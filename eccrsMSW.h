@@ -1,8 +1,13 @@
 #include "rules.h"
 
-//return 1 if 'a; is Comparable to 'b' else 0
-static inline i8 isComparable(Rule a , Rule b);
 
+typedef struct 
+{
+    i8 appRulesSize;
+    i8 inclusionSetSize;
+
+
+}RulesetSizes;
 
 
 //return 1 if 'a; is Compatible to 'b' else 0
@@ -29,7 +34,12 @@ static Prediction mswPrediction(Rule *appRule, i8 size);
 
 //given applicable rules ,overides chain set and inclusion-maximal set, and 
 //print the explanation traces.
-static void 
+
+
+RulesetSizes 
+computeEccrsMSW();
+
+void 
 printExplanationTraces(Rule *applicableRules, 
                        Overides  *overSets, 
                        i8 size,

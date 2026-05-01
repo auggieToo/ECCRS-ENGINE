@@ -1,76 +1,8 @@
-//Augustine Mochoeneng , 26-04-2025
-//ECCRS Prediction Engine
-//NB: THIS IMPLEMENTATION DOES NOT TAKE INTO CONSIDERATION ALIGNMENT Conditions
-
-
-#include <complex.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <stdio.h>
-
 #include "rules.h"
 
 
 //return 1 if 'a; is Comparable to 'b' else 0
 static inline i8 isComparable(Rule a , Rule b);
-
-
-
-//return 1 if 'a; is Compatible to 'b' else 0
-i8 isCompatible(Rule a , Rule b);
-
-
-//return 1 if 'a; is more specific to 'b' else 0
-i8 isMoreSpecific(Rule a , Rule b);
-
-//compute the applicable rule given an instance 
-static u8 computeApplicableRules(Rule *ruleset, Instance F , Rule* outSet);
-
-//create an Overides list, (rules point to whatever rules overides them)
-//static void computeOverides(Rule *applRules,Overides *v, u32 size);
-
-
-//creates a maximal inclusion set given a applicable sets 
-//returns the size of the set 
-static i8 maximalInclusionSet(Rule *applicableRules, u8  size, Rule *outSet, Overides *outRides);
-
-//given the inclusion-maximal applicable set, 
-//find the prediction
-static Prediction mswPrediction(Rule *appRule, i8 size);
-
-//given applicable rules ,overides chain set and inclusion-maximal set, and 
-//print the explanation traces.
-static void 
-printExplanationTraces(Rule *applicableRules, 
-                       Overides  *overSets, 
-                       i8 size,
-                       Rule *inclusionSet,
-                       i8 includeSize,
-                       Prediction prediction);
-
-
-
-
-i32 main(i32 argc , char * argv[])
-{
-
-//abtraction here
-    Rule outSet[MAX_RULES];
-    u8 size = computeApplicableRules(ruleset, F, outSet);
-    
-    Rule maxInc[size];
-    Overides outRides[size];
-    i8 sizeMax = maximalInclusionSet(outSet, size,maxInc,outRides);
-
-    Prediction prediction = mswPrediction(maxInc, sizeMax);
-//abstraction end
-    printExplanationTraces(outSet, outRides, size, maxInc, sizeMax,prediction);
-    
-
-
-    return EXIT_SUCCESS;
-}
-
 
 //check if Condition set a is a subset of Condition set b 
 static i8 
@@ -315,7 +247,3 @@ printExplanationTraces(Rule *applicableRules,
     else if(prediction == PRED_0) printf("Prediction: 0\n"); 
     else printf("Abstain"); 
 }
-
-
-
-
