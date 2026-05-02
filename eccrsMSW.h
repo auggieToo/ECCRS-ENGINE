@@ -6,6 +6,11 @@
         prediction = mswPrediction(maxIncl, maxInclSize);\
 
 
+//check if the assumptions made by the Alignment theorem 
+//hold for the given ECCRS rules. 
+//return 1 if all the all the asusmptions hold 
+u8 verifyAssumptions(Rule *rules);
+
 
 //compute the applicable rule given an instance 
 //returns the size of the applicable rules
@@ -28,5 +33,6 @@ printExplanationTraces(Rule *applicableRules,
                        i8 size,
                        Rule *inclusionSet,
                        i8 includeSize,
-                       Prediction prediction);
+                       Prediction prediction,
+                       u8 po);
 

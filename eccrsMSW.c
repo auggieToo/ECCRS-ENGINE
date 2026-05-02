@@ -17,6 +17,16 @@ static void printAllChains(Overides *outset, u32 size);
 
 
 
+//check if the assumptions made by the Alignment theorem 
+//hold for the given ECCRS rules. 
+//return 1 if all the all the asusmptions hold 
+u8 verifyAssumptions(Rule *rules)
+{
+    return 1;
+
+}
+
+
 //compute a set of applicale rules given an Instance F
 //returns the size of the set 
 u8 
@@ -80,42 +90,44 @@ printExplanationTraces(Rule *applicableRules,
                        i8 size,
                        Rule *inclusionSet,
                        i8 includeSize,
-                       Prediction prediction
-                       )
-{    
-    printf("Applicable Rules\n");
-    printf("----------------------------\n");
-    if(size)
-    {
-        for(int k = 0 ; k < size ;k++)
-            printf("rule %d\n", applicableRules[k].ruleId);
+                       Prediction prediction,
+                       u8 po)
+{
+    if(!po)
+    { 
+        printf("Applicable Rules\n");
+        printf("----------------------------\n");
+        if(size)
+        {
+            for(int k = 0 ; k < size ;k++)
+                printf("rule %d\n", applicableRules[k].ruleId);
+        }
+        else printf("\n No Applicable Rules for the given Instance");
+
+
+        printf("\n");
+        printf("Overiddes\n");
+        printf("----------------------------\n");
+        if(size)
+            printAllChains(overSets, size);
+        else printf("\n No Overiddes\n");
+
+        printf("inclusion-maximal applicable set\n");
+        printf("----------------------------\n");
+        for(int k = 0 ; k < includeSize ;k++)
+        {
+            printf("rule %d\n", inclusionSet[k].ruleId);
+
+        }
+
     }
-    else printf("\n No Applicable Rules for the given Instance");
-
-    
-    printf("\n");
-    printf("Overiddes\n");
-    printf("----------------------------\n");
-    if(size)
-        printAllChains(overSets, size);
-    else printf("\n No Overiddes\n");
-
-    printf("inclusion-maximal applicable set\n");
-    printf("----------------------------\n");
-    for(int k = 0 ; k < includeSize ;k++)
-    {
-        printf("rule %d\n", inclusionSet[k].ruleId);
-
-    }
-
-
 
     printf("\n");
     printf("Prediction\n");
     printf("----------------------------\n");
     if(prediction == PRED_1) printf("Prediction: 1\n"); 
     else if(prediction == PRED_0) printf("Prediction: 0\n"); 
-    else printf("Abstain"); 
+    else printf("Abstain\n"); 
 }
 
 
