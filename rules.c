@@ -15,5 +15,5 @@ Rule ruleset[] = {
     {4, {{2,1},{3,1},{4,1}}, 3, 0},
 };
 
-Instance F = { {{1,0},{2,0},{3,0},{4,0},{5,0}}, 5};
+Instance F = { {{1,0},{2,1},{3,1},{4,0},{5,0}}, 5};
  const unsigned int SIZE_OF_RULESET = 5;

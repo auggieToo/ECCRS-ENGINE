@@ -135,7 +135,7 @@ i32 main(i32 argc,char *argv[])
     fprintf(outC,"//---------------------------------------------\n");
     fprintf(outC,"//Warning: This file was auto generated\n");
     fprintf(outC,"//Changing this file may lead to unexpected behavior\n");
-    fprintf(out,"//Generated using: %s , %s \n",ruleName, instanceName);
+    fprintf(outC,"//Generated using: %s , %s \n",ruleName, instanceName);
     fprintf(outC,"//---------------------------------------------\n\n\n");
 
 

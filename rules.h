@@ -1,9 +1,11 @@
 //---------------------------------------------
 //Warning: This file was auto generated
 //Changing this file may lead to unexpected behavior
+//Generated using: tests-rules/scholar-rules.txt , tests-rules/scholar-inst2.txt 
 //---------------------------------------------
 
 
+//Generated using: tests-rules/scholar-rules.txt , tests-rules/scholar-inst2.txt 
 #pragma once
 
 #include <stdint.h>
