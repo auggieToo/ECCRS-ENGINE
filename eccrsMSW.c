@@ -14,6 +14,7 @@
 //helper fuctions
 static inline i8 isComparable(Rule a , Rule b);
 static i8 isSubset(Condition *a, u32 sizeA,Condition *b, u32  sizeB);
+static i8 isSubsetRules(Rule a, Rule b);
 static u8 isCompatible(Rule a, Rule b);
 static inline i8 isApplicable(Rule a, Instance F);
 static i32 compareRuleBySize(const void *a, const void *b);
@@ -23,6 +24,9 @@ static void printAllChains(Overides *outset, u32 size);
 static u8  sanityCheck(Rule *ruleset);
 static u8  strictGlobalExceptionClosure(Rule *ruleset);
 static u8  totalOverride(Rule *ruleset);
+static u8 ruleContainsFeature(Rule a, u32 featureIndex);
+static u8 ruleHasConflictingFeature(Rule a, u32 featureIndex, u32  val);
+static u8 areCompatible(Rule a, Rule b);
 
 
 //check if the assumptions made by the Alignment theorem 
@@ -168,10 +172,44 @@ sanityCheck(Rule *ruleset)
     return 1;
 }
 
+static inline u8 
+rulesOppositeLabels(Rule a,Rule b)
+{
+    return a.label != b.label;
+
+}
+
+
+//check for exception closure violation - 
+//i.e Two Compatible rules with opposite labels 
+//where either rule body is a subset of the other. 
+//return 1 if no violation else 0
 
 static u8  
 strictGlobalExceptionClosure(Rule *ruleset)
-{
+{ 
+    for(int k  = 0 ; k < SIZE_OF_RULESET ; k++)
+    {
+        for(int j = k + 1  ; j < SIZE_OF_RULESET ; j++)
+        {
+            if(rulesOppositeLabels(ruleset[k], ruleset[j]))
+            {
+
+                if(areCompatible(ruleset[k],ruleset[j]))
+                {
+                    if(!isSubsetRules(ruleset[k],ruleset[j]) &&
+                            !isSubsetRules(ruleset[j],ruleset[k]))
+                    {
+                        return 0;
+
+                    }
+                }
+            }
+
+        }
+
+    }
+
     return 1;
 }
 
@@ -206,6 +244,20 @@ isSubset(Condition *a, u32 sizeA,
     return match == sizeA;
 
 }
+
+//check if  a rule is a subset of the other rule 
+static i8 
+isSubsetRule(Rule ar , Rule br)
+{
+    Condition *a = ar.conditions;
+    u32 sizeA = ar.numConditions;
+    Condition *b = br.conditions;
+    u32 sizeB = br.numConditions;
+
+    return isSubset(a, sizeA, b, sizeB);
+
+}
+
 
 
 //check if a  is a subset of b
