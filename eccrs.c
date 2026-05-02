@@ -11,10 +11,15 @@
 
 typedef struct 
 {
-    u8 checkAssumptions;   //-ca 
-    u8 predictionOnly;     //-po
+    u8 checkAssumptions;   //-ca   --disable the Assumptions checks  
+    u8 predictionOnly;     //-po   --print the prediction Only
 
 }clFlags;
+
+#define DEFUALT_FLAG(flagsName)  \
+                 clFlags flagsName = (clFlags){ .predictionOnly   = 0,\
+                                       .checkAssumptions = 1\
+                                    };\
 
 static clFlags parseClArguments(i32 argc,char* argv[]);
 
@@ -65,11 +70,12 @@ i32 main(i32 argc , char * argv[])
 static clFlags 
 parseClArguments(i32 argc,char* argv[])
 {
-    clFlags f = (clFlags){0};
+    //create a defualt flag
+    DEFUALT_FLAG(f);
 
     for(i32 k = 1 ; k < argc; k++)
     {
-        if((strcmp("-ca",argv[k])==0)) f.checkAssumptions = 1;
+        if((strcmp("-ca",argv[k])==0)) f.checkAssumptions = 0;
         else if((strcmp("-po",argv[k])==0)) f.predictionOnly = 1;
     }
 
