@@ -3,14 +3,18 @@
 #include "rules.h"
 
 #define RULES_EQUAL(a, sizea, b,sizeb) isSubset(a, sizea, b ,sizeb) &&\
-                                       isSubset(b, sizeb,a, sizea)\
+                                       isSubset(b, sizeb,a, sizea)
 
-
+#define RULE_FOREACH_FEAT_VAL(rulep,fvar,vVar)\
+        for(u32 _i = 0 ; _i < rulep.numConditions &&\
+            ( ((fvar) = rulep.conditions[_i].featureIndex),\
+              ((vVar) = rulep.conditions[_i].requiredValue),1);\
+            ++_i)
 
 //helper fuctions
 static inline i8 isComparable(Rule a , Rule b);
 static i8 isSubset(Condition *a, u32 sizeA,Condition *b, u32  sizeB);
-static inline i8 isComparable(Rule a, Rule b);
+static u8 isCompatible(Rule a, Rule b);
 static inline i8 isApplicable(Rule a, Instance F);
 static i32 compareRuleBySize(const void *a, const void *b);
 static void computeOverides(Rule *appRules, Overides *outset, u32 size);
@@ -213,6 +217,56 @@ isComparable(Rule a, Rule b)
                     b.conditions, b.numConditions);
 
 }
+
+//check if a rule contains a feature pattern, (lookup by index)
+//return 1 if so else 0;
+static u8 
+ruleContainsFeature(Rule a, u32 featureIndex)
+{
+    u32 f,v;
+    RULE_FOREACH_FEAT_VAL(a,f, v)
+    {
+        if(f == featureIndex)
+            return 1;
+
+    }
+
+    return 0;
+
+}
+
+
+//return 1 if the feature exists with a different required val;
+static u8 
+ruleHasConflictingFeature(Rule a, u32 featureIndex, u32  val)
+{
+    u32 f,v;
+    RULE_FOREACH_FEAT_VAL(a,f, v)
+    {
+        if(f == featureIndex)
+             return v != val;
+    }
+    return 0;
+
+}
+ 
+
+//check if two rules are Compatible: they can be true together
+//return 1 if Compatible else 0
+static u8 
+areCompatible(Rule a, Rule b)
+{
+    u32 af,av;
+    RULE_FOREACH_FEAT_VAL(a, af, av) //loop over each feature of rule 
+    {
+        if(ruleHasConflictingFeature(b, af, av))
+            return 0;
+        
+    }
+
+    return 1;    
+}
+
 
 //check if a rule  'a' is applicale to an instance F
 static inline i8 
