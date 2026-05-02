@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "rules.h"
 
+#define RULES_EQUAL(a, sizea, b,sizeb) isSubset(a, sizea, b ,sizeb) &&\
+                                       isSubset(b, sizeb,a, sizea)\
+
 
 
 //helper fuctions
@@ -13,8 +16,9 @@ static i32 compareRuleBySize(const void *a, const void *b);
 static void computeOverides(Rule *appRules, Overides *outset, u32 size);
 static u32  findByRuleId(Overides *outset, u32 size, u32 ruleId);
 static void printAllChains(Overides *outset, u32 size);
-
-
+static u8  sanityCheck(Rule *ruleset);
+static u8  strictGlobalExceptionClosure(Rule *ruleset);
+static u8  totalOverride(Rule *ruleset);
 
 
 //check if the assumptions made by the Alignment theorem 
@@ -130,6 +134,50 @@ printExplanationTraces(Rule *applicableRules,
     else printf("Abstain\n"); 
 }
 
+
+//check if there exists two rules with identical bodies but different labels 
+//return 0 if such pair of rules exists else 1;
+static u8  
+sanityCheck(Rule *ruleset)
+{
+    for(int i = 0 ; i < SIZE_OF_RULESET ; i++)
+    {
+        Condition *a = ruleset[i].conditions;
+        u32 sizeA = ruleset[i].numConditions;
+        for(int j = i + 1 ;  j < SIZE_OF_RULESET ; j++)
+        {
+
+            Condition *b = ruleset[j].conditions;
+            u32 sizeB = ruleset[j].numConditions;
+
+            if(RULES_EQUAL(a, sizeA,b,sizeB))
+            {
+                if (ruleset[i].label != ruleset[j].label) 
+                    return 0;
+
+            }
+
+        }
+
+    }
+
+    return 1;
+}
+
+
+static u8  
+strictGlobalExceptionClosure(Rule *ruleset)
+{
+    return 1;
+}
+
+
+static u8  
+totalOverride(Rule *ruleset)
+{
+    return 1;
+
+}
 
 
 //check if Condition set a is a subset of Condition set b 

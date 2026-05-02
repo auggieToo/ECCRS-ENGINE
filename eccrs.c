@@ -11,14 +11,16 @@
 
 typedef struct 
 {
-    u8 checkAssumptions;   //-ca   --disable the Assumptions checks  
-    u8 predictionOnly;     //-po   --print the prediction Only
+    u8 checkAssumptions;        //-ca   --disable the Assumptions checks  
+    u8 predictionOnly;          //-po   --print the prediction Only
+    u8 assumptionsCheckTrace;    //-ct  --print traces for Assumptions checking
 
 }clFlags;
 
 #define DEFUALT_FLAG(flagsName)  \
                  clFlags flagsName = (clFlags){ .predictionOnly   = 0,\
-                                       .checkAssumptions = 1\
+                                       .checkAssumptions = 1,\
+                                       .assumptionsCheckTrace = 0\
                                     };\
 
 static clFlags parseClArguments(i32 argc,char* argv[]);
@@ -77,6 +79,7 @@ parseClArguments(i32 argc,char* argv[])
     {
         if((strcmp("-ca",argv[k])==0)) f.checkAssumptions = 0;
         else if((strcmp("-po",argv[k])==0)) f.predictionOnly = 1;
+        else if((strcmp("-ct",argv[k])==0)) f.assumptionsCheckTrace = 1;
     }
 
     return f;
