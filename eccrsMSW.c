@@ -1,5 +1,10 @@
 #include "rules.h"
 
+#define RUN_ECCRS_MSW(ruleset, F , outset, appliSize, maxInclSize,outRides,maxIncl, prediction )\
+        appliSize = computeApplicableRules(ruleset,F,outset);\
+        maxInclSize = maximalInclusionSet(outset,appliSize,maxIncl,outRides);\
+        prediction = mswPrediction(maxIncl, maxInclSize);\
+
 
 //return 1 if 'a; is Comparable to 'b' else 0
 static inline i8 isComparable(Rule a , Rule b);
@@ -49,7 +54,7 @@ isApplicable(Rule a, Instance F)
 
 //compute a set of applicale rules given an Instance F
 //returns the size of the set 
-static u8 
+u8 
 computeApplicableRules(Rule *ruleset, Instance F, Rule *outSet)
 {
     u32 size = 0;
@@ -64,7 +69,7 @@ computeApplicableRules(Rule *ruleset, Instance F, Rule *outSet)
 }
 
 
-int 
+static int 
 compareRuleBySize(const void *a, const void *b)
 {
     const Rule *ra = (const Rule *)a;
@@ -125,7 +130,7 @@ computeOverides(Rule *appRules, Overides *outset, u32 size)
 
 
 //calculate all the sets which are not overriden by others 
-static i8
+i8
 maximalInclusionSet(Rule *applicableRules,u8 size, 
                     Rule *outSet, Overides *outRides)   
 {
@@ -141,8 +146,8 @@ maximalInclusionSet(Rule *applicableRules,u8 size,
 
 }
 
-//make the  msw Prediction
-    static Prediction 
+//make the  msw Prediction 
+Prediction 
 mswPrediction(Rule  *mf, i8 size)
 {
 
@@ -162,7 +167,8 @@ mswPrediction(Rule  *mf, i8 size)
 
 //find a rule in an array using its rule id ..
 //returns the index of the array
-u32 findByRuleId(Overides *outset, u32 size, u32 ruleId)
+static u32 
+findByRuleId(Overides *outset, u32 size, u32 ruleId)
 {
     for (u32 i = 0; i < size; i++)
         if (outset[i].r.ruleId == ruleId) return i;
@@ -170,7 +176,8 @@ u32 findByRuleId(Overides *outset, u32 size, u32 ruleId)
 }
 
 //explanation traces: Rules point to the Rule that overrides it
-void printAllChains(Overides *outset, u32 size)
+static void 
+printAllChains(Overides *outset, u32 size)
 {
     for (u32 i = 0; i < size; i++)
     {
@@ -204,7 +211,7 @@ void printAllChains(Overides *outset, u32 size)
     }
 }
 
-static void 
+void 
 printExplanationTraces(Rule *applicableRules, 
                        Overides  *overSets, 
                        i8 size,

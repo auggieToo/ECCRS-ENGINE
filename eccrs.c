@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "rules.h"
+#include "eccrsMSW.h" 
 
 
 //return 1 if 'a; is Comparable to 'b' else 0
@@ -54,16 +54,18 @@ printExplanationTraces(Rule *applicableRules,
 i32 main(i32 argc , char * argv[])
 {
 
-//abtraction here
-    Rule outSet[MAX_RULES];
-    u8 size = computeApplicableRules(ruleset, F, outSet);
-    
-    Rule maxInc[size];
-    Overides outRides[size];
-    i8 sizeMax = maximalInclusionSet(outSet, size,maxInc,outRides);
+    u8 appliSize;
+    u8 maxInclSize;
+    Prediction prediction;
 
-    Prediction prediction = mswPrediction(maxInc, sizeMax);
-//abstraction end
+    Rule outSet[MAX_RULES];
+    
+    Rule maxInc[MAX_RULES];
+    Overides outRides[MAX_RULES];
+
+
+    RUN_ECCRS_MSW(ruleset,F, outSet, appliSize, maxInclSize,outRides,maxInc,prediction);
+
     printExplanationTraces(outSet, outRides, size, maxInc, sizeMax,prediction);
     
 
