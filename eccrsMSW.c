@@ -1,13 +1,124 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "rules.h"
 
-#define RUN_ECCRS_MSW(ruleset, F , outset, appliSize, maxInclSize,outRides,maxIncl, prediction )\
-        appliSize = computeApplicableRules(ruleset,F,outset);\
-        maxInclSize = maximalInclusionSet(outset,appliSize,maxIncl,outRides);\
-        prediction = mswPrediction(maxIncl, maxInclSize);\
 
 
-//return 1 if 'a; is Comparable to 'b' else 0
+//helper fuctions
 static inline i8 isComparable(Rule a , Rule b);
+static i8 isSubset(Condition *a, u32 sizeA,Condition *b, u32  sizeB);
+static inline i8 isComparable(Rule a, Rule b);
+static inline i8 isApplicable(Rule a, Instance F);
+static i32 compareRuleBySize(const void *a, const void *b);
+static void computeOverides(Rule *appRules, Overides *outset, u32 size);
+static u32  findByRuleId(Overides *outset, u32 size, u32 ruleId);
+static void printAllChains(Overides *outset, u32 size);
+
+
+
+
+//compute a set of applicale rules given an Instance F
+//returns the size of the set 
+u8 
+computeApplicableRules(Rule *ruleset, Instance F, Rule *outSet)
+{
+    u32 size = 0;
+    for(int r = 0 ; r < SIZE_OF_RULESET ; r++ )
+    {
+        if (isApplicable(ruleset[r], F)) outSet[size++] = ruleset[r];
+
+    }
+
+    return size;
+
+}
+
+//creates a maximal inclusion set given a applicable sets 
+//returns the size of the inclusion-maximal applicable rules set. 
+i8
+maximalInclusionSet(Rule *applicableRules,u8 size, 
+                    Rule *outSet, Overides *outRides)   
+{
+    computeOverides(applicableRules, outRides, size);
+    i8 asize = 0 ;
+    for(u32 k = 0 ; k < size ; k++ )
+    {
+        if(outRides[k].overideRuleId == UINT32_MAX)
+            outSet[asize++] = outRides[k].r;
+    }
+
+    return asize; 
+
+}
+
+//given the inclusion-maximal applicable set, 
+//find the prediction
+Prediction 
+mswPrediction(Rule  *mf, i8 size)
+{
+
+    Prediction prelimPred = PRED_ABSTAIN; 
+
+    for(u32 k = 0 ; k < size ; k++)
+    {
+        if(k == 0) { prelimPred = mf[k].label; continue;}
+
+        if(prelimPred != mf[k].label) return PRED_ABSTAIN;
+
+    }
+
+    return  prelimPred;
+
+}
+
+
+//given applicable rules ,overides chain set and inclusion-maximal set, and 
+//print the explanation traces.
+void 
+printExplanationTraces(Rule *applicableRules, 
+                       Overides  *overSets, 
+                       i8 size,
+                       Rule *inclusionSet,
+                       i8 includeSize,
+                       Prediction prediction
+                       )
+{    
+    printf("Applicable Rules\n");
+    printf("----------------------------\n");
+    if(size)
+    {
+        for(int k = 0 ; k < size ;k++)
+            printf("rule %d\n", applicableRules[k].ruleId);
+    }
+    else printf("\n No Applicable Rules for the given Instance");
+
+    
+    printf("\n");
+    printf("Overiddes\n");
+    printf("----------------------------\n");
+    if(size)
+        printAllChains(overSets, size);
+    else printf("\n No Overiddes\n");
+
+    printf("inclusion-maximal applicable set\n");
+    printf("----------------------------\n");
+    for(int k = 0 ; k < includeSize ;k++)
+    {
+        printf("rule %d\n", inclusionSet[k].ruleId);
+
+    }
+
+
+
+    printf("\n");
+    printf("Prediction\n");
+    printf("----------------------------\n");
+    if(prediction == PRED_1) printf("Prediction: 1\n"); 
+    else if(prediction == PRED_0) printf("Prediction: 0\n"); 
+    else printf("Abstain"); 
+}
+
+
 
 //check if Condition set a is a subset of Condition set b 
 static i8 
@@ -52,23 +163,9 @@ isApplicable(Rule a, Instance F)
 
 }
 
-//compute a set of applicale rules given an Instance F
-//returns the size of the set 
-u8 
-computeApplicableRules(Rule *ruleset, Instance F, Rule *outSet)
-{
-    u32 size = 0;
-    for(int r = 0 ; r < SIZE_OF_RULESET ; r++ )
-    {
-        if (isApplicable(ruleset[r], F)) outSet[size++] = ruleset[r];
-
-    }
-
-    return size;
-
-}
 
 
+//function to compare rule by the number of conditions they have.
 static int 
 compareRuleBySize(const void *a, const void *b)
 {
@@ -129,41 +226,7 @@ computeOverides(Rule *appRules, Overides *outset, u32 size)
 
 
 
-//calculate all the sets which are not overriden by others 
-i8
-maximalInclusionSet(Rule *applicableRules,u8 size, 
-                    Rule *outSet, Overides *outRides)   
-{
-    computeOverides(applicableRules, outRides, size);
-    i8 asize = 0 ;
-    for(u32 k = 0 ; k < size ; k++ )
-    {
-        if(outRides[k].overideRuleId == UINT32_MAX)
-            outSet[asize++] = outRides[k].r;
-    }
 
-    return asize; 
-
-}
-
-//make the  msw Prediction 
-Prediction 
-mswPrediction(Rule  *mf, i8 size)
-{
-
-    Prediction prelimPred = PRED_ABSTAIN; 
-
-    for(u32 k = 0 ; k < size ; k++)
-    {
-        if(k == 0) { prelimPred = mf[k].label; continue;}
-
-        if(prelimPred != mf[k].label) return PRED_ABSTAIN;
-
-    }
-
-    return  prelimPred;
-
-}
 
 //find a rule in an array using its rule id ..
 //returns the index of the array
@@ -211,46 +274,4 @@ printAllChains(Overides *outset, u32 size)
     }
 }
 
-void 
-printExplanationTraces(Rule *applicableRules, 
-                       Overides  *overSets, 
-                       i8 size,
-                       Rule *inclusionSet,
-                       i8 includeSize,
-                       Prediction prediction
-                       )
-{    
-    printf("Applicable Rules\n");
-    printf("----------------------------\n");
-    if(size)
-    {
-        for(int k = 0 ; k < size ;k++)
-            printf("rule %d\n", applicableRules[k].ruleId);
-    }
-    else printf("\n No Applicable Rules for the given Instance");
 
-    
-    printf("\n");
-    printf("Overiddes\n");
-    printf("----------------------------\n");
-    if(size)
-        printAllChains(overSets, size);
-    else printf("\n No Overiddes\n");
-
-    printf("inclusion-maximal applicable set\n");
-    printf("----------------------------\n");
-    for(int k = 0 ; k < includeSize ;k++)
-    {
-        printf("rule %d\n", inclusionSet[k].ruleId);
-
-    }
-
-
-
-    printf("\n");
-    printf("Prediction\n");
-    printf("----------------------------\n");
-    if(prediction == PRED_1) printf("Prediction: 1\n"); 
-    else if(prediction == PRED_0) printf("Prediction: 0\n"); 
-    else printf("Abstain"); 
-}

@@ -1,5 +1,9 @@
 #include "rules.h"
 
+#define RUN_ECCRS_MSW(ruleset, F , outset, appliSize, maxInclSize,outRides,maxIncl, prediction )\
+        appliSize = computeApplicableRules(ruleset,F,outset);\
+        maxInclSize = maximalInclusionSet(outset,appliSize,maxIncl,outRides);\
+        prediction = mswPrediction(maxIncl, maxInclSize);\
 
 
 
