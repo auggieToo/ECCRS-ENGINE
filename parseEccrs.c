@@ -370,7 +370,7 @@ static u32
 writeInstance(FILE *out, FILE *in, char *filename)
 {
     if(endsWith4(filename, ".txt")) return writeInstanceFromTXT(out,in);
-    else if(endsWith4(file, ".csv")) return writeInstanceFromCSV(out,in);
+    else if(endsWith4(filename, ".csv")) return writeInstanceFromCSV(out,in);
 
 }
 
