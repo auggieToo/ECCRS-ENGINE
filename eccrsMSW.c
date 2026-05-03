@@ -1,20 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "rules.h"
+#include "rulesIterators.h"
 
 #define RULES_EQUAL(a, sizea, b,sizeb) isSubset(a, sizea, b ,sizeb) &&\
                                        isSubset(b, sizeb,a, sizea)
 
-#define RULE_FOREACH_FEAT_VAL(rulep,fvar,vVar)\
-        for(u32 _i = 0 ; _i < rulep.numConditions &&\
-            ( ((fvar) = rulep.conditions[_i].featureIndex),\
-              ((vVar) = rulep.conditions[_i].requiredValue),1);\
-            ++_i)
+
 
 //helper fuctions
 static inline i8 isComparable(Rule a , Rule b);
 static i8 isSubset(Condition *a, u32 sizeA,Condition *b, u32  sizeB);
-static i8 isSubsetRules(Rule a, Rule b);
+static i8 isSubsetRule(Rule a, Rule b);
 static u8 isCompatible(Rule a, Rule b);
 static inline i8 isApplicable(Rule a, Instance F);
 static i32 compareRuleBySize(const void *a, const void *b);
@@ -27,6 +24,7 @@ static u8  totalOverride(Rule *ruleset);
 static u8 ruleContainsFeature(Rule a, u32 featureIndex);
 static u8 ruleHasConflictingFeature(Rule a, u32 featureIndex, u32  val);
 static u8 areCompatible(Rule a, Rule b);
+static inline u8 rulesOppositeLabels(Rule a,Rule b);
 
 
 //check if the assumptions made by the Alignment theorem 
@@ -172,42 +170,37 @@ sanityCheck(Rule *ruleset)
     return 1;
 }
 
-static inline u8 
-rulesOppositeLabels(Rule a,Rule b)
-{
-    return a.label != b.label;
-
-}
 
 
 //check for exception closure violation - 
 //i.e Two Compatible rules with opposite labels 
 //where either rule body is a subset of the other. 
 //return 1 if no violation else 0
-
 static u8  
 strictGlobalExceptionClosure(Rule *ruleset)
-{ 
-    for(int k  = 0 ; k < SIZE_OF_RULESET ; k++)
-    {
-        for(int j = k + 1  ; j < SIZE_OF_RULESET ; j++)
-        {
-            if(rulesOppositeLabels(ruleset[k], ruleset[j]))
-            {
+{
 
-                if(areCompatible(ruleset[k],ruleset[j]))
+    Rule *rk, *rj;
+    u32 k, j;
+
+    RULESET_FOREACH_RULEPTR_IDX(ruleset, rk, k)
+    {
+        for (j = k + 1; j < SIZE_OF_RULESET; ++j)
+        {
+            rj = &ruleset[j];
+
+            if (rulesOppositeLabels(*rk, *rj))
+            {
+                if (areCompatible(*rk, *rj))
                 {
-                    if(!isSubsetRules(ruleset[k],ruleset[j]) &&
-                            !isSubsetRules(ruleset[j],ruleset[k]))
+                    if (!isSubsetRule(*rk, *rj) &&
+                            !isSubsetRule(*rj, *rk))
                     {
                         return 0;
-
                     }
                 }
             }
-
         }
-
     }
 
     return 1;
@@ -220,6 +213,14 @@ totalOverride(Rule *ruleset)
     return 1;
 
 }
+
+static inline u8 
+rulesOppositeLabels(Rule a,Rule b)
+{
+    return a.label != b.label;
+
+}
+
 
 
 //check if Condition set a is a subset of Condition set b 
@@ -249,12 +250,20 @@ isSubset(Condition *a, u32 sizeA,
 static i8 
 isSubsetRule(Rule ar , Rule br)
 {
-    Condition *a = ar.conditions;
-    u32 sizeA = ar.numConditions;
-    Condition *b = br.conditions;
-    u32 sizeB = br.numConditions;
 
-    return isSubset(a, sizeA, b, sizeB);
+    u8 match = 0;
+    u32 aFval ,aRval;
+    RULE_FOREACH_FEAT_VAL_SAFE(ar,aFval,aRval)
+    {
+        u32 bFval,bRval;
+        RULE_FOREACH_FEAT_VAL_SAFE(br, bFval, bRval)
+        {
+            if(aFval == bFval && 
+               aRval == bRval) match++;            
+        }
+    }
+     
+    return match == ar.numConditions;
 
 }
 
@@ -276,11 +285,10 @@ static u8
 ruleContainsFeature(Rule a, u32 featureIndex)
 {
     u32 f,v;
-    RULE_FOREACH_FEAT_VAL(a,f, v)
+    RULE_FOREACH_FEAT_VAL_SAFE(a,f, v)
     {
         if(f == featureIndex)
             return 1;
-
     }
 
     return 0;
@@ -293,7 +301,7 @@ static u8
 ruleHasConflictingFeature(Rule a, u32 featureIndex, u32  val)
 {
     u32 f,v;
-    RULE_FOREACH_FEAT_VAL(a,f, v)
+    RULE_FOREACH_FEAT_VAL_SAFE(a,f, v)
     {
         if(f == featureIndex)
              return v != val;
@@ -309,7 +317,7 @@ static u8
 areCompatible(Rule a, Rule b)
 {
     u32 af,av;
-    RULE_FOREACH_FEAT_VAL(a, af, av) //loop over each feature of rule 
+    RULE_FOREACH_FEAT_VAL_SAFE(a, af, av) //loop over each feature of rule 
     {
         if(ruleHasConflictingFeature(b, af, av))
             return 0;
