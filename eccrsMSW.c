@@ -24,6 +24,7 @@ static u8  totalOverride(Rule *ruleset);
 static u8 ruleContainsFeature(Rule a, u32 featureIndex);
 static u8 ruleHasConflictingFeature(Rule a, u32 featureIndex, u32  val);
 static u8 areCompatible(Rule a, Rule b);
+static u8 areCompatible2(Rule a, Rule b);
 static inline u8 rulesOppositeLabels(Rule a,Rule b);
 
 
@@ -34,7 +35,7 @@ u8 verifyAssumptions(Rule *rules)
 {
     u8 violations = 1;
     if(sanityCheck(rules))
-        printf("Passed Sanity checki\n");
+        printf("Passed Sanity check\n");
     else 
     {   
         printf("Failed Sanity check\n");
@@ -197,7 +198,6 @@ sanityCheck(Rule *ruleset)
 static u8  
 strictGlobalExceptionClosure(Rule *ruleset)
 {
-
     Rule *rk, *rj;
     u32 k, j;
 
@@ -207,15 +207,33 @@ strictGlobalExceptionClosure(Rule *ruleset)
         {
             rj = &ruleset[j];
 
-            if (rulesOppositeLabels(*rk, *rj))
-            {
-                if (areCompatible(*rk, *rj))
+            if (!rulesOppositeLabels(*rk, *rj)) continue;
+            if (!areCompatible2(*rk, *rj)) continue;
+
+            /* equal size → cannot be strict subset */
+            if (rk->numConditions == rj->numConditions)
                 {
-                    if (!isSubsetRule(*rk, *rj) &&
-                            !isSubsetRule(*rj, *rk))
-                    {
-                        return 0;
-                    }
+
+                printf("RULE %d and %d are opp labels, Compatible and %d is not strict subset of %d as they are equal\n", k,j,k,j);
+                return 0;
+                }
+
+            /* check only the smaller against larger */
+            if (rk->numConditions < rj->numConditions)
+            {
+                if (!isSubsetRule(*rk, *rj))
+                {
+                    printf("RULE %d and %d are opp labels, Compatible and %d is not strict subset of %d\n", k,j,k,j);
+                    return 0;
+                }
+            }
+            else
+            {
+                if (!isSubsetRule(*rj, *rk))
+                {
+
+                    printf("RULE %d and %d are opp labels, Compatible and %d is not strict subset of %d\n", k,j,k,j);
+                    return 0;
                 }
             }
         }
@@ -223,7 +241,6 @@ strictGlobalExceptionClosure(Rule *ruleset)
 
     return 1;
 }
-
 
 static u8  
 totalOverride(Rule *ruleset)
@@ -264,26 +281,38 @@ isSubset(Condition *a, u32 sizeA,
 
 }
 
-//check if  a rule is a subset of the other rule 
+//check if rule a is a subset of rule b 
+//that is : eahc conditions in rule a must be in rule b 
+//return 1 if subset else 0
 static i8 
-isSubsetRule(Rule ar , Rule br)
+isSubsetRule(Rule ar, Rule br)
 {
+    u32 aFval, aRval;
+    u32 bFval, bRval;
+    u32 i, j;
 
-    u8 match = 0;
-    u32 aFval ,aRval;
-    RULE_FOREACH_FEAT_VAL_SAFE(ar,aFval,aRval)
+    RULE_FOREACH_FEAT_VAL_IDX(ar, aFval, aRval, i)
     {
-        u32 bFval,bRval;
-        RULE_FOREACH_FEAT_VAL_SAFE(br, bFval, bRval)
-        {
-            if(aFval == bFval && 
-               aRval == bRval) match++;            
-        }
-    }
-     
-    return match == ar.numConditions;
+        i8 found = 0;
 
+        RULE_FOREACH_FEAT_VAL_IDX(br, bFval, bRval, j)
+        {
+            if (aFval == bFval && 
+                aRval == bRval)
+            {
+                found = 1;
+                break;
+            }
+        }
+
+        if (!found)
+            return 0; 
+    }
+
+    return 1;
 }
+
+ 
 
 
 
@@ -344,6 +373,27 @@ areCompatible(Rule a, Rule b)
 
     return 1;    
 }
+
+//check if two rules are Compatible: they can be true together
+//return 1 if Compatible else 0
+static u8 
+areCompatible2(Rule a, Rule b)
+{
+    u8 commonFeature = 0;
+    u32 af,av;
+
+    RULE_FOREACH_FEAT_VAL_SAFE(a, af, av) //loop over each feature of rule 
+    {
+        if(ruleHasConflictingFeature(b, af, av))
+            return 0;
+        if(ruleContainsFeature(b,af)) commonFeature = 1;
+        
+    }
+
+    return commonFeature;    
+}
+
+
 
 
 //check if a rule  'a' is applicale to an instance F
