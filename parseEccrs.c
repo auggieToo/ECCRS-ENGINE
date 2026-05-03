@@ -1,4 +1,4 @@
-//Augustine Mochoeneng - 26-04-2026
+//Augustine Mochoeneng - 26-04-202, char *filename6
 //ECCRS parser
 //Take the raw ECCRS ruleset and produce a C data structure representing
 //all the rule
@@ -27,6 +27,8 @@ typedef struct
      u64 pos_max_conditions;
      u64 pos_max_features;
      u64 pos_max_instance;
+     u64 pos_max_instance_list;
+
 } HeaderPatchPoints;
 
 typedef struct 
@@ -41,7 +43,7 @@ typedef struct
 HeaderPatchPoints writeHeader(FILE *out); 
 HeaderPatchValues writeSrc(FILE *out, FILE *in); 
 
-static u32 writeInstance(FILE *out, FILE *in);
+static u32 writeInstance(FILE *out, FILE *in, char *filename);
 
 i32 main(i32 argc,char *argv[]) 
 {
@@ -141,7 +143,7 @@ i32 main(i32 argc,char *argv[])
 
     HeaderPatchPoints patch = writeHeader(out);
     HeaderPatchValues pv = writeSrc(outC, in);
-    u32 instances = writeInstance(outC, inI);
+    u32 instances = writeInstance(outC, inI, instanceName);
 
 
 
@@ -225,6 +227,13 @@ HeaderPatchPoints writeHeader(FILE *out)
         "} Instance;\n\n");
 
     fprintf(out,
+            "typedef struct\n"
+            "{\n"
+            "   u32 instanceId;\n"
+            "   Instance inst;\n"
+            "}InstanceList;\n\n");
+
+    fprintf(out,
         "typedef struct\n"
         "{\n"
         "    Rule r;\n"
@@ -241,8 +250,10 @@ HeaderPatchPoints writeHeader(FILE *out)
 
     
     fprintf(out, "extern Rule ruleset[];\n");
+    fprintf(out, "extern InstanceList instanceSet[];\n");
     fprintf(out, "extern Instance F;\n");
     fprintf(out,"extern const unsigned  SIZE_OF_RULESET;\n");
+    fprintf(out,"extern const unsigned  SIZE_OF_INSTANCE_SET;\n");
 
     return p;
 }
@@ -298,10 +309,19 @@ parseCondition(char **p, int *idx, int *val) {
     return 1;
 }
 
+static u8 
+endsWith4(const char *src, const char *suf)
+{
+    u64 len = strlen(src);
+    if(len < 4) return 0; 
+    return strcmp(src + len - 4, suf)==0;
+
+}
 
 static u32 
-writeInstance(FILE *out, FILE *in)
+writeInstanceFromTXT(FILE *out, FILE *in)
 {
+
     char line[512];
 
     if (!fgets(line, sizeof(line), in)) return 0;
@@ -334,6 +354,24 @@ writeInstance(FILE *out, FILE *in)
     fprintf(out, "}, %u};\n", count);
 
     return count;
+
+}
+
+static u32 
+writeInstanceFromCSV(FILE *out, FILE *in)
+{
+
+
+
+}
+
+
+static u32 
+writeInstance(FILE *out, FILE *in, char *filename)
+{
+    if(endsWith4(filename, ".txt")) return writeInstanceFromTXT(out,in);
+    else if(endsWith4(file, ".csv")) return writeInstanceFromCSV(out,in);
+
 }
 
 

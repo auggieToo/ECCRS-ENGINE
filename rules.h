@@ -21,6 +21,7 @@ typedef uint32_t u32;
 #define MAX_FEATURES          0
 
 #define INSTANCE_SIZE          5
+#define INSTANCES_LIST_SIZE  10
 
 typedef struct
 {
@@ -41,6 +42,13 @@ typedef struct
     Condition conditions[INSTANCE_SIZE];
     u32 size;
 } Instance;
+
+typedef struct 
+{
+    u32 instanceId;
+    Instance inst;
+
+}InstancesList;
 
 typedef struct
 {
