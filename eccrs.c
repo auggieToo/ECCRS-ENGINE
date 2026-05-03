@@ -45,8 +45,7 @@ i32 main(i32 argc , char * argv[])
 
     if(flags.checkAssumptions)
     {
-        printf("Assumptions for the give rules holds\n");
-
+        verifyAssumptions(ruleset);
     }
 
 

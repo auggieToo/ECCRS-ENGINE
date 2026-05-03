@@ -32,7 +32,25 @@ static inline u8 rulesOppositeLabels(Rule a,Rule b);
 //return 1 if all the all the asusmptions hold 
 u8 verifyAssumptions(Rule *rules)
 {
-    return 1;
+    u8 violations = 1;
+    if(sanityCheck(rules))
+        printf("Passed Sanity checki\n");
+    else 
+    {   
+        printf("Failed Sanity check\n");
+        violations = 1;
+    }
+
+    if(strictGlobalExceptionClosure(rules))
+        printf("Strict Global Exception  Closure not violated\n");
+    else
+    {
+        printf("Strict Global Closure Violated\n");
+        violations = 1;
+
+    }
+
+    return violations;
 
 }
 
