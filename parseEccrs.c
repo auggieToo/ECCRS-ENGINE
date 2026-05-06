@@ -400,10 +400,40 @@ writeInstanceFromTXT(FILE *out, FILE *in)
     return (InstanceSizes){ maxLiterals, count };
 }
 
+
+
+static int 
+parseIndex(char **p, int *idx, int *val) {
+    skipSpaces(p);
+
+    if (**p != 'a') return 0;
+    (*p)++;
+
+    if (**p != '(') return 0;
+    (*p)++;
+
+    *idx = parseInt(p);
+
+    if (**p != ')') return 0;
+    (*p)++;
+
+    skipSpaces(p);
+
+}
+
 static u32 
-writeColumIndex(FILE *out, FILE *in)
+writeColumnIndex(FILE *out, char *line, u32 size)
 {
-    u32 count =0 ;
+    u32 count =0;
+
+    //skip the first column //
+    line = line + 12 ; //len(instance_id)
+    
+
+
+
+
+
 
 
     return count;
@@ -413,6 +443,13 @@ writeColumIndex(FILE *out, FILE *in)
 static InstanceSizes 
 writeInstanceFromCSV(FILE *out, FILE *in)
 {
+
+    char line[512];
+
+    //get the header lines 
+    fgets(line,sizeof(line), in);
+
+    writeColumnIndex(out, line, 512);
     
 
 
