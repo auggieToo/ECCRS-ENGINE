@@ -403,7 +403,7 @@ writeInstanceFromTXT(FILE *out, FILE *in)
 
 
 static int 
-parseIndex(char **p, int *idx, int *val) {
+WriteIndexes(char **p, FILE *out) {
     skipSpaces(p);
 
     if (**p != 'a') return 0;
@@ -412,12 +412,17 @@ parseIndex(char **p, int *idx, int *val) {
     if (**p != '(') return 0;
     (*p)++;
 
-    *idx = parseInt(p);
+    u32 idx = parseInt(p);
+
+    fprintf(out, "%d",idx);
+
 
     if (**p != ')') return 0;
     (*p)++;
 
     skipSpaces(p);
+
+    return 1;
 
 }
 
@@ -428,6 +433,17 @@ writeColumnIndex(FILE *out, char *line, u32 size)
 
     //skip the first column //
     line = line + 12 ; //len(instance_id)
+    
+    while(line[0] != '\n' || line[0] == '\0')
+    {
+        skipSpaces(&line);
+        if(line[0] != ',') break;
+        line++; //skip the ','
+        fprintf(out, "u32 COLUMN_%d_INDEX = ", count + 1);
+        writeIndexes(&line, out);
+        fprintf(out, ";\n");
+        count++;
+    }
     
 
 
