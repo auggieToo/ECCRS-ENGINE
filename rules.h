@@ -20,7 +20,7 @@ typedef uint32_t u32;
 #define MAX_CONDITIONS          4
 #define MAX_FEATURES          0
 
-#define INSTANCE_SIZE          0
+#define INSTANCE_SIZE          8
 
 typedef struct
 {

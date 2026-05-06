@@ -432,7 +432,7 @@ writeColumnIndex(FILE *out, char *line, u32 size)
     u32 count =0;
 
     //skip the first column //
-    line = line + 12 ; //len(instance_id)
+   while (*line && *line != ',') line++;
     
     while(line[0] != '\0')
     {
@@ -441,7 +441,7 @@ writeColumnIndex(FILE *out, char *line, u32 size)
         line++; //skip the ','  
         skipSpaces(&line);
         if(line[0]=='y') break;
-        fprintf(out, "#define COLUMN_%d_INDEX    ", count + 1);
+        fprintf(out, "#define _%d_IDXS    ", count + 1);
         writeIndexes(&line, out);
         fprintf(out, "\n");
         count++;
@@ -478,7 +478,7 @@ writeInstanceCsvLine(FILE *out, char *line, u32 colCount)
         
         //write condition 
         if(count > 0) fprintf(out,",");
-        fprintf(out,"{COLUMN_%d_INDEX, %d}", count++, idx);
+        fprintf(out,"{_%d_IDXS, %d}", ++count, idx);
 
 
     }
