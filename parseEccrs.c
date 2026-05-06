@@ -402,8 +402,8 @@ writeInstanceFromTXT(FILE *out, FILE *in)
 
 
 
-static int 
-WriteIndexes(char **p, FILE *out) {
+static u8 
+writeIndexes(char **p, FILE *out) {
     skipSpaces(p);
 
     if (**p != 'a') return 0;
@@ -438,19 +438,52 @@ writeColumnIndex(FILE *out, char *line, u32 size)
     {
         skipSpaces(&line);
         if(line[0] != ',') break;
-        line++; //skip the ','
+        line++; //skip the ','  
+        skipSpaces(&line);
+        if(line[0]=='y') break;
         fprintf(out, "u32 COLUMN_%d_INDEX = ", count + 1);
         writeIndexes(&line, out);
         fprintf(out, ";\n");
         count++;
     }
     
+    return count;
+
+}
 
 
+static u32 
+writeInstancekCsvLine(FILE *out, char *line)
+{
+    u32 count = 0;
+    char *p = line;
+
+    fprintf(out,"{ {");
+
+    while (*p)
+    { 
+        //skip the ','
+        //parse int 
+        ////write int {column_%d_index, int}
 
 
+        /*
+        i32 idx, val;
 
+        
+        if (parseCondition(&p, &idx, &val)) 
+        {
+            if (count > 0) fprintf(out, ",");
+            fprintf(out, "{%d,%d}", idx, val);
+            count++;
+        }
+        //  next '&'
+        while (*p && *p != '&') p++;
+        if (*p == '&') p++;
+        */
+    }
 
+    fprintf(out, "}, %u}", count);
 
     return count;
 
@@ -467,8 +500,6 @@ writeInstanceFromCSV(FILE *out, FILE *in)
 
     writeColumnIndex(out, line, 512);
     
-
-
     return (InstanceSizes){0,0};
 
 }
