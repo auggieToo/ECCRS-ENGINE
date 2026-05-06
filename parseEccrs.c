@@ -162,7 +162,7 @@ i32 main(i32 argc,char *argv[])
 
 
     fprintf(outC, " const unsigned int SIZE_OF_RULESET = %d;\n", pv.rulesCount);
-    fprintf(outC, " const unsigned int SIZE_OF_INSTANCE_SET = %d;\n", 1);
+    fprintf(outC, " const unsigned int SIZE_OF_INSTANCE_SET = %d;\n", instances.numInstances);
 
     fseek(out, patch.pos_max_rules, SEEK_SET);
     fprintf(out, "%10d", pv.rulesCount);
@@ -467,8 +467,10 @@ writeInstanceCsvLine(FILE *out, char *line, u32 colCount)
         if( count + 1 >= colCount) break;  
         
         //skip the ','
+    
         skipSpaces(&p);
-        if(p[0] != ',') break; 
+        if(p[0] != ',') break;
+        p++;
 
 
         

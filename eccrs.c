@@ -59,6 +59,7 @@ i32 main(i32 argc , char * argv[])
                               maxInc,
                               prediction);
 
+        printf("\n------Instance ID: %d----------\n", instanceSet[k].instanceId);
         printExplanationTraces(outSet, outRides, 
                                        appliSize,
                                        maxInc, 
