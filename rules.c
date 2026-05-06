@@ -16,5 +16,8 @@ Rule ruleset[] = {
     {4, {{2,1},{3,1},{4,1}}, 3, 0},
 };
 
-Instance F = { {{1,0},{2,1},{3,1},{4,0},{5,0}}, 5};
+InstanceList instanceSet[] = {
+    {0, { {{1,0},{2,1},{3,1},{4,0},{5,0}}, 5}},
+};
  const unsigned int SIZE_OF_RULESET = 5;
+ const unsigned int SIZE_OF_INSTANCE_SET = 1;

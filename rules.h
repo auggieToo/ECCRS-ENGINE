@@ -21,7 +21,6 @@ typedef uint32_t u32;
 #define MAX_FEATURES          0
 
 #define INSTANCE_SIZE          5
-#define INSTANCES_LIST_SIZE  10
 
 typedef struct
 {
@@ -43,12 +42,11 @@ typedef struct
     u32 size;
 } Instance;
 
-typedef struct 
+typedef struct
 {
-    u32 instanceId;
-    Instance inst;
-
-}InstancesList;
+   u32 instanceId;
+   Instance inst;
+}InstanceList;
 
 typedef struct
 {
@@ -62,5 +60,7 @@ PRED_0 , PRED_1 , PRED_ABSTAIN
 }Prediction;
 
 extern Rule ruleset[];
+extern InstanceList instanceSet[];
 extern Instance F;
 extern const unsigned  SIZE_OF_RULESET;
+extern const unsigned  SIZE_OF_INSTANCE_SET;

@@ -20,6 +20,12 @@ typedef uint64_t u64;
 
 
 
+typedef struct 
+{
+    u32 maxInstances;
+    u32 numInstances;
+
+}InstanceSizes;
 
 typedef struct 
 {
@@ -43,7 +49,7 @@ typedef struct
 HeaderPatchPoints writeHeader(FILE *out); 
 HeaderPatchValues writeSrc(FILE *out, FILE *in); 
 
-static u32 writeInstance(FILE *out, FILE *in, char *filename);
+static InstanceSizes writeInstance(FILE *out, FILE *in, char *filename);
 
 i32 main(i32 argc,char *argv[]) 
 {
@@ -143,13 +149,14 @@ i32 main(i32 argc,char *argv[])
 
     HeaderPatchPoints patch = writeHeader(out);
     HeaderPatchValues pv = writeSrc(outC, in);
-    u32 instances = writeInstance(outC, inI, instanceName);
+    InstanceSizes instances = writeInstance(outC, inI, instanceName);
 
 
 
 
 
     fprintf(outC, " const unsigned int SIZE_OF_RULESET = %d;\n", pv.rulesCount);
+    fprintf(outC, " const unsigned int SIZE_OF_INSTANCE_SET = %d;\n", 1);
 
     fseek(out, patch.pos_max_rules, SEEK_SET);
     fprintf(out, "%10d", pv.rulesCount);
@@ -158,7 +165,7 @@ i32 main(i32 argc,char *argv[])
     fprintf(out, "%10d", pv.maxCond);
 
     fseek(out, patch.pos_max_features, SEEK_SET);
-    fprintf(out, "%10d", instances);
+    fprintf(out, "%10d", instances.maxInstances);
 
     fclose(in);
     fclose(out);
@@ -318,21 +325,16 @@ endsWith4(const char *src, const char *suf)
 
 }
 
+
+//write the instances set from a .txt 
+//return the number of literals in the instance 
 static u32 
-writeInstanceFromTXT(FILE *out, FILE *in)
+writeInstanceLine(FILE *out, char *line)
 {
-
-    char line[512];
-
-    if (!fgets(line, sizeof(line), in)) return 0;
-
-    // strip newline
-    line[strcspn(line, "\r\n")] = 0;
-
-    fprintf(out, "Instance F = { {");
-
     u32 count = 0;
     char *p = line;
+
+    fprintf(out,"{ {");
 
     while (*p)
     {
@@ -345,33 +347,70 @@ writeInstanceFromTXT(FILE *out, FILE *in)
             fprintf(out, "{%d,%d}", idx, val);
             count++;
         }
-
         //  next '&'
         while (*p && *p != '&') p++;
         if (*p == '&') p++;
     }
 
-    fprintf(out, "}, %u};\n", count);
+    fprintf(out, "}, %u}", count);
 
     return count;
 
 }
 
-static u32 
+static InstanceSizes
+writeInstanceFromTXT(FILE *out, FILE *in)
+{
+    u32 maxLiterals = 0;
+    u32 count = 0;
+
+    fprintf(out, "InstanceList instanceSet[] = {\n");
+
+    u32 literals;
+
+    char line[512];
+    while (1)
+    {
+
+        //check if we reached the EOF 
+        if (!fgets(line, sizeof(line), in)) break; 
+
+
+        line[strcspn(line, "\r\n")] = 0;
+
+        //black line or no entry at all
+        if(line[0]=='\0') break;
+
+
+        fprintf(out, "    {%u, ", count++);
+        literals = writeInstanceLine(out, line);
+        fprintf(out, "},\n");
+
+        if (literals == 0) { count--; break; }    // blank/empty line
+        if (literals > maxLiterals) maxLiterals = literals;
+    }
+
+    fprintf(out, "};\n");
+    return (InstanceSizes){ maxLiterals, count };
+}
+
+static InstanceSizes 
 writeInstanceFromCSV(FILE *out, FILE *in)
 {
 
 
+    return (InstanceSizes){0,0};
 
 }
 
 
-static u32 
+static InstanceSizes 
 writeInstance(FILE *out, FILE *in, char *filename)
 {
     if(endsWith4(filename, ".txt")) return writeInstanceFromTXT(out,in);
     else if(endsWith4(filename, ".csv")) return writeInstanceFromCSV(out,in);
 
+    return (InstanceSizes){0,0} ;
 }
 
 

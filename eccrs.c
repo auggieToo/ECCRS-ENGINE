@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "eccrsMSW.h"
+#include "rules.h"
 
 typedef struct 
 {
@@ -49,22 +50,24 @@ i32 main(i32 argc , char * argv[])
     }
 
 
-    RUN_ECCRS_MSW(ruleset,F, outSet, 
-                             appliSize, 
-                             maxInclSize,
-                             outRides,
-                             maxInc,
-                             prediction);
+    for(int k = 0 ; k < SIZE_OF_INSTANCE_SET ; k++)
+    {
+        RUN_ECCRS_MSW(ruleset,instanceSet[k].inst, outSet, 
+                              appliSize, 
+                              maxInclSize,
+                              outRides,
+                              maxInc,
+                              prediction);
 
-    printExplanationTraces(outSet, outRides, 
-                                   appliSize,
-                                   maxInc, 
-                                   maxInclSize,
-                                   prediction,
-                                   flags.predictionOnly);
-    
+        printExplanationTraces(outSet, outRides, 
+                                       appliSize,
+                                       maxInc, 
+                                       maxInclSize,
+                                       prediction,
+                                       flags.predictionOnly);
 
 
+    }
     return EXIT_SUCCESS;
 }
 
@@ -83,6 +86,5 @@ parseClArguments(i32 argc,char* argv[])
 
     return f;
 }
-
 
 
