@@ -461,26 +461,22 @@ writeInstancekCsvLine(FILE *out, char *line)
     fprintf(out,"{ {");
 
     while (*p)
-    { 
+    {
+        
         //skip the ','
-        //parse int 
-        ////write int {column_%d_index, int}
-
-
-        /*
-        i32 idx, val;
+        skipSpaces(&line);
+        if(line[0] != ',') break; 
 
         
-        if (parseCondition(&p, &idx, &val)) 
-        {
-            if (count > 0) fprintf(out, ",");
-            fprintf(out, "{%d,%d}", idx, val);
-            count++;
-        }
-        //  next '&'
-        while (*p && *p != '&') p++;
-        if (*p == '&') p++;
-        */
+        //parse int
+        skipSpaces(&line);
+        u32 idx = parseInt(&line);
+        
+        //write condition 
+        if(count > 0) fprintf(out,",");
+        fprintf(out,"{COLUMN_%d_INDEX, %d}", count++, idx);
+
+
     }
 
     fprintf(out, "}, %u}", count);
