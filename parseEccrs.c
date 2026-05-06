@@ -434,7 +434,7 @@ writeColumnIndex(FILE *out, char *line, u32 size)
     //skip the first column //
     line = line + 12 ; //len(instance_id)
     
-    while(line[0] != '\n' || line[0] == '\0')
+    while(line[0] != '\0')
     {
         skipSpaces(&line);
         if(line[0] != ',') break;
@@ -453,7 +453,7 @@ writeColumnIndex(FILE *out, char *line, u32 size)
 
 
 static u32 
-writeInstancekCsvLine(FILE *out, char *line, u32 colCount)
+writeInstanceCsvLine(FILE *out, char *line, u32 colCount)
 {
     u32 count = 0;
     char *p = line;
@@ -467,14 +467,14 @@ writeInstancekCsvLine(FILE *out, char *line, u32 colCount)
         if( count + 1 >= colCount) break;  
         
         //skip the ','
-        skipSpaces(&line);
-        if(line[0] != ',') break; 
+        skipSpaces(&p);
+        if(p[0] != ',') break; 
 
 
         
         //parse int
-        skipSpaces(&line);
-        u32 idx = parseInt(&line);
+        skipSpaces(&p);
+        u32 idx = parseInt(&p);
         
         //write condition 
         if(count > 0) fprintf(out,",");
@@ -498,9 +498,45 @@ writeInstanceFromCSV(FILE *out, FILE *in)
     //get the header lines 
     fgets(line,sizeof(line), in);
 
-    writeColumnIndex(out, line, 512);
+    u32 cols = writeColumnIndex(out, line, 512);
+    u32 count = 0;
+    u32 literals;
+
+
+    fprintf(out, "\n\nInstanceList instanceSet[] = {\n");
+
+    while (1)
+    {
+
+        //check if we reached the EOF 
+        if (!fgets(line, sizeof(line), in)) break; 
+
+
+        line[strcspn(line, "\r\n")] = 0;
+
+        //black line or no entry at all
+        if(line[0]=='\0') break;
+
+        //parse the instance id 
+        char *lines = line;
+        skipSpaces(&lines);
+        u32 id = parseInt(&lines);
+
+
+
+        fprintf(out, "    {%u, ", id);
+        literals = writeInstanceCsvLine(out, lines, cols);
+        fprintf(out, "},\n");
+
+        count++;
+
+    }
+
+    fprintf(out, "};\n");
+    return (InstanceSizes){ cols, count };
+
+
     
-    return (InstanceSizes){0,0};
 
 }
 
