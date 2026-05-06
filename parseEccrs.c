@@ -45,6 +45,12 @@ typedef struct
     
 } HeaderPatchValues;
 
+typedef struct 
+{
+    u32 columnIndex
+
+}IndexHeaderLookup;
+
 
 HeaderPatchPoints writeHeader(FILE *out); 
 HeaderPatchValues writeSrc(FILE *out, FILE *in); 
@@ -394,9 +400,20 @@ writeInstanceFromTXT(FILE *out, FILE *in)
     return (InstanceSizes){ maxLiterals, count };
 }
 
+static u32 
+writeColumIndex(FILE *out, FILE *in)
+{
+    u32 count =0 ;
+
+
+    return count;
+
+}
+
 static InstanceSizes 
 writeInstanceFromCSV(FILE *out, FILE *in)
 {
+    
 
 
     return (InstanceSizes){0,0};
