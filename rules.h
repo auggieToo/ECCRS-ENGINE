@@ -1,7 +1,7 @@
 //---------------------------------------------
 //Warning: This file was auto generated
 //Changing this file may lead to unexpected behavior
-//Generated using: tests-rules/scholar-rules.txt , tests-rules/scholar-inst2.txt 
+//Generated using: tests-rules/bcancer-rules.txt , tests-rules/bcancer-inst-csv.csv 
 //---------------------------------------------
 
 
@@ -16,11 +16,11 @@ typedef uint8_t u8;
 typedef uint16_t u16;
 typedef uint32_t u32;
 
-#define MAX_RULES          5
-#define MAX_CONDITIONS          3
+#define MAX_RULES         12
+#define MAX_CONDITIONS          4
 #define MAX_FEATURES          0
 
-#define INSTANCE_SIZE          5
+#define INSTANCE_SIZE          0
 
 typedef struct
 {

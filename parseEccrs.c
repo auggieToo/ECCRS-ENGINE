@@ -441,9 +441,9 @@ writeColumnIndex(FILE *out, char *line, u32 size)
         line++; //skip the ','  
         skipSpaces(&line);
         if(line[0]=='y') break;
-        fprintf(out, "u32 COLUMN_%d_INDEX = ", count + 1);
+        fprintf(out, "#define COLUMN_%d_INDEX    ", count + 1);
         writeIndexes(&line, out);
-        fprintf(out, ";\n");
+        fprintf(out, "\n");
         count++;
     }
     
@@ -453,7 +453,7 @@ writeColumnIndex(FILE *out, char *line, u32 size)
 
 
 static u32 
-writeInstancekCsvLine(FILE *out, char *line)
+writeInstancekCsvLine(FILE *out, char *line, u32 colCount)
 {
     u32 count = 0;
     char *p = line;
@@ -462,10 +462,14 @@ writeInstancekCsvLine(FILE *out, char *line)
 
     while (*p)
     {
+
+        //leave the prediction column
+        if( count + 1 >= colCount) break;  
         
         //skip the ','
         skipSpaces(&line);
         if(line[0] != ',') break; 
+
 
         
         //parse int
