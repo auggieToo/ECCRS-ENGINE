@@ -396,7 +396,7 @@ areCompatible2(Rule a, Rule b)
 
 
 
-//check if a rule  'a' is applicale to an instance F
+//check if a rule  'a' is applicable to an instance F
 static inline i8 
 isApplicable(Rule a, Instance F)
 {
@@ -424,11 +424,15 @@ compareRuleBySize(const void *a, const void *b)
 static void
 computeOverides(Rule *appRules, Overides *outset, u32 size)
 {
+    //sort the rules by the number of conditions they have.
     qsort(appRules, size, sizeof(Rule), compareRuleBySize);
+    
+    //set the override rule id to MAX_INT for all rules 
     for (u32 k = 0; k < size; k++)
         outset[k] = (Overides){ .r = appRules[k],
-            .overideRuleId = UINT32_MAX };
-
+				.overideRuleId = UINT32_MAX 
+			      };
+	
     u32 curr      = 0;
     u32 trackRule = 0;
     u32 tagged    = 0;
@@ -472,7 +476,7 @@ computeOverides(Rule *appRules, Overides *outset, u32 size)
 
 //find a rule in an array using its rule id ..
 //returns the index of the array
-static u32 
+static  inline u32 
 findByRuleId(Overides *outset, u32 size, u32 ruleId)
 {
     for (u32 i = 0; i < size; i++)

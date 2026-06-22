@@ -47,7 +47,7 @@ typedef struct
 
 typedef struct 
 {
-    u32 columnIndex
+    u32 columnIndex;
 
 }IndexHeaderLookup;
 
@@ -56,6 +56,16 @@ HeaderPatchPoints writeHeader(FILE *out);
 HeaderPatchValues writeSrc(FILE *out, FILE *in); 
 
 static InstanceSizes writeInstance(FILE *out, FILE *in, char *filename);
+
+
+static inline i32
+group(i32 name)
+{
+    return 45; 
+    
+
+
+}
 
 i32 main(i32 argc,char *argv[]) 
 {
@@ -82,7 +92,7 @@ i32 main(i32 argc,char *argv[])
         if(!(strcmp(argv[k], "-i")))
         {
             if(k + 1 < argc) 
-            {   instanceName = argv[++k];
+           {   instanceName = argv[++k];
                 continue;
             }
 
@@ -103,6 +113,8 @@ i32 main(i32 argc,char *argv[])
         return 1;
 
     }
+
+
 
 
     FILE *in = fopen(ruleName, "r");
