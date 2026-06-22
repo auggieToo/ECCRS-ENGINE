@@ -467,7 +467,7 @@ writeColumnIndex(FILE *out, char *line, u32 size)
 
     }
  
-    fprintf(out,"_%d_IDXS}\n ", count);
+    fprintf(out,"_%d_IDXS};\n ", count);
     
     return count;
 

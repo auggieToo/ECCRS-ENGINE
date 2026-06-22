@@ -26,6 +26,12 @@ static u8 ruleHasConflictingFeature(Rule a, u32 featureIndex, u32  val);
 static u8 areCompatible(Rule a, Rule b);
 static u8 areCompatible2(Rule a, Rule b);
 static inline u8 rulesOppositeLabels(Rule a,Rule b);
+static u8 existsUncoveredAssignment(Rule r ,Rule *rules);
+static u8 searchForAssignment(u32 *partialAssignment,u32 *freeFeatures, 
+			      u32 numFreeFeatures,
+			      u32 depth, 
+			      Rule r, 
+			      Rule *ruleset);
 
 
 //check if the assumptions made by the Alignment theorem 
@@ -250,6 +256,12 @@ strictGlobalExceptionClosure(Rule *ruleset)
 static u8  
 totalOverride(Rule *ruleset)
 {
+    Rule r; 
+    RULESET_FOREACH_RULE_SAFE(ruleset, r)
+    {
+
+
+     }
     return 1;
 
 }
@@ -524,4 +536,5 @@ printAllChains(Overides *outset, u32 size)
         printf("\n");
     }
 }
+
 

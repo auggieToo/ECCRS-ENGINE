@@ -31,7 +31,8 @@ Rule ruleset[] = {
 #define _6_IDXS    7
 #define _7_IDXS    8
 #define _8_IDXS    9
-
+u8 ALL_FEATURES[] = {_1_IDXS, _2_IDXS, _3_IDXS, _4_IDXS, _5_IDXS, _6_IDXS, _7_IDXS, _8_IDXS};
+ 
 
 InstanceList instanceSet[] = {
     {463, { {{_1_IDXS, 1},{_2_IDXS, 0},{_3_IDXS, 0},{_4_IDXS, 1},{_5_IDXS, 0},{_6_IDXS, 0},{_7_IDXS, 0}}, 7}},
