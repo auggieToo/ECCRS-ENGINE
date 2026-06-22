@@ -242,6 +242,11 @@ strictGlobalExceptionClosure(Rule *ruleset)
     return 1;
 }
 
+//" This can be framed as a small search problem over all possible 
+// boolean feature assignments. The goal is to determine whether there 
+// exists an assignment that satisfies a given rule without being covered 
+// by a stricter rule with the opposite label."
+
 static u8  
 totalOverride(Rule *ruleset)
 {
@@ -446,7 +451,7 @@ computeOverides(Rule *appRules, Overides *outset, u32 size)
 
         curr = trackRule;
         tagged++;
-        u32 nextTrack = size;
+        u32 nextTrack = size;		//the first rule not part of any overide chain
 
         for (u32 x = curr + 1; x < size; x++)
         {
@@ -519,5 +524,4 @@ printAllChains(Overides *outset, u32 size)
         printf("\n");
     }
 }
-
 

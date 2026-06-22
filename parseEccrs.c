@@ -458,6 +458,16 @@ writeColumnIndex(FILE *out, char *line, u32 size)
         fprintf(out, "\n");
         count++;
     }
+
+   //write the full feature array 
+    fprintf(out,"u8 ALL_FEATURES[] = {");
+    for(u32 k = 1 ; k < count ; k++)
+    {
+	fprintf(out,"_%d_IDXS, ", k);
+
+    }
+ 
+    fprintf(out,"_%d_IDXS}\n ", count);
     
     return count;
 
