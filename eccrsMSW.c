@@ -361,12 +361,29 @@ existsUncoveredAssignment(Rule r ,Rule *rules)
 //     return 0;
 // }
 //
+//
+
+static void 
+printInstance(Instance ins)
+{
+		u32 fvar, vvar;
+		INSTANCE_FOREACH_FEAT_VAL_SAFE(ins, fvar, vvar)
+		{
+			printf("a(%d) = %d ", fvar , vvar);
+
+		}
+		printf("\n");
+}
+
 static u8 searchForAssignment(Instance partialAssignment,u32 *freeFeatures, 
 			      u32 numFreeFeatures,
 			      u32 depth, 
 			      Rule r, 
 			      Rule *ruleset)
 {
+	//TODO: can check if a rule fires in all possible extension of the partial assignment- alreadyDominated()... 
+
+
 	if(depth == numFreeFeatures)
 	{
 		Rule other;
@@ -381,22 +398,43 @@ static u8 searchForAssignment(Instance partialAssignment,u32 *freeFeatures,
 
 
 		}
+		printInstance(partialAssignment);
 		return 1 ;
 		
 
 	}
 
 	u32 f = freeFeatures[depth];
+	Instance pa = partialAssignment; 
+		
+	//add the new feature in the partial assignment 
+	partialAssignment.conditions[partialAssignment.size++] = (Condition){f, 0};   //set the new feature to 0 first
 
+	if(searchForAssignment(partialAssignment,
+						   freeFeatures, 
+						   numFreeFeatures, 
+						   depth + 1, 
+						   r, 
+						   ruleset))
+		return 1; 
 
-
-
-
-
+	//change the feature value to 1
+	partialAssignment.conditions[partialAssignment.size] = (Condition){f, 1};   //set the new feature to 0 first
+	
+	if(searchForAssignment(partialAssignment,
+						   freeFeatures, 
+						   numFreeFeatures, 
+						   depth + 1, 
+						   r, 
+						   ruleset))
+		return 1; 
 
 	
+	//backtrack
+	partialAssignment = pa ;
+	
+	return 0;
 
-	 return 0;
 }
 static inline u8 
 rulesOppositeLabels(Rule a,Rule b)
