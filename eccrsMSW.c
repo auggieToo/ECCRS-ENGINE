@@ -1,4 +1,3 @@
-#include <algorithm>
 #include <stdio.h>
 #include <stdlib.h>
 #include "rules.h"
@@ -327,47 +326,73 @@ existsUncoveredAssignment(Rule r ,Rule *rules)
 
 }
 
-static u8
-already_dominated(u32 *partial_assignment, Rule *ruleset, u8 rule_label)
-{
-	Rule other ;
-	RULESET_FOREACH_RULE_SAFE(ruleset, other)
-    {
-
-        if (other.label == rule_label)
-            continue;                           // skip same label
-
-        // check if other_rule fires on ALL extensions of partial_assignment
-        // i.e. every condition of other_rule is already satisfied
-        // in the partial assignment (no condition is UNASSIGNED or conflicting)
-        u8 firesOnAllExtensions = 1;
-        u32 f, v;
-        RULE_FOREACH_FEAT_VAL_SAFE(other, f, v)
-        {
-            if (partial_assignment[f] == UNASSIGNED)
-            {
-                firesOnAllExtensions = 0;    // this feature not yet fixed
-                break;
-            }
-            if (partial_assignment[f] != v)
-            {
-                firesOnAllExtensions = 0;    // condition fails → rule wont fire
-                break;
-            }
-        }
-
-        if (fires_on_all_extensions)
-            return 1;                           // prune: every extension is dominated
-    }
-    return 0;
-}
-
+// static u8
+// alreadyDominated(u32 *partialAssignment, Rule *ruleset, u8 ruleLabel)
+// {
+// 	Rule other ;
+// 	RULESET_FOREACH_RULE_SAFE(ruleset, other)
+//     {
+//
+//         if (other.label == ruleLabel)
+//             continue;                           // skip same label
+//
+//         // check if other_rule fires on ALL extensions of partial_assignment
+//         // i.e. every condition of other_rule is already satisfied
+//         // in the partial assignment (no condition is UNASSIGNED or conflicting)
+//         u8 firesOnAllExtensions = 1;
+//         u32 f, v;
+//         RULE_FOREACH_FEAT_VAL_SAFE(other, f, v)
+//         {
+//             if (partialAssignment,f] == UNASSIGNED)
+//             {
+//                 firesOnAllExtensions = 0;    // this feature not yet fixed
+//                 break;
+//             }
+//             if (partial_assignment[f] != v)
+//             {
+//                 firesOnAllExtensions = 0;    // condition fails → rule wont fire
+//                 break;
+//             }
+//         }
+//
+//         if (fires_on_all_extensions)
+//             return 1;                           // prune: every extension is dominated
+//     }
+//     return 0;
+// }
+//
 static u8 searchForAssignment(Instance partialAssignment,u32 *freeFeatures, 
 			      u32 numFreeFeatures,
 			      u32 depth, 
 			      Rule r, 
 			      Rule *ruleset)
 {
+	if(depth == numFreeFeatures)
+	{
+		Rule other;
+		//this part forms part of the greedy algorithm 
+		RULESET_FOREACH_RULE_SAFE(ruleset, other)
+		{
+			if(other.label == r.label) continue; 
+			
+			if(	isApplicable(other, partialAssignment)		//other fires on this assignment
+				&& isSubsetRule(r, other)						//and rule is a subset of other
+			) return 0; 								//rule r is overriden for this assignment 
+
+
+		}
+		return 1 ;
+		
+
+	}
+
+	u32 f = freeFeatures[depth];
+
+
+
+
+
+
 
 	
 
