@@ -57,6 +57,8 @@ u8 verifyAssumptions(Rule *rules)
 
     }
 
+	totalOverride(rules);
+
     return violations;
 
 }
@@ -257,9 +259,11 @@ static u8
 totalOverride(Rule *ruleset)
 {
     Rule r; 
+	int k = 0 ;
     RULESET_FOREACH_RULE_SAFE(ruleset, r)
     {
-
+		printf("rule %d\n", k++);		
+		existsUncoveredAssignment(r, ruleset);
 
      }
     return 1;
@@ -419,7 +423,7 @@ static u8 searchForAssignment(Instance partialAssignment,u32 *freeFeatures,
 		return 1; 
 
 	//change the feature value to 1
-	partialAssignment.conditions[partialAssignment.size] = (Condition){f, 1};   //set the new feature to 0 first
+	partialAssignment.conditions[partialAssignment.size - 1] = (Condition){f, 1};   //set the new feature to 0 first
 	
 	if(searchForAssignment(partialAssignment,
 						   freeFeatures, 
