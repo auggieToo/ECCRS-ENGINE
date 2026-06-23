@@ -55,7 +55,7 @@ typedef struct
 HeaderPatchPoints writeHeader(FILE *out); 
 HeaderPatchValues writeSrc(FILE *out, FILE *in); 
 
-static InstanceSizes writeInstance(FILE *out, FILE *in, char *filename);
+static InstanceSizes writeInstance(FILE *out, FILE *in, FILE* outHeader,  char *filename);
 
 
 static inline i32
@@ -167,7 +167,7 @@ i32 main(i32 argc,char *argv[])
 
     HeaderPatchPoints patch = writeHeader(out);
     HeaderPatchValues pv = writeSrc(outC, in);
-    InstanceSizes instances = writeInstance(outC, inI, instanceName);
+    InstanceSizes instances = writeInstance(outC, inI, out,instanceName);
 
 
 
@@ -514,7 +514,7 @@ writeInstanceCsvLine(FILE *out, char *line, u32 colCount)
 }
 
 static InstanceSizes 
-writeInstanceFromCSV(FILE *out, FILE *in)
+writeInstanceFromCSV(FILE *out, FILE *in, FILE* outHeader)
 {
 
     char line[512];
@@ -522,7 +522,7 @@ writeInstanceFromCSV(FILE *out, FILE *in)
     //get the header lines 
     fgets(line,sizeof(line), in);
 
-    u32 cols = writeColumnIndex(out, line, 512);
+    u32 cols = writeColumnIndex(outHeader, line, 512);
     u32 count = 0;
     u32 literals;
 
@@ -566,10 +566,10 @@ writeInstanceFromCSV(FILE *out, FILE *in)
 
 
 static InstanceSizes 
-writeInstance(FILE *out, FILE *in, char *filename)
+writeInstance(FILE *out, FILE* outHeader,  FILE *in, char *filename)
 {
     if(endsWith4(filename, ".txt")) return writeInstanceFromTXT(out,in);
-    else if(endsWith4(filename, ".csv")) return writeInstanceFromCSV(out,in);
+    else if(endsWith4(filename, ".csv")) return writeInstanceFromCSV(out,in, outHeader);
 
     return (InstanceSizes){0,0} ;
 }
