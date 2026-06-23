@@ -265,6 +265,18 @@ totalOverride(Rule *ruleset)
     return 1;
 
 }
+		
+static u8 existsUncoveredAssignment(Rule r ,Rule *rules);
+{
+
+			
+}
+
+static u8 searchForAssignment(u32 *partialAssignment,u32 *freeFeatures, 
+			      u32 numFreeFeatures,
+			      u32 depth, 
+			      Rule r, 
+			      Rule *ruleset);
 
 static inline u8 
 rulesOppositeLabels(Rule a,Rule b)
