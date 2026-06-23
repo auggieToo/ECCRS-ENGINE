@@ -275,6 +275,7 @@ HeaderPatchPoints writeHeader(FILE *out)
 
     
     fprintf(out, "extern Rule ruleset[];\n");
+    fprintf(out, "extern u8 ALL_FEATURES[];\n");
     fprintf(out, "extern InstanceList instanceSet[];\n");
     fprintf(out, "extern Instance F;\n");
     fprintf(out,"extern const unsigned  SIZE_OF_RULESET;\n");
@@ -522,7 +523,7 @@ writeInstanceFromCSV(FILE *out, FILE *in, FILE* outHeader)
     //get the header lines 
     fgets(line,sizeof(line), in);
 
-    u32 cols = writeColumnIndex(outHeader, line, 512);
+    u32 cols = writeColumnIndex(out, line, 512);
     u32 count = 0;
     u32 literals;
 
@@ -566,7 +567,7 @@ writeInstanceFromCSV(FILE *out, FILE *in, FILE* outHeader)
 
 
 static InstanceSizes 
-writeInstance(FILE *out, FILE* outHeader,  FILE *in, char *filename)
+writeInstance(FILE *out,  FILE *in, FILE* outHeader, char *filename)
 {
     if(endsWith4(filename, ".txt")) return writeInstanceFromTXT(out,in);
     else if(endsWith4(filename, ".csv")) return writeInstanceFromCSV(out,in, outHeader);

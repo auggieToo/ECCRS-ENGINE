@@ -7,7 +7,7 @@
 
 #include "rules.h"
 
-		
+
 Rule ruleset[] = {
     {0, {{2,0},{4,1},{7,1},{8,0}}, 4, 1},
     {1, {{2,0},{4,1},{7,0},{8,0}}, 4, 1},
@@ -31,7 +31,6 @@ Rule ruleset[] = {
 #define _6_IDXS    7
 #define _7_IDXS    8
 #define _8_IDXS    9
-
 u8 ALL_FEATURES[] = {_1_IDXS, _2_IDXS, _3_IDXS, _4_IDXS, _5_IDXS, _6_IDXS, _7_IDXS, _8_IDXS};
  
 

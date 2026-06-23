@@ -60,6 +60,7 @@ PRED_0 , PRED_1 , PRED_ABSTAIN
 }Prediction;
 
 extern Rule ruleset[];
+extern u8 ALL_FEATURES[];
 extern InstanceList instanceSet[];
 extern Instance F;
 extern const unsigned  SIZE_OF_RULESET;

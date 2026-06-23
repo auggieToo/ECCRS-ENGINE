@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <stdio.h>
 #include <stdlib.h>
 #include "rules.h"
@@ -266,13 +267,14 @@ totalOverride(Rule *ruleset)
 
 }
 
+//returns the required value of a feature in a rule
 static u8 
-containsFeature(Rule r, u8 feat)
+featureVal(Rule r, u8 feat)
 {
 	u8 fvar, vvar ;
 	RULE_FOREACH_FEAT_VAL_SAFE(r , fvar , vvar)
 	{
-		if(fvar==feat) return 1;
+		if(fvar==feat) return vvar;
 	}
 	return 0;
 }
@@ -282,14 +284,29 @@ existsUncoveredAssignment(Rule r ,Rule *rules)
 {
 	//build a partial assignment 
 	//need to figure out which feature is in what index...
-	u8 partialAssignment[INSTANCE_SIZE];
+	Instance partialAssignment=  (Instance){0};
 	for(u8 k = 0; k <  INSTANCE_SIZE;k++)
 	{
-		if()
+		if(ruleContainsFeature(r,ALL_FEATURES[k])) 
+			partialAssignment.conditions[partialAssignment.size++] = (Condition){ALL_FEATURES[k],featureVal(r,ALL_FEATURES[k]) };
+	}
+
+	//collect all the free features -> these are features that are not in the rule conditions
+	Rule other; 
+	RULESET_FOREACH_RULE_SAFE(ruleset, other)
+	{
+
+		//because we want to check if the rule can be overriden by 
+		//rule of opposite label for a given instance/partial assignment , we only need 
+		//to select features that appear in the rules of opposite labels 
+		if(other.label == r.label) continue;
+
+
+
+
 
 
 	}
-
 	return 0;
 
 }
