@@ -28,7 +28,7 @@ static u8 areCompatible(Rule a, Rule b);
 static u8 areCompatible2(Rule a, Rule b);
 static inline u8 rulesOppositeLabels(Rule a,Rule b);
 static u8 existsUncoveredAssignment(Rule r ,Rule *rules);
-static u8 searchForAssignment(u32 *partialAssignment,u32 *freeFeatures, 
+static u8 searchForAssignment(Instance partialAssignment,u32 *freeFeatures, 
 			      u32 numFreeFeatures,
 			      u32 depth, 
 			      Rule r, 
@@ -279,6 +279,15 @@ featureVal(Rule r, u8 feat)
 	return 0;
 }
 
+
+static u8
+inArray(u32 *arr, u32 len, u32 val)
+{
+    for (u32 i = 0; i < len; i++)
+        if (arr[i] == val) return 1;
+    return 0;
+}
+
 static u8 
 existsUncoveredAssignment(Rule r ,Rule *rules)
 {
@@ -292,6 +301,8 @@ existsUncoveredAssignment(Rule r ,Rule *rules)
 	}
 
 	//collect all the free features -> these are features that are not in the rule conditions
+	u32 freeFeatures[INSTANCE_SIZE];
+	u32 freeFeaturesSize = 0 ; 
 	Rule other; 
 	RULESET_FOREACH_RULE_SAFE(ruleset, other)
 	{
@@ -301,22 +312,63 @@ existsUncoveredAssignment(Rule r ,Rule *rules)
 		//to select features that appear in the rules of opposite labels 
 		if(other.label == r.label) continue;
 
-
-
-
+		u32 fvar, vvar; 
+		RULE_FOREACH_FEAT_VAL_SAFE(other, fvar, vvar)
+		{
+			if( !ruleContainsFeature(r, fvar) &&					//feature not in the rule
+			    !inArray(freeFeatures, freeFeaturesSize, fvar)		//featue already seen
+			  ) freeFeatures[freeFeaturesSize++] = fvar;	
+				
+		}
 
 
 	}
-	return 0;
+	return searchForAssignment(partialAssignment, freeFeatures, freeFeaturesSize , 0 , r, rules);
 
 }
 
-static u8 searchForAssignment(u32 *partialAssignment,u32 *freeFeatures, 
+static u8
+already_dominated(u32 *partial_assignment, Rule *ruleset, u8 rule_label)
+{
+	Rule other ;
+	RULESET_FOREACH_RULE_SAFE(ruleset, other)
+    {
+
+        if (other.label == rule_label)
+            continue;                           // skip same label
+
+        // check if other_rule fires on ALL extensions of partial_assignment
+        // i.e. every condition of other_rule is already satisfied
+        // in the partial assignment (no condition is UNASSIGNED or conflicting)
+        u8 firesOnAllExtensions = 1;
+        u32 f, v;
+        RULE_FOREACH_FEAT_VAL_SAFE(other, f, v)
+        {
+            if (partial_assignment[f] == UNASSIGNED)
+            {
+                firesOnAllExtensions = 0;    // this feature not yet fixed
+                break;
+            }
+            if (partial_assignment[f] != v)
+            {
+                firesOnAllExtensions = 0;    // condition fails → rule wont fire
+                break;
+            }
+        }
+
+        if (fires_on_all_extensions)
+            return 1;                           // prune: every extension is dominated
+    }
+    return 0;
+}
+
+static u8 searchForAssignment(Instance partialAssignment,u32 *freeFeatures, 
 			      u32 numFreeFeatures,
 			      u32 depth, 
 			      Rule r, 
 			      Rule *ruleset)
 {
+
 	
 
 	 return 0;
