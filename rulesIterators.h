@@ -54,7 +54,7 @@
 
 
 
-// Indexed feature/value 
+ //Indexed feature/value 
 #define INSTANCE_FOREACH_FEAT_VAL_IDX(instp, fvar, vvar, i) \
     for ((i) = 0; \
          (i) < (instp).size && \

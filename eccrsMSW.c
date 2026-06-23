@@ -265,19 +265,45 @@ totalOverride(Rule *ruleset)
     return 1;
 
 }
-		
-static u8 existsUncoveredAssignment(Rule r ,Rule *rules);
-{
 
-			
+static u8 
+containsFeature(Rule r, u8 feat)
+{
+	u8 fvar, vvar ;
+	RULE_FOREACH_FEAT_VAL_SAFE(r , fvar , vvar)
+	{
+		if(fvar==feat) return 1;
+	}
+	return 0;
+}
+
+static u8 
+existsUncoveredAssignment(Rule r ,Rule *rules)
+{
+	//build a partial assignment 
+	//need to figure out which feature is in what index...
+	u8 partialAssignment[INSTANCE_SIZE];
+	for(u8 k = 0; k <  INSTANCE_SIZE;k++)
+	{
+		if()
+
+
+	}
+
+	return 0;
+
 }
 
 static u8 searchForAssignment(u32 *partialAssignment,u32 *freeFeatures, 
 			      u32 numFreeFeatures,
 			      u32 depth, 
 			      Rule r, 
-			      Rule *ruleset);
+			      Rule *ruleset)
+{
+	
 
+	 return 0;
+}
 static inline u8 
 rulesOppositeLabels(Rule a,Rule b)
 {
