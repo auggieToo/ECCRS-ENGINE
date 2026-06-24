@@ -49,6 +49,13 @@ i32 main(i32 argc , char * argv[])
         verifyAssumptions(ruleset);
     }
 
+	FILE *csv = fopen("explanation_traces.csv", "w");
+	if (!csv) { perror("fopen"); return 1; }
+
+	// Write CSV header
+	fprintf(csv, "instance_id,applicable_rules,overrides,incl_max,prediction\n");
+
+
 
     for(int k = 0 ; k < SIZE_OF_INSTANCE_SET ; k++)
     {
@@ -59,16 +66,23 @@ i32 main(i32 argc , char * argv[])
                               maxInc,
                               prediction);
 
-        printf("\n------Instance ID: %d----------\n", instanceSet[k].instanceId);
-		printExplanationTraces(outSet, outRides, 
-                                       appliSize,
-                                       maxInc, 
-                                       maxInclSize,
-                                       prediction,
-                                       flags.predictionOnly);
 
+    printf("\n------Instance ID: %d----------\n", instanceSet[k].instanceId);
+	printExplanationTraces(outSet, outRides, 
+                                        appliSize,
+                                       maxInc, 
+                                        maxInclSize,
+                                        prediction,
+                                        flags.predictionOnly);
+		
+		  writeExplanationTracesCSV(csv,
+                              instanceSet[k].instanceId,
+                              outSet, outRides, appliSize,
+                              maxInc, maxInclSize,
+                              prediction);
 
     }
+	fclose(csv);
     return EXIT_SUCCESS;
 }
 

@@ -137,7 +137,7 @@ writeExplanationTracesCSV(FILE *fp,
 	fprintf(fp, "\"");
 	for(int k = 0 ; k < size ;k++)
 	{
-		fprintf(fp, "r%d\n", applicableRules[k].ruleId);
+		fprintf(fp, "r%d", applicableRules[k].ruleId);
 		if(k < size - 1) fprintf(fp," ");
 	}
 	fprintf(fp, "\",");
@@ -153,7 +153,7 @@ writeExplanationTracesCSV(FILE *fp,
 	fprintf(fp, "\"");
 	for(int k = 0 ; k < includeSize ;k++)
 	{
-		fprintf(fp,"r%d\n", inclusionSet[k].ruleId);
+		fprintf(fp,"r%d", inclusionSet[k].ruleId);
 		if(k < includeSize - 1) fprintf(fp," ");
 	}
 	fprintf(fp, "\",");
@@ -163,6 +163,7 @@ writeExplanationTracesCSV(FILE *fp,
 	else                            fprintf(fp, "abstain");
 
 
+	fprintf(fp, "\n");
 }
 
 //given applicable rules ,overides chain set and inclusion-maximal set, and 
@@ -770,7 +771,7 @@ printAllChains(Overides *outset, u32 size)
 
 
         //explnation traces
-        printf("Rule %u applies\n", outset[chain[0]].r.ruleId);
+        printf("Rule %u applies", outset[chain[0]].r.ruleId);
         for (u32 k = 1; k < len; k++)
             printf("Rule %u applies but is more specific than Rule %u, so Rule %u is overridden\n",
                     outset[chain[k]].r.ruleId,
@@ -805,16 +806,16 @@ printAllChainsToCSV(Overides *outset, u32 size, FILE *out)
 
 
         //explnation traces
-        fprintf(out,"r%u applies ->\n", outset[chain[0]].r.ruleId);
+        fprintf(out,"r%u applies", outset[chain[0]].r.ruleId);
         for (u32 k = 1; k < len; k++)
 			{
-             fprintf(out,"r%u applies & overides r%u\n",
+			 fprintf(out, "->");
+             fprintf(out,"r%u applies & overides r%u",
                     outset[chain[k]].r.ruleId,
                     outset[chain[k-1]].r.ruleId);
-			if(k < len - 1) fprintf(out, "->");
 			}
 		if(i < size)
-			fprintf(out,"...");
+			fprintf(out,"|");
     }
 }
 
