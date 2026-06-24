@@ -333,7 +333,7 @@ writeIndexes(char **p, FILE *out) {
 	u8 pairs = 0;
 
 	//scan the indexes and write them out.
-	while(**p != ')' || **p != '\0')
+	while(**p != ')' && **p != '\0')
 	{
 		u32 idx = parseInt(p);
 
@@ -377,7 +377,7 @@ parseCondition(char **p, FILE *out) {
 
     u32 val = parseInt(p);
 
-	fprintf(out, "%d }", val);
+	fprintf(out, ",%d }", val);
     return 1;
 }
 
@@ -409,7 +409,6 @@ writeInstanceLine(FILE *out, char *line)
         if (count > 0) fprintf(out, ",");
         parseCondition(&p, out); 
         count++;
-
 
         //  next '&'
         while (*p && *p != '&') p++;
@@ -647,20 +646,21 @@ HeaderPatchValues writeSrc(FILE *out, FILE *in)
         while (*cp) {
             int idx, val;
 
-            if (parseCondition(&cp, &idx, &val)) {
-                if (condCount > 0) fprintf(out, ",");
-                fprintf(out, "{%d,%d}", idx, val);
 
-                if ((u32)idx > maxFeature)
-                    maxFeature = idx;
+			if (condCount > 0) fprintf(out, ",");
+			parseCondition(&cp, out);
 
-                condCount++;
-            }
+			//TODO: HANDLE THE MAX FEATURE
 
-            // move to next '&'
-            while (*cp && *cp != '&') cp++;
-            if (*cp == '&') cp++;
-        }
+			// if ((u32)idx > maxFeature)
+			// 	maxFeature = idx;
+			//
+			condCount++;
+
+			// move to next '&'
+			while (*cp && *cp != '&') cp++;
+			if (*cp == '&') cp++;
+		}
 
         // get the result 
         i32 result = -1;
@@ -705,7 +705,7 @@ HeaderPatchValues writeSrc(FILE *out, FILE *in)
 
     pv.maxCond = maxCond;
     pv.rulesCount = count;
-    pv.maxFeature = maxFeature;
+	pv.maxFeature = 12;
 
     return pv;
 }

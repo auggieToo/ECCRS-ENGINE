@@ -24,7 +24,14 @@ typedef uint32_t u32;
 
 typedef struct
 {
-    i32 featureIndex;
+	 i32 index1;
+	 i32 index2;
+  u8 isPair;
+} featureIndex;
+
+typedef struct
+{
+    featureIndex index;
     i32 requiredValue;
 } Condition;
 
