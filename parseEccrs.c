@@ -329,14 +329,25 @@ writeIndexes(char **p, FILE *out) {
 
 
 
+	fprintf(out, "{");
+	u8 pairs = 0;
+
+	//scan the indexes and write them out.
 	while(**p != ')' || **p != '\0')
 	{
 		u32 idx = parseInt(p);
-		fprintf(out, "%d",idx);
 
-		if(**p == ',')  (*p)++; //skip the ','
+		fprintf(out, "%d,",idx);
+
+		if(**p == ',') { (*p)++; pairs++;} //skip the ','
 
 	}
+
+	//fill the rest of the indexes to 0, if we we got one index 
+	if(pairs == 0 ) fprintf(out, "0,");
+
+	//write the final part of the featureIndex
+	fprintf(out, " %d }", pairs > 0 ? 1 : 0);
 
     (*p)++;
 
@@ -349,12 +360,7 @@ writeIndexes(char **p, FILE *out) {
 //   2			// require value
 //}
 
-	// if (parseCondition(&p, &idx, &val)) 
-	// {
-	// 	if (count > 0) fprintf(out, ",");
-	// 	fprintf(out, "{%d,%d}", idx, val);
-	// 	count++;
-	// }
+
 
 //get the condtions 
 static int 
@@ -386,7 +392,8 @@ endsWith4(const char *src, const char *suf)
 
 
 //write the instances set from a .txt 
-//return the number of literals in the instance 
+//return the number of literals in the instance
+//{ { {} } , count }
 static u32 
 writeInstanceLine(FILE *out, char *line)
 {
@@ -397,15 +404,13 @@ writeInstanceLine(FILE *out, char *line)
 
     while (*p)
     {
-        i32 idx, val;
 
         
-        if (parseCondition(&p, out)) 
-        {
-            if (count > 0) fprintf(out, ",");
-            fprintf(out, "{%d,%d}", idx, val);
-            count++;
-        }
+        if (count > 0) fprintf(out, ",");
+        parseCondition(&p, out); 
+        count++;
+
+
         //  next '&'
         while (*p && *p != '&') p++;
         if (*p == '&') p++;
