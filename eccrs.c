@@ -60,7 +60,21 @@ i32 main(i32 argc , char * argv[])
                               prediction);
 
         printf("\n------Instance ID: %d----------\n", instanceSet[k].instanceId);
-        printExplanationTraces(outSet, outRides, 
+        if(instanceSet[k].instanceId == 40635)
+		{
+			for(int j = 0 ; j < INSTANCE_SIZE; j++)
+			{
+				if(instanceSet[k].inst.conditions[j].requiredValue == 1)
+				{
+					printf("a(%d,%d) = 1 " , instanceSet[k].inst.conditions[j].feature.index1, instanceSet[k].inst.conditions[j].feature.index2);
+
+				}
+
+			}
+
+
+		}
+		printExplanationTraces(outSet, outRides, 
                                        appliSize,
                                        maxInc, 
                                        maxInclSize,

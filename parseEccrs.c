@@ -547,12 +547,12 @@ static InstanceSizes
 writeInstanceFromCSV(FILE *out, FILE *in, FILE* outHeader)
 {
 
-    char line[512];
+    char line[512*2];
 
     //get the header lines 
     fgets(line,sizeof(line), in);
 
-    u32 cols = writeColumnIndex(out, line, 512);
+    u32 cols = writeColumnIndex(out, line, 512*2);
     u32 count = 0;
     u32 literals;
 
