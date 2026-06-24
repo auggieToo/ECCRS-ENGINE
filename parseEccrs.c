@@ -321,6 +321,9 @@ static u8
 writeIndexes(char **p, FILE *out) {
     skipSpaces(p);
 
+	//for the two or indexes which contains the "" 
+	if(**p  == '\"') (*p)++;
+
     if (**p != 'a') return 0;
     (*p)++;
 
@@ -349,7 +352,11 @@ writeIndexes(char **p, FILE *out) {
 	//write the final part of the featureIndex
 	fprintf(out, " %d }", pairs > 0 ? 1 : 0);
 
+	//skip the ')'
     (*p)++;
+
+	//for the two or indexes which contains the "" 
+	if(**p  == '\"') (*p)++;
 
     skipSpaces(p);
 
