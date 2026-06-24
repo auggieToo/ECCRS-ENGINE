@@ -5,6 +5,7 @@
 //The rules and the Structs are defined in the generated header and c file ..
 //rules.(h / c)
 
+#include <ctype.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
@@ -228,10 +229,18 @@ HeaderPatchPoints writeHeader(FILE *out)
     p.pos_max_features = ftell(out);
     fprintf(out, "%10d\n\n", 0);
 
-    fprintf(out,
+	fprintf(out, 
+		 "typedef struct\n"
+		  "{\n"
+		  "	 i32 index1;\n"
+		  "	 i32 index2;\n"
+		  "  u8 isPair;\n"
+		  "} featureIndex;\n\n"
+		 );
+    fprintf(out,			
         "typedef struct\n"
         "{\n"
-        "    i32 featureIndex;\n"
+        "    featureIndex index;\n"
         "    i32 requiredValue;\n"
         "} Condition;\n\n");
 
@@ -307,9 +316,9 @@ parseInt(char **p)
     return x;
 }
 
-//get the condtions 
-static int 
-parseCondition(char **p, int *idx, int *val) {
+
+static u8 
+writeIndexes(char **p, FILE *out) {
     skipSpaces(p);
 
     if (**p != 'a') return 0;
@@ -318,20 +327,51 @@ parseCondition(char **p, int *idx, int *val) {
     if (**p != '(') return 0;
     (*p)++;
 
-    *idx = parseInt(p);
 
-    if (**p != ')') return 0;
+
+	while(**p != ')' || **p != '\0')
+	{
+		u32 idx = parseInt(p);
+		fprintf(out, "%d",idx);
+
+		if(**p == ',')  (*p)++; //skip the ','
+
+	}
+
     (*p)++;
 
     skipSpaces(p);
+
+    return 1;
+
+}
+// { {1, 0, 1},  //feature index 
+//   2			// require value
+//}
+
+	// if (parseCondition(&p, &idx, &val)) 
+	// {
+	// 	if (count > 0) fprintf(out, ",");
+	// 	fprintf(out, "{%d,%d}", idx, val);
+	// 	count++;
+	// }
+
+//get the condtions 
+static int 
+parseCondition(char **p, FILE *out) {
+	
+
+	fprintf(out, "{");
+	writeIndexes(p, out);
 
     if (**p != '=') return 0;
     (*p)++;
 
     skipSpaces(p);
 
-    *val = parseInt(p);
+    u32 val = parseInt(p);
 
+	fprintf(out, "%d }", val);
     return 1;
 }
 
@@ -360,7 +400,7 @@ writeInstanceLine(FILE *out, char *line)
         i32 idx, val;
 
         
-        if (parseCondition(&p, &idx, &val)) 
+        if (parseCondition(&p, out)) 
         {
             if (count > 0) fprintf(out, ",");
             fprintf(out, "{%d,%d}", idx, val);
@@ -415,29 +455,7 @@ writeInstanceFromTXT(FILE *out, FILE *in)
 
 
 
-static u8 
-writeIndexes(char **p, FILE *out) {
-    skipSpaces(p);
 
-    if (**p != 'a') return 0;
-    (*p)++;
-
-    if (**p != '(') return 0;
-    (*p)++;
-
-    u32 idx = parseInt(p);
-
-    fprintf(out, "%d",idx);
-
-
-    if (**p != ')') return 0;
-    (*p)++;
-
-    skipSpaces(p);
-
-    return 1;
-
-}
 
 static u32 
 writeColumnIndex(FILE *out, char *line, u32 size)
