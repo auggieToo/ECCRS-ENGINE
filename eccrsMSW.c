@@ -386,6 +386,8 @@ printInstance(Instance ins)
 		printf("\n");
 }
 
+
+
 static u8 searchForAssignment(Instance partialAssignment,featureIndex *freeFeatures, 
 			      u32 numFreeFeatures,
 			      u32 depth, 
