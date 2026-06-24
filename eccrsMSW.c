@@ -18,6 +18,7 @@ static i32 compareRuleBySize(const void *a, const void *b);
 static void computeOverides(Rule *appRules, Overides *outset, u32 size);
 static u32  findByRuleId(Overides *outset, u32 size, u32 ruleId);
 static void printAllChains(Overides *outset, u32 size);
+static void printAllChainsToCSV(Overides *outset, u32 size, FILE *out);
 static u8  sanityCheck(Rule *ruleset);
 static u8  strictGlobalExceptionClosure(Rule *ruleset);
 static u8  totalOverride(Rule *ruleset);
@@ -121,7 +122,7 @@ mswPrediction(Rule  *mf, i8 size)
 }
 
 void 
-writrExplanationTracesCSV(FILE *fp,
+writeExplanationTracesCSV(FILE *fp,
                           u32 instanceId,
                           Rule *applicableRules,
                           Overides *overSets,
@@ -130,6 +131,36 @@ writrExplanationTracesCSV(FILE *fp,
                           i8 includeSize,
                           Prediction prediction)
 {
+	fprintf(fp, "%u,", instanceId);
+
+	//applicableRules
+	fprintf(fp, "\"");
+	for(int k = 0 ; k < size ;k++)
+	{
+		fprintf(fp, "r%d\n", applicableRules[k].ruleId);
+		if(k < size - 1) fprintf(fp," ");
+	}
+	fprintf(fp, "\",");
+
+	//overrides
+	fprintf(fp, "\"");
+	printAllChainsToCSV(overSets, size , fp);
+	fprintf(fp, "\",");
+
+	//inclusion-maximal 
+	//
+
+	fprintf(fp, "\"");
+	for(int k = 0 ; k < includeSize ;k++)
+	{
+		fprintf(fp,"r%d\n", inclusionSet[k].ruleId);
+		if(k < includeSize - 1) fprintf(fp," ");
+	}
+	fprintf(fp, "\",");
+
+	if (prediction == PRED_1)       fprintf(fp, "1");
+	else if (prediction == PRED_0)  fprintf(fp, "0");
+	else                            fprintf(fp, "abstain");
 
 
 }
@@ -746,6 +777,44 @@ printAllChains(Overides *outset, u32 size)
                     outset[chain[k-1]].r.ruleId,
                     outset[chain[k-1]].r.ruleId);
         printf("\n");
+    }
+}
+
+static void 
+printAllChainsToCSV(Overides *outset, u32 size, FILE *out)
+{
+    for (u32 i = 0; i < size; i++)
+    {
+        // FIND RULE THAT APPLIES FIRST
+        u8 isTail = 1;
+        for (u32 j = 0; j < size; j++)
+            if (outset[j].overideRuleId == outset[i].r.ruleId) { isTail = 0; break; }
+        if (!isTail) continue;
+
+        // chanin into a temp array
+        u32 chain[size];
+        u32 len = 0;
+        u32 curr = i;
+        while (curr != UINT32_MAX)
+        {
+            chain[len++] = curr;
+            u32 parentRuleId = outset[curr].overideRuleId;
+            if (parentRuleId == UINT32_MAX) break;
+            curr = findByRuleId(outset, size, parentRuleId);
+        }
+
+
+        //explnation traces
+        fprintf(out,"r%u applies ->\n", outset[chain[0]].r.ruleId);
+        for (u32 k = 1; k < len; k++)
+			{
+             fprintf(out,"r%u applies & overides r%u\n",
+                    outset[chain[k]].r.ruleId,
+                    outset[chain[k-1]].r.ruleId);
+			if(k < len - 1) fprintf(out, "->");
+			}
+		if(i < size)
+			fprintf(out,"...");
     }
 }
 

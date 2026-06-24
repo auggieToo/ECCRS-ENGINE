@@ -1,4 +1,5 @@
 #include "rules.h"
+#include "stdio.h"
 
 #define RUN_ECCRS_MSW(ruleset, F , outset, appliSize, maxInclSize,outRides,maxIncl, prediction )\
         appliSize = computeApplicableRules(ruleset,F,outset);\
@@ -36,3 +37,14 @@ printExplanationTraces(Rule *applicableRules,
                        Prediction prediction,
                        u8 po);
 
+
+
+void 
+writeExplanationTracesCSV(FILE *fp,
+                          u32 instanceId,
+                          Rule *applicableRules,
+                          Overides *overSets,
+                          i8 size,
+                          Rule *inclusionSet,
+                          i8 includeSize,
+                          Prediction prediction);
