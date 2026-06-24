@@ -120,6 +120,19 @@ mswPrediction(Rule  *mf, i8 size)
 
 }
 
+void 
+writrExplanationTracesCSV(FILE *fp,
+                          u32 instanceId,
+                          Rule *applicableRules,
+                          Overides *overSets,
+                          i8 size,
+                          Rule *inclusionSet,
+                          i8 includeSize,
+                          Prediction prediction)
+{
+
+
+}
 
 //given applicable rules ,overides chain set and inclusion-maximal set, and 
 //print the explanation traces.
