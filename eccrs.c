@@ -52,12 +52,12 @@ i32 main(i32 argc , char * argv[])
 
     for(int k = 0 ; k < SIZE_OF_INSTANCE_SET ; k++)
     {
-        // RUN_ECCRS_MSW(ruleset,instanceSet[k].inst, outSet, 
-        //                       appliSize, 
-        //                       maxInclSize,
-        //                       outRides,
-        //                       maxInc,
-        //                       prediction);
+        RUN_ECCRS_MSW(ruleset,instanceSet[k].inst, outSet, 
+                              appliSize, 
+                              maxInclSize,
+                              outRides,
+                              maxInc,
+                              prediction);
 
         printf("\n------Instance ID: %d----------\n", instanceSet[k].instanceId);
         printExplanationTraces(outSet, outRides, 

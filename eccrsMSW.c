@@ -58,7 +58,7 @@ u8 verifyAssumptions(Rule *rules)
 
     }
 
-	totalOverride(rules);
+	//totalOverride(rules);
 
     return violations;
 
@@ -70,14 +70,15 @@ u8 verifyAssumptions(Rule *rules)
 u8 
 computeApplicableRules(Rule *ruleset, Instance F, Rule *outSet)
 {
-    u32 size = 0;
-    for(int r = 0 ; r < SIZE_OF_RULESET ; r++ )
-    {
-        if (isApplicable(ruleset[r], F)) outSet[size++] = ruleset[r];
 
-    }
+	u32 size = 0;
+	for(int r = 0 ; r < SIZE_OF_RULESET ; r++ )
+	{
+		if (isApplicable(ruleset[r], F)) outSet[size++] = ruleset[r];
 
-    return size;
+	}
+
+	return size;
 
 }
 
@@ -483,7 +484,7 @@ isSubset(Condition *a, u32 sizeA,
         i32 aRequiredVal = a[k].requiredValue; 
 
         for(int j = 0 ; j < sizeB ; j++)
-            if(featureKeysEquals(aFeatureIdx, b->feature) && 
+            if(featureKeysEquals(aFeatureIdx, b[j].feature) && 
                aRequiredVal == b[j].requiredValue)
                 match++;
 
