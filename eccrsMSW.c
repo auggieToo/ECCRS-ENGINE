@@ -21,18 +21,19 @@ static void printAllChains(Overides *outset, u32 size);
 static u8  sanityCheck(Rule *ruleset);
 static u8  strictGlobalExceptionClosure(Rule *ruleset);
 static u8  totalOverride(Rule *ruleset);
-static u8 ruleContainsFeature(Rule a, u32 featureIndex);
-static u8 ruleHasConflictingFeature(Rule a, u32 featureIndex, u32  val);
+static u8 ruleContainsFeature(Rule a, featureIndex fi);
+static u8 ruleHasConflictingFeature(Rule a, featureIndex fi, u32  val);
 static u8 areCompatible(Rule a, Rule b);
 static u8 areCompatible2(Rule a, Rule b);
 static inline u8 rulesOppositeLabels(Rule a,Rule b);
 static u8 existsUncoveredAssignment(Rule r ,Rule *rules);
-static u8 searchForAssignment(Instance partialAssignment,u32 *freeFeatures, 
+static u8 searchForAssignment(Instance partialAssignment,featureIndex *freeFeatures, 
 			      u32 numFreeFeatures,
 			      u32 depth, 
 			      Rule r, 
 			      Rule *ruleset);
 
+static inline u8 featureKeysEquals(featureIndex a, featureIndex b);
 
 //check if the assumptions made by the Alignment theorem 
 //hold for the given ECCRS rules. 
@@ -272,22 +273,23 @@ totalOverride(Rule *ruleset)
 
 //returns the required value of a feature in a rule
 static u8 
-featureVal(Rule r, u8 feat)
+featureVal(Rule r, featureIndex feat)
 {
-	u8 fvar, vvar ;
+	featureIndex fvar;
+	u8  vvar ;
 	RULE_FOREACH_FEAT_VAL_SAFE(r , fvar , vvar)
 	{
-		if(fvar==feat) return vvar;
+		if(featureKeysEquals(fvar, feat)) return vvar;
 	}
 	return 0;
 }
 
 
 static u8
-inArray(u32 *arr, u32 len, u32 val)
+inAllFeatureArray(featureIndex *arr, u32 len, featureIndex val)
 {
     for (u32 i = 0; i < len; i++)
-        if (arr[i] == val) return 1;
+        if (featureKeysEquals(arr[i], val)) return 1;
     return 0;
 }
 
@@ -304,7 +306,7 @@ existsUncoveredAssignment(Rule r ,Rule *rules)
 	}
 
 	//collect all the free features -> these are features that are not in the rule conditions
-	u32 freeFeatures[INSTANCE_SIZE];
+	featureIndex freeFeatures[INSTANCE_SIZE];
 	u32 freeFeaturesSize = 0 ; 
 	Rule other; 
 	RULESET_FOREACH_RULE_SAFE(ruleset, other)
@@ -315,11 +317,12 @@ existsUncoveredAssignment(Rule r ,Rule *rules)
 		//to select features that appear in the rules of opposite labels 
 		if(other.label == r.label) continue;
 
-		u32 fvar, vvar; 
+		featureIndex fvar;
+		u32 vvar; 
 		RULE_FOREACH_FEAT_VAL_SAFE(other, fvar, vvar)
 		{
 			if( !ruleContainsFeature(r, fvar) &&					//feature not in the rule
-			    !inArray(freeFeatures, freeFeaturesSize, fvar)		//featue already seen
+			    !inAllFeatureArray(freeFeatures, freeFeaturesSize, fvar)		//featue already seen
 			  ) freeFeatures[freeFeaturesSize++] = fvar;	
 				
 		}
@@ -370,16 +373,20 @@ existsUncoveredAssignment(Rule r ,Rule *rules)
 static void 
 printInstance(Instance ins)
 {
-		u32 fvar, vvar;
+		featureIndex fvar;
+		u32 vvar;
 		INSTANCE_FOREACH_FEAT_VAL_SAFE(ins, fvar, vvar)
 		{
-			printf("a(%d) = %d ", fvar , vvar);
+			if(fvar.isPair)  
+				printf("a(%d, %d) = %d ", fvar.index1, fvar.index2 , vvar);
+			
+			else printf("a(%d) = %d ", fvar.index1 , vvar);
 
 		}
 		printf("\n");
 }
 
-static u8 searchForAssignment(Instance partialAssignment,u32 *freeFeatures, 
+static u8 searchForAssignment(Instance partialAssignment,featureIndex *freeFeatures, 
 			      u32 numFreeFeatures,
 			      u32 depth, 
 			      Rule r, 
@@ -408,7 +415,7 @@ static u8 searchForAssignment(Instance partialAssignment,u32 *freeFeatures,
 
 	}
 
-	u32 f = freeFeatures[depth];
+	featureIndex f = freeFeatures[depth];
 	Instance pa = partialAssignment; 
 		
 	//add the new feature in the partial assignment 
@@ -447,6 +454,18 @@ rulesOppositeLabels(Rule a,Rule b)
 
 }
 
+static inline u8 
+featureKeysEquals(featureIndex a, featureIndex b)
+{
+
+	if(a.isPair  != b.isPair) return 0; 
+	if(a.index1  != b.index1) return 0; 
+	if(a.isPair && a.index2  != b.index2) return 0; 
+	
+	return 1;
+
+}
+
 
 
 //check if Condition set a is a subset of Condition set b 
@@ -458,11 +477,11 @@ isSubset(Condition *a, u32 sizeA,
     u8 match = 0;
     for(int k = 0 ; k < sizeA ; k++ )
     {
-        i32 aFeatureIdx  = a[k].featureIndex; 
+        featureIndex aFeatureIdx  = a[k].feature; 
         i32 aRequiredVal = a[k].requiredValue; 
 
         for(int j = 0 ; j < sizeB ; j++)
-            if(aFeatureIdx  == b[j].featureIndex && 
+            if(featureKeysEquals(aFeatureIdx, b->feature) && 
                aRequiredVal == b[j].requiredValue)
                 match++;
 
@@ -478,17 +497,17 @@ isSubset(Condition *a, u32 sizeA,
 static i8 
 isSubsetRule(Rule ar, Rule br)
 {
-    u32 aFval, aRval;
-    u32 bFval, bRval;
+	featureIndex aFidx, bFidx;
+    u32 bRval, aRval;
     u32 i, j;
 
-    RULE_FOREACH_FEAT_VAL_IDX(ar, aFval, aRval, i)
+    RULE_FOREACH_FEAT_VAL_IDX(ar, aFidx, aRval, i)
     {
         i8 found = 0;
 
-        RULE_FOREACH_FEAT_VAL_IDX(br, bFval, bRval, j)
+        RULE_FOREACH_FEAT_VAL_IDX(br, bFidx, bRval, j)
         {
-            if (aFval == bFval && 
+            if (featureKeysEquals(aFidx, bFidx) && 
                 aRval == bRval)
             {
                 found = 1;
@@ -520,12 +539,13 @@ isComparable(Rule a, Rule b)
 //check if a rule contains a feature pattern, (lookup by index)
 //return 1 if so else 0;
 static u8 
-ruleContainsFeature(Rule a, u32 featureIndex)
+ruleContainsFeature(Rule a, featureIndex fi)
 {
-    u32 f,v;
+	featureIndex f;
+    u32 v;
     RULE_FOREACH_FEAT_VAL_SAFE(a,f, v)
     {
-        if(f == featureIndex)
+        if(featureKeysEquals(f, fi))
             return 1;
     }
 
@@ -536,12 +556,13 @@ ruleContainsFeature(Rule a, u32 featureIndex)
 
 //return 1 if the feature exists with a different required val;
 static u8 
-ruleHasConflictingFeature(Rule a, u32 featureIndex, u32  val)
+ruleHasConflictingFeature(Rule a,  featureIndex fi, u32  val)
 {
-    u32 f,v;
+	featureIndex f;
+    u32 v;
     RULE_FOREACH_FEAT_VAL_SAFE(a,f, v)
     {
-        if(f == featureIndex)
+        if(featureKeysEquals(f, fi))
              return v != val;
     }
     return 0;
@@ -554,10 +575,11 @@ ruleHasConflictingFeature(Rule a, u32 featureIndex, u32  val)
 static u8 
 areCompatible(Rule a, Rule b)
 {
-    u32 af,av;
-    RULE_FOREACH_FEAT_VAL_SAFE(a, af, av) //loop over each feature of rule 
+	featureIndex f;
+    u32 v;
+    RULE_FOREACH_FEAT_VAL_SAFE(a, f, v) //loop over each feature of rule 
     {
-        if(ruleHasConflictingFeature(b, af, av))
+        if(ruleHasConflictingFeature(b, f, v))
             return 0;
         
     }
@@ -571,13 +593,13 @@ static u8
 areCompatible2(Rule a, Rule b)
 {
     u8 commonFeature = 0;
-    u32 af,av;
-
-    RULE_FOREACH_FEAT_VAL_SAFE(a, af, av) //loop over each feature of rule 
+	featureIndex f;
+    u32 v;
+    RULE_FOREACH_FEAT_VAL_SAFE(a, f, v) //loop over each feature of rule 
     {
-        if(ruleHasConflictingFeature(b, af, av))
+        if(ruleHasConflictingFeature(b, f, v))
             return 0;
-        if(ruleContainsFeature(b,af)) commonFeature = 1;
+        if(ruleContainsFeature(b,f)) commonFeature = 1;
         
     }
 

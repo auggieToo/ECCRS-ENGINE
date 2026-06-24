@@ -240,7 +240,7 @@ HeaderPatchPoints writeHeader(FILE *out)
     fprintf(out,			
         "typedef struct\n"
         "{\n"
-        "    featureIndex index;\n"
+        "    featureIndex feature;\n"
         "    i32 requiredValue;\n"
         "} Condition;\n\n");
 
@@ -284,7 +284,7 @@ HeaderPatchPoints writeHeader(FILE *out)
 
     
     fprintf(out, "extern Rule ruleset[];\n");
-    fprintf(out, "extern u8 ALL_FEATURES[];\n");
+	fprintf(out, "extern featureIndex ALL_FEATURES[];\n");
     fprintf(out, "extern InstanceList instanceSet[];\n");
     fprintf(out, "extern Instance F;\n");
     fprintf(out,"extern const unsigned  SIZE_OF_RULESET;\n");

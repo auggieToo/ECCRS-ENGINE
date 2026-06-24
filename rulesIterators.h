@@ -32,7 +32,7 @@
 #define RULE_FOREACH_FEAT_VAL_IDX(rulep, fvar, vvar, i) \
     for ((i) = 0; \
          (i) < (rulep).numConditions && \
-         (((fvar) = (rulep).conditions[(i)].featureIndex), \
+         (((fvar) = (rulep).conditions[(i)].feature), \
           ((vvar) = (rulep).conditions[(i)].requiredValue), 1); \
          ++(i))
 
@@ -43,11 +43,11 @@
          (((condptr) = &((rulep).conditions[(i)])), 1); \
          ++(i))
 
-// auto-index feature/value 
+// auto-feature feature/value 
 #define RULE_FOREACH_FEAT_VAL_SAFE(rulep, fvar, vvar) \
     for (u32 RI_CONCAT(_i_, __LINE__) = 0; \
          RI_CONCAT(_i_, __LINE__) < (rulep).numConditions && \
-         (((fvar) = (rulep).conditions[RI_CONCAT(_i_, __LINE__)].featureIndex), \
+         (((fvar) = (rulep).conditions[RI_CONCAT(_i_, __LINE__)].feature), \
           ((vvar) = (rulep).conditions[RI_CONCAT(_i_, __LINE__)].requiredValue), 1); \
          ++RI_CONCAT(_i_, __LINE__))
 
@@ -58,22 +58,22 @@
 #define INSTANCE_FOREACH_FEAT_VAL_IDX(instp, fvar, vvar, i) \
     for ((i) = 0; \
          (i) < (instp).size && \
-         (((fvar) = (instp).conditions[(i)].featureIndex), \
+         (((fvar) = (instp).conditions[(i)].feature), \
           ((vvar) = (instp).conditions[(i)].requiredValue), 1); \
          ++(i))
 
-// indexed condition pointer
+// featureed condition pointer
 #define INSTANCE_FOREACH_COND_IDX(instp, condptr, i) \
     for ((i) = 0; \
          (i) < (instp).size && \
          (((condptr) = &((instp).conditions[(i)])), 1); \
          ++(i))
 
-// auto-index feature/value 
+// auto-feature feature/value 
 #define INSTANCE_FOREACH_FEAT_VAL_SAFE(instp, fvar, vvar) \
     for (u32 RI_CONCAT(_i_, __LINE__) = 0; \
          RI_CONCAT(_i_, __LINE__) < (instp).size && \
-         (((fvar) = (instp).conditions[RI_CONCAT(_i_, __LINE__)].featureIndex), \
+         (((fvar) = (instp).conditions[RI_CONCAT(_i_, __LINE__)].feature), \
           ((vvar) = (instp).conditions[RI_CONCAT(_i_, __LINE__)].requiredValue), 1); \
          ++RI_CONCAT(_i_, __LINE__))
 

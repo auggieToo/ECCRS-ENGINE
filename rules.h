@@ -31,7 +31,7 @@ typedef struct
 
 typedef struct
 {
-    featureIndex index;
+    featureIndex feature;
     i32 requiredValue;
 } Condition;
 
