@@ -17,12 +17,12 @@ endif
 GEN = ./gen$(EXE_EXT)
 
 # Final executable
-eccrs$(EXE_EXT): eccrs.o eccrsMSW.o rules.o
+eccrs$(EXE_EXT): main.o eccrsMSW.o rules.o
 	$(CC) $(CFLAGS) eccrs.o eccrsMSW.o rules.o -o eccrs$(EXE_EXT)
 
 # Object files
-eccrs.o: eccrs.c rules.h
-	$(CC) $(CFLAGS) -c eccrs.c
+eccrs.o: main.c rules.h
+	$(CC) $(CFLAGS) -c main.c
 
 eccrsMSW.o: eccrsMSW.c rules.h
 	$(CC) $(CFLAGS) -c eccrsMSW.c
