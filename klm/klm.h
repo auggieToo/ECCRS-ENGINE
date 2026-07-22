@@ -37,4 +37,26 @@ typedef struct
 
 }atomTable; 
 
+typedef struct 
+{
+	atomId atom; 
+	literalType  sign; 
+}literal; 
+
+typedef struct 
+{
+	ruleId id; 
+	ruleType  type; 
+	
+	literal *head; 
+	u32 headCount; 
+
+
+	//conjuction of literal
+	literal *body;
+	u32 bodyCount; 
+
+	//assigned by RC algorithm 
+	u32 rank;
+}rule; 
 
