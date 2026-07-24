@@ -48,9 +48,11 @@ typedef struct
 
 typedef struct 
 {
-	ruleId id; 
+
+	//CLASSICAL or DEFEASIBLE
 	ruleType  type; 
-	
+
+
 	literal *head; 
 	u32 headCount; 
 
@@ -58,6 +60,15 @@ typedef struct
 	//conjuction of literal
 	literal *body;
 	u32 bodyCount; 
+
+}implic; 
+
+typedef struct 
+{
+	ruleId id; 
+
+	//
+	implic impl; 
 
 	//assigned by RC algorithm 
 	u32 rank;
