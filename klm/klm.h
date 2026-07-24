@@ -1,5 +1,6 @@
-#include <cstdint>
 #include <stdint.h>
+
+
 
 typedef unsigned char u8; 
 typedef uint16_t u16;
@@ -10,10 +11,12 @@ typedef int16_t i16;
 typedef int32_t i32; 
 typedef int64_t i64;
 
-
+ 
 
 typedef u32 atomId ; 
 typedef u32 ruleId; 
+
+
 
 
 typedef enum 
@@ -58,5 +61,21 @@ typedef struct
 
 	//assigned by RC algorithm 
 	u32 rank;
-}rule; 
+}rule;
+
+
+typedef struct 
+{
+	
+	rule *rules; 
+	u32 count; 
+	u32 capacity; 
+
+
+	atomTable atoms ; 
+
+}knowledgeBase; 
+
+
+u8 LexicographicalClosure(knowledgeBase K);
 
