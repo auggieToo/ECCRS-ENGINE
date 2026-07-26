@@ -56,7 +56,7 @@ BaseRank(knowledgeBase K)
 	u32 i = 0; 
 	knowledgeBase E_i = kArrow; 
 	do {
-		knowledgeBase E_i1 =  ;
+		knowledgeBase E_i1 =;
 		
 
 	}while ()
