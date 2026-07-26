@@ -162,6 +162,26 @@ formulaCopy(formula *dst, const formula *src)
     return 0;
 }
 
+i32 
+formulaContains(const formula *f, literal l)
+{
+    for (u32 i = 0; i < f->count; i++)
+        if (literalEq(f->clause[i], l))
+            return 1;
+    return 0;
+}
+
+i32 formulaEq(const formula *a, const formula *b)
+{
+    if (a->count != b->count) return 0;
+    for (u32 i = 0; i < a->count; i++)
+        if (!formulaContains(b, a->clause[i]))
+            return 0;
+    return 1;
+}
+
+
+
 
 static void 
 implicFree(implic *im)
@@ -184,6 +204,14 @@ implicCopy(implic *dst, const implic *src)
     return 0;
 }
 
+static inline  i32 
+ruleEq(const rule *a, const rule *b)
+{
+	return a->impl.type == b->impl.type &&
+			formulaEq(&a->impl.head, &b->impl.head) &&	
+			formulaEq(&a->impl.body, &b->impl.body); 
+			
+}
 
 i32 
 kbInit(knowledgeBase *kb, u32 cap)
@@ -242,10 +270,22 @@ kbGrow(knowledgeBase *kb)
 	return 1;
 }
 
+//helper function to keep the rule ID consistent
+static ruleId 
+kbNextId(const knowledgeBase *kb)
+{
+    ruleId maxId = 0;
+    for (u32 i = 0; i < kb->count; i++)
+        if (kb->rules[i].id >= maxId)
+            maxId = kb->rules[i].id + 1;
+    return maxId;
+}
+
+
 
 //add a rule to the knowledge base 
 ruleId 
-kbAddRule(khowledgeBase *kb, 
+kbAddRule(knowledgeBase *kb, 
 		 ruleType type, 
 		 const formula *head, 
 		 const formula *body)
@@ -256,8 +296,80 @@ kbAddRule(khowledgeBase *kb,
 	
 	//check if there is a duplicate
 	rule pr;
+	pr.impl.type = type; 
+	pr.impl.head = *head; 
+	pr.impl.body = *body; 
+
+	//check for duplicates 
+	for(u32 i = 0 ; i < kb->count; i++)
+		if (ruleEq(&kb->rules[i], &pr)) return kb->rules[i].id;
 	
+	if(kb->count == kb->capacity &&			//kb array full
+	   kbGrow(kb) != 0						//attempt to grow  kb  array failed 
+	  ) return RULE_NOT_FOUND; 
 	
+	//add the head
+	if (formulaCopy(&r.impl.head, head) != 0)
+        return RULE_NOT_FOUND;
+   
+	//add the body
+	if (formulaCopy(&r.impl.body, body) != 0) 
+	{
+        formulaFree(&r.impl.head);
+	    return RULE_NOT_FOUND;
+	}
+
+	r.id = kbNextId(kb);
+	kb->rules[kb->count++] =r ;
+	return r.id;	
+}
+
+ruleId 
+kbAddRuleWithName(knowledgeBase *kb, 
+						ruleType type, 
+						const char **headNames,
+						const literalType *hSigns,
+						u32 hCount,
+						const char **bodyNames,
+						const literalType *bSigns,
+						u32 bCount
+						)
+{
+	formula h, b; 
+	formulaInit(&h);
+	formulaInit(&b);
+	
+	//add the head 
+	for(u32 i = 0 ; i < hCount ; i++)
+	{	
+		atomId a = atomIntern(&kb->atoms, headNames[i]);
+		if( (a == ATOM_INVALID) ||			//failed to add the atom
+			
+			//failed to add the literal to the formula 
+		   formulaAddLiteral(&h, (literal){.atom = a , .sign = hSigns[i]}) == 0
+		  )	 goto fail; 
+	}
+
+	for(u32 i = 0 ; i < bCount ; i++)
+	{	
+		atomId a = atomIntern(&kb->atoms, bodyNames[i]);
+		if( (a == ATOM_INVALID) ||			//failed to add the atom
+			
+			//failed to add the literal to the formula 
+		   formulaAddLiteral(&b, (literal){.atom = a , .sign = bSigns[i]}) == 0
+		  )	 goto fail; 
+	}
+	
+	ruleId id =  kbAddRule(kb, type, &h, &b);
+	formulaFree(&h);
+	formulaFree(&b);
+
+
+	fail:
+		formulaFree(&h);
+		formulaFree(&b);
+		return RULE_NOT_FOUND;	
 
 
 }
+
