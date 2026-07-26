@@ -94,6 +94,93 @@ atomTableFree(atomTable *t)
     t->count = t->capacity = 0;
 }
 
+void 
+formulaInit(formula *f)
+{
+    f->clause = NULL;
+    f->count = 0;
+}
+ 
+void 
+formulaFree(formula *f)
+{
+    if (!f) return;
+    free(f->clause);
+    f->clause = NULL;
+    f->count = 0;
+}
+
+inline literal 
+literalNegate(literal l)
+{
+	l.sign = (l.sign == POSITIVE) ? NEGATIVE : POSITIVE;
+	return l;
+}
+
+
+i32 
+literalEq(literal a , literal b)
+{	
+	return	   a.atom == b.atom 
+		    && a.sign == b.sign; 
+
+}
+
+i32 
+formulaAddLiteral(formula *f, literal l)
+{
+	//avoid dups 
+    for (u32 i = 0; i < f->count; i++)
+        if (literalEq(f->clause[i], l))
+            return 0;
+ 
+    literal *nc = realloc(f->clause, (f->count + 1) * sizeof(literal));
+    if (!nc) return -1;
+    f->clause = nc;
+    f->clause[f->count++] = l;
+    return 0;
+}
+
+i32 
+formulaCopy(formula *dst, const formula *src)
+{
+    dst->count = src->count;
+
+    if (src->count == 0) 
+	{
+			dst->clause = NULL; 
+			return 0; 
+	}
+    dst->clause = malloc(src->count * sizeof(literal));
+    
+	if (!dst->clause) 
+	{ 
+		dst->count = 0; return -1; 
+	}
+	
+    memcpy(dst->clause, src->clause, src->count * sizeof(literal));
+    return 0;
+}
+
+
+static void 
+implicFree(implic *im)
+{
+    formulaFree(&im->head);
+    formulaFree(&im->body);
+}
+ 
+static i32 
+implicCopy(implic *dst, const implic *src)
+{
+    dst->type = src->type;
+    if (formulaCopy(&dst->head, &src->head) != 0) return -1;
+    if (formulaCopy(&dst->body, &src->body) != 0) {
+        formulaFree(&dst->head);
+        return -1;
+    }
+    return 0;
+}
 
 
 i32 
@@ -102,7 +189,7 @@ kbInit(knowledgeBase *kb, u32 cap)
 	if(cap == 0) cap = 16; 
 	kb->rules = malloc(cap * sizeof(rule));
 	
-	if(!kb->rule) 
+	if(!kb->rules) 
 	{
 		kb->count = kb->capacity = 0 ; 
 		return -1; 
