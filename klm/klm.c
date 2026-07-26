@@ -175,7 +175,9 @@ implicCopy(implic *dst, const implic *src)
 {
     dst->type = src->type;
     if (formulaCopy(&dst->head, &src->head) != 0) return -1;
-    if (formulaCopy(&dst->body, &src->body) != 0) {
+    
+	if (formulaCopy(&dst->body, &src->body) != 0) 
+	{
         formulaFree(&dst->head);
         return -1;
     }
@@ -197,4 +199,65 @@ kbInit(knowledgeBase *kb, u32 cap)
 	kb->count = 0 ; 
 	kb->capacity = cap; 
 	
+	if(atomTableInit(&kb->atoms, cap) != 0)  //init failed
+	{
+		free(kb->rules);
+		kb->rules = NULL; 
+		kb->capacity = 0 ;
+		return -1;
+	
+	}
+
+
+	return -0; 	
+}
+
+void 
+kbFree(knowledgeBase *kb)
+{
+	if(!kb) return; 
+	
+	for(u32 i = 0 ; i < kb->count; i++)
+		implicFree(&kb->rules[i].impl); 
+	
+	free(kb->rules);
+	kb->rules = NULL;
+	kb->count = kb->capacity = 0 ; 
+	atomTableFree(&kb->atoms);
+	
+}
+
+static i32 
+kbGrow(knowledgeBase *kb)
+{
+	//grow the knowledgeBase by 1.5 
+	u32 newCap = kb->capacity ? kb->capacity + kb->capacity / 2 
+				 : 16 ; 
+	rule *nr = realloc(kb->rules, newCap * sizeof(rule));
+	
+	if(!nr) return -1;
+	kb->rules = nr;
+	kb->capacity = newCap;
+	
+	return 1;
+}
+
+
+//add a rule to the knowledge base 
+ruleId 
+kbAddRule(khowledgeBase *kb, 
+		 ruleType type, 
+		 const formula *head, 
+		 const formula *body)
+{
+	rule r; 
+	r.impl.type = type; 
+	r.rank = RANK_UNASSIGNED; 
+	
+	//check if there is a duplicate
+	rule pr;
+	
+	
+
+
 }
