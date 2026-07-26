@@ -46,21 +46,26 @@ typedef struct
 	literalType  sign; 
 }literal; 
 
+
+//a conjuctive formula 
+typedef  struct 
+{
+	literal *clause; 
+	u32 count;
+}formula; 
+
 typedef struct 
 {
 
 	//CLASSICAL or DEFEASIBLE
 	ruleType  type; 
 
-
-	literal *head; 
-	u32 headCount; 
+	//conjuction of literals 
+	formula head; 
 
 
 	//conjuction of literal
-	literal *body;
-	u32 bodyCount; 
-
+	formula body; 
 }implic; 
 
 typedef struct 

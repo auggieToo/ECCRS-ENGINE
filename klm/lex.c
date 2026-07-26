@@ -1,5 +1,10 @@
 #include "klm.h"
 #include <stdlib.h>
+#include <picosat.h>
+
+
+//sat solver initialization 
+PicoSAT *solver;
 
 typedef struct 
 {
@@ -22,33 +27,39 @@ typedef struct
 }orderedTuple;
 
 
-u8 entails()
+//return true if 'concl' is a logical consequence of 'premise'
+static u8 logicalConsequence(formula premise, formula concl);
+
 
 //return true if the implication r is entailed
 //by the knowledge base K, 
-u8 khowledgeBaseEntails(knowledgeBase K , implic r);
+static u8 Entail(knowledgeBase K , implic r);
 
 //materialize the knowledge base 
 //turn every defeasible implication into a classical 
 //implication;
-void materialisation(knowledgeBase K, knowledgeBase *out);
+static void materialisation(knowledgeBase K, knowledgeBase *out);
 
 
 orderedTuple 
 BaseRank(knowledgeBase K)
 {
+	//initialize our solver 
+	solver = picosat_init();
+
+	//algorithm for  BaseRank
 	knowledgeBase kArrow = {0};
 	kArrow.count	= K.count;
 	kArrow.capacity = K.count; 
 	materialisation(K, &kArrow);
 
 	u32 i = 0; 
-	E_i = kArrow; 
+	knowledgeBase E_i = kArrow; 
 	do {
-		E_i1 
+		knowledgeBase E_i1 =  ;
+		
 
 	}while ()
-	E
 
 
 }
