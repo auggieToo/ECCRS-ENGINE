@@ -8,7 +8,7 @@ PicoSAT *solver;
 
 typedef struct 
 {
-	rule *r; 
+	knowledgeBase *r; 
 	u32 size; 
 
 	//resizing 
@@ -25,6 +25,8 @@ typedef struct
 	//resizing 
 	u32 _capacity;
 }orderedTuple;
+
+i8 tupleInit(orderedTuple *ot);
 
 
 //return true if 'concl' is a logical consequence of 'premise'
@@ -46,6 +48,7 @@ BaseRank(knowledgeBase K)
 {
 	//initialize our solver 
 	solver = picosat_init();
+	orderedTuple ot; 	
 
 	//algorithm for  BaseRank
 	knowledgeBase kArrow = {0};
@@ -56,7 +59,11 @@ BaseRank(knowledgeBase K)
 	u32 i = 0; 
 	knowledgeBase E_i = kArrow; 
 	do {
-		knowledgeBase E_i1 =;
+		
+		for(int k = 0 ; k < E_i.count ; k++
+		{
+			knowledgeBase E_i1;
+		}
 		
 
 	}while ()

@@ -93,5 +93,24 @@ typedef struct
 }knowledgeBase; 
 
 
+i32 kbInit(knowledgeBase *kb, u32 cap); 
+void kbFree(knowledgeBase *kb);
+
+ruleId kbAddRule(knowledgeBase *kb, 
+		 ruleType type, 
+		 const formula *head, 
+		 const formula *body);
+
+ruleId 
+kbAddRuleWithName(knowledgeBase *kb, 
+						ruleType type, 
+						const char **headNames,
+						const literalType *hSigns,
+						u32 hCount,
+						const char **bodyNames,
+						const literalType *bSigns,
+						u32 bCount
+						);
+
 u8 LexicographicalClosure(knowledgeBase K);
 
