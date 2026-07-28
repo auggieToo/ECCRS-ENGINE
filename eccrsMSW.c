@@ -540,7 +540,7 @@ isSubset(Condition *a, u32 sizeA,
 }
 
 //check if rule a is a subset of rule b 
-//that is : eahc conditions in rule a must be in rule b 
+//that is : each conditions in rule a must be in rule b 
 //return 1 if subset else 0
 static i8 
 isSubsetRule(Rule ar, Rule br)

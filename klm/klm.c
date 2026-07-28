@@ -72,7 +72,7 @@ atomIntern(atomTable *t, const char *name)
     if (!copy) return ATOM_INVALID;
     memcpy(copy, name, len);
  
-    atomId newId = t->count;          /* ids are dense: 0..count-1 */
+    atomId newId = t->count + 1;          /* ids are dense: 0..count-1 */
     t->names[t->count] = copy;
     t->ids[t->count] = newId;
     t->count++;
@@ -371,5 +371,16 @@ kbAddRuleWithName(knowledgeBase *kb,
 		return RULE_NOT_FOUND;	
 
 
+}
+
+
+
+u8
+kbEquals(knowledgeBase a, knowledgeBase b)
+{	
+	//if the knowledge base contain unequal amount of rules 
+	//then they are not the same knowledge base
+	if(a.count != b.count) return 0;
+	
 }
 

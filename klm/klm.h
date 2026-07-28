@@ -112,5 +112,10 @@ kbAddRuleWithName(knowledgeBase *kb,
 						u32 bCount
 						);
 
+//check whether two knowledge basea are equal 
+u8 kbEquals(knowledgeBase a, knowledgeBase b);
+
+u8 kbEqualsP(knowledgeBase *a, knowledgeBase *b);
+
 u8 LexicographicalClosure(knowledgeBase K);
 
