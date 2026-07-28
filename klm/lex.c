@@ -142,66 +142,74 @@ materialisation(knowledgeBase K, knowledgeBase *out)
 	}
 }
 
+static inline i32 
+litToInt(literal l){
+
+	return l.sign == POSITIVE ? (i32)l.atom : - l.atom;
+}
+
 
 //K is entailed by r  <==> K U {not r } UNSAT, 
 //K is a set of formulas, treated as conjuction , 
 //so checking the satisfiability of K U {not r} is checking one big 
 //conjuction
 //one formula: a1 AND a2 ... an -> az <==> not a1 OR not a2 OR ... OR az
+
+
+//This function converts an implication statement to a 
+// CNF formula , 
+// b1 AND  b2 AND ... AND bn -> h1 AND h2 AND ... hm 
+// <==>  ~b1 OR ~b2 OR ... ~bn OR hj   .... j : 1 to m    
 //
+static void 
+addRuleClause(PicoSAT *s, implic *r)
+{
+
+	if(r->head.count == 0)
+	{
+		for(u32 i = 0 ; i < r->body.count ; i++)
+		{
+			picosat_add(s, -litToInt(r->body.clause[i]));
+			
+		}	
+		picosat_add(s,0);
+		return;
+	}
+
+	for(u32 i = 0 ; i < r->head.count ; i++)
+	{
+		for(u32 j = 0 ; j < r->body.count ; j++)
+		{
+			picosat_add(s, -litToInt(r->body.clause[j]));
+	
+		}
+		picosat_add(s, litToInt(r->head.clause[i]));
+		picosat_add(s,0);
+	
+	}
+
+}
+
 static u8 
-entail(knowledgeBase K , formula r)
+NegEntail(knowledgeBase K , formula r)
 {
 
 	picosat_reset(solver);
 
 	for(u32 i = 0 ; i < K.count ; i++)
 	{	
-		{  //body
-			formula f =  K.rules[i].impl.body;
-			for(u32 j = 0 ; j < f.count ;j++)
-			{
-				picosat_add(solver, f.clause[j].sign == POSITIVE ? 
-									f.clause[j].atom :	
-									-1 * f.clause[j].atom 
-									
-									);
-			}
-		}
-
-
-		{  //head
-			formula f =  K.rules[i].impl.head;
-			for(u32 j = 0 ; j < f.count ;j++)
-			{
-				picosat_add(solver, f.clause[j].sign == POSITIVE ? 
-									f.clause[j].atom :	
-									-1 * f.clause[j].atom 
-									
-									);
-			}
-		}
-
-		picosat_add(solver, 0);
-
+		addRuleClause(solver, &K.rules->impl);
 	}
 
 	
-	{  //fomula
-		formula f =  r;
-		for(u32 j = 0 ; j < f.count ;j++)
-		{
-			picosat_add(solver, f.clause[j].sign == POSITIVE ? 
-								f.clause[j].atom :	
-								-1 * f.clause[j].atom 
-								
-								);
-		}
+	for(u32 j = 0 ; j < r.count ;j++)
+	{
+		picosat_add(solver,	litToInt(r.clause[j]));			
+		picosat_add(solver, 0);
 	}
-	picosat_add(solver, 0);
 
 	int res = picosat_sat(solver,-1);
-	return 0;
+	return res == PICOSAT_SATISFIABLE;
 
 }
 
@@ -253,23 +261,45 @@ int main()
 	knowledgeBase A; 
 	kbInit(&A, 10);
 	solver = picosat_init();
-	
+
 	DEFEASIBLE_RULE(&A,
 		IF(POS("boat")),
-        THEN(POS("float") ));
-	
+		THEN(POS("float") ));
+
 	DEFEASIBLE_RULE(&A,
 		IF(NEG("boat"), POS("leaky") ),
-        THEN(POS("bot") ));
+		THEN(POS("bot") ));
 
 	DEFEASIBLE_RULE(&A,
 		IF(NEG("floats")),
-        THEN(POS("leaky") ));
-	
-	printf("hereo: %d", A.count);
+		THEN(POS("leaky") ));
+
+
+	DEFEASIBLE_RULE(&A,
+		IF(   POS("boat")   ),
+		THEN( POS("floats") ));
+
+
+	DEFEASIBLE_RULE(&A,
+		IF(   POS("wooden") ),
+		THEN( POS("floats") ));
+
+
+	DEFEASIBLE_RULE(&A,
+		IF(   POS("anchor") ),
+		THEN( NEG("floats") ));
+
+
+	DEFEASIBLE_RULE(&A,
+		IF(   POS("wooden"), POS("anchor") ),
+		THEN( NEG("floats") ));
+
+
 	kbPrint(NULL,&A);
 
-	
-	return 0;
+	BaseRank(A);
+
+
+return 0;
 
 }
