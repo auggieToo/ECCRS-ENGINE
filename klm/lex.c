@@ -52,29 +52,18 @@ BaseRank(knowledgeBase K)
 	orderedTuple ot; 
 	tupleInit(&ot);
 
-
-	u32 count_i;
-	u32 count_i1;
-
 	//algorithm for  BaseRank
 	knowledgeBase kArrow = {0};
 	kArrow.count	= K.count;
 	kArrow.capacity = K.count; 
 	materialisation(K, &kArrow);
 
-	u8 isEmpty = 0;
-
-	u32 i = 0; 
 	
 	//E_o = K^(->)
 	knowledgeBase E_i;
 	kbCopy(&kArrow, &E_i);
 
-	u8 changed;
 	rank:
-		//an array to keep track of the formula we inserted 
-		//in the current rank 
-		
 		
 		//init new rank
 		tupleNewRank(&ot);
@@ -83,7 +72,6 @@ BaseRank(knowledgeBase K)
 		kbInit(&E_i1, 4);
 
 		//tracks whether E_i+1 is the same as E_i 
-
 		u32 inCurrRank  = 0;  	
 		
 		//E_(i+1) = {a -> B in E_i | E_i entails not a}
@@ -106,22 +94,23 @@ BaseRank(knowledgeBase K)
 			}
 
 		}
+
 		if(inCurrRank==0)
 		{
 			kbFree(&E_i1);
 			goto done;
 		}
 
-		
-		
-		
+				
 		kbFree(&E_i);
-		E_i = E_i1; 
+		E_i = E_i1;
+		goto rank;
 		
 
-done:
-
-	return ot;
+	done:
+		kbInit(&ot.infinite, 8);
+		ot.infinite = E_i;
+		return ot;
 }
 
 
@@ -142,7 +131,7 @@ materialisation(knowledgeBase K, knowledgeBase *out)
 static inline i32 
 litToInt(literal l){
 
-	return l.sign == POSITIVE ? (i32)l.atom : - l.atom;
+	return l.sign == POSITIVE ? (i32)l.atom : - (i32)l.atom;
 }
 
 
@@ -195,7 +184,7 @@ NegEntail(knowledgeBase K , formula r)
 
 	for(u32 i = 0 ; i < K.count ; i++)
 	{	
-		addRuleClause(solver, &K.rules->impl);
+		addRuleClause(solver, &K.rules[i].impl);
 	}
 
 	
@@ -206,7 +195,7 @@ NegEntail(knowledgeBase K , formula r)
 	}
 
 	int res = picosat_sat(solver,-1);
-	return res == PICOSAT_SATISFIABLE;
+	return res == PICOSAT_UNSATISFIABLE;
 
 }
 
@@ -247,7 +236,7 @@ tupleNewRank(orderedTuple *ot)
 i8 
 tupleAddFormula(orderedTuple *ot, rule r)
 {
-	return kbAddRule(&ot->R[ot->n].r, r.impl.type, &r.impl.head, &r.impl.body);
+	return kbAddRule(&ot->R[ot->n-1].r, r.impl.type, &r.impl.head, &r.impl.body);
 
 }
 
@@ -257,7 +246,6 @@ int main()
 { 
 	knowledgeBase A; 
 	kbInit(&A, 10);
-	solver = picosat_init();
 
 	DEFEASIBLE_RULE(&A,
 		IF(POS("boat")),
