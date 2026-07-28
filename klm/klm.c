@@ -382,7 +382,7 @@ kbAddRuleLits(knowledgeBase *kb,
                    litList body 
 				   )
 {
-	char *hn[head.n]; 
+	const char *hn[head.n]; 
 	literalType ht[head.n];
 	
     for (u32 i = 0; i < head.n; i++) 
@@ -391,7 +391,7 @@ kbAddRuleLits(knowledgeBase *kb,
 		ht[i] = head.lits[i].t; 
 	}
 	
-    char *bn[body.n]; 
+    const char *bn[body.n]; 
 	literalType bt[body.n];
     for (u32 i = 0; i < body.n; i++) 
 	{ 
@@ -413,3 +413,101 @@ kbEquals(knowledgeBase a, knowledgeBase b)
 	
 }
 
+
+
+/* ids are 1-based (atomIntern returns count+1), and the ids[] array is not
+   guaranteed to stay in insertion order forever, so do a real lookup. */
+static const char *
+atomName(const atomTable *t, atomId a)
+{
+	if (!t) return "<?>";
+
+	for (u32 i = 0; i < t->count; i++)
+		if (t->ids[i] == a)
+			return (const char *)t->names[i];
+
+	return "<?>";
+}
+
+/* A conjunction. Empty conjunction is logical truth. */
+static void
+formulaPrint(FILE *out, const atomTable *t, const formula *f)
+{
+	if (f->count == 0)
+	{
+		fputs("T", out);
+		return;
+	}
+
+	for (u32 i = 0; i < f->count; i++)
+	{
+		if (i) fputs(" & ", out);
+		if (f->clause[i].sign == NEGATIVE) fputc('~', out);
+		fputs(atomName(t, f->clause[i].atom), out);
+	}
+}
+
+static void
+rulePrint(FILE *out, const atomTable *t, const rule *r)
+{
+	fprintf(out, "  [%u] ", (u32)r->id);
+
+	formulaPrint(out, t, &r->impl.body);
+	fputs(r->impl.type == DEFEASIBLE ? "  |~  " : "  ->  ", out);
+	formulaPrint(out, t, &r->impl.head);
+
+	if (r->rank == RANK_UNASSIGNED)
+		fputs("      (rank: inf)\n", out);
+	else
+		fprintf(out, "      (rank: %u)\n", r->rank);
+}
+
+void
+atomTablePrint(FILE *out, const atomTable *t)
+{
+	if (!out) out = stdout;
+	if (!t) { fputs("atomTable: (null)\n", out); return; }
+
+	fprintf(out, "atoms (%u/%u):", t->count, t->capacity);
+	for (u32 i = 0; i < t->count; i++)
+		fprintf(out, " %s=%u", (const char *)t->names[i], (u32)t->ids[i]);
+	fputc('\n', out);
+}
+
+void
+kbPrint(FILE *out, const knowledgeBase *kb)
+{
+	if (!out) out = stdout;
+	if (!kb) { fputs("knowledgeBase: (null)\n", out); return; }
+
+	fprintf(out, "knowledgeBase: %u rule%s, %u atom%s\n",
+			kb->count, kb->count == 1 ? "" : "s",
+			kb->atoms.count, kb->atoms.count == 1 ? "" : "s");
+
+	if (kb->count == 0)
+	{
+		fputs("  (empty)\n", out);
+		return;
+	}
+
+	/* classical block first, then defeasible: reads the way a DKB is written */
+	fputs(" classical:\n", out);
+	u32 shown = 0;
+	for (u32 i = 0; i < kb->count; i++)
+		if (kb->rules[i].impl.type == CLASSICAL)
+		{
+			rulePrint(out, &kb->atoms, &kb->rules[i]);
+			shown++;
+		}
+	if (shown == 0) fputs("  (none)\n", out);
+
+	fputs(" defeasible:\n", out);
+	shown = 0;
+	for (u32 i = 0; i < kb->count; i++)
+		if (kb->rules[i].impl.type == DEFEASIBLE)
+		{
+			rulePrint(out, &kb->atoms, &kb->rules[i]);
+			shown++;
+		}
+	if (shown == 0) fputs("  (none)\n", out);
+}

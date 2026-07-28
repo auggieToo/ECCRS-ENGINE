@@ -246,10 +246,13 @@ tupleAddFormula(orderedTuple *ot, rule r)
 
 }
 
+
+
 int main()
 { 
 	knowledgeBase A; 
 	kbInit(&A, 10);
+	solver = picosat_init();
 	
 	DEFEASIBLE_RULE(&A,
 		IF(POS("boat")),
@@ -262,6 +265,9 @@ int main()
 	DEFEASIBLE_RULE(&A,
 		IF(NEG("floats")),
         THEN(POS("leaky") ));
+	
+	printf("hereo: %d", A.count);
+	kbPrint(NULL,&A);
 
 	
 	return 0;

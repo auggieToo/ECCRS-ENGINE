@@ -1,5 +1,5 @@
 #include <stdint.h>
-
+#include <stdio.h>
 
 
 typedef unsigned char u8; 
@@ -27,8 +27,8 @@ typedef u32 ruleId;
 #define THEN LITLIST
 #define IF   LITLIST
 
-#define DEFEASIBLE_RULE(kb, head, body) kbAddRuleLits((kb), DEFEASIBLE, head, body)
-#define STRICT_RULE(kb, head, body)     kbAddRuleLits((kb), STRICT, head, body)
+#define DEFEASIBLE_RULE(kb, head, body) kbAddRuleLits((kb), DEFEASIBLE, body, head)
+#define STRICT_RULE(kb, head, body)     kbAddRuleLits((kb), STRICT, body, head)
 
 
 typedef enum 
@@ -146,4 +146,8 @@ u8 kbEquals(knowledgeBase a, knowledgeBase b);
 u8 kbEqualsP(knowledgeBase *a, knowledgeBase *b);
 
 u8 LexicographicalClosure(knowledgeBase K);
+
+void atomTablePrint(FILE *out, const atomTable *t);
+
+void kbPrint(FILE *out, const knowledgeBase *kb);
 
