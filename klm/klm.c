@@ -374,6 +374,35 @@ kbAddRuleWithName(knowledgeBase *kb,
 }
 
 
+ruleId
+kbAddRuleLits(knowledgeBase *kb, 
+				   ruleType type,
+                   lit *head, 
+				   u32 nh,
+                   lit *body, 
+				   u32 nb)
+{
+	char *hn[nh]; 
+	literalType ht[nh];
+	
+    for (u32 i = 0; i < nh; i++) 
+	{ 
+		hn[i] = head[i].name; 
+		ht[i] = head[i].t; 
+	}
+	
+    char *bn[nb]; 
+	literalType bt[nb];
+    for (u32 i = 0; i < nb; i++) 
+	{ 
+		bn[i] = body[i].name; 
+		bt[i] = body[i].t; 
+	}
+  
+	return kbAddRuleWithName(kb, type, hn, ht, nh, bn, bt, nb);
+
+}
+
 
 u8
 kbEquals(knowledgeBase a, knowledgeBase b)
