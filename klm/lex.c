@@ -152,6 +152,9 @@ materialisation(knowledgeBase K, knowledgeBase *out)
 static u8 
 entail(knowledgeBase K , formula r)
 {
+
+	picosat_reset(solver);
+
 	for(u32 i = 0 ; i < K.count ; i++)
 	{	
 		{  //body
@@ -178,12 +181,27 @@ entail(knowledgeBase K , formula r)
 									);
 			}
 		}
-		
+
 		picosat_add(solver, 0);
 
 	}
-	
 
+	
+	{  //fomula
+		formula f =  r;
+		for(u32 j = 0 ; j < f.count ;j++)
+		{
+			picosat_add(solver, f.clause[j].sign == POSITIVE ? 
+								f.clause[j].atom :	
+								-1 * f.clause[j].atom 
+								
+								);
+		}
+	}
+	picosat_add(solver, 0);
+
+	int res = picosat_sat(solver,-1);
+	return 0;
 
 }
 
