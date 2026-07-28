@@ -246,18 +246,23 @@ tupleAddFormula(orderedTuple *ot, rule r)
 
 }
 
-
 int main()
 { 
 	knowledgeBase A; 
 	kbInit(&A, 10);
 	
-	char* h[] = {"boat", "leaky"};
-	literalType ht[] = {POSITIVE, NEGATIVE};
-	char* b[] = {"sink"};
-	literalType bt[] =  {POSITIVE};
+	DEFEASIBLE_RULE(&A,
+		IF(POS("boat")),
+        THEN(POS("float") ));
+	
+	DEFEASIBLE_RULE(&A,
+		IF(NEG("boat"), POS("leaky") ),
+        THEN(POS("bot") ));
 
-	kbAddRuleWithName(&A, DEFEASIBLE, h, ht, 2 , b, bt,1);
+	DEFEASIBLE_RULE(&A,
+		IF(NEG("floats")),
+        THEN(POS("leaky") ));
+
 	
 	return 0;
 

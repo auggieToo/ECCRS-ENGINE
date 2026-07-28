@@ -17,21 +17,18 @@ typedef u32 atomId ;
 typedef u32 ruleId; 
 
 
-
 #define POS(a)  ((lit){ (a), POSITIVE })
 #define NEG(a)  ((lit){ (a), NEGATIVE })
 
-#define LITLIST(...) ((Lit[]){ __VA_ARGS__ }), \
-                     (sizeof((Lit[]){ __VA_ARGS__ }) / sizeof(Lit))
+#define LITLIST(...) \
+    ((litList){ (lit[]){ __VA_ARGS__ }, \
+                sizeof((lit[]){ __VA_ARGS__ }) / sizeof(lit) })
 
-#define RULE(kb, type, HEAD, BODY) \
-    kbAddRuleLits((kb), (type), HEAD, BODY)
+#define THEN LITLIST
+#define IF   LITLIST
 
-#define IF     LITLIST
-#define THEN   LITLIST
-
-#define DEFEASIBLE_RULE(kb, head, body)  RULE((kb), DEFEASIBLE, head, body)
-#define STRICT_RULE(kb, head, body)      RULE((kb), STRICT, head, body)
+#define DEFEASIBLE_RULE(kb, head, body) kbAddRuleLits((kb), DEFEASIBLE, head, body)
+#define STRICT_RULE(kb, head, body)     kbAddRuleLits((kb), STRICT, head, body)
 
 
 typedef enum 
@@ -60,7 +57,8 @@ typedef struct
 {
 	atomId atom; 
 	literalType  sign; 
-}literal; 
+}literal;
+
 
 typedef struct 
 {
@@ -69,6 +67,7 @@ typedef struct
 }lit; 
 
 
+typedef struct { lit *lits; u32 n; } litList;
 //a conjuctive formula 
 typedef  struct 
 {
@@ -137,10 +136,9 @@ kbAddRuleWithName(knowledgeBase *kb,
 ruleId
 kbAddRuleLits(knowledgeBase *kb, 
 				   ruleType type,
-                   lit *head, 
-				   u32 nh,
-                   lit *body, 
-				   u32 nb);
+                   litList head, 
+                   litList body 
+				   );
 
 //check whether two knowledge basea are equal 
 u8 kbEquals(knowledgeBase a, knowledgeBase b);

@@ -346,7 +346,7 @@ kbAddRuleWithName(knowledgeBase *kb,
 		if( (a == ATOM_INVALID) ||			//failed to add the atom
 			
 			//failed to add the literal to the formula 
-		   formulaAddLiteral(&h, (literal){.atom = a , .sign = hSigns[i]}) == 0
+		   formulaAddLiteral(&h, (literal){.atom = a , .sign = hSigns[i]}) < 0
 		  )	 goto fail; 
 	}
 
@@ -356,13 +356,14 @@ kbAddRuleWithName(knowledgeBase *kb,
 		if( (a == ATOM_INVALID) ||			//failed to add the atom
 			
 			//failed to add the literal to the formula 
-		   formulaAddLiteral(&b, (literal){.atom = a , .sign = bSigns[i]}) == 0
+		   formulaAddLiteral(&b, (literal){.atom = a , .sign = bSigns[i]}) < 0
 		  )	 goto fail; 
 	}
 	
 	ruleId id =  kbAddRule(kb, type, &h, &b);
 	formulaFree(&h);
 	formulaFree(&b);
+	return id;
 
 
 	fail:
@@ -377,29 +378,28 @@ kbAddRuleWithName(knowledgeBase *kb,
 ruleId
 kbAddRuleLits(knowledgeBase *kb, 
 				   ruleType type,
-                   lit *head, 
-				   u32 nh,
-                   lit *body, 
-				   u32 nb)
+                   litList head, 
+                   litList body 
+				   )
 {
-	char *hn[nh]; 
-	literalType ht[nh];
+	char *hn[head.n]; 
+	literalType ht[head.n];
 	
-    for (u32 i = 0; i < nh; i++) 
+    for (u32 i = 0; i < head.n; i++) 
 	{ 
-		hn[i] = head[i].name; 
-		ht[i] = head[i].t; 
+		hn[i] =  head.lits[i].name; 
+		ht[i] = head.lits[i].t; 
 	}
 	
-    char *bn[nb]; 
-	literalType bt[nb];
-    for (u32 i = 0; i < nb; i++) 
+    char *bn[body.n]; 
+	literalType bt[body.n];
+    for (u32 i = 0; i < body.n; i++) 
 	{ 
-		bn[i] = body[i].name; 
-		bt[i] = body[i].t; 
+		bn[i] = body.lits[i].name; 
+		bt[i] = body.lits[i].t; 
 	}
   
-	return kbAddRuleWithName(kb, type, hn, ht, nh, bn, bt, nb);
+	return kbAddRuleWithName(kb, type, hn, ht, head.n, bn, bt, body.n);
 
 }
 
