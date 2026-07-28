@@ -20,6 +20,9 @@ typedef struct
 
 	//resizing 
 	u32 _capacity;
+
+	//infinite rank 
+	knowledgeBase infinite;
 }orderedTuple;
 
 i8 tupleInit(orderedTuple *ot);
@@ -32,7 +35,7 @@ static u8 logicalConsequence(formula premise, formula concl);
 
 //return true if the implication r is entailed
 //by the knowledge base K, 
-static u8 entail(knowledgeBase K , formula r);
+static u8 NegEntail(knowledgeBase K , formula r);
 
 //materialize the knowledge base 
 //turn every defeasible implication into a classical 
@@ -63,16 +66,14 @@ BaseRank(knowledgeBase K)
 
 	u32 i = 0; 
 	
-	//E_o = K^(->) 
-	knowledgeBase E_i = kArrow; 
+	//E_o = K^(->)
+	knowledgeBase E_i;
+	kbCopy(&kArrow, &E_i);
 
 	u8 changed;
-	do {
+	rank:
 		//an array to keep track of the formula we inserted 
 		//in the current rank 
-		u32 ranks[E_i.count];
-		i32 size = -1;
-		
 		
 		
 		//init new rank
@@ -83,46 +84,42 @@ BaseRank(knowledgeBase K)
 
 		//tracks whether E_i+1 is the same as E_i 
 
-		changed  = 0;  	
+		u32 inCurrRank  = 0;  	
 		
 		//E_(i+1) = {a -> B in E_i | E_i entails not a}
 		for(int k = 0 ; k < E_i.count ; k++)
 		{
-			if(entail(E_i, E_i.rules[k].impl.body ))
+			if(NegEntail(E_i, E_i.rules[k].impl.body ))
 			{
 				kbAddRule(&E_i1, 
 						  E_i.rules[k].impl.type, 
 						  &E_i.rules[k].impl.head ,
 						  &E_i.rules[k].impl.body);
-				ranks[++size] = k;
-				changed = 1; 
 	
 			}
-			else 				
+			else
+			{
 				//R_i = E_i \ E_(i+1)
 				//R_i is all the rules in the E_i that were not added in E_i1 		
 				tupleAddFormula(&ot, E_i.rules[k]);
+				inCurrRank++;
+			}
 
 		}
+		if(inCurrRank==0)
+		{
+			kbFree(&E_i1);
+			goto done;
+		}
 
-		//counts 
-		count_i = E_i.count;
-		count_i1 = E_i1.count;
 		
 		
-		//i = i + 1
-		i++;
-
+		
 		kbFree(&E_i);
 		E_i = E_i1; 
 		
-	}while (count_i != count_i1);
 
-	//R_inf = := E_i+1 
-	//last entry in the tuple is the inf rank 
-	u32 n;
-	if(count_i==0) n = i - 1 ; 
-	else n = i ;
+done:
 
 	return ot;
 }

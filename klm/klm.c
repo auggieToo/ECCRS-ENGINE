@@ -79,6 +79,21 @@ atomIntern(atomTable *t, const char *name)
     return newId;
 }
 
+i32
+kbCopy(const knowledgeBase *src, knowledgeBase *dst)
+{
+	if (kbInit(dst, src->count ? src->count : 4) != 0) return -1;
+ 
+	for (u32 i = 0; i < src->count; i++)
+		if (kbAddRule(dst, src->rules[i].impl.type,
+					  &src->rules[i].impl.head,
+					  &src->rules[i].impl.body) == RULE_NOT_FOUND)
+		{
+			kbFree(dst);
+			return -1;
+		}
+	return 0;
+}
 
 
 static void 
