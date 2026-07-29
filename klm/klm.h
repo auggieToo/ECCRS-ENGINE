@@ -152,4 +152,5 @@ void atomTablePrint(FILE *out, const atomTable *t);
 void kbPrint(FILE *out, const knowledgeBase *kb);
 
 i32 kbCopy(const knowledgeBase *src, knowledgeBase *dst);
+void kbPrintWithAtoms(FILE *out, const knowledgeBase *kb, const atomTable *atoms);
 

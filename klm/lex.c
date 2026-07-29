@@ -180,8 +180,7 @@ static u8
 NegEntail(knowledgeBase K , formula r)
 {
 
-	picosat_reset(solver);
-
+	PicoSAT *solver = picosat_init();
 	for(u32 i = 0 ; i < K.count ; i++)
 	{	
 		addRuleClause(solver, &K.rules[i].impl);
@@ -195,6 +194,8 @@ NegEntail(knowledgeBase K , formula r)
 	}
 
 	int res = picosat_sat(solver,-1);
+	
+	picosat_reset(solver);
 	return res == PICOSAT_UNSATISFIABLE;
 
 }
@@ -241,6 +242,20 @@ tupleAddFormula(orderedTuple *ot, rule r)
 }
 
 
+void
+tuplePrint(FILE *out, const atomTable *atoms, const orderedTuple *ot)
+{
+	if (!out) out = stdout;
+ 
+	for (u32 i = 0; i < ot->n - 1; i++)
+	{
+		fprintf(out, "rank %u:\n", i);
+		kbPrintWithAtoms(out, &ot->R[i].r, atoms);
+	}
+ 
+	fputs("rank inf:\n", out);
+	kbPrintWithAtoms(out, &ot->infinite, atoms);
+}
 
 int main()
 { 
@@ -281,8 +296,10 @@ int main()
 
 
 	kbPrint(NULL,&A);
+	
 
-	BaseRank(A);
+	orderedTuple ot = BaseRank(A);
+	tuplePrint(NULL,&A.atoms ,&ot);
 
 
 return 0;

@@ -79,7 +79,7 @@ atomIntern(atomTable *t, const char *name)
     return newId;
 }
 
-i32
+ i32
 kbCopy(const knowledgeBase *src, knowledgeBase *dst)
 {
 	if (kbInit(dst, src->count ? src->count : 4) != 0) return -1;
@@ -525,4 +525,38 @@ kbPrint(FILE *out, const knowledgeBase *kb)
 			shown++;
 		}
 	if (shown == 0) fputs("  (none)\n", out);
+}
+
+void 
+kbPrintWithAtoms(FILE *out, const knowledgeBase *kb, const atomTable *atoms)
+
+{          
+
+		if(!out) out = stdout ; 
+
+		if(!kb) 
+
+		{
+
+			fputs("knowledge base is NULL", out);
+
+			return;
+
+		}
+
+	
+
+		if(kb->count == 0)
+
+		{
+
+			fputs("empty", out);
+
+			return;			
+
+		}
+
+		for(u32 i = 0 ; i < kb->count; i++)
+
+			rulePrint(out, atoms, &kb->rules[i]);
 }
