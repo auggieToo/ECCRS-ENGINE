@@ -1,10 +1,13 @@
 #include "klm.h"
 #include <stdlib.h>
 #include <picosat.h>
-
+#include <stdbool.h>
+#define TEST_BANK
 
 //sat solver initialization 
-PicoSAT *solver;
+
+//kb size 
+u32 kbSize = 0;
 
 typedef struct 
 {
@@ -47,7 +50,6 @@ orderedTuple
 BaseRank(knowledgeBase K)
 {
 	//initialize our solver
-	solver = picosat_init();	
 
 	orderedTuple ot; 
 	tupleInit(&ot);
@@ -61,7 +63,7 @@ BaseRank(knowledgeBase K)
 	
 	//E_o = K^(->)
 	knowledgeBase E_i;
-	kbCopy(&kArrow, &E_i);
+	kbCopy(&K, &E_i);
 
 	rank:
 		
@@ -77,7 +79,8 @@ BaseRank(knowledgeBase K)
 		//E_(i+1) = {a -> B in E_i | E_i entails not a}
 		for(int k = 0 ; k < E_i.count ; k++)
 		{
-			if(NegEntail(E_i, E_i.rules[k].impl.body ))
+			if(	E_i.rules[k].impl.type == CLASSICAL ||			//classical rules live to rank inf
+				NegEntail(E_i, E_i.rules[k].impl.body ))
 			{
 				kbAddRule(&E_i1, 
 						  E_i.rules[k].impl.type, 
@@ -111,6 +114,50 @@ BaseRank(knowledgeBase K)
 		kbInit(&ot.infinite, 8);
 		ot.infinite = E_i;
 		return ot;
+}
+
+
+u32 
+unionRank(knowledgeBase *K, orderedTuple ot)
+{
+	kbInit(K, kbSize);
+
+	for(u32 j = 0 ; j < ot.n ; j++)
+	{
+		knowledgeBase r = ot.R[j].r;
+		for(u32 i = 0 ; i <  r.count ; i++ )
+		{
+			implic rule = r.rules[i].impl;  
+			kbAddRule(K, rule.type , &rule.head ,&rule.body);
+		}
+
+
+	}
+
+	u32 infiniteRankSize = ot.infinite.count;
+	rule* r = ot.infinite.rules; 
+	for(u32 i = 0 ; i < infiniteRankSize ; i++ )
+	{
+			implic rule = r[i].impl;	
+			kbAddRule(K, rule.type , &rule.head ,&rule.body);
+	}
+	
+	return infiniteRankSize;
+	
+	
+}
+
+
+bool
+RationalClosure(knowledgeBase K , implic a)
+{
+	orderedTuple t = BaseRank(K);
+
+	knowledgeBase R;
+	unionRank(&R,t);
+	
+
+
 }
 
 
@@ -247,7 +294,7 @@ tuplePrint(FILE *out, const atomTable *atoms, const orderedTuple *ot)
 {
 	if (!out) out = stdout;
  
-	for (u32 i = 0; i < ot->n - 1; i++)
+	for (u32 i = 0; i < ot->n ; i++)
 	{
 		fprintf(out, "rank %u:\n", i);
 		kbPrintWithAtoms(out, &ot->R[i].r, atoms);
@@ -262,6 +309,7 @@ int main()
 	knowledgeBase A; 
 	kbInit(&A, 10);
 
+#ifdef  TEST_BOATS
 	DEFEASIBLE_RULE(&A,
 		IF(POS("boat")),
 		THEN(POS("float") ));
@@ -293,15 +341,122 @@ int main()
 	DEFEASIBLE_RULE(&A,
 		IF(   POS("wooden"), POS("anchor") ),
 		THEN( NEG("floats") ));
+	
+	CLASSICAL_RULE(&A,
+		IF( POS("flyingDutchman")),
+		THEN(POS("boat")));
+
+#endif
+
+#ifdef TEST_BANK
+
+	DEFEASIBLE_RULE(&A,
+		IF(   NEG("a15_9"), POS("a16_3"), NEG("a4_1"),
+		      NEG("a4_2"),  POS("a4_4"),  NEG("a4_5") ),
+		THEN( POS("y") ));
+
+	DEFEASIBLE_RULE(&A,
+		IF(   NEG("a15_9"), POS("a16_3"), NEG("a4_1"),
+		      NEG("a4_2"),  NEG("a4_4"),  NEG("a4_5") ),
+		THEN( POS("y") ));
+
+	DEFEASIBLE_RULE(&A,
+		IF(   NEG("a10_2"), NEG("a12_2"), NEG("a14_3"),
+		      POS("a16_3"), POS("a4_5"),  NEG("a7_2") ),
+		THEN( POS("y") ));
+
+	DEFEASIBLE_RULE(&A,
+		IF(   POS("a10_2"), NEG("a12_2"), NEG("a14_3"),
+		      POS("a16_3"), POS("a4_5"),  NEG("a7_2") ),
+		THEN( POS("y") ));
+
+	DEFEASIBLE_RULE(&A,
+		IF(   POS("a12_1"), NEG("a14_3"), POS("a15_1"),
+		      NEG("a16_3"), POS("a3_5"),  POS("a4_5") ),
+		THEN( POS("y") ));
+
+	DEFEASIBLE_RULE(&A,
+		IF(   POS("a12_1"), NEG("a14_3"), POS("a15_1"),
+		      NEG("a16_3"), NEG("a3_5"),  POS("a4_5") ),
+		THEN( POS("y") ));
+
+	DEFEASIBLE_RULE(&A,
+		IF(   NEG("a10_2"), POS("a16_3"), NEG("a4_1"),
+		      POS("a4_2"),  NEG("a4_5"),  POS("a9_2") ),
+		THEN( NEG("y") ));
+
+	DEFEASIBLE_RULE(&A,
+		IF(   POS("a12_1"), POS("a15_9"), POS("a16_3"),
+		      NEG("a4_1"),  NEG("a4_2"),  NEG("a4_5") ),
+		THEN( POS("y") ));
+
+	DEFEASIBLE_RULE(&A,
+		IF(   NEG("a12_1"), POS("a15_9"), POS("a16_3"),
+		      NEG("a4_1"),  NEG("a4_2"),  NEG("a4_5") ),
+		THEN( NEG("y") ));
+
+	DEFEASIBLE_RULE(&A,
+		IF(   NEG("a10_2"), POS("a16_3"), NEG("a4_1"),
+		      POS("a4_2"),  NEG("a4_5"),  NEG("a9_2") ),
+		THEN( NEG("y") ));
+
+	DEFEASIBLE_RULE(&A,
+		IF(   POS("a12_1"), NEG("a14_3"), POS("a15_1"),
+		      NEG("a16_3"), POS("a4_5") ),
+		THEN( POS("y") ));
+
+	DEFEASIBLE_RULE(&A,
+		IF(   NEG("a12_2"), NEG("a14_3"), POS("a16_3"),
+		      POS("a4_5"),  POS("a7_2") ),
+		THEN( POS("y") ));
+
+	DEFEASIBLE_RULE(&A,
+		IF(   POS("a10_2"), POS("a16_3"), NEG("a4_1"),
+		      POS("a4_2"),  NEG("a4_5") ),
+		THEN( NEG("y") ));
+
+	DEFEASIBLE_RULE(&A,
+		IF(   POS("a10_2"), POS("a12_2"), NEG("a14_3"),
+		      POS("a16_3"), POS("a4_5") ),
+		THEN( POS("y") ));
+
+	DEFEASIBLE_RULE(&A,
+		IF(   NEG("a10_2"), POS("a12_2"), NEG("a14_3"),
+		      POS("a16_3"), POS("a4_5") ),
+		THEN( POS("y") ));
+
+	DEFEASIBLE_RULE(&A,
+		IF(   POS("a16_3"), NEG("a4_1"), POS("a4_2"), NEG("a4_5") ),
+		THEN( NEG("y") ));
+
+	DEFEASIBLE_RULE(&A,
+		IF(   NEG("a14_3"), POS("a16_3"), POS("a4_5") ),
+		THEN( POS("y") ));
+
+	DEFEASIBLE_RULE(&A,
+		IF(   POS("a16_3"), POS("a4_1"), NEG("a4_5") ),
+		THEN( NEG("y") ));
+
+	DEFEASIBLE_RULE(&A,
+		IF(   POS("a16_3"), NEG("a4_5") ),
+		THEN( POS("y") ));
+
+	DEFEASIBLE_RULE(&A,
+		IF(   NEG("a4_5") ),
+		THEN( NEG("y") ));
+
+	DEFEASIBLE_RULE(&A,
+		IF(   POS("a4_5") ),
+		THEN( NEG("y") ));
+#endif
 
 
 	kbPrint(NULL,&A);
+	kbSize = A.count;
 	
 
 	orderedTuple ot = BaseRank(A);
-	tuplePrint(NULL,&A.atoms ,&ot);
-
-
+	tuplePrint(NULL,&A.atoms ,&ot);\
 return 0;
 
 }
