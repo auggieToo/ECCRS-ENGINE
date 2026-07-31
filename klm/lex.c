@@ -154,9 +154,20 @@ RationalClosure(knowledgeBase K , implic a)
 	orderedTuple t = BaseRank(K);
 
 	knowledgeBase R;
-	unionRank(&R,t);
-	
+	u32 infSize = unionRank(&R,t);
+	u32 i = 0;
 
+	while(NegEntail(R, a.body) && R.count - infSize > 0)
+	{
+		for(int k = 0 ; k < t.R[i].r.count)
+		{
+
+
+		}
+
+
+	}
+	
 
 }
 

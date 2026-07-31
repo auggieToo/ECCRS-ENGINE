@@ -108,6 +108,9 @@ ruleId kbAddRuleLits(knowledgeBase *kb, ruleType type, litList head,
 // check whether two knowledge basea are equal
 u8 kbEquals(knowledgeBase a, knowledgeBase b);
 
+//knowledge base remove first rule 
+u8 kbRemoveFirst(knowledgeBase *k);
+
 u8 kbEqualsP(knowledgeBase *a, knowledgeBase *b);
 
 u8 LexicographicalClosure(knowledgeBase K);

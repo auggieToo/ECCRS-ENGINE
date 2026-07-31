@@ -282,7 +282,7 @@ kbGrow(knowledgeBase *kb)
 	kb->rules = nr;
 	kb->capacity = newCap;
 	
-	return 1;
+	return 0;
 }
 
 //helper function to keep the rule ID consistent
@@ -428,6 +428,11 @@ kbEquals(knowledgeBase a, knowledgeBase b)
 	
 }
 
+//knowledge base remove first rule 
+u8 kbRemoveFirst(knowledgeBase *k){
+
+
+}
 
 
 /* ids are 1-based (atomIntern returns count+1), and the ids[] array is not
