@@ -429,8 +429,14 @@ kbEquals(knowledgeBase a, knowledgeBase b)
 }
 
 //knowledge base remove first rule 
-u8 kbRemoveFirst(knowledgeBase *k){
-
+u8 
+kbRemoveFirst(knowledgeBase *k)
+{
+	if(k->count == 0) return 1; 
+	
+	memmove(k->rules , k->rules + 1, (k->count - 1) * sizeof(knowledgeBase));
+	k->count--;
+	return 0;
 
 }
 

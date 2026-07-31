@@ -39,6 +39,7 @@ static u8 logicalConsequence(formula premise, formula concl);
 //return true if the implication r is entailed
 //by the knowledge base K, 
 static u8 NegEntail(knowledgeBase K , formula r);
+static u8 Entail(knowledgeBase K , implic r);
 
 //materialize the knowledge base 
 //turn every defeasible implication into a classical 
@@ -159,15 +160,17 @@ RationalClosure(knowledgeBase K , implic a)
 
 	while(NegEntail(R, a.body) && R.count - infSize > 0)
 	{
-		for(int k = 0 ; k < t.R[i].r.count)
+		for(int k = 0 ; k < t.R[i].r.count; k++)
 		{
-
+			kbRemoveFirst(&R);
 
 		}
 
-
+		i++;
 	}
-	
+
+	return (bool)Entail(R, a);
+
 
 }
 
@@ -251,6 +254,43 @@ NegEntail(knowledgeBase K , formula r)
 		picosat_add(solver, 0);
 	}
 
+	int res = picosat_sat(solver,-1);
+	
+	picosat_reset(solver);
+	return res == PICOSAT_UNSATISFIABLE;
+
+}
+
+//converts a negated implication to cnf 
+//similar to above: R = not (b1 AND b2 AND ... AND bn -> h1 AND h2 ... AND hn) 
+static void 
+addNegRuleClause(PicoSAT *s, implic *r)
+{
+	for (u32 i = 0; i < r->body.count; i++) {
+        picosat_add(s, litToInt(r->body.clause[i]));
+        picosat_add(s, 0);
+    }
+
+    for (u32 i = 0; i < r->head.count; i++)
+        picosat_add(s, -litToInt(r->head.clause[i]));
+    picosat_add(s, 0);
+
+}
+
+
+static u8 
+Entail(knowledgeBase K , implic r)
+{
+
+	PicoSAT *solver = picosat_init();
+	for(u32 i = 0 ; i < K.count ; i++)
+	{	
+		addRuleClause(solver, &K.rules[i].impl);
+	}
+
+	addNegRuleClause(solver, &r);
+
+	
 	int res = picosat_sat(solver,-1);
 	
 	picosat_reset(solver);
@@ -467,7 +507,7 @@ int main()
 	
 
 	orderedTuple ot = BaseRank(A);
-	tuplePrint(NULL,&A.atoms ,&ot);\
+	tuplePrint(NULL,&A.atoms ,&ot);
 return 0;
 
 }
