@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 #include "lex.h"
+#include "setRules.h"
 #include "orderedTuple.h"
 
 
@@ -24,6 +25,7 @@ tupleInit(orderedTuple *ot)
 i8
 tupleNewRank(orderedTuple *ot)
 {	
+
 	if(ot->n == ot->_capacity)
 	{
 		//grow 
@@ -33,9 +35,16 @@ tupleNewRank(orderedTuple *ot)
 		
 		ot->R = nf; 
 	}
+	//knowledge base approach 
 	kbInit(&ot->R[ot->n].r , 10);
+
+	//set approach 
+	rsInit(&ot->R[ot->n].rs, ot->kbSize);
+
+
 	ot->n++;
 	return 0;
+
 
 }
 
@@ -46,6 +55,15 @@ tupleAddFormula(orderedTuple *ot, rule r)
 {
 	return kbAddRule(&ot->R[ot->n-1].r, r.impl.type, &r.impl.head, &r.impl.body);
 
+}
+
+//add the rule to the latest rank 
+//idx is the index of the rule in the 
+//KB 
+void 
+tupleAddRule(orderedTuple *ot, u32 idx)
+{
+	rsAdd(&ot->R[ot->n - 1].rs , idx);
 }
 
 

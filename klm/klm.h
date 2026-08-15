@@ -99,6 +99,13 @@ void kbFree(knowledgeBase *kb);
 ruleId kbAddRule(knowledgeBase *kb, ruleType type, const formula *head,
                  const formula *body);
 
+ruleId  kbAddRuleWithID(knowledgeBase *kb, 
+		 ruleType type, 
+		 const formula *head, 
+		 const formula *body, 
+		 u32 ruleId);
+
+
 ruleId kbAddRuleWithName(knowledgeBase *kb, ruleType type,
                          const char **headNames, const literalType *hSigns,
                          u32 hCount, const char **bodyNames,

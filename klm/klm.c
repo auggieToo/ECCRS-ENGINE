@@ -286,6 +286,8 @@ kbGrow(knowledgeBase *kb)
 }
 
 //helper function to keep the rule ID consistent
+//If we never remove rules from the knowledge , the ruleID 
+//should match the index of the rule in KB.rules array  
 static ruleId 
 kbNextId(const knowledgeBase *kb)
 {
@@ -335,6 +337,48 @@ kbAddRule(knowledgeBase *kb,
 	}
 
 	r.id = kbNextId(kb);
+	kb->rules[kb->count++] =r ;
+	return r.id;	
+}
+
+
+ruleId 
+kbAddRuleWithID(knowledgeBase *kb, 
+		 ruleType type, 
+		 const formula *head, 
+		 const formula *body, 
+		 u32 ruleId)
+{
+	rule r; 
+	r.impl.type = type; 
+	r.rank = RANK_UNASSIGNED; 
+	
+	//check if there is a duplicate
+	rule pr;
+	pr.impl.type = type; 
+	pr.impl.head = *head; 
+	pr.impl.body = *body; 
+
+	//check for duplicates 
+	for(u32 i = 0 ; i < kb->count; i++)
+		if (ruleEq(&kb->rules[i], &pr)) return kb->rules[i].id;
+	
+	if(kb->count == kb->capacity &&			//kb array full
+	   kbGrow(kb) != 0						//attempt to grow  kb  array failed 
+	  ) return RULE_NOT_FOUND; 
+	
+	//add the head
+	if (formulaCopy(&r.impl.head, head) != 0)
+        return RULE_NOT_FOUND;
+   
+	//add the body
+	if (formulaCopy(&r.impl.body, body) != 0) 
+	{
+        formulaFree(&r.impl.head);
+	    return RULE_NOT_FOUND;
+	}
+
+	r.id = ruleId;
 	kb->rules[kb->count++] =r ;
 	return r.id;	
 }

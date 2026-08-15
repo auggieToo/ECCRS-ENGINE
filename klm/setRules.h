@@ -18,7 +18,7 @@ u8 rsContains(ruleSet *r, u32 idx);
 void rsDifference(ruleSet *dst, ruleSet *a , ruleSet *b);
 void rsForEachSubsetOfSize(ruleSet *src, u32 capacity, u32 k,
                            void (*fn)(ruleSet *subset, void *ctx), void *ctx);
-
- 
+void rsForEach(ruleSet *s, 
+			   void ) 
 
 

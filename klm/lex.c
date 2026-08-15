@@ -8,6 +8,7 @@
 
 
 #include "lex.h"
+#include "orderedTuple.h"
 #define TEST_BANK
 
 //sat solver initialization 
@@ -54,10 +55,11 @@ BaseRank(knowledgeBase K)
 			if(	E_i.rules[k].impl.type == CLASSICAL ||			//classical rules live to rank inf
 				NegEntail(E_i, E_i.rules[k].impl.body ))
 			{
-				kbAddRule(&E_i1, 
+				kbAddRuleWithID(&E_i1, 
 						  E_i.rules[k].impl.type, 
 						  &E_i.rules[k].impl.head ,
-						  &E_i.rules[k].impl.body);
+						  &E_i.rules[k].impl.body, 
+						  E_i.rules[k].id); 
 	
 			}
 			else
@@ -65,6 +67,8 @@ BaseRank(knowledgeBase K)
 				//R_i = E_i \ E_(i+1)
 				//R_i is all the rules in the E_i that were not added in E_i1 		
 				tupleAddFormula(&ot, E_i.rules[k]);
+				tupleAddRule(&ot,E_i.rules[k].id);
+				
 				inCurrRank++;
 			}
 
