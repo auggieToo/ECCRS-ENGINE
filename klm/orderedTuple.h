@@ -29,6 +29,7 @@ typedef struct
 	u32 kbSize;
 
 	//infinite rank 
+	ruleRank infRank;
 	knowledgeBase infinite;
 }orderedTuple;
 

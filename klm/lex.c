@@ -9,6 +9,7 @@
 
 #include "lex.h"
 #include "orderedTuple.h"
+#include "setRules.h"
 #define TEST_BANK
 
 //sat solver initialization 
@@ -90,8 +91,14 @@ BaseRank(knowledgeBase K)
 	done:
 		kbInit(&ot.infinite, 8);
 		ot.infinite = E_i;
-
-		//TODO: add new bitset rank for the  inifinite
+		
+		rsInit(&ot.infRank.rs, E_i.count);
+		for(u32 i = 0 ; i < E_i.count ; i++)
+		{
+			rsAdd(&ot.infRank.rs, E_i.rules[i].id);
+		}
+		
+	
 		return ot;
 }
 

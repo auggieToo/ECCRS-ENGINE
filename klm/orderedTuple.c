@@ -103,14 +103,15 @@ tuplePrintSet(FILE *out,
 {
 
 	
-	if (!out) out = stdout;
+	if (!out) out = stdout;	
+	struct rankPrntCtx  rp = {.out = out, .K = K};                                                                                                                                                                                                                                         
 	for(u32 i = 0 ; i < ot->n ; i++)
 	{
-		struct rankPrntCtx  rp = {.out = out, .K = K};                                                                                                                                                                                                                                         
 		fprintf(out, "rank %u:\n", i);	                                                                                                                                                                                                                                                                                                                                                                                             
 		rsForEach(&ot->R[i].rs,printRuleFromIdx, &rp);
 	}
-
+	
+	rsForEach(&ot->infRank.rs,printRuleFromIdx, &rp);
 }
 	
 
