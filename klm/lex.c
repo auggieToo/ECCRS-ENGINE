@@ -2,6 +2,7 @@
 
 
 
+#include <ctype.h>
 #include <stdlib.h>
 #include <picosat.h>
 #include <stdbool.h>
@@ -115,13 +116,22 @@ fillSrRank(ruleSet *R, void *ctx)
 }
 
 
-u32
-fact(u32 n)
+u32 choose(u32 n, u32 k)
 {
-	u32 prod = 1; 
-	for(u32 k = n ; k >= 1 ; k-- ) prod *= k;
-	return prod;
+	if (k > n) return 0;
+	if (k > n - k) k = n - k;
+	u64 c = 1;
+	for (u32 i = 0; i < k; i++)
+		c = c * (n - i) / (i + 1);
+	return (u32)c;
+}
 
+u32 rsPopcount(ruleSet *s) {
+    u32 words = (s->capacity + 63) / 64;
+    u32 total = 0;
+    for (u32 w = 0; w < words; w++)
+        total += __builtin_popcountll(s->bits[w]);
+    return total;
 }
 
 u32
@@ -138,12 +148,13 @@ SubsetRankAlg(knowledgeBase K, orderedSrTuple *out)
 	
 	while(i != B.n)
 	{
-		u32 lenBi = B.R[i].rs.count; 
+		 u32 lenBi = rsPopcount(&B.R[i].rs);
 		for(u32  j = lenBi ; j >= 1 ; j--)
 		{
 			srTupleNewRank(out);
 			out->R[out->rankNo - 1].count = 0;
-			u32 cnt = fact(lenBi) / (fact(j) * fact (lenBi - j));	
+			
+			u32 cnt = choose(lenBi, j);	
 			out->R[out->rankNo - 1].rs = (ruleSet *) malloc(sizeof(ruleSet) * cnt);
 			rsForEachSubsetOfSize(&B.R[i].rs, 
 								  B.R[i].rs.capacity, 
@@ -151,12 +162,19 @@ SubsetRankAlg(knowledgeBase K, orderedSrTuple *out)
 								  fillSrRank, 
 								  out);
 			k++;
-										
+								
 		}
+
 
 		i++;
 
 	}
+
+	out->infRank = B.infRank;
+
+			printf("\n\n\n\n");		
+		orderedSrTuplePrint(NULL, out, &K);
+	
 
 
 }
@@ -504,7 +522,6 @@ CLASSICAL_RULE(&A,
 
 
 	
-	orderedSrTuplePrint(NULL, &ost, &A);
 return 0;
 
 }

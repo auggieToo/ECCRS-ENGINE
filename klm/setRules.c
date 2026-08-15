@@ -49,7 +49,7 @@ rsContains(ruleSet *r, u32 idx)
 {
 
 
-	return (r->bits[idx/64] >> (idx%64));
+	 return (r->bits[idx/64] >> (idx%64)) & 1ULL;
 }
 
 //returns the difference of two sets 

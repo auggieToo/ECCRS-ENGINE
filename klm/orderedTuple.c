@@ -30,14 +30,14 @@ tupleNewRank(orderedTuple *ot)
 	{
 		//grow 
 		ot->_capacity = ot->_capacity * 1.5f ;
-		ruleRank *nf = realloc(&ot->R, ot->_capacity * sizeof(ruleRank));
+		ruleRank *nf = realloc(ot->R, ot->_capacity * sizeof(ruleRank));
 		if(!nf) return -1;
 		
 		ot->R = nf; 
 	}
 
 	//knowledge base approach to tuple ranking 
-	//kbInit(&ot->R[ot->n].r , 10);
+	kbInit(&ot->R[ot->n].r , 10);
 
 
 	//set approach 
@@ -193,7 +193,7 @@ srTupleInit(orderedSrTuple *ot)
 	
 	ot->_capacity = 8;
 
-	ot->R = malloc(ot->_capacity*sizeof(ruleRank));
+	ot->R = malloc(ot->_capacity*sizeof(subsetRank));
 	ot->rankNo = 0;
 
 	return 1;
