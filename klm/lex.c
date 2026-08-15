@@ -26,6 +26,7 @@ BaseRank(knowledgeBase K)
 
 	orderedTuple ot; 
 	tupleInit(&ot);
+	ot.kbSize = K.count;
 
 	//algorithm for  BaseRank
 	knowledgeBase kArrow = {0};
@@ -89,6 +90,8 @@ BaseRank(knowledgeBase K)
 	done:
 		kbInit(&ot.infinite, 8);
 		ot.infinite = E_i;
+
+		//TODO: add new bitset rank for the  inifinite
 		return ot;
 }
 

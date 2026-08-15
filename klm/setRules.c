@@ -13,7 +13,9 @@ rsInit(ruleSet * r, u32 numRules)
 	
 	r->bits = calloc(wrds , sizeof(u64));
 
-	r->capacity = numRules; 
+	r->capacity = numRules;
+
+	r->count = 0;
 }
 
 
@@ -25,6 +27,7 @@ rsAdd(ruleSet *r, u32 idx)
 {
 	r->bits[idx/64] |= ( 1ULL << (idx%64));
 
+	r->count++;
 }
 
 //remove the rule in the set 
@@ -36,6 +39,8 @@ rsRemove(ruleSet *r, u32 idx)
 {
 
 	r->bits[idx/64] &= ~( 1ULL << (idx%64));
+	
+	r->count--;
 }
 
 

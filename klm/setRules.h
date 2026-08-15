@@ -9,6 +9,9 @@ typedef struct
 	//number of rules the bitsey can track 
 	u32 capacity; 
 
+	//number of rules currently in the set 
+	u32 count;
+
 }ruleSet ;
 
 void rsInit(ruleSet * r, u32 numRules);

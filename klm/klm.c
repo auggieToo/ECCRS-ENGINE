@@ -517,7 +517,7 @@ formulaPrint(FILE *out, const atomTable *t, const formula *f)
 	}
 }
 
-static void
+void
 rulePrint(FILE *out, const atomTable *t, const rule *r)
 {
 	fprintf(out, "  [%u] ", (u32)r->id);
