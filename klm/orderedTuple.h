@@ -33,6 +33,34 @@ typedef struct
 	knowledgeBase infinite;
 }orderedTuple;
 
+
+
+typedef struct 
+{
+	//rule sets 
+	ruleSet *rs;
+
+	//count 
+	u32 count; 
+
+}subsetRank; 
+
+typedef struct 
+{
+	subsetRank *R; 
+	
+	u32 rankNo; 
+
+	//resizing 
+	u32 _capacity;
+
+	//length of the knowledge base 
+	u32 kbSize;
+
+	//infinite rank 
+	ruleRank infRank;
+}orderedSrTuple;
+
 i8 tupleInit(orderedTuple *ot);
 i8 tupleNewRank(orderedTuple *ot); 
 i8 tupleAddFormula(orderedTuple *ot, rule r);
@@ -44,3 +72,7 @@ tuplePrintSet(FILE *out,
 void  tupleAddRule(orderedTuple *ot, u32 idx);
 u32  unionRank(knowledgeBase *K, orderedTuple ot);
 void tuplePrint(FILE *out, const atomTable *atoms, const orderedTuple *ot);
+
+i8 srTupleInit(orderedSrTuple *ot);
+i8 srTupleNewRank(orderedSrTuple *ot);
+void  tupleAddRule(orderedTuple *ot, u32 idx);

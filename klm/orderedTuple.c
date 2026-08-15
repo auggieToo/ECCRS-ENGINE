@@ -2,7 +2,6 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-
 #include "klm.h"
 #include "lex.h"
 #include "setRules.h"
@@ -187,3 +186,54 @@ u32  unionBitRank(knowledgeBase *ogKB, knowledgeBase *orderedKB, orderedTuple ot
 	
 }
 
+
+i8 
+srTupleInit(orderedSrTuple *ot)
+{
+	
+	ot->_capacity = 8;
+
+	ot->R = malloc(ot->_capacity*sizeof(ruleRank));
+	ot->rankNo = 0;
+
+	return 1;
+		
+}
+
+u32
+fact(u32 n)
+{
+	u32 prod = 1; 
+	for(u32 k = n ; k >= 1 ; k-- ) prod *= k;
+	return prod;
+
+}
+
+
+i8
+srTupleNewRank(orderedSrTuple *ot)
+{	
+
+	if(ot->rankNo == ot->_capacity)
+	{
+		//grow 
+		ot->_capacity = ot->_capacity * 1.5f ;
+		subsetRank *nf = realloc(&ot->R, ot->_capacity * sizeof(subsetRank));
+		if(!nf) return -1;
+		
+		ot->R = nf;
+		
+	}
+
+	//knowledge base approach to tuple ranking 
+	//kbInit(&ot->R[ot->n].r , 10);
+
+
+	//set approach 
+	//	rsInit(&ot->R[ot->n].rs, ot->kbSize);
+
+	ot->rankNo++;
+	return 0;
+
+
+}

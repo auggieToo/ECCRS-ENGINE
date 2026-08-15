@@ -44,7 +44,8 @@ rsRemove(ruleSet *r, u32 idx)
 }
 
 
-u8 rsContains(ruleSet *r, u32 idx)
+u8 
+rsContains(ruleSet *r, u32 idx)
 {
 
 
@@ -52,7 +53,8 @@ u8 rsContains(ruleSet *r, u32 idx)
 }
 
 //returns the difference of two sets 
-void rsDifference(ruleSet *dst, ruleSet *a , ruleSet *b)
+void 
+rsDifference(ruleSet *dst, ruleSet *a , ruleSet *b)
 {
 	u32 wrds = (a->capacity + 64 ) / 64 ; 
 	for(u32 w  = 0; w < wrds; w++ )
@@ -61,7 +63,8 @@ void rsDifference(ruleSet *dst, ruleSet *a , ruleSet *b)
 
 	 
 // generates all k-element subsets of src via combinatorial enumeration
-void rsForEachSubsetOfSize(ruleSet *src,
+void 
+rsForEachSubsetOfSize(ruleSet *src,
 						  u32 capacity,
 						  u32 k,
                           void (*fn)(ruleSet *subset, void *ctx), 
@@ -97,7 +100,8 @@ void rsForEachSubsetOfSize(ruleSet *src,
 }
 
 
-void rsForEach(ruleSet *s, 
+void 
+rsForEach(ruleSet *s, 
 			   void (*fn) (u32 idx, void *ctx),
 				void *ctx)
 {
@@ -116,7 +120,17 @@ void rsForEach(ruleSet *s,
 
 
 	}
+}
 
+void 
+rsCopy(ruleSet  *dst, ruleSet *src)
+{
+	u32 wrds = (src->capacity + 63) / 64 ; 
+	
+	rsInit(dst, src->capacity);
 
+	memcpy(dst->bits , src->bits, wrds * sizeof(u64));
+	
+	dst->count = src->count;
 }
 
