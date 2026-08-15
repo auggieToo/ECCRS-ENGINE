@@ -18,10 +18,10 @@ GEN = ./gen$(EXE_EXT)
 
 # Final executable
 eccrs$(EXE_EXT): main.o eccrsMSW.o rules.o
-	$(CC) $(CFLAGS) eccrs.o eccrsMSW.o rules.o -o eccrs$(EXE_EXT)
+	$(CC) $(CFLAGS) main.o eccrsMSW.o rules.o -o eccrs$(EXE_EXT)
 
 # Object files
-eccrs.o: main.c rules.h
+main.o: main.c rules.h
 	$(CC) $(CFLAGS) -c main.c
 
 eccrsMSW.o: eccrsMSW.c rules.h

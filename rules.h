@@ -24,13 +24,9 @@ typedef uint32_t u32;
 
 typedef struct
 {
-	//TODO:
-	//index[] ;
-	//u32 size;
-
 	 i32 index1;
 	 i32 index2;
-	 u8 isPair;
+  u8 isPair;
 } featureIndex;
 
 typedef struct

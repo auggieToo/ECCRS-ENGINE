@@ -1,7 +1,13 @@
-#include "klm.h"
+//author : Augustine Mochoeneng
+
+
+
 #include <stdlib.h>
 #include <picosat.h>
 #include <stdbool.h>
+
+
+#include "lex.h"
 #define TEST_BANK
 
 //sat solver initialization 
@@ -9,42 +15,7 @@
 //kb size 
 u32 kbSize = 0;
 
-typedef struct 
-{
-	knowledgeBase r; 
 
-}ruleRank; 
-
-
-typedef struct 
-{
-	ruleRank *R; 
-	u32 n; 
-
-	//resizing 
-	u32 _capacity;
-
-	//infinite rank 
-	knowledgeBase infinite;
-}orderedTuple;
-
-i8 tupleInit(orderedTuple *ot);
-i8 tupleNewRank(orderedTuple *ot); 
-i8 tupleAddFormula(orderedTuple *ot, rule r);
-
-//return true if 'concl' is a logical consequence of 'premise'
-static u8 logicalConsequence(formula premise, formula concl);
-
-
-//return true if the implication r is entailed
-//by the knowledge base K, 
-static u8 NegEntail(knowledgeBase K , formula r);
-static u8 Entail(knowledgeBase K , implic r);
-
-//materialize the knowledge base 
-//turn every defeasible implication into a classical 
-//implication;
-static void materialisation(knowledgeBase K, knowledgeBase *out);
 
 
 orderedTuple 
@@ -115,37 +86,6 @@ BaseRank(knowledgeBase K)
 		kbInit(&ot.infinite, 8);
 		ot.infinite = E_i;
 		return ot;
-}
-
-
-u32 
-unionRank(knowledgeBase *K, orderedTuple ot)
-{
-	kbInit(K, kbSize);
-
-	for(u32 j = 0 ; j < ot.n ; j++)
-	{
-		knowledgeBase r = ot.R[j].r;
-		for(u32 i = 0 ; i <  r.count ; i++ )
-		{
-			implic rule = r.rules[i].impl;  
-			kbAddRule(K, rule.type , &rule.head ,&rule.body);
-		}
-
-
-	}
-
-	u32 infiniteRankSize = ot.infinite.count;
-	rule* r = ot.infinite.rules; 
-	for(u32 i = 0 ; i < infiniteRankSize ; i++ )
-	{
-			implic rule = r[i].impl;	
-			kbAddRule(K, rule.type , &rule.head ,&rule.body);
-	}
-	
-	return infiniteRankSize;
-	
-	
 }
 
 
@@ -298,62 +238,6 @@ Entail(knowledgeBase K , implic r)
 
 }
 
-
-i8 
-tupleInit(orderedTuple *ot)
-{
-	
-	ot->_capacity = 8;
-
-	ot->R = malloc(ot->_capacity*sizeof(ruleRank));
-	ot->n = 0;
-
-	return 1;
-		
-}
-
-i8
-tupleNewRank(orderedTuple *ot)
-{	
-	if(ot->n == ot->_capacity)
-	{
-		//grow 
-		ot->_capacity = ot->_capacity * 1.5f ;
-		ruleRank *nf = realloc(&ot->R, ot->_capacity * sizeof(ruleRank));
-		if(!nf) return -1;
-		
-		ot->R = nf; 
-	}
-	kbInit(&ot->R[ot->n].r , 10);
-	ot->n++;
-	return 0;
-
-}
-
-
-//add formula to the latest rank 
-i8 
-tupleAddFormula(orderedTuple *ot, rule r)
-{
-	return kbAddRule(&ot->R[ot->n-1].r, r.impl.type, &r.impl.head, &r.impl.body);
-
-}
-
-
-void
-tuplePrint(FILE *out, const atomTable *atoms, const orderedTuple *ot)
-{
-	if (!out) out = stdout;
- 
-	for (u32 i = 0; i < ot->n ; i++)
-	{
-		fprintf(out, "rank %u:\n", i);
-		kbPrintWithAtoms(out, &ot->R[i].r, atoms);
-	}
- 
-	fputs("rank inf:\n", out);
-	kbPrintWithAtoms(out, &ot->infinite, atoms);
-}
 
 int main()
 { 
@@ -508,6 +392,66 @@ int main()
 
 	orderedTuple ot = BaseRank(A);
 	tuplePrint(NULL,&A.atoms ,&ot);
+	
 return 0;
 
 }
+
+/*
+LexicographicClosure
+1:  Input:  a knowledge base K, a defeasible implication α |~ β
+2:  Output: true, if K |≈_LC α |~ β, and false otherwise
+3:  (R_0, ..., R_{n-1}, R_inf, n) := BaseRank(K);
+4:  i := 0;
+5:  R := ⋃_{j=0}^{j<n} R_j;
+6:  while R_inf ∪ R |= ¬α  and  R ≠ ∅ do
+7:      R := R \ R_i;
+8:      W := WeakenRank(R_i, R, R_inf, α);
+9:      if W ≠ FAIL then
+10:         return R_inf ∪ R ∪ {W} |= α → β;
+11:     end if
+12:     i := i + 1;
+13: end while
+14: return R_inf ∪ R |= α → β;
+
+WeakenRank
+1:  Input:  a rank R_i, the surviving ranks R, the infinite rank R_inf, an antecedent α
+2:  Output: a weakened formula W, or FAIL if no subset of R_i is compatible with α
+3:  m := |R_i|;
+4:  for k := m - 1 down to 1 do
+5:      D_k := ⋁ { ⋀ S  |  S ⊆ R_i,  |S| = k };
+6:      if R_inf ∪ R ∪ {D_k} |≠ ¬α then
+7:          return D_k;
+8:      end if
+9:  end for
+10: return FAIL;
+
+LexicographicRank                         // rank function form, feeds DefeasibleEntailment
+1:  Input:  a knowledge base K
+2:  Output: an ordered tuple (L_0, ..., L_{m-1}, L_inf, m)
+3:  (R_0, ..., R_{n-1}, R_inf, n) := BaseRank(K);
+4:  L_inf := R_inf;
+5:  S := ∅;                                // refined ranks, in ascending seriousness
+6:  for i := 0 to n - 1 do
+7:      m_i := |R_i|;
+8:      for k := m_i down to 1 do
+9:          D := ⋁ { ⋀ T  |  T ⊆ R_i,  |T| = k };
+10:         S := S ⌢ ⟨D⟩;                  // append: larger k = less serious to keep
+11:     end for
+12: end for
+13: (L_0, ..., L_{m-1}) := S;
+14: return (L_0, ..., L_{m-1}, L_inf, m);
+
+
+Seriousness                               // ≺_S, for comparing two subsets directly
+1:  Input:  D ⊆ K, base rank function br, order k of K
+2:  Output: the tuple n_D = ⟨n_0, ..., n_k⟩
+3:  n_0 := |{ α |~ β ∈ D  |  br(α) = ∞ }|;
+4:  for i := 1 to k do
+5:      n_i := |{ α |~ β ∈ D  |  br(α) = k - i }|;
+6:  end for
+7:  return ⟨n_0, ..., n_k⟩;
+
+    D_1 ≺_S D_2  iff  n_{D_1} <_lex n_{D_2}      // compared left to right, ∞ first
+
+*/
