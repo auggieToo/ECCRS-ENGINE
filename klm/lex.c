@@ -8,6 +8,7 @@
 
 
 #include "lex.h"
+#include "klm.h"
 #include "orderedTuple.h"
 #include "setRules.h"
 #define TEST_BANK
@@ -299,7 +300,7 @@ int main()
 
 #ifdef TEST_BANK
 
-	DEFEASIBLE_RULE(&A,
+	CLASSICAL_RULE(&A,
 		IF(   NEG("a15_9"), POS("a16_3"), NEG("a4_1"),
 		      NEG("a4_2"),  POS("a4_4"),  NEG("a4_5") ),
 		THEN( POS("y") ));

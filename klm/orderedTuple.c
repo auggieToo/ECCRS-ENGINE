@@ -36,8 +36,10 @@ tupleNewRank(orderedTuple *ot)
 		
 		ot->R = nf; 
 	}
-	//knowledge base approach 
-	kbInit(&ot->R[ot->n].r , 10);
+
+	//knowledge base approach to tuple ranking 
+	//kbInit(&ot->R[ot->n].r , 10);
+
 
 	//set approach 
 	rsInit(&ot->R[ot->n].rs, ot->kbSize);
@@ -139,6 +141,47 @@ u32  unionRank(knowledgeBase *K, orderedTuple ot)
 			kbAddRule(K, rule.type , &rule.head ,&rule.body);
 	}
 	
+	return infiniteRankSize;
+	
+	
+}
+
+typedef struct 
+{
+	knowledgeBase *og;
+	knowledgeBase *cp;
+}ruleSetCtx;
+
+void 
+addRuleFromSet(u32 idx, void *ctx)
+{
+	ruleSetCtx *k = (ruleSetCtx *)ctx;
+
+	implic rule = k->og->rules[idx].impl;  
+	kbAddRule(k->cp, rule.type , &rule.head ,&rule.body);
+
+	
+	
+
+
+}
+
+u32  unionBitRank(knowledgeBase *ogKB, knowledgeBase *orderedKB, orderedTuple ot)
+{
+	kbInit(orderedKB, ot.kbSize);
+	
+	ruleSetCtx ctx = {.og = ogKB , .cp = orderedKB};
+	for(u32 j = 0 ; j < ot.n ; j++)
+	{
+		ruleSet  r = ot.R[j].rs;
+		rsForEach(&r,addRuleFromSet , &ctx);
+
+	}
+
+	u32 infiniteRankSize = ot.infRank.rs.count;
+	ruleSet  r = ot.infRank.rs;
+	rsForEach(&r,addRuleFromSet , &ctx)o;
+
 	return infiniteRankSize;
 	
 	
