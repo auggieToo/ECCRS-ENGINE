@@ -200,14 +200,6 @@ srTupleInit(orderedSrTuple *ot)
 		
 }
 
-u32
-fact(u32 n)
-{
-	u32 prod = 1; 
-	for(u32 k = n ; k >= 1 ; k-- ) prod *= k;
-	return prod;
-
-}
 
 
 i8

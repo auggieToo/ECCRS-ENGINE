@@ -24,5 +24,4 @@ void rsForEachSubsetOfSize(ruleSet *src, u32 capacity, u32 k,
 void rsForEach(ruleSet *s, 
 			   void (*fn) (u32 idx, void *ctx), void *ctx);
 
-
-
+void  rsCopy(ruleSet  *dst, ruleSet *src);
