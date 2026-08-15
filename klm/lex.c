@@ -396,6 +396,7 @@ int main()
 
 	orderedTuple ot = BaseRank(A);
 	tuplePrint(NULL,&A.atoms ,&ot);
+	tuplePrintSet(NULL,&ot, &A);
 	
 return 0;
 

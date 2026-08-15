@@ -36,6 +36,10 @@ i8 tupleInit(orderedTuple *ot);
 i8 tupleNewRank(orderedTuple *ot); 
 i8 tupleAddFormula(orderedTuple *ot, rule r);
 
+void 
+tuplePrintSet(FILE *out,
+			 const orderedTuple* ot, 
+			 knowledgeBase *K);
 void  tupleAddRule(orderedTuple *ot, u32 idx);
 u32  unionRank(knowledgeBase *K, orderedTuple ot);
 void tuplePrint(FILE *out, const atomTable *atoms, const orderedTuple *ot);

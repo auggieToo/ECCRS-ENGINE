@@ -56,8 +56,11 @@ void rsDifference(ruleSet *dst, ruleSet *a , ruleSet *b)
 
 	 
 // generates all k-element subsets of src via combinatorial enumeration
-void rsForEachSubsetOfSize(ruleSet *src, u32 capacity, u32 k,
-                           void (*fn)(ruleSet *subset, void *ctx), void *ctx)
+void rsForEachSubsetOfSize(ruleSet *src,
+						  u32 capacity,
+						  u32 k,
+                          void (*fn)(ruleSet *subset, void *ctx), 
+						  void *ctx)
 {
     u32 indices[capacity];
     u32 n = 0;
@@ -87,3 +90,28 @@ void rsForEachSubsetOfSize(ruleSet *src, u32 capacity, u32 k,
     }
     free(sub.bits);
 }
+
+
+void rsForEach(ruleSet *s, 
+			   void (*fn) (u32 idx, void *ctx),
+				void *ctx)
+{
+	u32 words = (s->capacity + 63) / 64; 
+	for(u32 w = 0 ; w < words ; w++)
+	{
+		u64 bits = s->bits[w];
+		while(bits )
+		{
+			u32 idx = w * 64 + __builtin_ctzll(bits);
+			fn(idx, ctx);
+				
+			//clear the lowest bit
+			bits &= bits -1;
+		}
+
+
+	}
+
+
+}
+

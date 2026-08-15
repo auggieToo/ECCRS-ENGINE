@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "klm.h"
 #include "lex.h"
 #include "setRules.h"
 #include "orderedTuple.h"
@@ -82,7 +83,32 @@ tuplePrint(FILE *out, const atomTable *atoms, const orderedTuple *ot)
 	kbPrintWithAtoms(out, &ot->infinite, atoms);
 }
 
+struct rankPrntCtx  
+{
+		FILE *out;
+		knowledgeBase *K;
+};
 
+void printRuleFromIdx(u32 idx, void *ctx)
+{
+	struct rankPrntCtx *c = (struct rankPrntCtx *)ctx;
+	rulePrint(c->out, &c->K->atoms ,&c->K->rules[idx]);
+
+}
+void 
+tuplePrintSet(FILE *out,
+			 const orderedTuple* ot, 
+			 knowledgeBase *K)
+{
+	for(u32 i = 0 ; i < ot->n ; i++)
+	{
+		struct rankPrntCtx  rp = {.out = out, .K = K};                                                                                                                                                                                                                                         
+		fprintf(out, "rank %u:\n", i);	                                                                                                                                                                                                                                                                                                                                                                                             
+		rsForEach(&ot->R[i].rs,printRuleFromIdx, &rp);
+	}
+
+}
+	
 
 u32  unionRank(knowledgeBase *K, orderedTuple ot)
 {
