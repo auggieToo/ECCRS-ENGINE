@@ -11,7 +11,7 @@
 #include "klm.h"
 #include "orderedTuple.h"
 #include "setRules.h"
-#define TEST_BANK
+#define TEST_PERSON
 
 //sat solver initialization 
 
@@ -110,8 +110,8 @@ fillSrRank(ruleSet *R, void *ctx)
 {
 	orderedSrTuple *osr = (orderedSrTuple *) ctx; 
 	
-	subsetRank sr = osr->R[osr->rankNo - 1]; 
-	rsCopy(&sr.rs[sr.count++] , R);
+	subsetRank *sr = &osr->R[osr->rankNo - 1]; 
+	rsCopy(&sr->rs[sr->count++] , R);
 }
 
 
@@ -131,24 +131,30 @@ SubsetRankAlg(knowledgeBase K, orderedSrTuple *out)
 
 
 	orderedTuple B = BaseRank(K);
+
+	tuplePrintSet(NULL,&B, &K);
 	
 	u32 i = 0, k = 0; 
 	
 	while(i != B.n)
 	{
-		u32 lenBi = B.R->rs.count; 
+		u32 lenBi = B.R[i].rs.count; 
 		for(u32  j = lenBi ; j >= 1 ; j--)
 		{
 			srTupleNewRank(out);
+			out->R[out->rankNo - 1].count = 0;
 			u32 cnt = fact(lenBi) / (fact(j) * fact (lenBi - j));	
 			out->R[out->rankNo - 1].rs = (ruleSet *) malloc(sizeof(ruleSet) * cnt);
 			rsForEachSubsetOfSize(&B.R[i].rs, 
-								  B.R[i].rs.count, 
+								  B.R[i].rs.capacity, 
 								  j,
 								  fillSrRank, 
 								  out);
+			k++;
 										
 		}
+
+		i++;
 
 	}
 
@@ -306,6 +312,8 @@ Entail(knowledgeBase K , implic r)
 }
 
 
+
+
 int main()
 { 
 	knowledgeBase A; 
@@ -452,14 +460,40 @@ int main()
 		THEN( NEG("y") ));
 #endif
 
+#ifdef TEST_PERSON 
+// B_0
+DEFEASIBLE_RULE(&A,
+    IF( POS("p") ),
+    THEN( POS("m") ));
+
+DEFEASIBLE_RULE(&A,
+    IF( POS("p") ),
+    THEN( POS("a") ));
+
+DEFEASIBLE_RULE(&A,
+    IF( POS("p") ),
+    THEN( POS("t") ));
+
+// B_1
+DEFEASIBLE_RULE(&A,
+    IF( POS("s") ),
+    THEN( NEG("t") ));
+
+// B_inf
+CLASSICAL_RULE(&A,
+    IF( POS("a") ),
+    THEN( POS("p") ));
+
+CLASSICAL_RULE(&A,
+    IF( POS("s") ),
+    THEN( POS("p") ));
+
+#endif
+
 
 	kbPrint(NULL,&A);
 	kbSize = A.count;
 	
-
-	orderedTuple ot = BaseRank(A);
-	tuplePrint(NULL,&A.atoms ,&ot);
-	tuplePrintSet(NULL,&ot, &A);
 
 	printf("\n\n\n");
 
@@ -468,7 +502,9 @@ int main()
 	SubsetRankAlg(A, &ost);
 
 
+
 	
+	orderedSrTuplePrint(NULL, &ost, &A);
 return 0;
 
 }

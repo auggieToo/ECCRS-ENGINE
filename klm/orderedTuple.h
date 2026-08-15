@@ -76,3 +76,5 @@ void tuplePrint(FILE *out, const atomTable *atoms, const orderedTuple *ot);
 i8 srTupleInit(orderedSrTuple *ot);
 i8 srTupleNewRank(orderedSrTuple *ot);
 void  tupleAddRule(orderedTuple *ot, u32 idx);
+
+void orderedSrTuplePrint(FILE *out, orderedSrTuple *ot, knowledgeBase *K);

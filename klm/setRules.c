@@ -86,7 +86,8 @@ rsForEachSubsetOfSize(ruleSet *src,
     for (;;) {
         // build subset from combo
         memset(sub.bits, 0, ((capacity + 63) / 64) * sizeof(u64));
-        for (u32 j = 0; j < k; j++) rsAdd(&sub, indices[combo[j]]);
+		sub.count = 0;
+		for (u32 j = 0; j < k; j++) rsAdd(&sub, indices[combo[j]]);
         fn(&sub, ctx);
 
         // next combination

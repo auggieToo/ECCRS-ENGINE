@@ -179,7 +179,7 @@ u32  unionBitRank(knowledgeBase *ogKB, knowledgeBase *orderedKB, orderedTuple ot
 
 	u32 infiniteRankSize = ot.infRank.rs.count;
 	ruleSet  r = ot.infRank.rs;
-	rsForEach(&r,addRuleFromSet , &ctx)o;
+	rsForEach(&r,addRuleFromSet , &ctx);
 
 	return infiniteRankSize;
 	
@@ -209,8 +209,9 @@ srTupleNewRank(orderedSrTuple *ot)
 	if(ot->rankNo == ot->_capacity)
 	{
 		//grow 
-		ot->_capacity = ot->_capacity * 1.5f ;
-		subsetRank *nf = realloc(&ot->R, ot->_capacity * sizeof(subsetRank));
+		ot->_capacity = ot->_capacity ? ot->_capacity + ot->_capacity / 2 + 1 : 8;
+
+		subsetRank *nf = realloc(ot->R, ot->_capacity * sizeof(subsetRank));
 		if(!nf) return -1;
 		
 		ot->R = nf;
@@ -223,9 +224,26 @@ srTupleNewRank(orderedSrTuple *ot)
 
 	//set approach 
 	//	rsInit(&ot->R[ot->n].rs, ot->kbSize);
-
 	ot->rankNo++;
 	return 0;
 
 
+}
+
+void orderedSrTuplePrint(FILE *out, orderedSrTuple *ot, knowledgeBase *K)
+{
+
+	if(!out) out = stdout;
+    struct rankPrntCtx rp = {.out = out, .K = K};
+
+    for (u32 i = 0; i < ot->rankNo; i++) {
+        fprintf(out, "rank %u (%u subsets):\n", i, ot->R[i].count);
+        for (u32 j = 0; j < ot->R[i].count; j++) {
+            fprintf(out, "  subset %u:\n", j);
+            rsForEach(&ot->R[i].rs[j], printRuleFromIdx, &rp);
+        }
+    }
+
+    fprintf(out, "R_inf:\n");
+    rsForEach(&ot->infRank.rs, printRuleFromIdx, &rp);
 }
