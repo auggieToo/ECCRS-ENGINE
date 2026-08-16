@@ -331,6 +331,152 @@ Entail(knowledgeBase K , implic r)
 
 
 
+/* emit one rule's CNF, optionally guarded by ¬sel (sel == 0 -> unguarded) */
+static void
+addRuleClauseSel(PicoSAT *s, const implic *r, i32 sel)
+{
+	if (r->head.count == 0)
+	{
+		if (sel) picosat_add(s, -sel);
+		for (u32 i = 0; i < r->body.count; i++)
+			picosat_add(s, -litToInt(r->body.clause[i]));
+		picosat_add(s, 0);
+		return;
+	}
+
+	for (u32 j = 0; j < r->head.count; j++)
+	{
+		if (sel) picosat_add(s, -sel);
+		for (u32 i = 0; i < r->body.count; i++)
+			picosat_add(s, -litToInt(r->body.clause[i]));
+		picosat_add(s, litToInt(r->head.clause[j]));
+		picosat_add(s, 0);
+	}
+}
+
+typedef struct
+{
+	PicoSAT             *s;
+	const knowledgeBase *K;
+	i32                  sel;
+} emitCtx;
+
+static void
+emitRuleCb(u32 idx, void *ctx)
+{
+	emitCtx *e = (emitCtx *)ctx;
+	addRuleClauseSel(e->s, &e->K->rules[idx].impl, e->sel);
+}
+
+/* does  R_start ∧ ... ∧ R_(rankNo-1) ∧ R_inf  entail ¬a ?          */
+/* i.e.  that conjunction ∪ {a}  is UNSAT                            */
+u8
+NegEntailSr(const knowledgeBase *K,
+            const orderedSrTuple *ot,
+            u32 startRank,
+            formula a)
+{
+	PicoSAT *s = picosat_init();
+	i32 nextVar = (i32)K->atoms.count + 1;    /* fresh vars live above atoms */
+
+	for (u32 i = startRank; i < ot->rankNo; i++)
+	{
+		const subsetRank *sr = &ot->R[i];
+
+		if (sr->count == 1)                   /* plain conjunction */
+		{
+			emitCtx e = { .s = s, .K = K, .sel = 0 };
+			rsForEach(&sr->rs[0], emitRuleCb, &e);
+		}
+		else                                  /* disjunction of conjunctions */
+		{
+			i32 firstSel = nextVar;
+
+			for (u32 g = 0; g < sr->count; g++)
+			{
+				emitCtx e = { .s = s, .K = K, .sel = nextVar++ };
+				rsForEach(&sr->rs[g], emitRuleCb, &e);
+			}
+
+			for (i32 v = firstSel; v < nextVar; v++)   /* sel_1 ∨ ... ∨ sel_p */
+				picosat_add(s, v);
+			picosat_add(s, 0);
+		}
+	}
+
+	/* R_inf, unguarded */
+	emitCtx e = { .s = s, .K = K, .sel = 0 };
+	rsForEach(&ot->infRank.rs, emitRuleCb, &e);
+
+	/* assert a's literals */
+	for (u32 j = 0; j < a.count; j++)
+	{
+		picosat_add(s, litToInt(a.clause[j]));
+		picosat_add(s, 0);
+	}
+
+	int res = picosat_sat(s, -1);
+	picosat_reset(s);
+	return res == PICOSAT_UNSATISFIABLE;
+}
+static i32
+emitRanks(PicoSAT *s, const knowledgeBase *K,
+          const orderedSrTuple *ot, u32 startRank)
+{
+	i32 nextVar = (i32)K->atoms.count + 1;
+
+	for (u32 i = startRank; i < ot->rankNo; i++)
+	{
+		const subsetRank *sr = &ot->R[i];
+
+		if (sr->count == 1)
+		{
+			emitCtx e = { .s = s, .K = K, .sel = 0 };
+			rsForEach(&sr->rs[0], emitRuleCb, &e);
+		}
+		else
+		{
+			i32 firstSel = nextVar;
+			for (u32 g = 0; g < sr->count; g++)
+			{
+				emitCtx e = { .s = s, .K = K, .sel = nextVar++ };
+				rsForEach(&sr->rs[g], emitRuleCb, &e);
+			}
+			for (i32 v = firstSel; v < nextVar; v++)
+				picosat_add(s, v);
+			picosat_add(s, 0);
+		}
+	}
+
+	emitCtx e = { .s = s, .K = K, .sel = 0 };
+	rsForEach(&ot->infRank.rs, emitRuleCb, &e);
+
+	return nextVar;                 /* in case callers need more fresh vars */
+}
+
+u8
+EntailSr(const knowledgeBase *K, const orderedSrTuple *ot,
+         u32 startRank, implic q)
+{
+	PicoSAT *s = picosat_init();
+	emitRanks(s, K, ot, startRank);
+
+	addNegRuleClause(s, &q);                   /* assert ¬(body -> head) */
+
+	int res = picosat_sat(s, -1);
+	picosat_reset(s);
+	return res == PICOSAT_UNSATISFIABLE;
+}
+
+bool
+LexicographicClosure(const knowledgeBase *K, const orderedSrTuple *ot, implic q)
+{
+	u32 i = 0;
+	while (i < ot->rankNo && NegEntailSr(K, ot, i, q.body))
+		i++;
+
+	return EntailSr(K, ot, i, q);
+}
 
 int main()
 { 
