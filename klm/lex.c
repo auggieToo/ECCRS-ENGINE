@@ -12,6 +12,9 @@
 #include "klm.h"
 #include "orderedTuple.h"
 #include "setRules.h"
+
+#include "../kb.c"
+
 #define TEST_PERSON
 
 //sat solver initialization 
@@ -182,11 +185,9 @@ SubsetRankAlg(knowledgeBase K, orderedSrTuple *out)
 
 	out->infRank = B.infRank;
 
-			printf("\n\n\n\n");		
-		orderedSrTuplePrint(NULL, out, &K);
+		printf("\n\n\n\n");		
+		//orderedSrTuplePrint(NULL, out, &K);
 	
-
-
 }
 
 
@@ -493,176 +494,7 @@ int main()
 	knowledgeBase A; 
 	kbInit(&A, 10);
 
-#ifdef  TEST_BOATS
-	DEFEASIBLE_RULE(&A,
-		IF(POS("boat")),
-		THEN(POS("float") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(NEG("boat"), POS("leaky") ),
-		THEN(POS("bot") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(NEG("floats")),
-		THEN(POS("leaky") ));
-
-
-	DEFEASIBLE_RULE(&A,
-		IF(   POS("boat")   ),
-		THEN( POS("floats") ));
-
-
-	DEFEASIBLE_RULE(&A,
-		IF(   POS("wooden") ),
-		THEN( POS("floats") ));
-
-
-	DEFEASIBLE_RULE(&A,
-		IF(   POS("anchor") ),
-		THEN( NEG("floats") ));
-
-
-	DEFEASIBLE_RULE(&A,
-		IF(   POS("wooden"), POS("anchor") ),
-		THEN( NEG("floats") ));
-	
-	CLASSICAL_RULE(&A,
-		IF( POS("flyingDutchman")),
-		THEN(POS("boat")));
-
-#endif
-
-#ifdef TEST_BANK
-
-	CLASSICAL_RULE(&A,
-		IF(   NEG("a15_9"), POS("a16_3"), NEG("a4_1"),
-		      NEG("a4_2"),  POS("a4_4"),  NEG("a4_5") ),
-		THEN( POS("y") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(   NEG("a15_9"), POS("a16_3"), NEG("a4_1"),
-		      NEG("a4_2"),  NEG("a4_4"),  NEG("a4_5") ),
-		THEN( POS("y") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(   NEG("a10_2"), NEG("a12_2"), NEG("a14_3"),
-		      POS("a16_3"), POS("a4_5"),  NEG("a7_2") ),
-		THEN( POS("y") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(   POS("a10_2"), NEG("a12_2"), NEG("a14_3"),
-		      POS("a16_3"), POS("a4_5"),  NEG("a7_2") ),
-		THEN( POS("y") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(   POS("a12_1"), NEG("a14_3"), POS("a15_1"),
-		      NEG("a16_3"), POS("a3_5"),  POS("a4_5") ),
-		THEN( POS("y") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(   POS("a12_1"), NEG("a14_3"), POS("a15_1"),
-		      NEG("a16_3"), NEG("a3_5"),  POS("a4_5") ),
-		THEN( POS("y") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(   NEG("a10_2"), POS("a16_3"), NEG("a4_1"),
-		      POS("a4_2"),  NEG("a4_5"),  POS("a9_2") ),
-		THEN( NEG("y") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(   POS("a12_1"), POS("a15_9"), POS("a16_3"),
-		      NEG("a4_1"),  NEG("a4_2"),  NEG("a4_5") ),
-		THEN( POS("y") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(   NEG("a12_1"), POS("a15_9"), POS("a16_3"),
-		      NEG("a4_1"),  NEG("a4_2"),  NEG("a4_5") ),
-		THEN( NEG("y") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(   NEG("a10_2"), POS("a16_3"), NEG("a4_1"),
-		      POS("a4_2"),  NEG("a4_5"),  NEG("a9_2") ),
-		THEN( NEG("y") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(   POS("a12_1"), NEG("a14_3"), POS("a15_1"),
-		      NEG("a16_3"), POS("a4_5") ),
-		THEN( POS("y") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(   NEG("a12_2"), NEG("a14_3"), POS("a16_3"),
-		      POS("a4_5"),  POS("a7_2") ),
-		THEN( POS("y") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(   POS("a10_2"), POS("a16_3"), NEG("a4_1"),
-		      POS("a4_2"),  NEG("a4_5") ),
-		THEN( NEG("y") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(   POS("a10_2"), POS("a12_2"), NEG("a14_3"),
-		      POS("a16_3"), POS("a4_5") ),
-		THEN( POS("y") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(   NEG("a10_2"), POS("a12_2"), NEG("a14_3"),
-		      POS("a16_3"), POS("a4_5") ),
-		THEN( POS("y") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(   POS("a16_3"), NEG("a4_1"), POS("a4_2"), NEG("a4_5") ),
-		THEN( NEG("y") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(   NEG("a14_3"), POS("a16_3"), POS("a4_5") ),
-		THEN( POS("y") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(   POS("a16_3"), POS("a4_1"), NEG("a4_5") ),
-		THEN( NEG("y") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(   POS("a16_3"), NEG("a4_5") ),
-		THEN( POS("y") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(   NEG("a4_5") ),
-		THEN( NEG("y") ));
-
-	DEFEASIBLE_RULE(&A,
-		IF(   POS("a4_5") ),
-		THEN( NEG("y") ));
-#endif
-
-#ifdef TEST_PERSON 
-// B_0
-DEFEASIBLE_RULE(&A,
-    IF( POS("p") ),
-    THEN( POS("m") ));
-
-DEFEASIBLE_RULE(&A,
-    IF( POS("p") ),
-    THEN( POS("a") ));
-
-DEFEASIBLE_RULE(&A,
-    IF( POS("p") ),
-    THEN( POS("t") ));
-
-// B_1
-DEFEASIBLE_RULE(&A,
-    IF( POS("s") ),
-    THEN( NEG("t") ));
-
-// B_inf
-CLASSICAL_RULE(&A,
-    IF( POS("a") ),
-    THEN( POS("p") ));
-
-CLASSICAL_RULE(&A,
-    IF( POS("s") ),
-    THEN( POS("p") ));
-
-#endif
+	getKnowledgeBase(&A);
 
 
 	kbPrint(NULL,&A);
@@ -675,11 +507,11 @@ CLASSICAL_RULE(&A,
 	srTupleInit(&ost);
 	SubsetRankAlg(A, &ost);
 
-	qimplic q = QUERY(&A, 0, IF(POS("s")), THEN(POS("m")));
-	implic  qi = asImplic(&q);          
-	bool res = LexicographicClosure(&A, &ost, qi);
-
-	if(res) printf("Yes"); else printf("No");
+	// qimplic q = QUERY(&A, 0, IF(POS("s")), THEN(POS("m")));
+	// implic  qi = asImplic(&q);          
+	// bool res = LexicographicClosure(&A, &ost, qi);
+	//
+	// if(res) printf("Yes"); else printf("No");
 
 
 

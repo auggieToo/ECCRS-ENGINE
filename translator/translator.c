@@ -3,23 +3,46 @@
 #include "translator.h"
 
 
-void genConditionName(FILE *out, featureIndex f) {
+void 
+genConditionName(FILE *out, featureIndex f)
+{
     if (f.isPair)
         fprintf(out, "\"a%d_%d\"", f.index1, f.index2);
     else
         fprintf(out, "\"a%d\"", f.index1);
 }
 
-void emitKnowledgeBase(FILE *out, Rule *ruleset, u32 numRules) {
+void 
+writeHeader(FILE *out)
+{
+	fprintf(out,"//---------------------------------------------\n");
+    fprintf(out,"//Warning: This file was auto generated\n");
+    fprintf(out,"//Changing this file may lead to unexpected behavior\n");
+    fprintf(out,"//---------------------------------------------\n");
+    fprintf(out,"\n\n");
+
+	fprintf(out, "#include  \"klm/klm.h\"\n");
+
+	fprintf(out, "\n\n\\n");
+	
+}
+
+
+void
+emitKnowledgeBase(FILE *out, Rule *ruleset, u32 numRules) 
+{
+	writeHeader(out);
     fprintf(out, "void getKnowledgeBase(knowledgeBase *A)\n{\n");
 
-    for (u32 r = 0; r < numRules; r++) {
+    for (u32 r = 0; r < numRules; r++) 
+{
         Rule *rule = &ruleset[r];
 
         fprintf(out, "\tDEFEASIBLE_RULE(A,\n");
         fprintf(out, "\t\tIF( ");
 
-        for (u32 c = 0; c < rule->numConditions; c++) {
+        for (u32 c = 0; c < rule->numConditions; c++) 
+		{
             Condition *cond = &rule->conditions[c];
             const char *sign = cond->requiredValue == 1 ? "POS" : "NEG";
 
