@@ -31,8 +31,8 @@ typedef u32 ruleId;
 #define CLASSICAL_RULE(kb, head, body)                                         \
   kbAddRuleLits((kb), CLASSICAL, body, head)
 
-#define QUERY(kb, body, head) \
-    implicFromLits((kb), DEFEASIBLE, body, head)
+#define QUERY(kb, id, body, head) \
+    implicFromLits((kb), DEFEASIBLE,id, body, head)
 
 typedef enum { CLASSICAL, DEFEASIBLE } ruleType;
 
@@ -60,11 +60,24 @@ typedef struct {
   lit *lits;
   u32 n;
 } litList;
+
 // a conjuctive formula
 typedef struct {
-  literal clause[MAX_CLAUSE];
+  literal *clause;
   u32 count;
 } formula;
+
+typedef struct {
+    literal clause[MAX_CLAUSE];
+    u32 count;
+} qformula;
+
+typedef struct {
+	u32 queryId;
+    ruleType type;
+    qformula head;
+    qformula body;
+} qimplic;
 
 typedef struct {
 
@@ -139,3 +152,7 @@ rulePrint(FILE *out, const atomTable *t, const rule *r);
 i32 kbCopy(const knowledgeBase *src, knowledgeBase *dst);
 void kbPrintWithAtoms(FILE *out, const knowledgeBase *kb,
                       const atomTable *atoms);
+
+
+qimplic
+implicFromLits(const knowledgeBase *kb, ruleType t,u32 id, litList body, litList head);

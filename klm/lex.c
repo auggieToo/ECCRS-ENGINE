@@ -116,6 +116,16 @@ fillSrRank(ruleSet *R, void *ctx)
 }
 
 
+implic
+asImplic(qimplic *q)
+{
+    return (implic){
+        .type = q->type,
+        .head = { .clause = q->head.clause, .count = q->head.count },
+        .body = { .clause = q->body.clause, .count = q->body.count },
+    };
+}
+
 u32 choose(u32 n, u32 k)
 {
 	if (k > n) return 0;
@@ -665,6 +675,12 @@ CLASSICAL_RULE(&A,
 	srTupleInit(&ost);
 	SubsetRankAlg(A, &ost);
 
+	qimplic q = QUERY(&A, 0, IF(POS("s")), THEN(POS("m")));
+	implic  qi = asImplic(&q);          
+	bool res = LexicographicClosure(&A, &ost, qi);
+
+	if(res) printf("Yes"); else printf("No");
+
 
 
 	
@@ -672,61 +688,3 @@ return 0;
 
 }
 
-/*
-LexicographicClosure
-1:  Input:  a knowledge base K, a defeasible implication α |~ β
-2:  Output: true, if K |≈_LC α |~ β, and false otherwise
-3:  (R_0, ..., R_{n-1}, R_inf, n) := BaseRank(K);
-4:  i := 0;
-5:  R := ⋃_{j=0}^{j<n} R_j;
-6:  while R_inf ∪ R |= ¬α  and  R ≠ ∅ do
-7:      R := R \ R_i;
-8:      W := WeakenRank(R_i, R, R_inf, α);
-9:      if W ≠ FAIL then
-10:         return R_inf ∪ R ∪ {W} |= α → β;
-11:     end if
-12:     i := i + 1;
-13: end while
-14: return R_inf ∪ R |= α → β;
-
-WeakenRank
-1:  Input:  a rank R_i, the surviving ranks R, the infinite rank R_inf, an antecedent α
-2:  Output: a weakened formula W, or FAIL if no subset of R_i is compatible with α
-3:  m := |R_i|;
-4:  for k := m - 1 down to 1 do
-5:      D_k := ⋁ { ⋀ S  |  S ⊆ R_i,  |S| = k };
-6:      if R_inf ∪ R ∪ {D_k} |≠ ¬α then
-7:          return D_k;
-8:      end if
-9:  end for
-10: return FAIL;
-
-LexicographicRank                         // rank function form, feeds DefeasibleEntailment
-1:  Input:  a knowledge base K
-2:  Output: an ordered tuple (L_0, ..., L_{m-1}, L_inf, m)
-3:  (R_0, ..., R_{n-1}, R_inf, n) := BaseRank(K);
-4:  L_inf := R_inf;
-5:  S := ∅;                                // refined ranks, in ascending seriousness
-6:  for i := 0 to n - 1 do
-7:      m_i := |R_i|;
-8:      for k := m_i down to 1 do
-9:          D := ⋁ { ⋀ T  |  T ⊆ R_i,  |T| = k };
-10:         S := S ⌢ ⟨D⟩;                  // append: larger k = less serious to keep
-11:     end for
-12: end for
-13: (L_0, ..., L_{m-1}) := S;
-14: return (L_0, ..., L_{m-1}, L_inf, m);
-
-
-Seriousness                               // ≺_S, for comparing two subsets directly
-1:  Input:  D ⊆ K, base rank function br, order k of K
-2:  Output: the tuple n_D = ⟨n_0, ..., n_k⟩
-3:  n_0 := |{ α |~ β ∈ D  |  br(α) = ∞ }|;
-4:  for i := 1 to k do
-5:      n_i := |{ α |~ β ∈ D  |  br(α) = k - i }|;
-6:  end for
-7:  return ⟨n_0, ..., n_k⟩;
-
-    D_1 ≺_S D_2  iff  n_{D_1} <_lex n_{D_2}      // compared left to right, ∞ first
-
-*/

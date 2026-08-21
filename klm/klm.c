@@ -2,7 +2,7 @@
 #include <complex.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <assert.h>
 
 #define ATOM_INVALID ((atomId)0xFFFFFFFFu)
 #define RULE_NOT_FOUND ((u32)0xFFFFFFFFu)
@@ -156,31 +156,27 @@ formulaAddLiteral(formula *f, literal l)
     return 0;
 }
 
-implic
-implicFromLits(knowledgeBase *kb, ruleType t, litList body, litList head)
+qimplic
+implicFromLits(const knowledgeBase *kb, ruleType t,u32 id, litList body, litList head)
 {
-    implic r;
-    r.type = t;
-
-    r.body.count  = body.n;
-    r.body.clause = malloc(sizeof(literal) * body.n);
-    
-	for (u32 i = 0; i < body.n; i++) 
-	{
-		//TODO: guard this 
-        r.body.clause[i].atom = atomLookup(&kb->atoms, body.lits[i].name);
-        r.body.clause[i].sign = body.lits[i].t;
+    qimplic r = { .type = t , .queryId = id};
+    assert(body.n <= MAX_CLAUSE);
+    r.body.count = body.n;
+    for (u32 i = 0; i < body.n; i++) {
+        atomId a = atomLookup(&kb->atoms, body.lits[i].name);
+        assert(a != ATOM_INVALID);
+        r.body.clause[i] = (literal){a, body.lits[i].t};
     }
-
-    r.head.count  = head.n;
-    r.head.clause = malloc(sizeof(literal) * head.n);
+    assert(head.n <= MAX_CLAUSE);
+    r.head.count = head.n;
     for (u32 i = 0; i < head.n; i++) {
-        r.head.clause[i].atom = atomLookup(&kb->atoms, head.lits[i].name);
-        r.head.clause[i].sign = head.lits[i].t;
+        atomId a = atomLookup(&kb->atoms, head.lits[i].name);
+        assert(a != ATOM_INVALID);
+        r.head.clause[i] = (literal){a, head.lits[i].t};
     }
-
     return r;
 }
+
 
 i32 
 formulaCopy(formula *dst, const formula *src)
