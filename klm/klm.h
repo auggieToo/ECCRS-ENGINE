@@ -15,6 +15,8 @@ typedef int64_t i64;
 typedef u32 atomId;
 typedef u32 ruleId;
 
+#define MAX_CLAUSE 16
+
 #define POS(a) ((lit){(a), POSITIVE})
 #define NEG(a) ((lit){(a), NEGATIVE})
 
@@ -28,6 +30,9 @@ typedef u32 ruleId;
   kbAddRuleLits((kb), DEFEASIBLE, body, head)
 #define CLASSICAL_RULE(kb, head, body)                                         \
   kbAddRuleLits((kb), CLASSICAL, body, head)
+
+#define QUERY(kb, body, head) \
+    implicFromLits((kb), DEFEASIBLE, body, head)
 
 typedef enum { CLASSICAL, DEFEASIBLE } ruleType;
 
@@ -57,7 +62,7 @@ typedef struct {
 } litList;
 // a conjuctive formula
 typedef struct {
-  literal *clause;
+  literal clause[MAX_CLAUSE];
   u32 count;
 } formula;
 

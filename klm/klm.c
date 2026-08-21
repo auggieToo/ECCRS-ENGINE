@@ -156,6 +156,32 @@ formulaAddLiteral(formula *f, literal l)
     return 0;
 }
 
+implic
+implicFromLits(knowledgeBase *kb, ruleType t, litList body, litList head)
+{
+    implic r;
+    r.type = t;
+
+    r.body.count  = body.n;
+    r.body.clause = malloc(sizeof(literal) * body.n);
+    
+	for (u32 i = 0; i < body.n; i++) 
+	{
+		//TODO: guard this 
+        r.body.clause[i].atom = atomLookup(&kb->atoms, body.lits[i].name);
+        r.body.clause[i].sign = body.lits[i].t;
+    }
+
+    r.head.count  = head.n;
+    r.head.clause = malloc(sizeof(literal) * head.n);
+    for (u32 i = 0; i < head.n; i++) {
+        r.head.clause[i].atom = atomLookup(&kb->atoms, head.lits[i].name);
+        r.head.clause[i].sign = head.lits[i].t;
+    }
+
+    return r;
+}
+
 i32 
 formulaCopy(formula *dst, const formula *src)
 {
