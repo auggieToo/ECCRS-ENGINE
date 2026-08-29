@@ -134,7 +134,7 @@ i32 main(i32 argc,char *argv[])
     }
 
 
-    FILE *out = fopen("rules.h", "w");
+    FILE *out = fopen("../rules.h", "w");
 
     if (!out) 
     {
@@ -143,7 +143,7 @@ i32 main(i32 argc,char *argv[])
     }
 
 
-    FILE *outC = fopen("rules.c", "w");
+    FILE *outC = fopen("../rules.c", "w");
 
     if (!outC)
     {

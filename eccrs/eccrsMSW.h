@@ -1,4 +1,4 @@
-#include "rules.h"
+#include "../rules.h"
 #include "stdio.h"
 
 #define RUN_ECCRS_MSW(ruleset, F , outset, appliSize, maxInclSize,outRides,maxIncl, prediction )\

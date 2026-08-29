@@ -163,15 +163,13 @@ implicFromLits(const knowledgeBase *kb, ruleType t,u32 id, litList body, litList
     assert(body.n <= MAX_CLAUSE);
     r.body.count = body.n;
     for (u32 i = 0; i < body.n; i++) {
-        atomId a = atomLookup(&kb->atoms, body.lits[i].name);
-        assert(a != ATOM_INVALID);
+        atomId a = atomIntern(&kb->atoms, body.lits[i].name);
         r.body.clause[i] = (literal){a, body.lits[i].t};
     }
     assert(head.n <= MAX_CLAUSE);
     r.head.count = head.n;
     for (u32 i = 0; i < head.n; i++) {
-        atomId a = atomLookup(&kb->atoms, head.lits[i].name);
-        assert(a != ATOM_INVALID);
+        atomId a = atomIntern(&kb->atoms, head.lits[i].name);
         r.head.clause[i] = (literal){a, head.lits[i].t};
     }
     return r;
@@ -274,7 +272,7 @@ kbInit(knowledgeBase *kb, u32 cap)
 	}
 
 
-	return -0; 	
+	return 0; 	
 }
 
 void 
@@ -506,9 +504,6 @@ kbRemoveFirst(knowledgeBase *k)
 
 }
 
-
-/* ids are 1-based (atomIntern returns count+1), and the ids[] array is not
-   guaranteed to stay in insertion order forever, so do a real lookup. */
 static const char *
 atomName(const atomTable *t, atomId a)
 {

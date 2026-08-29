@@ -1,0 +1,3 @@
+dataset,n,agree,disagree,both_abstain,correct_abstains,violating_abstains,label_kept_rate,label_kept,support_identical,applicable_differs,incl_max_differs,unchanged_rate,mean_jaccard_applicable,only_in_correct,only_in_violating
+Mushroom,175,98,77,0,0,0,0.560000,98,98,0,0,0.560000,0.560000,0,0
+Overall,175,98,77,0,0,0,0.560000,98,98,0,0,0.560000,0.560000,0,0

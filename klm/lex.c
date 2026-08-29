@@ -6,16 +6,15 @@
 #include <stdlib.h>
 #include <picosat.h>
 #include <stdbool.h>
-
+#include <string.h>
 
 #include "lex.h"
 #include "klm.h"
 #include "orderedTuple.h"
 #include "setRules.h"
+#include "../rules.h"
 
-#include "../kb.c"
 
-#define TEST_PERSON
 
 //sat solver initialization 
 
@@ -23,6 +22,8 @@
 u32 kbSize = 0;
 
 
+void getKnowledgeBase(knowledgeBase *A);
+void getQueries(knowledgeBase *A, qimplic *out);
 
 
 orderedTuple 
@@ -250,6 +251,8 @@ litToInt(literal l){
 // b1 AND  b2 AND ... AND bn -> h1 AND h2 AND ... hm 
 // <==>  ~b1 OR ~b2 OR ... ~bn OR hj   .... j : 1 to m    
 //
+//
+/*
 static void 
 addRuleClause(PicoSAT *s, implic *r)
 {
@@ -278,6 +281,55 @@ addRuleClause(PicoSAT *s, implic *r)
 	}
 
 }
+*/
+
+static void
+addRuleClause(PicoSAT *s, implic *r)
+{
+	for (u32 j = 0; j < r->body.count; j++)
+		picosat_add(s, -litToInt(r->body.clause[j]));
+
+	for (u32 i = 0; i < r->head.count; i++)
+		picosat_add(s, litToInt(r->head.clause[i]));
+
+	picosat_add(s, 0);
+}
+
+
+/* same, optionally guarded by ¬sel (sel == 0 -> unguarded).
+   The guard is added ONCE, not per head literal. */
+static void
+addRuleClauseSel(PicoSAT *s, const implic *r, i32 sel)
+{
+	if (sel) picosat_add(s, -sel);
+
+	for (u32 j = 0; j < r->body.count; j++)
+		picosat_add(s, -litToInt(r->body.clause[j]));
+
+	for (u32 i = 0; i < r->head.count; i++)
+		picosat_add(s, litToInt(r->head.clause[i]));
+
+	picosat_add(s, 0);
+}
+
+
+/* ¬(b1 ∧ ... ∧ bm  →  h1 ∨ ... ∨ hn)
+   ≡ b1 ∧ ... ∧ bm ∧ ¬h1 ∧ ... ∧ ¬hn
+   Every literal is its OWN unit clause. */
+static void
+addNegRuleClause(PicoSAT *s, implic *r)
+{
+	for (u32 i = 0; i < r->body.count; i++) {
+		picosat_add(s, litToInt(r->body.clause[i]));
+		picosat_add(s, 0);
+	}
+
+	for (u32 i = 0; i < r->head.count; i++) {
+		picosat_add(s, -litToInt(r->head.clause[i]));
+		picosat_add(s, 0);
+	}
+}
+
 
 static u8 
 NegEntail(knowledgeBase K , formula r)
@@ -305,6 +357,7 @@ NegEntail(knowledgeBase K , formula r)
 
 //converts a negated implication to cnf 
 //similar to above: R = not (b1 AND b2 AND ... AND bn -> h1 AND h2 ... AND hn) 
+/*
 static void 
 addNegRuleClause(PicoSAT *s, implic *r)
 {
@@ -317,7 +370,7 @@ addNegRuleClause(PicoSAT *s, implic *r)
         picosat_add(s, -litToInt(r->head.clause[i]));
     picosat_add(s, 0);
 
-}
+}*/
 
 
 static u8 
@@ -343,6 +396,7 @@ Entail(knowledgeBase K , implic r)
 
 
 /* emit one rule's CNF, optionally guarded by ¬sel (sel == 0 -> unguarded) */
+/*
 static void
 addRuleClauseSel(PicoSAT *s, const implic *r, i32 sel)
 {
@@ -364,7 +418,7 @@ addRuleClauseSel(PicoSAT *s, const implic *r, i32 sel)
 		picosat_add(s, 0);
 	}
 }
-
+*/
 typedef struct
 {
 	PicoSAT             *s;
@@ -489,8 +543,11 @@ LexicographicClosure(const knowledgeBase *K, const orderedSrTuple *ot, implic q)
 	return EntailSr(K, ot, i, q);
 }
 
+void loadBlob(const char *path, knowledgeBase *A,
+				qimplic **queries, u32 *nQueries);
 int main()
-{ 
+{
+/*
 	knowledgeBase A; 
 	kbInit(&A, 10);
 
@@ -507,11 +564,51 @@ int main()
 	srTupleInit(&ost);
 	SubsetRankAlg(A, &ost);
 
-	// qimplic q = QUERY(&A, 0, IF(POS("s")), THEN(POS("m")));
-	// implic  qi = asImplic(&q);          
-	// bool res = LexicographicClosure(&A, &ost, qi);
-	//
-	// if(res) printf("Yes"); else printf("No");
+	static qimplic q[11303];
+	getQueries(&A, q);
+*/
+
+	knowledgeBase A;
+	orderedSrTuple ost;
+	srTupleInit(&ost);
+	u32 s;
+	qimplic *q;
+	loadBlob("../mushroom-data.blob", &A, &q, &s);
+
+
+
+
+	kbPrint(NULL,&A);
+	kbSize = A.count;
+	
+
+	printf("\n\n\n");
+
+		SubsetRankAlg(A, &ost);
+
+	FILE *csv = fopen("../results.csv", "w");
+	if (!csv) { perror("fopen results.csv"); return 1; }
+
+	fprintf(csv, "instanceid,entail_m,entail_not_m,abstain\n");
+
+	for (u32 i = 0; i < SIZE_OF_INSTANCE_SET; i++) {
+		implic qi = asImplic(&q[i]);
+
+		// entail m
+		bool entailM = LexicographicClosure(&A, &ost, qi);
+
+		// entail not m
+		qi.head.clause[0].sign = NEGATIVE;
+		bool entailNotM = LexicographicClosure(&A, &ost, qi);
+
+		// abstain = neither
+		int abstain = (!entailM && !entailNotM) ? 1 : 0;
+
+		fprintf(csv, "%u,%d,%d,%d\n",
+				q[i].queryId, entailM ? 1 : 0, entailNotM ? 1 : 0, abstain);
+	}
+
+fclose(csv);
 
 
 
@@ -519,4 +616,106 @@ int main()
 return 0;
 
 }
+static u32 rU32(FILE *f) {
+    u8 b[4];
+    fread(b, 1, 4, f);
+    return (u32)b[0] | ((u32)b[1]<<8) | ((u32)b[2]<<16) | ((u32)b[3]<<24);
+}
+static u8 rU8(FILE *f) { u8 v; fread(&v, 1, 1, f); return v; }
 
+// ---- atom table: register a name at the exact id the blob assigned ----
+// ids arrive in order 0,1,2,... so this is really append, but we store the
+// id explicitly to stay robust if that ever changes.
+
+static void
+atomTableAddNamed(atomTable *t, const char *name, atomId id)
+{
+    if (t->count >= t->capacity) {
+        t->capacity = t->capacity ? t->capacity * 2 : 64;
+        t->names = realloc(t->names, sizeof(u8*)    * t->capacity);
+        t->ids   = realloc(t->ids,   sizeof(atomId) * t->capacity);
+    }
+    u32 len = strlen(name);
+    t->names[t->count] = malloc(len + 1);
+    memcpy(t->names[t->count], name, len + 1);
+    t->ids[t->count] = id;
+    t->count++;
+}
+
+// ---- formula readers ----
+// count, then count × (u32 atom, u8 sign)
+
+static void
+readFormula(FILE *f, formula *out)   // heap-backed (KB rules)
+{
+    out->count = rU32(f);
+    out->clause = malloc(sizeof(literal) * out->count);
+    for (u32 i = 0; i < out->count; i++) {
+        out->clause[i].atom = rU32(f) + 1;
+        out->clause[i].sign = (literalType)rU8(f);
+    }
+}
+
+static void
+readQformula(FILE *f, qformula *out) // inline (queries)
+{
+    out->count = rU32(f);
+    if (out->count > MAX_CLAUSE) {
+        fprintf(stderr, "query clause %u exceeds MAX_CLAUSE %d\n",
+                out->count, MAX_CLAUSE);
+        exit(1);
+    }
+    for (u32 i = 0; i < out->count; i++) {
+        out->clause[i].atom = rU32(f) + 1;
+        out->clause[i].sign = (literalType)rU8(f);
+    }
+}
+
+void
+loadBlob(const char *path, knowledgeBase *A,
+         qimplic **queries, u32 *nQueries)
+{
+    FILE *f = fopen(path, "rb");
+    if (!f) { perror(path); exit(1); }
+
+    // KB must be initialized (rules array + atom table) before adding
+    kbInit(A, 32);
+
+    // SECTION 1: atom table — id = write order
+    u32 nAtoms = rU32(f);
+    for (u32 i = 0; i < nAtoms; i++) {
+        u32 len = rU32(f);
+        char name[64];
+        fread(name, 1, len, f);
+        name[len] = 0;
+        atomTableAddNamed(&A->atoms, name, i+1);
+    }
+
+	for (u32 i = 0; i < A->atoms.count; i++)
+    printf("atom %u = %s (id %u)\n", i, A->atoms.names[i], A->atoms.ids[i]);
+
+    // SECTION 2: rules
+    u32 nRules = rU32(f);
+    for (u32 r = 0; r < nRules; r++) {
+        ruleType type = (ruleType)rU8(f);
+        formula body, head;
+        readFormula(f, &body);
+        readFormula(f, &head);
+        kbAddRule(A, type, &head, &body);   
+        free(body.clause);          
+        free(head.clause);
+    }
+
+    // SECTION 3: queries
+    *nQueries = rU32(f);
+    *queries  = malloc(sizeof(qimplic) * *nQueries);
+    for (u32 q = 0; q < *nQueries; q++) {
+        qimplic *qi = &(*queries)[q];
+        qi->queryId = rU32(f);
+        qi->type    = (ruleType)rU8(f);
+        readQformula(f, &qi->body);
+        readQformula(f, &qi->head);
+    }
+
+    fclose(f);
+}

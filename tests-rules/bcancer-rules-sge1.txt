@@ -10,3 +10,6 @@
 9: IF a(2)=1 & a(5)=0 THEN y=1
 10: IF a(2)=0 & a(8)=1 THEN y=0
 11: IF a(2)=1 THEN y=0
+12: IF a(4)=1 & a(5)=1 THEN y=0
+
+

@@ -1,0 +1,39 @@
+
+Dataset   N     Agree  Disagree  Both abstain  Correct abstains  Violating abstains  Label kept (%)
+--------  ----  -----  --------  ------------  ----------------  ------------------  --------------
+Mushroom  2031  1223   0         0             0                 808                 60.22         
+--------  ----  -----  --------  ------------  ----------------  ------------------  --------------
+Overall   2031  1223   0         0             0                 808                 60.22         
+
+  N                   instances present in both trace files (outcome columns sum to N)
+  Agree               both rule sets decisive, same label
+  Disagree            both rule sets decisive, different labels
+  Both abstain        neither rule set commits to a label
+  Correct abstains    only the correct rule set abstains
+  Violating abstains  only the violating rule set abstains
+  Label kept (%)      (Agree + Both abstain) / N
+
+Dataset   Label kept  Support identical  Applicable differs  Incl-max differs  Unchanged (%)  Mean Jaccard
+--------  ----------  -----------------  ------------------  ----------------  -------------  ------------
+Mushroom  1223        895                328                 0                 44.07          0.4407      
+--------  ----------  -----------------  ------------------  ----------------  -------------  ------------
+Overall   1223        895                328                 0                 44.07          0.4407      
+
+  Label kept          instances the violation did not relabel
+  Support identical   of those, same applicable-rule set AND same incl_max
+  Applicable differs  of those, the violation changed which rules apply
+  Incl-max differs    of those, the violation changed which rules win
+  Unchanged (%)       label kept on identical support, over all N
+  Mean Jaccard        mean overlap of applicable-rule sets over all N
+
+  label confusion (rows = correct rule set, cols = violating)
+
+               1     0  abstain
+    -------  ---  ----  -------
+          1  169     0      808
+          0    0  1054        0
+    abstain    0     0        0
+
+wrote output/ruleset_diff_tables.tex
+wrote output/ruleset_diff_summary.csv
+wrote output/ruleset_diff_divergences.csv  (1136 divergent instance(s))

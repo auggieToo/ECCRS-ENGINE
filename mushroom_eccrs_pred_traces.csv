@@ -1,0 +1,2032 @@
+instance_id,applicable_rules,overrides,incl_max,prediction
+6569,"r12","r12 applies|","r12",1
+3353,"r12","r12 applies|","r12",1
+2013,"r4","r4 applies|","r4",0
+5224,"r4","r4 applies|","r4",0
+3540,"r12","r12 applies|","r12",1
+3490,"r4","r4 applies|","r4",0
+873,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5921,"r12","r12 applies|","r12",1
+546,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+711,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+3709,"r12","r12 applies|","r12",1
+3668,"r12","r12 applies|","r12",1
+5424,"r11","r11 applies|","r11",1
+8094,"r12","r12 applies|","r12",1
+6783,"r12","r12 applies|","r12",1
+3542,"r4","r4 applies|","r4",0
+3425,"r4","r4 applies|","r4",0
+4120,"r12","r12 applies|","r12",1
+777,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+6534,"r12","r12 applies|","r12",1
+4143,"r4","r4 applies|","r4",0
+4329,"r12","r12 applies|","r12",1
+4048,"r4","r4 applies|","r4",0
+7616,"r4","r4 applies|","r4",0
+2049,"r4","r4 applies|","r4",0
+1955,"r4","r4 applies|","r4",0
+3586,"r4","r4 applies|","r4",0
+6373,"r12","r12 applies|","r12",1
+3641,"r4","r4 applies|","r4",0
+7473,"r12","r12 applies|","r12",1
+7560,"r4","r4 applies|","r4",0
+3501,"r12","r12 applies|","r12",1
+1413,"r4","r4 applies|","r4",0
+6037,"r12","r12 applies|","r12",1
+2604,"r4","r4 applies|","r4",0
+2811,"r4","r4 applies|","r4",0
+2467,"r4","r4 applies|","r4",0
+3572,"r4","r4 applies|","r4",0
+6414,"r12","r12 applies|","r12",1
+2512,"r4","r4 applies|","r4",0
+2360,"r4","r4 applies|","r4",0
+5102,"r4","r4 applies|","r4",0
+2671,"r4","r4 applies|","r4",0
+4922,"r12","r12 applies|","r12",1
+5535,"r4","r4 applies|","r4",0
+3452,"r12","r12 applies|","r12",1
+7051,"r4","r4 applies|","r4",0
+1254,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+4406,"r12","r12 applies|","r12",1
+1076,"r4","r4 applies|","r4",0
+2493,"r4","r4 applies|","r4",0
+7208,"r12","r12 applies|","r12",1
+881,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+7677,"r12","r12 applies|","r12",1
+2560,"r4","r4 applies|","r4",0
+147,"r4","r4 applies|","r4",0
+7617,"r12","r12 applies|","r12",1
+1875,"r4","r4 applies|","r4",0
+4058,"r12","r12 applies|","r12",1
+329,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4194,"r12","r12 applies|","r12",1
+1425,"r4","r4 applies|","r4",0
+2007,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+2644,"r4","r4 applies|","r4",0
+5478,"r11","r11 applies|","r11",1
+1491,"r4","r4 applies|","r4",0
+279,"r4","r4 applies|","r4",0
+8064,"r4","r4 applies|","r4",0
+1507,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+2665,"r4","r4 applies|","r4",0
+6868,"r12","r12 applies|","r12",1
+6618,"r12","r12 applies|","r12",1
+7810,"r4","r4 applies|","r4",0
+3928,"r12","r12 applies|","r12",1
+2471,"r4","r4 applies|","r4",0
+4878,"r12","r12 applies|","r12",1
+3001,"r4","r4 applies|","r4",0
+4041,"r12","r12 applies|","r12",1
+1667,"r4","r4 applies|","r4",0
+7164,"r12","r12 applies|","r12",1
+3774,"r4","r4 applies|","r4",0
+1791,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+1663,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+7997,"r4","r4 applies|","r4",0
+1628,"r4","r4 applies|","r4",0
+3832,"r12","r12 applies|","r12",1
+5504,"r4","r4 applies|","r4",0
+1462,"r4","r4 applies|","r4",0
+3133,"r4","r4 applies|","r4",0
+1377,"r4","r4 applies|","r4",0
+5329,"r12","r12 applies|","r12",1
+2139,"r4","r4 applies|","r4",0
+2844,"r4","r4 applies|","r4",0
+5735,"r4","r4 applies|","r4",0
+1117,"r4","r4 applies|","r4",0
+4755,"r12","r12 applies|","r12",1
+4228,"r12","r12 applies|","r12",1
+3308,"r4","r4 applies|","r4",0
+5926,"r12","r12 applies|","r12",1
+2948,"r4","r4 applies|","r4",0
+3349,"r4","r4 applies|","r4",0
+5425,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+7752,"r12","r12 applies|","r12",1
+6230,"r12","r12 applies|","r12",1
+5518,"r12","r12 applies|","r12",1
+2921,"r4","r4 applies|","r4",0
+6661,"r4","r4 applies|","r4",0
+3618,"r4","r4 applies|","r4",0
+1804,"r4","r4 applies|","r4",0
+5256,"r11","r11 applies|","r11",1
+1083,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5446,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+3789,"r4","r4 applies|","r4",0
+3770,"r4","r4 applies|","r4",0
+1877,"r4","r4 applies|","r4",0
+613,"r4","r4 applies|","r4",0
+4376,"r4","r4 applies|","r4",0
+7292,"r12","r12 applies|","r12",1
+592,"r4","r4 applies|","r4",0
+7299,"r12","r12 applies|","r12",1
+4693,"r12","r12 applies|","r12",1
+6059,"r12","r12 applies|","r12",1
+6764,"r4","r4 applies|","r4",0
+7238,"r12","r12 applies|","r12",1
+6220,"r4","r4 applies|","r4",0
+4036,"r12","r12 applies|","r12",1
+8124,"r4","r4 applies|","r4",0
+4542,"r12","r12 applies|","r12",1
+1797,"r4","r4 applies|","r4",0
+771,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1223,"r4","r4 applies|","r4",0
+4986,"r12","r12 applies|","r12",1
+2738,"r4","r4 applies|","r4",0
+2264,"r4","r4 applies|","r4",0
+2686,"r4","r4 applies|","r4",0
+7052,"r4","r4 applies|","r4",0
+5474,"r12","r12 applies|","r12",1
+7843,"r4","r4 applies|","r4",0
+6003,"r12","r12 applies|","r12",1
+4324,"r12","r12 applies|","r12",1
+7695,"r12","r12 applies|","r12",1
+7155,"r12","r12 applies|","r12",1
+6605,"r12","r12 applies|","r12",1
+7526,"r12","r12 applies|","r12",1
+2579,"r4","r4 applies|","r4",0
+2559,"r4","r4 applies|","r4",0
+2767,"r12","r12 applies|","r12",1
+7764,"r4","r4 applies|","r4",0
+1478,"r4","r4 applies|","r4",0
+5374,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+7533,"r4","r4 applies|","r4",0
+7219,"r12","r12 applies|","r12",1
+6137,"r12","r12 applies|","r12",1
+2094,"r4","r4 applies|","r4",0
+3216,"r4","r4 applies|","r4",0
+5770,"r4","r4 applies|","r4",0
+6153,"r12","r12 applies|","r12",1
+521,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2399,"r4","r4 applies|","r4",0
+986,"r4","r4 applies|","r4",0
+6056,"r12","r12 applies|","r12",1
+966,"r4","r4 applies|","r4",0
+1664,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5754,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+7769,"r12","r12 applies|","r12",1
+390,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1953,"r4","r4 applies|","r4",0
+317,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2756,"r4","r4 applies|","r4",0
+3670,"r4","r4 applies|","r4",0
+864,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1984,"r4","r4 applies|","r4",0
+2972,"r4","r4 applies|","r4",0
+1211,"r4","r4 applies|","r4",0
+6850,"r4","r4 applies|","r4",0
+4286,"r12","r12 applies|","r12",1
+7861,"r4","r4 applies|","r4",0
+4605,"r12","r12 applies|","r12",1
+2802,"r4","r4 applies|","r4",0
+2373,"r4","r4 applies|","r4",0
+1689,"r4","r4 applies|","r4",0
+6075,"r12","r12 applies|","r12",1
+6608,"r12","r12 applies|","r12",1
+1806,"r4","r4 applies|","r4",0
+6157,"r12","r12 applies|","r12",1
+5794,"r11","r11 applies|","r11",1
+1082,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+4393,"r12","r12 applies|","r12",1
+5328,"r12","r12 applies|","r12",1
+4708,"r12","r12 applies|","r12",1
+4401,"r12","r12 applies|","r12",1
+5058,"r12","r12 applies|","r12",1
+1261,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+2100,"r4","r4 applies|","r4",0
+827,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2226,"r4","r4 applies|","r4",0
+5863,"r11","r11 applies|","r11",1
+7437,"r12","r12 applies|","r12",1
+6492,"r12","r12 applies|","r12",1
+2280,"r4","r4 applies|","r4",0
+799,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+5750,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+5680,"r4","r4 applies|","r4",0
+6584,"r12","r12 applies|","r12",1
+4128,"r4","r4 applies|","r4",0
+7207,"r12","r12 applies|","r12",1
+4705,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+143,"r0","r0 applies|","r0",0
+4864,"r12","r12 applies|","r12",1
+4322,"r12","r12 applies|","r12",1
+6351,"r12","r12 applies|","r12",1
+6188,"r12","r12 applies|","r12",1
+1569,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+5833,"r12","r12 applies|","r12",1
+6852,"r12","r12 applies|","r12",1
+5235,"r12","r12 applies|","r12",1
+4734,"r12","r12 applies|","r12",1
+6416,"r12","r12 applies|","r12",1
+6268,"r12","r12 applies|","r12",1
+4492,"r0","r0 applies|","r0",0
+5412,"r12","r12 applies|","r12",1
+5399,"r9","r9 applies|","r9",1
+7029,"r12","r12 applies|","r12",1
+4190,"r12","r12 applies|","r12",1
+1125,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+714,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+544,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+7556,"r4","r4 applies|","r4",0
+7961,"r4","r4 applies|","r4",0
+4057,"r12","r12 applies|","r12",1
+284,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+6447,"r12","r12 applies|","r12",1
+6666,"r12","r12 applies|","r12",1
+6950,"r12","r12 applies|","r12",1
+1102,"r4","r4 applies|","r4",0
+152,"r4","r4 applies|","r4",0
+7423,"r4","r4 applies|","r4",0
+821,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4321,"r12","r12 applies|","r12",1
+1717,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1242,"r4","r4 applies|","r4",0
+3374,"r4","r4 applies|","r4",0
+2572,"r12","r12 applies|","r12",1
+2083,"r4","r4 applies|","r4",0
+4577,"r12","r12 applies|","r12",1
+498,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+3819,"r4","r4 applies|","r4",0
+2152,"r4","r4 applies|","r4",0
+5900,"r12","r12 applies|","r12",1
+441,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4350,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+7101,"r12","r12 applies|","r12",1
+3384,"r4","r4 applies|","r4",0
+2937,"r4","r4 applies|","r4",0
+5580,"r12","r12 applies|","r12",1
+2839,"r4","r4 applies|","r4",0
+70,"r0","r0 applies|","r0",0
+7577,"r4","r4 applies|","r4",0
+1771,"r4","r4 applies|","r4",0
+6129,"r12","r12 applies|","r12",1
+1724,"r4","r4 applies|","r4",0
+1998,"r4","r4 applies|","r4",0
+276,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+6468,"r12","r12 applies|","r12",1
+48,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2623,"r4","r4 applies|","r4",0
+2678,"r4","r4 applies|","r4",0
+364,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+3390,"r12","r12 applies|","r12",1
+4507,"r12","r12 applies|","r12",1
+3827,"r12","r12 applies|","r12",1
+3511,"r4","r4 applies|","r4",0
+6867,"r12","r12 applies|","r12",1
+3691,"r4","r4 applies|","r4",0
+5887,"r4","r4 applies|","r4",0
+7453,"r12","r12 applies|","r12",1
+7068,"r4","r4 applies|","r4",0
+6988,"r12","r12 applies|","r12",1
+6754,"r12","r12 applies|","r12",1
+6305,"r12","r12 applies|","r12",1
+2908,"r4","r4 applies|","r4",0
+4191,"r12","r12 applies|","r12",1
+731,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1809,"r4","r4 applies|","r4",0
+5615,"r12","r12 applies|","r12",1
+1287,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+1768,"r4","r4 applies|","r4",0
+3204,"r4","r4 applies|","r4",0
+7327,"r12","r12 applies|","r12",1
+5976,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+6945,"r12","r12 applies|","r12",1
+7044,"r12","r12 applies|","r12",1
+1027,"r0","r0 applies|","r0",0
+7946,"r4","r4 applies|","r4",0
+256,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+7076,"r12","r12 applies|","r12",1
+6593,"r12","r12 applies|","r12",1
+1706,"r4","r4 applies|","r4",0
+1587,"r4","r4 applies|","r4",0
+776,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5622,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+6184,"r12","r12 applies|","r12",1
+5122,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+4574,"r12","r12 applies|","r12",1
+7138,"r12","r12 applies|","r12",1
+7282,"r4","r4 applies|","r4",0
+3581,"r4","r4 applies|","r4",0
+7855,"r4","r4 applies|","r4",0
+6759,"r12","r12 applies|","r12",1
+6011,"r12","r12 applies|","r12",1
+6861,"r4","r4 applies|","r4",0
+3712,"r4","r4 applies|","r4",0
+3531,"r4","r4 applies|","r4",0
+157,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1871,"r4","r4 applies|","r4",0
+2238,"r4","r4 applies|","r4",0
+1400,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+1259,"r4","r4 applies|","r4",0
+5413,"r12","r12 applies|","r12",1
+1737,"r4","r4 applies|","r4",0
+1741,"r4","r4 applies|","r4",0
+7733,"r12","r12 applies|","r12",1
+652,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5120,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+2316,"r4","r4 applies|","r4",0
+7193,"r12","r12 applies|","r12",1
+3565,"r4","r4 applies|","r4",0
+736,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+6320,"r12","r12 applies|","r12",1
+1078,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+5699,"r4","r4 applies|","r4",0
+1407,"r4","r4 applies|","r4",0
+1107,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+4266,"r12","r12 applies|","r12",1
+6786,"r12","r12 applies|","r12",1
+7407,"r12","r12 applies|","r12",1
+8066,"r4","r4 applies|","r4",0
+1987,"r4","r4 applies|","r4",0
+4241,"r12","r12 applies|","r12",1
+7723,"r12","r12 applies|","r12",1
+2326,"r4","r4 applies|","r4",0
+4369,"r12","r12 applies|","r12",1
+2353,"r4","r4 applies|","r4",0
+3794,"r4","r4 applies|","r4",0
+7712,"r12","r12 applies|","r12",1
+3301,"r12","r12 applies|","r12",1
+2111,"r4","r4 applies|","r4",0
+7291,"r4","r4 applies|","r4",0
+3619,"r4","r4 applies|","r4",0
+5952,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+7527,"r4","r4 applies|","r4",0
+5652,"r12","r12 applies|","r12",1
+4979,"r12","r12 applies|","r12",1
+2575,"r4","r4 applies|","r4",0
+3157,"r12","r12 applies|","r12",1
+614,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+1142,"r4","r4 applies|","r4",0
+3671,"r12","r12 applies|","r12",1
+2648,"r4","r4 applies|","r4",0
+4290,"r12","r12 applies|","r12",1
+7023,"r4","r4 applies|","r4",0
+5949,"r3","r3 applies|","r3",0
+3727,"r12","r12 applies|","r12",1
+4718,"r0","r0 applies|","r0",0
+4672,"r12","r12 applies|","r12",1
+269,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2275,"r4","r4 applies|","r4",0
+3333,"r4","r4 applies|","r4",0
+1862,"r4","r4 applies|","r4",0
+3963,"r12","r12 applies|","r12",1
+5972,"r12","r12 applies|","r12",1
+3935,"r12","r12 applies|","r12",1
+768,"r0","r0 applies|","r0",0
+4260,"r12","r12 applies|","r12",1
+8062,"r12","r12 applies|","r12",1
+2889,"r4","r4 applies|","r4",0
+4663,"r4","r4 applies|","r4",0
+2909,"r4","r4 applies|","r4",0
+99,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+171,"r0","r0 applies|","r0",0
+1576,"r4","r4 applies|","r4",0
+4870,"r12","r12 applies|","r12",1
+1700,"r4","r4 applies|","r4",0
+2482,"r4","r4 applies|","r4",0
+5603,"r12","r12 applies|","r12",1
+6029,"r12","r12 applies|","r12",1
+1189,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5541,"r4","r4 applies|","r4",0
+621,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+7126,"r12","r12 applies|","r12",1
+3918,"r12","r12 applies|","r12",1
+2110,"r4","r4 applies|","r4",0
+7088,"r12","r12 applies|","r12",1
+5342,"r11","r11 applies|","r11",1
+1104,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+7713,"r4","r4 applies|","r4",0
+6683,"r12","r12 applies|","r12",1
+2011,"r4","r4 applies|","r4",0
+7901,"r4","r4 applies|","r4",0
+5037,"r12","r12 applies|","r12",1
+7322,"r12","r12 applies|","r12",1
+6926,"r12","r12 applies|","r12",1
+4394,"r12","r12 applies|","r12",1
+8102,"r12","r12 applies|","r12",1
+1341,"r4","r4 applies|","r4",0
+839,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4099,"r12","r12 applies|","r12",1
+7293,"r7 r9","r9 applies->r7 applies & overides r9|","r7",0
+4159,"r12","r12 applies|","r12",1
+3174,"r12","r12 applies|","r12",1
+4156,"r4","r4 applies|","r4",0
+1656,"r4","r4 applies|","r4",0
+5922,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+491,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5387,"r0","r0 applies|","r0",0
+445,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+6667,"r12","r12 applies|","r12",1
+5299,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+6069,"r4","r4 applies|","r4",0
+4147,"r12","r12 applies|","r12",1
+689,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5847,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+4866,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+7846,"r4","r4 applies|","r4",0
+6567,"r12","r12 applies|","r12",1
+3676,"r12","r12 applies|","r12",1
+4408,"r12","r12 applies|","r12",1
+4924,"r4","r4 applies|","r4",0
+5423,"r12","r12 applies|","r12",1
+3925,"r4","r4 applies|","r4",0
+2632,"r4","r4 applies|","r4",0
+1840,"r4","r4 applies|","r4",0
+5272,"r4","r4 applies|","r4",0
+7754,"r4","r4 applies|","r4",0
+1184,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4023,"r12","r12 applies|","r12",1
+7872,"r4","r4 applies|","r4",0
+3528,"r4","r4 applies|","r4",0
+5393,"r4","r4 applies|","r4",0
+5326,"r3","r3 applies|","r3",0
+2653,"r4","r4 applies|","r4",0
+1657,"r4","r4 applies|","r4",0
+1017,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+3736,"r4","r4 applies|","r4",0
+5310,"r4","r4 applies|","r4",0
+6990,"r4","r4 applies|","r4",0
+1214,"r4","r4 applies|","r4",0
+6971,"r7 r9","r9 applies->r7 applies & overides r9|","r7",0
+5468,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+368,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+6290,"r12","r12 applies|","r12",1
+3554,"r4","r4 applies|","r4",0
+4142,"r4","r4 applies|","r4",0
+4911,"r12","r12 applies|","r12",1
+6913,"r9","r9 applies|","r9",1
+2029,"r4","r4 applies|","r4",0
+6132,"r12","r12 applies|","r12",1
+7366,"r12","r12 applies|","r12",1
+1264,"r4","r4 applies|","r4",0
+1493,"r4","r4 applies|","r4",0
+3648,"r12","r12 applies|","r12",1
+4835,"r0","r0 applies|","r0",0
+7589,"r12","r12 applies|","r12",1
+7988,"r12","r12 applies|","r12",1
+2135,"r4","r4 applies|","r4",0
+142,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+6799,"r12","r12 applies|","r12",1
+5882,"r12","r12 applies|","r12",1
+7709,"r12","r12 applies|","r12",1
+285,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2546,"r4","r4 applies|","r4",0
+3950,"r12","r12 applies|","r12",1
+4199,"r12","r12 applies|","r12",1
+1968,"r4","r4 applies|","r4",0
+7736,"r12","r12 applies|","r12",1
+7784,"r4","r4 applies|","r4",0
+655,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+1720,"r4","r4 applies|","r4",0
+7952,"r12","r12 applies|","r12",1
+1263,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+1633,"r4","r4 applies|","r4",0
+6198,"r12","r12 applies|","r12",1
+2355,"r4","r4 applies|","r4",0
+2521,"r4","r4 applies|","r4",0
+3730,"r4","r4 applies|","r4",0
+4338,"r12","r12 applies|","r12",1
+138,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4962,"r12","r12 applies|","r12",1
+6242,"r12","r12 applies|","r12",1
+3179,"r4","r4 applies|","r4",0
+2302,"r4","r4 applies|","r4",0
+1516,"r4","r4 applies|","r4",0
+669,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2278,"r4","r4 applies|","r4",0
+8042,"r12","r12 applies|","r12",1
+4788,"r12","r12 applies|","r12",1
+6229,"r12","r12 applies|","r12",1
+3562,"r4","r4 applies|","r4",0
+1966,"r4","r4 applies|","r4",0
+5494,"r11","r11 applies|","r11",1
+3700,"r12","r12 applies|","r12",1
+3921,"r4","r4 applies|","r4",0
+6383,"r12","r12 applies|","r12",1
+7390,"r12","r12 applies|","r12",1
+3698,"r12","r12 applies|","r12",1
+6862,"r12","r12 applies|","r12",1
+3128,"r4","r4 applies|","r4",0
+1274,"r4","r4 applies|","r4",0
+3894,"r4","r4 applies|","r4",0
+186,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+7132,"r12","r12 applies|","r12",1
+7163,"r4","r4 applies|","r4",0
+6829,"r12","r12 applies|","r12",1
+249,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1358,"r4","r4 applies|","r4",0
+5510,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+5115,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+2754,"r4","r4 applies|","r4",0
+4042,"r4","r4 applies|","r4",0
+274,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1305,"r4","r4 applies|","r4",0
+7403,"r12","r12 applies|","r12",1
+657,"r4","r4 applies|","r4",0
+4862,"r12","r12 applies|","r12",1
+1999,"r4","r4 applies|","r4",0
+5944,"r12","r12 applies|","r12",1
+2478,"r4","r4 applies|","r4",0
+2587,"r4","r4 applies|","r4",0
+1785,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2615,"r4","r4 applies|","r4",0
+992,"r4","r4 applies|","r4",0
+3039,"r4","r4 applies|","r4",0
+1112,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+4888,"r12","r12 applies|","r12",1
+4833,"r12","r12 applies|","r12",1
+354,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+7225,"r12","r12 applies|","r12",1
+1405,"r4","r4 applies|","r4",0
+5597,"r4","r4 applies|","r4",0
+2946,"r4","r4 applies|","r4",0
+2874,"r4","r4 applies|","r4",0
+7217,"r12","r12 applies|","r12",1
+4887,"r12","r12 applies|","r12",1
+700,"r4","r4 applies|","r4",0
+510,"r0","r0 applies|","r0",0
+5606,"r11","r11 applies|","r11",1
+3673,"r4","r4 applies|","r4",0
+5543,"r12","r12 applies|","r12",1
+7156,"r12","r12 applies|","r12",1
+3716,"r4","r4 applies|","r4",0
+2096,"r4","r4 applies|","r4",0
+3131,"r4","r4 applies|","r4",0
+130,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4552,"r12","r12 applies|","r12",1
+2789,"r4","r4 applies|","r4",0
+1250,"r4","r4 applies|","r4",0
+7873,"r4","r4 applies|","r4",0
+3760,"r4","r4 applies|","r4",0
+7858,"r12","r12 applies|","r12",1
+75,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5354,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+6768,"r12","r12 applies|","r12",1
+6642,"r12","r12 applies|","r12",1
+5656,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+2933,"r4","r4 applies|","r4",0
+6599,"r12","r12 applies|","r12",1
+2522,"r4","r4 applies|","r4",0
+3498,"r4","r4 applies|","r4",0
+231,"r0","r0 applies|","r0",0
+7837,"r4","r4 applies|","r4",0
+970,"r4","r4 applies|","r4",0
+2252,"r4","r4 applies|","r4",0
+8038,"r12","r12 applies|","r12",1
+106,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1909,"r4","r4 applies|","r4",0
+5252,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+2313,"r4","r4 applies|","r4",0
+4219,"r12","r12 applies|","r12",1
+3413,"r4","r4 applies|","r4",0
+2329,"r4","r4 applies|","r4",0
+7042,"r4","r4 applies|","r4",0
+6929,"r4","r4 applies|","r4",0
+442,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5844,"r12","r12 applies|","r12",1
+6444,"r12","r12 applies|","r12",1
+2708,"r4","r4 applies|","r4",0
+5136,"r4","r4 applies|","r4",0
+3527,"r4","r4 applies|","r4",0
+2027,"r4","r4 applies|","r4",0
+6274,"r12","r12 applies|","r12",1
+2758,"r4","r4 applies|","r4",0
+7444,"r4","r4 applies|","r4",0
+940,"r4","r4 applies|","r4",0
+2593,"r4","r4 applies|","r4",0
+4675,"r12","r12 applies|","r12",1
+6532,"r12","r12 applies|","r12",1
+3117,"r4","r4 applies|","r4",0
+917,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2365,"r4","r4 applies|","r4",0
+6151,"r12","r12 applies|","r12",1
+5121,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+8035,"r4","r4 applies|","r4",0
+7256,"r4","r4 applies|","r4",0
+2616,"r4","r4 applies|","r4",0
+8033,"r12","r12 applies|","r12",1
+140,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5177,"r4","r4 applies|","r4",0
+1010,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5048,"r12","r12 applies|","r12",1
+5182,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+5706,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+688,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+3194,"r12","r12 applies|","r12",1
+1793,"r4","r4 applies|","r4",0
+4650,"r12","r12 applies|","r12",1
+6562,"r12","r12 applies|","r12",1
+3632,"r4","r4 applies|","r4",0
+4192,"r12","r12 applies|","r12",1
+6911,"r4","r4 applies|","r4",0
+5479,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+5633,"r12","r12 applies|","r12",1
+6655,"r12","r12 applies|","r12",1
+6367,"r4","r4 applies|","r4",0
+4354,"r12","r12 applies|","r12",1
+5554,"r0","r0 applies|","r0",0
+4449,"r12","r12 applies|","r12",1
+2109,"r4","r4 applies|","r4",0
+539,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5689,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+5986,"r12","r12 applies|","r12",1
+6645,"r12","r12 applies|","r12",1
+6920,"r12","r12 applies|","r12",1
+8103,"r4","r4 applies|","r4",0
+336,"r4","r4 applies|","r4",0
+6834,"r12","r12 applies|","r12",1
+4901,"r12","r12 applies|","r12",1
+4459,"r12","r12 applies|","r12",1
+6780,"r12","r12 applies|","r12",1
+1195,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+7087,"r4","r4 applies|","r4",0
+3316,"r4","r4 applies|","r4",0
+5684,"r4","r4 applies|","r4",0
+5948,"r11","r11 applies|","r11",1
+5695,"r12","r12 applies|","r12",1
+937,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+3113,"r4","r4 applies|","r4",0
+6707,"r12","r12 applies|","r12",1
+3870,"r12","r12 applies|","r12",1
+6907,"r4","r4 applies|","r4",0
+6222,"r12","r12 applies|","r12",1
+5907,"r4","r4 applies|","r4",0
+5700,"r12","r12 applies|","r12",1
+2267,"r4","r4 applies|","r4",0
+6441,"r12","r12 applies|","r12",1
+7821,"r12","r12 applies|","r12",1
+6510,"r4","r4 applies|","r4",0
+5759,"r12","r12 applies|","r12",1
+1295,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+2761,"r4","r4 applies|","r4",0
+2064,"r4","r4 applies|","r4",0
+1387,"r4","r4 applies|","r4",0
+4060,"r4","r4 applies|","r4",0
+3062,"r12","r12 applies|","r12",1
+3096,"r12","r12 applies|","r12",1
+7666,"r4","r4 applies|","r4",0
+4953,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+4396,"r12","r12 applies|","r12",1
+5368,"r12","r12 applies|","r12",1
+4388,"r12","r12 applies|","r12",1
+826,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1480,"r4","r4 applies|","r4",0
+3218,"r4","r4 applies|","r4",0
+7216,"r12","r12 applies|","r12",1
+2125,"r4","r4 applies|","r4",0
+388,"r4","r4 applies|","r4",0
+7726,"r4","r4 applies|","r4",0
+7721,"r4","r4 applies|","r4",0
+4456,"r12","r12 applies|","r12",1
+6571,"r12","r12 applies|","r12",1
+551,"r0","r0 applies|","r0",0
+3416,"r4","r4 applies|","r4",0
+3081,"r4","r4 applies|","r4",0
+2269,"r4","r4 applies|","r4",0
+188,"r0","r0 applies|","r0",0
+4111,"r12","r12 applies|","r12",1
+2300,"r4","r4 applies|","r4",0
+7211,"r12","r12 applies|","r12",1
+4040,"r4","r4 applies|","r4",0
+405,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+7340,"r12","r12 applies|","r12",1
+1681,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+7298,"r12","r12 applies|","r12",1
+5629,"r4","r4 applies|","r4",0
+3044,"r4","r4 applies|","r4",0
+4686,"r12","r12 applies|","r12",1
+2961,"r4","r4 applies|","r4",0
+1162,"r4","r4 applies|","r4",0
+2315,"r4","r4 applies|","r4",0
+4460,"r4","r4 applies|","r4",0
+3801,"r4","r4 applies|","r4",0
+6993,"r12","r12 applies|","r12",1
+8077,"r4","r4 applies|","r4",0
+1755,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+2652,"r4","r4 applies|","r4",0
+172,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+96,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5989,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+1837,"r4","r4 applies|","r4",0
+5916,"r12","r12 applies|","r12",1
+90,"r0","r0 applies|","r0",0
+1627,"r4","r4 applies|","r4",0
+2903,"r4","r4 applies|","r4",0
+1283,"r4","r4 applies|","r4",0
+1101,"r4","r4 applies|","r4",0
+7636,"r12","r12 applies|","r12",1
+464,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2966,"r4","r4 applies|","r4",0
+4761,"r12","r12 applies|","r12",1
+5781,"r12","r12 applies|","r12",1
+358,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+7678,"r12","r12 applies|","r12",1
+2295,"r4","r4 applies|","r4",0
+8088,"r12","r12 applies|","r12",1
+1067,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1787,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+5448,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+3713,"r4","r4 applies|","r4",0
+3045,"r4","r4 applies|","r4",0
+5856,"r11","r11 applies|","r11",1
+5165,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+4614,"r12","r12 applies|","r12",1
+3357,"r4","r4 applies|","r4",0
+7339,"r12","r12 applies|","r12",1
+2912,"r4","r4 applies|","r4",0
+3473,"r4","r4 applies|","r4",0
+3310,"r4","r4 applies|","r4",0
+3800,"r4","r4 applies|","r4",0
+2549,"r4","r4 applies|","r4",0
+2336,"r4","r4 applies|","r4",0
+4746,"r12","r12 applies|","r12",1
+5896,"r3","r3 applies|","r3",0
+1913,"r4","r4 applies|","r4",0
+876,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5557,"r4","r4 applies|","r4",0
+122,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5977,"r4","r4 applies|","r4",0
+2145,"r4","r4 applies|","r4",0
+7106,"r12","r12 applies|","r12",1
+4365,"r3","r3 applies|","r3",0
+3350,"r12","r12 applies|","r12",1
+3779,"r4","r4 applies|","r4",0
+6948,"r12","r12 applies|","r12",1
+3415,"r4","r4 applies|","r4",0
+3253,"r4","r4 applies|","r4",0
+6043,"r12","r12 applies|","r12",1
+6740,"r12","r12 applies|","r12",1
+1636,"r4","r4 applies|","r4",0
+5162,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+2992,"r4","r4 applies|","r4",0
+994,"r0","r0 applies|","r0",0
+7177,"r4","r4 applies|","r4",0
+512,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+377,"r0","r0 applies|","r0",0
+76,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+6118,"r12","r12 applies|","r12",1
+7257,"r12","r12 applies|","r12",1
+5982,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+1527,"r4","r4 applies|","r4",0
+7034,"r4","r4 applies|","r4",0
+2837,"r4","r4 applies|","r4",0
+5295,"r12","r12 applies|","r12",1
+3019,"r4","r4 applies|","r4",0
+5820,"r12","r12 applies|","r12",1
+385,"r4","r4 applies|","r4",0
+6045,"r12","r12 applies|","r12",1
+6047,"r12","r12 applies|","r12",1
+2753,"r4","r4 applies|","r4",0
+6289,"r12","r12 applies|","r12",1
+1132,"r4","r4 applies|","r4",0
+5637,"r12","r12 applies|","r12",1
+5508,"r12","r12 applies|","r12",1
+6753,"r4","r4 applies|","r4",0
+4538,"r12","r12 applies|","r12",1
+3276,"r4","r4 applies|","r4",0
+6040,"r12","r12 applies|","r12",1
+4292,"r4","r4 applies|","r4",0
+5430,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+7006,"r4","r4 applies|","r4",0
+5118,"r0","r0 applies|","r0",0
+7525,"r4","r4 applies|","r4",0
+7004,"r4","r4 applies|","r4",0
+6005,"r12","r12 applies|","r12",1
+6165,"r12","r12 applies|","r12",1
+262,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+6524,"r12","r12 applies|","r12",1
+3258,"r4","r4 applies|","r4",0
+2047,"r4","r4 applies|","r4",0
+2603,"r4","r4 applies|","r4",0
+1324,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+3294,"r4","r4 applies|","r4",0
+1213,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+303,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+729,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4553,"r12","r12 applies|","r12",1
+7791,"r4","r4 applies|","r4",0
+1655,"r4","r4 applies|","r4",0
+1441,"r4","r4 applies|","r4",0
+3000,"r4","r4 applies|","r4",0
+4560,"r12","r12 applies|","r12",1
+2532,"r4","r4 applies|","r4",0
+4968,"r11","r11 applies|","r11",1
+5912,"r12","r12 applies|","r12",1
+5623,"r4","r4 applies|","r4",0
+6079,"r12","r12 applies|","r12",1
+3765,"r4","r4 applies|","r4",0
+5858,"r12","r12 applies|","r12",1
+1844,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+5784,"r9","r9 applies|","r9",1
+1970,"r4","r4 applies|","r4",0
+200,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4559,"r12","r12 applies|","r12",1
+5250,"r12","r12 applies|","r12",1
+7510,"r12","r12 applies|","r12",1
+8097,"r4","r4 applies|","r4",0
+4592,"r12","r12 applies|","r12",1
+8108,"r4","r4 applies|","r4",0
+4511,"r12","r12 applies|","r12",1
+7803,"r12","r12 applies|","r12",1
+1573,"r4","r4 applies|","r4",0
+6939,"r4","r4 applies|","r4",0
+7402,"r9","r9 applies|","r9",1
+1202,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+6502,"r12","r12 applies|","r12",1
+7668,"r12","r12 applies|","r12",1
+6327,"r12","r12 applies|","r12",1
+1137,"r4","r4 applies|","r4",0
+5957,"r12","r12 applies|","r12",1
+6737,"r12","r12 applies|","r12",1
+5408,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+7593,"r12","r12 applies|","r12",1
+6854,"r12","r12 applies|","r12",1
+4838,"r12","r12 applies|","r12",1
+5499,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+7860,"r4","r4 applies|","r4",0
+4733,"r4","r4 applies|","r4",0
+3097,"r4","r4 applies|","r4",0
+2831,"r4","r4 applies|","r4",0
+3120,"r12","r12 applies|","r12",1
+843,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2195,"r4","r4 applies|","r4",0
+7186,"r4","r4 applies|","r4",0
+3286,"r4","r4 applies|","r4",0
+2721,"r4","r4 applies|","r4",0
+4032,"r12","r12 applies|","r12",1
+4834,"r12","r12 applies|","r12",1
+1145,"r4","r4 applies|","r4",0
+4528,"r12","r12 applies|","r12",1
+6606,"r12","r12 applies|","r12",1
+3451,"r4","r4 applies|","r4",0
+2060,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1814,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5979,"r0","r0 applies|","r0",0
+5692,"r4","r4 applies|","r4",0
+7687,"r12","r12 applies|","r12",1
+3127,"r4","r4 applies|","r4",0
+3449,"r4","r4 applies|","r4",0
+4039,"r12","r12 applies|","r12",1
+4579,"r12","r12 applies|","r12",1
+4037,"r12","r12 applies|","r12",1
+3961,"r12","r12 applies|","r12",1
+219,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+6467,"r12","r12 applies|","r12",1
+5285,"r0","r0 applies|","r0",0
+5171,"r12","r12 applies|","r12",1
+4884,"r12","r12 applies|","r12",1
+5296,"r4","r4 applies|","r4",0
+5589,"r4","r4 applies|","r4",0
+5234,"r4","r4 applies|","r4",0
+519,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+245,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4706,"r12","r12 applies|","r12",1
+3212,"r12","r12 applies|","r12",1
+7171,"r4","r4 applies|","r4",0
+4306,"r4","r4 applies|","r4",0
+5146,"r12","r12 applies|","r12",1
+1193,"r4","r4 applies|","r4",0
+4193,"r12","r12 applies|","r12",1
+3806,"r4","r4 applies|","r4",0
+4520,"r4","r4 applies|","r4",0
+6696,"r12","r12 applies|","r12",1
+1020,"r4","r4 applies|","r4",0
+2038,"r4","r4 applies|","r4",0
+8122,"r4","r4 applies|","r4",0
+1386,"r4","r4 applies|","r4",0
+4117,"r12","r12 applies|","r12",1
+4963,"r12","r12 applies|","r12",1
+3424,"r4","r4 applies|","r4",0
+325,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1514,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+3140,"r4","r4 applies|","r4",0
+4008,"r12","r12 applies|","r12",1
+1828,"r4","r4 applies|","r4",0
+694,"r4","r4 applies|","r4",0
+7505,"r12","r12 applies|","r12",1
+6656,"r12","r12 applies|","r12",1
+5755,"r4","r4 applies|","r4",0
+5879,"r12","r12 applies|","r12",1
+4490,"r12","r12 applies|","r12",1
+2394,"r4","r4 applies|","r4",0
+7692,"r12","r12 applies|","r12",1
+509,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+7400,"r12","r12 applies|","r12",1
+1389,"r4","r4 applies|","r4",0
+4995,"r12","r12 applies|","r12",1
+1352,"r4","r4 applies|","r4",0
+6194,"r12","r12 applies|","r12",1
+2283,"r4","r4 applies|","r4",0
+2454,"r4","r4 applies|","r4",0
+1767,"r4","r4 applies|","r4",0
+3142,"r12","r12 applies|","r12",1
+6663,"r12","r12 applies|","r12",1
+3719,"r12","r12 applies|","r12",1
+2734,"r4","r4 applies|","r4",0
+5004,"r12","r12 applies|","r12",1
+866,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+6544,"r12","r12 applies|","r12",1
+4291,"r12","r12 applies|","r12",1
+1383,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+7226,"r12","r12 applies|","r12",1
+2741,"r4","r4 applies|","r4",0
+4018,"r12","r12 applies|","r12",1
+1630,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+3285,"r12","r12 applies|","r12",1
+5143,"r12","r12 applies|","r12",1
+6636,"r12","r12 applies|","r12",1
+5724,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+155,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+3802,"r12","r12 applies|","r12",1
+4556,"r12","r12 applies|","r12",1
+5030,"r12","r12 applies|","r12",1
+5591,"r12","r12 applies|","r12",1
+2398,"r4","r4 applies|","r4",0
+6424,"r12","r12 applies|","r12",1
+1062,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1427,"r4","r4 applies|","r4",0
+6084,"r12","r12 applies|","r12",1
+5908,"r4","r4 applies|","r4",0
+754,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+74,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1337,"r4","r4 applies|","r4",0
+8121,"r4","r4 applies|","r4",0
+1481,"r4","r4 applies|","r4",0
+6248,"r12","r12 applies|","r12",1
+855,"r0","r0 applies|","r0",0
+6533,"r12","r12 applies|","r12",1
+5152,"r4","r4 applies|","r4",0
+2189,"r4","r4 applies|","r4",0
+4407,"r12","r12 applies|","r12",1
+3066,"r4","r4 applies|","r4",0
+5044,"r12","r12 applies|","r12",1
+1388,"r4","r4 applies|","r4",0
+4786,"r12","r12 applies|","r12",1
+2097,"r4","r4 applies|","r4",0
+547,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2122,"r4","r4 applies|","r4",0
+3008,"r4","r4 applies|","r4",0
+8030,"r4","r4 applies|","r4",0
+4211,"r12","r12 applies|","r12",1
+6779,"r12","r12 applies|","r12",1
+4585,"r12","r12 applies|","r12",1
+7947,"r4","r4 applies|","r4",0
+3355,"r4","r4 applies|","r4",0
+1066,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+3954,"r12","r12 applies|","r12",1
+7134,"r4","r4 applies|","r4",0
+7535,"r4","r4 applies|","r4",0
+6944,"r12","r12 applies|","r12",1
+7756,"r12","r12 applies|","r12",1
+4373,"r12","r12 applies|","r12",1
+1729,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+6497,"r12","r12 applies|","r12",1
+5411,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+4709,"r11","r11 applies|","r11",1
+3772,"r4","r4 applies|","r4",0
+351,"r4","r4 applies|","r4",0
+960,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4026,"r12","r12 applies|","r12",1
+211,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5920,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+2781,"r4","r4 applies|","r4",0
+5495,"r11","r11 applies|","r11",1
+3427,"r12","r12 applies|","r12",1
+5761,"r11","r11 applies|","r11",1
+653,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+929,"r0","r0 applies|","r0",0
+2463,"r4","r4 applies|","r4",0
+5956,"r9","r9 applies|","r9",1
+5166,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+3277,"r12","r12 applies|","r12",1
+7317,"r12","r12 applies|","r12",1
+31,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+3526,"r12","r12 applies|","r12",1
+7343,"r12","r12 applies|","r12",1
+719,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+6941,"r12","r12 applies|","r12",1
+1160,"r4","r4 applies|","r4",0
+3359,"r12","r12 applies|","r12",1
+5671,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+2952,"r4","r4 applies|","r4",0
+4368,"r12","r12 applies|","r12",1
+7565,"r4","r4 applies|","r4",0
+3168,"r4","r4 applies|","r4",0
+3236,"r12","r12 applies|","r12",1
+972,"r4","r4 applies|","r4",0
+2058,"r4","r4 applies|","r4",0
+6671,"r12","r12 applies|","r12",1
+4750,"r12","r12 applies|","r12",1
+4029,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+1042,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1247,"r4","r4 applies|","r4",0
+4206,"r12","r12 applies|","r12",1
+6398,"r12","r12 applies|","r12",1
+6207,"r12","r12 applies|","r12",1
+2487,"r4","r4 applies|","r4",0
+7115,"r12","r12 applies|","r12",1
+1141,"r4","r4 applies|","r4",0
+182,"r0","r0 applies|","r0",0
+641,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4500,"r12","r12 applies|","r12",1
+941,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2218,"r4","r4 applies|","r4",0
+6181,"r12","r12 applies|","r12",1
+6708,"r12","r12 applies|","r12",1
+3317,"r4","r4 applies|","r4",0
+6505,"r12","r12 applies|","r12",1
+7907,"r12","r12 applies|","r12",1
+6801,"r12","r12 applies|","r12",1
+4092,"r12","r12 applies|","r12",1
+420,"r4","r4 applies|","r4",0
+1727,"r4","r4 applies|","r4",0
+4790,"r12","r12 applies|","r12",1
+3480,"r12","r12 applies|","r12",1
+1512,"r4","r4 applies|","r4",0
+3595,"r12","r12 applies|","r12",1
+4417,"r12","r12 applies|","r12",1
+4996,"r12","r12 applies|","r12",1
+1715,"r4","r4 applies|","r4",0
+4820,"r12","r12 applies|","r12",1
+4603,"r12","r12 applies|","r12",1
+3363,"r12","r12 applies|","r12",1
+2,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+964,"r4","r4 applies|","r4",0
+1271,"r4","r4 applies|","r4",0
+6772,"r12","r12 applies|","r12",1
+8049,"r12","r12 applies|","r12",1
+4993,"r12","r12 applies|","r12",1
+524,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+6506,"r12","r12 applies|","r12",1
+3927,"r12","r12 applies|","r12",1
+5119,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+2640,"r4","r4 applies|","r4",0
+7414,"r4","r4 applies|","r4",0
+703,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5244,"r4","r4 applies|","r4",0
+2062,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+3600,"r12","r12 applies|","r12",1
+3861,"r4","r4 applies|","r4",0
+2886,"r4","r4 applies|","r4",0
+6335,"r12","r12 applies|","r12",1
+7176,"r12","r12 applies|","r12",1
+8045,"r4","r4 applies|","r4",0
+3109,"r4","r4 applies|","r4",0
+1542,"r4","r4 applies|","r4",0
+4906,"r12","r12 applies|","r12",1
+980,"r4","r4 applies|","r4",0
+4508,"r12","r12 applies|","r12",1
+1372,"r4","r4 applies|","r4",0
+4719,"r12","r12 applies|","r12",1
+8003,"r4","r4 applies|","r4",0
+571,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4871,"r12","r12 applies|","r12",1
+2279,"r4","r4 applies|","r4",0
+1,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+2680,"r4","r4 applies|","r4",0
+5987,"r12","r12 applies|","r12",1
+170,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5160,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+7435,"r4","r4 applies|","r4",0
+2382,"r4","r4 applies|","r4",0
+4282,"r12","r12 applies|","r12",1
+2578,"r4","r4 applies|","r4",0
+6718,"r12","r12 applies|","r12",1
+2053,"r4","r4 applies|","r4",0
+1703,"r4","r4 applies|","r4",0
+832,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4075,"r4","r4 applies|","r4",0
+3371,"r4","r4 applies|","r4",0
+446,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+528,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1304,"r4","r4 applies|","r4",0
+4342,"r4","r4 applies|","r4",0
+5427,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+8107,"r4","r4 applies|","r4",0
+3817,"r4","r4 applies|","r4",0
+4288,"r12","r12 applies|","r12",1
+5802,"r12","r12 applies|","r12",1
+1421,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+1205,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+5765,"r0","r0 applies|","r0",0
+2405,"r4","r4 applies|","r4",0
+4802,"r12","r12 applies|","r12",1
+4740,"r12","r12 applies|","r12",1
+6976,"r4","r4 applies|","r4",0
+2885,"r4","r4 applies|","r4",0
+3909,"r12","r12 applies|","r12",1
+5939,"r4","r4 applies|","r4",0
+5969,"r12","r12 applies|","r12",1
+886,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+408,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+277,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2483,"r12","r12 applies|","r12",1
+1815,"r4","r4 applies|","r4",0
+6193,"r12","r12 applies|","r12",1
+4483,"r12","r12 applies|","r12",1
+4426,"r12","r12 applies|","r12",1
+6329,"r12","r12 applies|","r12",1
+3838,"r4","r4 applies|","r4",0
+1973,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+4909,"r12","r12 applies|","r12",1
+6306,"r12","r12 applies|","r12",1
+7683,"r4","r4 applies|","r4",0
+831,"r0","r0 applies|","r0",0
+570,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2077,"r4","r4 applies|","r4",0
+2940,"r4","r4 applies|","r4",0
+1231,"r4","r4 applies|","r4",0
+6160,"r12","r12 applies|","r12",1
+2498,"r4","r4 applies|","r4",0
+4512,"r12","r12 applies|","r12",1
+299,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+7604,"r12","r12 applies|","r12",1
+5713,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+2418,"r4","r4 applies|","r4",0
+5643,"r12","r12 applies|","r12",1
+6023,"r12","r12 applies|","r12",1
+7229,"r4","r4 applies|","r4",0
+1157,"r4","r4 applies|","r4",0
+6612,"r12","r12 applies|","r12",1
+4678,"r12","r12 applies|","r12",1
+5105,"r12","r12 applies|","r12",1
+4548,"r12","r12 applies|","r12",1
+7136,"r4","r4 applies|","r4",0
+3305,"r12","r12 applies|","r12",1
+4074,"r4","r4 applies|","r4",0
+2656,"r4","r4 applies|","r4",0
+184,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+7419,"r4","r4 applies|","r4",0
+233,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+3508,"r4","r4 applies|","r4",0
+5186,"r0","r0 applies|","r0",0
+7236,"r4","r4 applies|","r4",0
+7731,"r12","r12 applies|","r12",1
+8119,"r12","r12 applies|","r12",1
+4088,"r4","r4 applies|","r4",0
+8012,"r4","r4 applies|","r4",0
+1813,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+2818,"r4","r4 applies|","r4",0
+6670,"r12","r12 applies|","r12",1
+2172,"r4","r4 applies|","r4",0
+2675,"r4","r4 applies|","r4",0
+7618,"r4","r4 applies|","r4",0
+2516,"r4","r4 applies|","r4",0
+7629,"r12","r12 applies|","r12",1
+7428,"r12","r12 applies|","r12",1
+116,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4468,"r12","r12 applies|","r12",1
+2891,"r4","r4 applies|","r4",0
+1601,"r4","r4 applies|","r4",0
+8056,"r4","r4 applies|","r4",0
+7089,"r12","r12 applies|","r12",1
+7119,"r12","r12 applies|","r12",1
+3998,"r12","r12 applies|","r12",1
+2244,"r4","r4 applies|","r4",0
+2843,"r4","r4 applies|","r4",0
+7213,"r12","r12 applies|","r12",1
+1692,"r4","r4 applies|","r4",0
+1892,"r4","r4 applies|","r4",0
+1925,"r4","r4 applies|","r4",0
+2534,"r12","r12 applies|","r12",1
+5985,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+1090,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2232,"r4","r4 applies|","r4",0
+4518,"r12","r12 applies|","r12",1
+3132,"r4","r4 applies|","r4",0
+4940,"r4","r4 applies|","r4",0
+2606,"r12","r12 applies|","r12",1
+8091,"r12","r12 applies|","r12",1
+7123,"r12","r12 applies|","r12",1
+2558,"r4","r4 applies|","r4",0
+4413,"r12","r12 applies|","r12",1
+2154,"r4","r4 applies|","r4",0
+550,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1590,"r4","r4 applies|","r4",0
+104,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5866,"r4","r4 applies|","r4",0
+1650,"r4","r4 applies|","r4",0
+389,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2788,"r4","r4 applies|","r4",0
+2960,"r4","r4 applies|","r4",0
+5063,"r12","r12 applies|","r12",1
+575,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+6622,"r12","r12 applies|","r12",1
+7009,"r4","r4 applies|","r4",0
+2749,"r4","r4 applies|","r4",0
+1544,"r4","r4 applies|","r4",0
+1859,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+3661,"r4","r4 applies|","r4",0
+7071,"r12","r12 applies|","r12",1
+1477,"r4","r4 applies|","r4",0
+7864,"r12","r12 applies|","r12",1
+2786,"r4","r4 applies|","r4",0
+6380,"r12","r12 applies|","r12",1
+6698,"r12","r12 applies|","r12",1
+3057,"r4","r4 applies|","r4",0
+6331,"r12","r12 applies|","r12",1
+1554,"r4","r4 applies|","r4",0
+5852,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+2637,"r4","r4 applies|","r4",0
+2032,"r4","r4 applies|","r4",0
+7063,"r12","r12 applies|","r12",1
+1773,"r4","r4 applies|","r4",0
+2890,"r4","r4 applies|","r4",0
+2088,"r4","r4 applies|","r4",0
+4121,"r12","r12 applies|","r12",1
+6529,"r12","r12 applies|","r12",1
+3599,"r4","r4 applies|","r4",0
+366,"r0","r0 applies|","r0",0
+4808,"r12","r12 applies|","r12",1
+5131,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+6473,"r12","r12 applies|","r12",1
+4908,"r12","r12 applies|","r12",1
+1188,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+3917,"r4","r4 applies|","r4",0
+4628,"r12","r12 applies|","r12",1
+6925,"r4","r4 applies|","r4",0
+3370,"r4","r4 applies|","r4",0
+749,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+816,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5024,"r0","r0 applies|","r0",0
+5352,"r0","r0 applies|","r0",0
+7716,"r12","r12 applies|","r12",1
+3807,"r12","r12 applies|","r12",1
+3858,"r4","r4 applies|","r4",0
+2737,"r4","r4 applies|","r4",0
+5542,"r12","r12 applies|","r12",1
+1051,"r4","r4 applies|","r4",0
+4186,"r12","r12 applies|","r12",1
+1203,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+8040,"r12","r12 applies|","r12",1
+4958,"r12","r12 applies|","r12",1
+5582,"r12","r12 applies|","r12",1
+6050,"r12","r12 applies|","r12",1
+7190,"r12","r12 applies|","r12",1
+6749,"r12","r12 applies|","r12",1
+4854,"r12","r12 applies|","r12",1
+7799,"r12","r12 applies|","r12",1
+1297,"r4","r4 applies|","r4",0
+3408,"r4","r4 applies|","r4",0
+3787,"r4","r4 applies|","r4",0
+7495,"r12","r12 applies|","r12",1
+968,"r4","r4 applies|","r4",0
+6333,"r12","r12 applies|","r12",1
+6915,"r4","r4 applies|","r4",0
+6756,"r12","r12 applies|","r12",1
+5461,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+5736,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+4970,"r12","r12 applies|","r12",1
+5346,"r0","r0 applies|","r0",0
+5685,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+976,"r4","r4 applies|","r4",0
+83,"r0","r0 applies|","r0",0
+5766,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+7242,"r12","r12 applies|","r12",1
+3702,"r12","r12 applies|","r12",1
+6434,"r12","r12 applies|","r12",1
+6300,"r12","r12 applies|","r12",1
+2514,"r4","r4 applies|","r4",0
+4858,"r12","r12 applies|","r12",1
+7518,"r12","r12 applies|","r12",1
+8115,"r12","r12 applies|","r12",1
+7395,"r12","r12 applies|","r12",1
+3737,"r4","r4 applies|","r4",0
+5801,"r9","r9 applies|","r9",1
+5311,"r12","r12 applies|","r12",1
+4462,"r12","r12 applies|","r12",1
+4847,"r4","r4 applies|","r4",0
+563,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2699,"r4","r4 applies|","r4",0
+2205,"r4","r4 applies|","r4",0
+4381,"r4","r4 applies|","r4",0
+2008,"r4","r4 applies|","r4",0
+7994,"r4","r4 applies|","r4",0
+3220,"r4","r4 applies|","r4",0
+2243,"r4","r4 applies|","r4",0
+526,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+7751,"r12","r12 applies|","r12",1
+1424,"r4","r4 applies|","r4",0
+4033,"r12","r12 applies|","r12",1
+4030,"r12","r12 applies|","r12",1
+6804,"r12","r12 applies|","r12",1
+3428,"r4","r4 applies|","r4",0
+7113,"r12","r12 applies|","r12",1
+7675,"r4","r4 applies|","r4",0
+312,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+5456,"r12","r12 applies|","r12",1
+4141,"r12","r12 applies|","r12",1
+3250,"r4","r4 applies|","r4",0
+1557,"r4","r4 applies|","r4",0
+7566,"r12","r12 applies|","r12",1
+4845,"r4","r4 applies|","r4",0
+707,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+6243,"r12","r12 applies|","r12",1
+6978,"r12","r12 applies|","r12",1
+4420,"r4","r4 applies|","r4",0
+1677,"r4","r4 applies|","r4",0
+428,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4537,"r12","r12 applies|","r12",1
+6377,"r12","r12 applies|","r12",1
+6439,"r12","r12 applies|","r12",1
+1444,"r4","r4 applies|","r4",0
+4493,"r12","r12 applies|","r12",1
+2402,"r4","r4 applies|","r4",0
+5377,"r11","r11 applies|","r11",1
+3102,"r4","r4 applies|","r4",0
+3707,"r4","r4 applies|","r4",0
+7993,"r12","r12 applies|","r12",1
+6195,"r4","r4 applies|","r4",0
+5572,"r11","r11 applies|","r11",1
+1915,"r4","r4 applies|","r4",0
+3299,"r12","r12 applies|","r12",1
+5730,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+3620,"r4","r4 applies|","r4",0
+2768,"r4","r4 applies|","r4",0
+497,"r4","r4 applies|","r4",0
+1802,"r4","r4 applies|","r4",0
+905,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+6898,"r12","r12 applies|","r12",1
+959,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+6149,"r12","r12 applies|","r12",1
+210,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+906,"r4","r4 applies|","r4",0
+5000,"r12","r12 applies|","r12",1
+6275,"r12","r12 applies|","r12",1
+1131,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+977,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+7933,"r12","r12 applies|","r12",1
+3076,"r12","r12 applies|","r12",1
+7981,"r12","r12 applies|","r12",1
+3610,"r4","r4 applies|","r4",0
+3191,"r12","r12 applies|","r12",1
+569,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+5807,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+3513,"r4","r4 applies|","r4",0
+2130,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+4293,"r12","r12 applies|","r12",1
+3267,"r4","r4 applies|","r4",0
+2136,"r4","r4 applies|","r4",0
+3247,"r12","r12 applies|","r12",1
+6319,"r12","r12 applies|","r12",1
+1232,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+5041,"r12","r12 applies|","r12",1
+5167,"r4","r4 applies|","r4",0
+3288,"r4","r4 applies|","r4",0
+6706,"r12","r12 applies|","r12",1
+4948,"r12","r12 applies|","r12",1
+2854,"r4","r4 applies|","r4",0
+1897,"r4","r4 applies|","r4",0
+1513,"r4","r4 applies|","r4",0
+6108,"r12","r12 applies|","r12",1
+2091,"r4","r4 applies|","r4",0
+6072,"r12","r12 applies|","r12",1
+1338,"r4","r4 applies|","r4",0
+2547,"r4","r4 applies|","r4",0
+1794,"r4","r4 applies|","r4",0
+4486,"r12","r12 applies|","r12",1
+3032,"r4","r4 applies|","r4",0
+7585,"r4","r4 applies|","r4",0
+215,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+7206,"r4","r4 applies|","r4",0
+1173,"r4","r4 applies|","r4",0
+2050,"r4","r4 applies|","r4",0
+1150,"r4","r4 applies|","r4",0
+332,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+6657,"r12","r12 applies|","r12",1
+4904,"r12","r12 applies|","r12",1
+2621,"r4","r4 applies|","r4",0
+5492,"r12","r12 applies|","r12",1
+4149,"r12","r12 applies|","r12",1
+3887,"r4","r4 applies|","r4",0
+177,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+375,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2187,"r4","r4 applies|","r4",0
+8047,"r4","r4 applies|","r4",0
+4782,"r12","r12 applies|","r12",1
+3871,"r4","r4 applies|","r4",0
+1059,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5596,"r12","r12 applies|","r12",1
+3307,"r12","r12 applies|","r12",1
+677,"r0","r0 applies|","r0",0
+6782,"r12","r12 applies|","r12",1
+7755,"r12","r12 applies|","r12",1
+5414,"r4","r4 applies|","r4",0
+7722,"r4","r4 applies|","r4",0
+3752,"r12","r12 applies|","r12",1
+6802,"r12","r12 applies|","r12",1
+4464,"r12","r12 applies|","r12",1
+3677,"r4","r4 applies|","r4",0
+6808,"r12","r12 applies|","r12",1
+7467,"r12","r12 applies|","r12",1
+7559,"r4","r4 applies|","r4",0
+7152,"r12","r12 applies|","r12",1
+2764,"r4","r4 applies|","r4",0
+1363,"r4","r4 applies|","r4",0
+3366,"r12","r12 applies|","r12",1
+5803,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+431,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5991,"r12","r12 applies|","r12",1
+5839,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+580,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+6527,"r12","r12 applies|","r12",1
+537,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+7200,"r12","r12 applies|","r12",1
+7753,"r4","r4 applies|","r4",0
+323,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2507,"r4","r4 applies|","r4",0
+8010,"r4","r4 applies|","r4",0
+7643,"r4","r4 applies|","r4",0
+3944,"r4","r4 applies|","r4",0
+238,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1780,"r4","r4 applies|","r4",0
+7491,"r4","r4 applies|","r4",0
+1733,"r4","r4 applies|","r4",0
+7398,"r12","r12 applies|","r12",1
+3892,"r4","r4 applies|","r4",0
+2716,"r4","r4 applies|","r4",0
+5585,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+4055,"r4","r4 applies|","r4",0
+3988,"r12","r12 applies|","r12",1
+7932,"r7 r9","r9 applies->r7 applies & overides r9|","r7",0
+7898,"r12","r12 applies|","r12",1
+311,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1417,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1519,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4625,"r12","r12 applies|","r12",1
+7469,"r4","r4 applies|","r4",0
+734,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+2501,"r4","r4 applies|","r4",0
+6900,"r12","r12 applies|","r12",1
+1129,"r4","r4 applies|","r4",0
+7233,"r12","r12 applies|","r12",1
+7882,"r12","r12 applies|","r12",1
+2277,"r4","r4 applies|","r4",0
+7180,"r12","r12 applies|","r12",1
+2306,"r4","r4 applies|","r4",0
+5741,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+3073,"r4","r4 applies|","r4",0
+3743,"r12","r12 applies|","r12",1
+939,"r4","r4 applies|","r4",0
+704,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2821,"r4","r4 applies|","r4",0
+281,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+3338,"r12","r12 applies|","r12",1
+3757,"r4","r4 applies|","r4",0
+4270,"r12","r12 applies|","r12",1
+5216,"r11","r11 applies|","r11",1
+6516,"r12","r12 applies|","r12",1
+7801,"r12","r12 applies|","r12",1
+2005,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+6703,"r12","r12 applies|","r12",1
+7053,"r12","r12 applies|","r12",1
+7689,"r4","r4 applies|","r4",0
+1865,"r4","r4 applies|","r4",0
+7766,"r4","r4 applies|","r4",0
+2947,"r4","r4 applies|","r4",0
+5556,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+3023,"r4","r4 applies|","r4",0
+1778,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+3332,"r12","r12 applies|","r12",1
+3658,"r4","r4 applies|","r4",0
+617,"r4","r4 applies|","r4",0
+5073,"r12","r12 applies|","r12",1
+7375,"r12","r12 applies|","r12",1
+5816,"r12","r12 applies|","r12",1
+7876,"r12","r12 applies|","r12",1
+4853,"r12","r12 applies|","r12",1
+4124,"r12","r12 applies|","r12",1
+4428,"r12","r12 applies|","r12",1
+21,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+3149,"r12","r12 applies|","r12",1
+3372,"r12","r12 applies|","r12",1
+2647,"r4","r4 applies|","r4",0
+7867,"r4","r4 applies|","r4",0
+7312,"r4","r4 applies|","r4",0
+7828,"r12","r12 applies|","r12",1
+6525,"r12","r12 applies|","r12",1
+6211,"r12","r12 applies|","r12",1
+5040,"r12","r12 applies|","r12",1
+7338,"r12","r12 applies|","r12",1
+7606,"r12","r12 applies|","r12",1
+6630,"r12","r12 applies|","r12",1
+331,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+494,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+6583,"r12","r12 applies|","r12",1
+3545,"r12","r12 applies|","r12",1
+357,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4105,"r12","r12 applies|","r12",1
+3674,"r4","r4 applies|","r4",0
+3675,"r4","r4 applies|","r4",0
+4825,"r4","r4 applies|","r4",0
+7892,"r12","r12 applies|","r12",1
+2251,"r4","r4 applies|","r4",0
+5712,"r4","r4 applies|","r4",0
+6032,"r12","r12 applies|","r12",1
+2127,"r4","r4 applies|","r4",0
+5193,"r12","r12 applies|","r12",1
+6674,"r12","r12 applies|","r12",1
+3457,"r4","r4 applies|","r4",0
+2926,"r4","r4 applies|","r4",0
+4017,"r12","r12 applies|","r12",1
+2012,"r4","r4 applies|","r4",0
+2614,"r4","r4 applies|","r4",0
+3135,"r4","r4 applies|","r4",0
+1187,"r4","r4 applies|","r4",0
+2502,"r4","r4 applies|","r4",0
+2742,"r4","r4 applies|","r4",0
+8032,"r12","r12 applies|","r12",1
+3420,"r4","r4 applies|","r4",0
+3746,"r4","r4 applies|","r4",0
+4174,"r12","r12 applies|","r12",1
+1448,"r4","r4 applies|","r4",0
+5533,"r12","r12 applies|","r12",1
+4006,"r12","r12 applies|","r12",1
+4882,"r12","r12 applies|","r12",1
+3461,"r4","r4 applies|","r4",0
+7145,"r12","r12 applies|","r12",1
+7045,"r12","r12 applies|","r12",1
+4425,"r4","r4 applies|","r4",0
+6723,"r12","r12 applies|","r12",1
+5740,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+5142,"r12","r12 applies|","r12",1
+3555,"r12","r12 applies|","r12",1
+2010,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+5378,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+1693,"r4","r4 applies|","r4",0
+3394,"r12","r12 applies|","r12",1
+2598,"r4","r4 applies|","r4",0
+5889,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+1299,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5371,"r12","r12 applies|","r12",1
+5223,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+2270,"r4","r4 applies|","r4",0
+7086,"r12","r12 applies|","r12",1
+5860,"r4","r4 applies|","r4",0
+3344,"r4","r4 applies|","r4",0
+6255,"r12","r12 applies|","r12",1
+1220,"r4","r4 applies|","r4",0
+6856,"r12","r12 applies|","r12",1
+2601,"r4","r4 applies|","r4",0
+1626,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+3846,"r12","r12 applies|","r12",1
+5439,"r12","r12 applies|","r12",1
+3751,"r12","r12 applies|","r12",1
+3170,"r12","r12 applies|","r12",1
+4703,"r12","r12 applies|","r12",1
+5500,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+659,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2361,"r4","r4 applies|","r4",0
+7358,"r12","r12 applies|","r12",1
+484,"r0","r0 applies|","r0",0
+5312,"r9","r9 applies|","r9",1
+2090,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+1457,"r4","r4 applies|","r4",0
+560,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+194,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1353,"r4","r4 applies|","r4",0
+3293,"r12","r12 applies|","r12",1
+4515,"r12","r12 applies|","r12",1
+1971,"r4","r4 applies|","r4",0
+3568,"r12","r12 applies|","r12",1
+6560,"r12","r12 applies|","r12",1
+3177,"r4","r4 applies|","r4",0
+3813,"r4","r4 applies|","r4",0
+6122,"r12","r12 applies|","r12",1
+8011,"r4","r4 applies|","r4",0
+4328,"r12","r12 applies|","r12",1
+6795,"r12","r12 applies|","r12",1
+565,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2344,"r4","r4 applies|","r4",0
+3115,"r4","r4 applies|","r4",0
+1965,"r4","r4 applies|","r4",0
+7984,"r4","r4 applies|","r4",0
+7146,"r12","r12 applies|","r12",1
+7030,"r12","r12 applies|","r12",1
+7199,"r12","r12 applies|","r12",1
+6994,"r12","r12 applies|","r12",1
+6873,"r12","r12 applies|","r12",1
+493,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+4138,"r12","r12 applies|","r12",1
+2350,"r4","r4 applies|","r4",0
+2148,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+7151,"r12","r12 applies|","r12",1
+4166,"r0","r0 applies|","r0",0
+1418,"r4","r4 applies|","r4",0
+6833,"r12","r12 applies|","r12",1
+3957,"r12","r12 applies|","r12",1
+3493,"r12","r12 applies|","r12",1
+5932,"r12","r12 applies|","r12",1
+6699,"r12","r12 applies|","r12",1
+3319,"r4","r4 applies|","r4",0
+3375,"r4","r4 applies|","r4",0
+3820,"r4","r4 applies|","r4",0
+16,"r0","r0 applies|","r0",0
+6291,"r12","r12 applies|","r12",1
+3351,"r4","r4 applies|","r4",0
+6442,"r12","r12 applies|","r12",1
+7532,"r4","r4 applies|","r4",0
+6338,"r12","r12 applies|","r12",1
+2865,"r4","r4 applies|","r4",0
+7960,"r12","r12 applies|","r12",1
+112,"r0","r0 applies|","r0",0
+7541,"r4","r4 applies|","r4",0
+7013,"r12","r12 applies|","r12",1
+189,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+7330,"r4","r4 applies|","r4",0
+1696,"r4","r4 applies|","r4",0
+7429,"r12","r12 applies|","r12",1
+6481,"r12","r12 applies|","r12",1
+4803,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+6285,"r12","r12 applies|","r12",1
+861,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+3112,"r4","r4 applies|","r4",0
+4098,"r12","r12 applies|","r12",1
+2930,"r4","r4 applies|","r4",0
+764,"r0","r0 applies|","r0",0
+5917,"r4","r4 applies|","r4",0
+1490,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+5953,"r12","r12 applies|","r12",1
+6965,"r12","r12 applies|","r12",1
+5958,"r12","r12 applies|","r12",1
+1688,"r4","r4 applies|","r4",0
+4651,"r12","r12 applies|","r12",1
+3693,"r12","r12 applies|","r12",1
+3628,"r12","r12 applies|","r12",1
+3708,"r12","r12 applies|","r12",1
+342,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4724,"r12","r12 applies|","r12",1
+5113,"r12","r12 applies|","r12",1
+7303,"r12","r12 applies|","r12",1
+6311,"r12","r12 applies|","r12",1
+3368,"r4","r4 applies|","r4",0
+2324,"r4","r4 applies|","r4",0
+5460,"r12","r12 applies|","r12",1
+7874,"r12","r12 applies|","r12",1
+8078,"r4","r4 applies|","r4",0
+4839,"r12","r12 applies|","r12",1
+3406,"r12","r12 applies|","r12",1
+3896,"r12","r12 applies|","r12",1
+6517,"r12","r12 applies|","r12",1
+4532,"r12","r12 applies|","r12",1
+675,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2286,"r12","r12 applies|","r12",1
+7704,"r12","r12 applies|","r12",1
+6185,"r12","r12 applies|","r12",1
+1432,"r4","r4 applies|","r4",0
+5042,"r12","r12 applies|","r12",1
+3002,"r12","r12 applies|","r12",1
+945,"r4","r4 applies|","r4",0
+6592,"r12","r12 applies|","r12",1
+4615,"r12","r12 applies|","r12",1
+7844,"r4","r4 applies|","r4",0
+3830,"r12","r12 applies|","r12",1
+6259,"r12","r12 applies|","r12",1
+2339,"r4","r4 applies|","r4",0
+2803,"r4","r4 applies|","r4",0
+2835,"r4","r4 applies|","r4",0
+7349,"r12","r12 applies|","r12",1
+1000,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+4555,"r12","r12 applies|","r12",1
+6686,"r12","r12 applies|","r12",1
+6530,"r12","r12 applies|","r12",1
+6875,"r12","r12 applies|","r12",1
+2649,"r4","r4 applies|","r4",0
+2850,"r4","r4 applies|","r4",0
+7488,"r12","r12 applies|","r12",1
+7573,"r12","r12 applies|","r12",1
+5291,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+6478,"r12","r12 applies|","r12",1
+6476,"r12","r12 applies|","r12",1
+7964,"r12","r12 applies|","r12",1
+6822,"r12","r12 applies|","r12",1
+1336,"r4","r4 applies|","r4",0
+7588,"r12","r12 applies|","r12",1
+7470,"r12","r12 applies|","r12",1
+4582,"r12","r12 applies|","r12",1
+7663,"r4","r4 applies|","r4",0
+7166,"r12","r12 applies|","r12",1
+6252,"r12","r12 applies|","r12",1
+6554,"r12","r12 applies|","r12",1
+7278,"r12","r12 applies|","r12",1
+2574,"r4","r4 applies|","r4",0
+5322,"r12","r12 applies|","r12",1
+2469,"r4","r4 applies|","r4",0
+4434,"r12","r12 applies|","r12",1
+1910,"r4","r4 applies|","r4",0
+4644,"r12","r12 applies|","r12",1
+6156,"r12","r12 applies|","r12",1
+5309,"r4","r4 applies|","r4",0
+1290,"r4","r4 applies|","r4",0
+5870,"r12","r12 applies|","r12",1
+2695,"r4","r4 applies|","r4",0
+5200,"r12","r12 applies|","r12",1
+6223,"r12","r12 applies|","r12",1
+6175,"r12","r12 applies|","r12",1
+1005,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4969,"r12","r12 applies|","r12",1
+4119,"r12","r12 applies|","r12",1
+672,"r0","r0 applies|","r0",0
+2757,"r4","r4 applies|","r4",0
+7681,"r4","r4 applies|","r4",0
+7028,"r12","r12 applies|","r12",1
+3231,"r4","r4 applies|","r4",0
+790,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5013,"r12","r12 applies|","r12",1
+5841,"r11","r11 applies|","r11",1
+297,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+3630,"r4","r4 applies|","r4",0
+2198,"r4","r4 applies|","r4",0
+3356,"r4","r4 applies|","r4",0
+7418,"r12","r12 applies|","r12",1
+1393,"r4","r4 applies|","r4",0
+3205,"r4","r4 applies|","r4",0
+2428,"r4","r4 applies|","r4",0
+8022,"r12","r12 applies|","r12",1
+5325,"r12","r12 applies|","r12",1
+7958,"r4","r4 applies|","r4",0
+2112,"r4","r4 applies|","r4",0
+3864,"r4","r4 applies|","r4",0
+6409,"r12","r12 applies|","r12",1
+3234,"r12","r12 applies|","r12",1
+1453,"r4","r4 applies|","r4",0
+4197,"r12","r12 applies|","r12",1
+1718,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5519,"r12","r12 applies|","r12",1
+380,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+7914,"r4","r4 applies|","r4",0
+7888,"r7 r9","r9 applies->r7 applies & overides r9|","r7",0
+2892,"r4","r4 applies|","r4",0
+6147,"r12","r12 applies|","r12",1
+3548,"r12","r12 applies|","r12",1
+523,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+7140,"r12","r12 applies|","r12",1
+4589,"r12","r12 applies|","r12",1
+3284,"r4","r4 applies|","r4",0
+7223,"r4","r4 applies|","r4",0
+1087,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+3434,"r4","r4 applies|","r4",0
+7702,"r4","r4 applies|","r4",0
+7383,"r12","r12 applies|","r12",1
+6730,"r12","r12 applies|","r12",1
+4497,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+916,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+3814,"r4","r4 applies|","r4",0
+7957,"r4","r4 applies|","r4",0
+7580,"r12","r12 applies|","r12",1
+2730,"r4","r4 applies|","r4",0
+1766,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+7337,"r12","r12 applies|","r12",1
+3269,"r12","r12 applies|","r12",1
+3414,"r4","r4 applies|","r4",0
+726,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+6844,"r12","r12 applies|","r12",1
+6689,"r12","r12 applies|","r12",1
+4546,"r12","r12 applies|","r12",1
+237,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5883,"r11","r11 applies|","r11",1
+5702,"r12","r12 applies|","r12",1
+2372,"r4","r4 applies|","r4",0
+3309,"r4","r4 applies|","r4",0
+3613,"r4","r4 applies|","r4",0
+7290,"r12","r12 applies|","r12",1
+4624,"r12","r12 applies|","r12",1
+5284,"r3","r3 applies|","r3",0
+374,"r0","r0 applies|","r0",0
+5722,"r12","r12 applies|","r12",1
+7569,"r12","r12 applies|","r12",1
+8099,"r12","r12 applies|","r12",1
+7387,"r12","r12 applies|","r12",1
+7475,"r12","r12 applies|","r12",1
+7576,"r12","r12 applies|","r12",1
+7658,"r12","r12 applies|","r12",1
+1169,"r4","r4 applies|","r4",0
+5276,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+3790,"r4","r4 applies|","r4",0
+3052,"r4","r4 applies|","r4",0
+5874,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+7372,"r12","r12 applies|","r12",1
+2877,"r4","r4 applies|","r4",0
+1120,"r4","r4 applies|","r4",0
+1334,"r4","r4 applies|","r4",0
+7058,"r12","r12 applies|","r12",1
+6582,"r12","r12 applies|","r12",1
+5358,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+3278,"r12","r12 applies|","r12",1
+2380,"r4","r4 applies|","r4",0
+4917,"r12","r12 applies|","r12",1
+606,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+5351,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+4702,"r12","r12 applies|","r12",1
+167,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4554,"r12","r12 applies|","r12",1
+1642,"r4","r4 applies|","r4",0
+5333,"r9","r9 applies|","r9",1
+6250,"r12","r12 applies|","r12",1
+4756,"r12","r12 applies|","r12",1
+2904,"r12","r12 applies|","r12",1
+7296,"r9","r9 applies|","r9",1
+6247,"r12","r12 applies|","r12",1
+4966,"r4","r4 applies|","r4",0
+1156,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+6713,"r12","r12 applies|","r12",1
+2772,"r4","r4 applies|","r4",0
+598,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+3958,"r12","r12 applies|","r12",1
+3089,"r4","r4 applies|","r4",0
+2681,"r4","r4 applies|","r4",0
+66,"r4","r4 applies|","r4",0
+2362,"r4","r4 applies|","r4",0
+7137,"r4","r4 applies|","r4",0
+520,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+3049,"r4","r4 applies|","r4",0
+3440,"r12","r12 applies|","r12",1
+6824,"r12","r12 applies|","r12",1
+2860,"r4","r4 applies|","r4",0
+5349,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+7582,"r4","r4 applies|","r4",0
+3182,"r12","r12 applies|","r12",1
+2629,"r4","r4 applies|","r4",0
+5621,"r0","r0 applies|","r0",0
+240,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1523,"r4","r4 applies|","r4",0
+1239,"r4","r4 applies|","r4",0
+2985,"r4","r4 applies|","r4",0
+3432,"r4","r4 applies|","r4",0
+5768,"r3","r3 applies|","r3",0
+7055,"r4","r4 applies|","r4",0
+6789,"r12","r12 applies|","r12",1
+5738,"r4","r4 applies|","r4",0
+2646,"r4","r4 applies|","r4",0
+4359,"r12","r12 applies|","r12",1
+1676,"r4","r4 applies|","r4",0
+7563,"r12","r12 applies|","r12",1
+451,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+963,"r4","r4 applies|","r4",0
+3067,"r4","r4 applies|","r4",0
+1234,"r4","r4 applies|","r4",0
+7995,"r4","r4 applies|","r4",0
+1834,"r4","r4 applies|","r4",0
+1279,"r4","r4 applies|","r4",0
+6575,"r12","r12 applies|","r12",1
+4326,"r12","r12 applies|","r12",1
+3803,"r4","r4 applies|","r4",0
+5905,"r12","r12 applies|","r12",1
+341,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4185,"r12","r12 applies|","r12",1
+1428,"r4","r4 applies|","r4",0
+5701,"r12","r12 applies|","r12",1
+3150,"r4","r4 applies|","r4",0
+2807,"r4","r4 applies|","r4",0
+1678,"r4","r4 applies|","r4",0
+6142,"r12","r12 applies|","r12",1
+1240,"r4","r4 applies|","r4",0
+2392,"r4","r4 applies|","r4",0
+7003,"r12","r12 applies|","r12",1
+4478,"r12","r12 applies|","r12",1
+1575,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4841,"r11","r11 applies|","r11",1
+5662,"r4","r4 applies|","r4",0
+1652,"r4","r4 applies|","r4",0
+4890,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+4259,"r12","r12 applies|","r12",1
+7908,"r4","r4 applies|","r4",0
+5279,"r11","r11 applies|","r11",1
+4688,"r12","r12 applies|","r12",1
+1108,"r4","r4 applies|","r4",0
+4255,"r12","r12 applies|","r12",1
+4333,"r12","r12 applies|","r12",1
+4263,"r12","r12 applies|","r12",1
+4083,"r12","r12 applies|","r12",1
+3074,"r12","r12 applies|","r12",1
+7463,"r12","r12 applies|","r12",1
+3995,"r12","r12 applies|","r12",1
+3621,"r4","r4 applies|","r4",0
+1589,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+1376,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+5660,"r9","r9 applies|","r9",1
+7900,"r12","r12 applies|","r12",1
+7965,"r4","r4 applies|","r4",0
+6038,"r12","r12 applies|","r12",1
+603,"r4","r4 applies|","r4",0
+2190,"r4","r4 applies|","r4",0
+8110,"r4","r4 applies|","r4",0
+1144,"r4","r4 applies|","r4",0
+6702,"r12","r12 applies|","r12",1
+3512,"r12","r12 applies|","r12",1
+2282,"r4","r4 applies|","r4",0
+3890,"r12","r12 applies|","r12",1
+2569,"r4","r4 applies|","r4",0
+4692,"r12","r12 applies|","r12",1
+7842,"r12","r12 applies|","r12",1
+1882,"r4","r4 applies|","r4",0
+2869,"r4","r4 applies|","r4",0
+8006,"r12","r12 applies|","r12",1
+6370,"r12","r12 applies|","r12",1
+6955,"r12","r12 applies|","r12",1
+5135,"r4","r4 applies|","r4",0
+495,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+434,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+6429,"r12","r12 applies|","r12",1
+6166,"r12","r12 applies|","r12",1
+7850,"r12","r12 applies|","r12",1
+5087,"r12","r12 applies|","r12",1
+4842,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+1178,"r0","r0 applies|","r0",0
+1314,"r4","r4 applies|","r4",0
+55,"r1 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r1 applies & overides r6|","r1",1
+7433,"r4","r4 applies|","r4",0
+5503,"r4","r4 applies|","r4",0
+1996,"r4","r4 applies|","r4",0
+6081,"r12","r12 applies|","r12",1
+3529,"r4","r4 applies|","r4",0
+6389,"r12","r12 applies|","r12",1
+5682,"r0","r0 applies|","r0",0
+3031,"r4","r4 applies|","r4",0
+5686,"r12","r12 applies|","r12",1
+3325,"r4","r4 applies|","r4",0
+114,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+627,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4475,"r12","r12 applies|","r12",1
+8021,"r12","r12 applies|","r12",1
+7498,"r12","r12 applies|","r12",1
+1543,"r4","r4 applies|","r4",0
+161,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+473,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2526,"r4","r4 applies|","r4",0
+4416,"r12","r12 applies|","r12",1
+5390,"r4","r4 applies|","r4",0
+902,"r4","r4 applies|","r4",0
+41,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+7480,"r4","r4 applies|","r4",0
+6352,"r12","r12 applies|","r12",1
+6183,"r12","r12 applies|","r12",1
+1403,"r4","r4 applies|","r4",0
+7545,"r12","r12 applies|","r12",1
+4721,"r12","r12 applies|","r12",1
+2879,"r4","r4 applies|","r4",0
+1302,"r4","r4 applies|","r4",0
+1015,"r4","r4 applies|","r4",0
+6650,"r12","r12 applies|","r12",1
+1033,"r4","r4 applies|","r4",0
+4148,"r12","r12 applies|","r12",1
+88,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+2166,"r4","r4 applies|","r4",0
+4050,"r12","r12 applies|","r12",1
+7422,"r12","r12 applies|","r12",1
+5845,"r12","r12 applies|","r12",1
+6297,"r12","r12 applies|","r12",1
+5365,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+620,"r0","r0 applies|","r0",0
+8065,"r12","r12 applies|","r12",1
+4473,"r12","r12 applies|","r12",1
+4640,"r12","r12 applies|","r12",1
+6634,"r12","r12 applies|","r12",1
+5210,"r8 r10 r12","r12 applies->r10 applies & overides r12->r8 applies & overides r10|","r8",1
+1406,"r2 r6 r10 r12","r12 applies->r10 applies & overides r12->r6 applies & overides r10->r2 applies & overides r6|","r2",1
+202,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4865,"r12","r12 applies|","r12",1
+3633,"r12","r12 applies|","r12",1
+4762,"r12","r12 applies|","r12",1
+2732,"r4","r4 applies|","r4",0
+2540,"r12","r12 applies|","r12",1
+1679,"r4","r4 applies|","r4",0
+1669,"r4","r4 applies|","r4",0
+2374,"r4","r4 applies|","r4",0
+6677,"r12","r12 applies|","r12",1
+794,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+3422,"r12","r12 applies|","r12",1
+2910,"r4","r4 applies|","r4",0
+414,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+4308,"r12","r12 applies|","r12",1
+7072,"r12","r12 applies|","r12",1
+6892,"r12","r12 applies|","r12",1
+3419,"r12","r12 applies|","r12",1
+1009,"r4","r4 applies|","r4",0
+2103,"r4","r4 applies|","r4",0
+612,"r4","r4 applies|","r4",0
+7456,"r4","r4 applies|","r4",0
+6827,"r12","r12 applies|","r12",1
+5067,"r12","r12 applies|","r12",1
+4414,"r12","r12 applies|","r12",1
+6051,"r12","r12 applies|","r12",1
+1595,"r4","r4 applies|","r4",0
+7795,"r12","r12 applies|","r12",1
+3729,"r4","r4 applies|","r4",0
+4648,"r0","r0 applies|","r0",0
+6119,"r12","r12 applies|","r12",1
+4701,"r12","r12 applies|","r12",1
+2859,"r4","r4 applies|","r4",0
+4387,"r12","r12 applies|","r12",1
+3209,"r12","r12 applies|","r12",1
+5304,"r12","r12 applies|","r12",1
+6956,"r12","r12 applies|","r12",1
+1983,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+3606,"r12","r12 applies|","r12",1
+7496,"r12","r12 applies|","r12",1
+5108,"r3","r3 applies|","r3",0
+8005,"r12","r12 applies|","r12",1
+2618,"r4","r4 applies|","r4",0
+2783,"r4","r4 applies|","r4",0
+286,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0
+6044,"r12","r12 applies|","r12",1
+258,"r5 r10 r12","r12 applies->r10 applies & overides r12->r5 applies & overides r10|","r5",0

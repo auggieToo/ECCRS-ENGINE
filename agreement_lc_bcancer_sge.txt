@@ -1,0 +1,21 @@
+
+Dataset   N      Agree  Both abstain  Disagree  LC abstains  MSW abstains  Conflict  Aligned (%)
+--------  -----  -----  ------------  --------  -----------  ------------  --------  -----------
+Bank      11303  11303  0             0         0            0             0         100.00     
+Cancer    175    175    0             0         0            0             0         100.00     
+Mushroom  175    172    3             0         0            0             0         100.00     
+--------  -----  -----  ------------  --------  -----------  ------------  --------  -----------
+Overall   11653  11650  3             0         0            0             0         100.00     
+
+  N             instances present in both files (the six outcome columns sum to N)
+  Agree         both decisive, same label: MSW=1 with m entailed, or MSW=0 with not-m entailed
+  Both abstain  MSW abstains and LC entails neither m nor not-m
+  Disagree      both decisive, different labels
+  LC abstains   MSW is decisive, LC entails neither m nor not-m
+  MSW abstains  MSW abstains, LC is decisive
+  Conflict      LC entails both m and not-m (inconsistent; should not occur)
+  Aligned (%)   (Agree + Both abstain) / N
+
+wrote output/agreement_table.tex
+wrote output/agreement_summary.csv
+wrote output/agreement_per_instance.csv

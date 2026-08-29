@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "rules.h"
+#include "../rules.h"
 #include "rulesIterators.h"
 
 #define RULES_EQUAL(a, sizea, b,sizeb) isSubset(a, sizea, b ,sizeb) &&\
@@ -85,20 +85,20 @@ computeApplicableRules(Rule *ruleset, Instance F, Rule *outSet)
 
 //creates a maximal inclusion set given a applicable sets 
 //returns the size of the inclusion-maximal applicable rules set. 
-i8
-maximalInclusionSet(Rule *applicableRules,u8 size, 
-                    Rule *outSet, Overides *outRides)   
+i8 maximalInclusionSet(Rule *app, u8 size, Rule *outSet, Overides *outRides)
 {
-    computeOverides(applicableRules, outRides, size);
-    i8 asize = 0 ;
-    for(u32 k = 0 ; k < size ; k++ )
+    computeOverides(app, outRides, size);
+    i8 asize = 0;
+    for(u32 k = 0; k < size; k++)
     {
-        if(outRides[k].overideRuleId == UINT32_MAX)
-            outSet[asize++] = outRides[k].r;
+        u8 dominated = 0;
+        for(u32 j = 0; j < size; j++)
+            if(j != k && app[k].numConditions < app[j].numConditions
+                      && isSubsetRule(app[k], app[j]))
+                { dominated = 1; break; }
+        if(!dominated) outSet[asize++] = app[k];
     }
-
-    return asize; 
-
+    return asize;
 }
 
 //given the inclusion-maximal applicable set, 
@@ -164,6 +164,8 @@ writeExplanationTracesCSV(FILE *fp,
 
 
 	fprintf(fp, "\n");
+	
+	printf("here");
 }
 
 //given applicable rules ,overides chain set and inclusion-maximal set, and 
@@ -579,7 +581,8 @@ isSubsetRule(Rule ar, Rule br)
 static inline i8 
 isComparable(Rule a, Rule b)
 {
-    return isSubset(a.conditions, a.numConditions,
+    return a.numConditions < b.numConditions &&
+			isSubset(a.conditions, a.numConditions,
                     b.conditions, b.numConditions);
 
 }

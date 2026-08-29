@@ -1,0 +1,5 @@
+dataset,n,agree,both_abstain,disagree,lc_abstains,msw_abstains,conflict,aligned_rate,agreement_rate_decisive_only,agreement_rate_msw1,agreement_rate_msw0,cohens_kappa,only_in_lc,only_in_msw
+Bank,11303,11303,0,0,0,0,0,1.000000,1.000000,1.000000,1.000000,1.000000,0,0
+Cancer,175,175,0,0,0,0,0,1.000000,1.000000,1.000000,1.000000,1.000000,0,0
+Mushroom,175,98,0,0,0,0,77,0.560000,1.000000,1.000000,1.000000,1.000000,0,0
+Overall,11653,11576,0,0,0,0,77,0.993392,1.000000,1.000000,1.000000,1.000000,0,0

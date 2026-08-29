@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "eccrsMSW.h"
-#include "rules.h"
+#include "../rules.h"
 
 typedef struct 
 {
@@ -49,7 +49,7 @@ i32 main(i32 argc , char * argv[])
         verifyAssumptions(ruleset);
     }
 
-	FILE *csv = fopen("explanation_traces.csv", "w");
+	FILE *csv = fopen("../explanation_traces.csv", "w");
 	if (!csv) { perror("fopen"); return 1; }
 
 	// Write CSV header
@@ -80,6 +80,7 @@ i32 main(i32 argc , char * argv[])
                               outSet, outRides, appliSize,
                               maxInc, maxInclSize,
                               prediction);
+		
 
     }
 	fclose(csv);
@@ -101,5 +102,7 @@ parseClArguments(i32 argc,char* argv[])
 
     return f;
 }
+
+
 
 

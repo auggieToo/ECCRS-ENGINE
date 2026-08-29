@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering
+\caption{Agreement between Lexicographic Closure (LC) entailment and the ECCRS most-specific-wins (MSW) classifier. Each instance falls into exactly one outcome, so the six outcome columns sum to $N$. \emph{Agree}: both are decisive and assign the same label, i.e.\ $\mathrm{MSW}=1$ with $m$ entailed or $\mathrm{MSW}=0$ with $\neg m$ entailed. \emph{Both abstain}: MSW abstains and LC entails neither $m$ nor $\neg m$. \emph{Disagree}: both decisive, different labels. \emph{LC abstains} and \emph{MSW abstains}: exactly one of the two abstains. \emph{Conflict}: LC entails both $m$ and $\neg m$. Aligned $=$ (Agree $+$ Both abstain)$/N$.}
+\label{tab:agreement}
+\begin{tabular}{lrrrrrrrr}
+\toprule
+ & & \multicolumn{2}{c}{Same answer} & \multicolumn{4}{c}{Different answer} & \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-8}
+Dataset & $N$ & Agree & Both abstain & Disagree & LC abstains & MSW abstains & Conflict & Aligned (\%) \\
+\midrule
+Bank & 11303 & 11303 & 0 & 0 & 0 & 0 & 0 & 100.00 \\
+Cancer & 175 & 175 & 0 & 0 & 0 & 0 & 0 & 100.00 \\
+Mushroom & 175 & 98 & 0 & 0 & 0 & 0 & 77 & 56.00 \\
+\midrule
+Overall & 11653 & 11576 & 0 & 0 & 0 & 0 & 77 & 99.34 \\
+\bottomrule
+\end{tabular}
+\end{table}

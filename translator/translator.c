@@ -23,7 +23,7 @@ writeHeader(FILE *out)
 
 	fprintf(out, "#include  \"klm/klm.h\"\n");
 
-	fprintf(out, "\n\n\\n");
+	fprintf(out, "\n\n\n");
 	
 }
 
@@ -66,6 +66,48 @@ emitKnowledgeBase(FILE *out, Rule *ruleset, u32 numRules)
     fprintf(out, "}\n");
 }
 
+void emitFeatureName(FILE *out, featureIndex f) {
+    if (f.isPair)
+        fprintf(out, "\"a%d_%d\"", f.index1, f.index2);
+    else
+        fprintf(out, "\"a%d\"", f.index1);
+}
+
+void emitQimplicList(FILE *out, 
+					 InstanceList *instances, 
+					  u32 numInstances) 
+{
+	fprintf(out,"\n\n\n\n");
+    fprintf(out, "void getQueries(knowledgeBase *A, qimplic *out)\n{\n");
+
+    for (u32 r = 0; r < numInstances; r++) 
+	{
+        Instance *inst = &instances[r].inst;
+
+        fprintf(out, "\tout[%u] = QUERY(A,%d,\n", r, instances[r].instanceId);
+        fprintf(out, "\t\tIF( ");
+
+        for (u32 c = 0; c < inst->size; c++) 
+		{
+            Condition *cond = &inst->conditions[c];
+            const char *sign = cond->requiredValue == 1 ? "POS" : "NEG";
+
+            fprintf(out, "%s(", sign);
+            emitFeatureName(out, cond->feature);
+            fprintf(out, ")");
+
+            if (c + 1 < inst->size) fprintf(out, ", ");
+            if ((c + 1) % 4 == 0 && c + 1 < inst->size)
+                fprintf(out, "\n\t\t    ");
+        }
+
+        fprintf(out, " ),\n");
+        fprintf(out, "\t\tTHEN( POS(\"m\") ));\n\n");
+    }
+
+    fprintf(out, "}\n");
+}
+
 int 
 main()
 {
@@ -73,6 +115,7 @@ main()
 	
 	
 	emitKnowledgeBase(f, ruleset, SIZE_OF_RULESET);
+	emitQimplicList(f,instanceSet, 10);
 
 	
 

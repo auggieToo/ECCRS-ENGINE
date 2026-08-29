@@ -1,42 +1,44 @@
-CC = gcc
+CC     = gcc
 CFLAGS = -O2 -Wall
 
-RULES = default-rules/rules.txt
-INSTANCE = default-rules/inst.txt
+# Given relative to THIS directory, or absolute. Normalised before
+# being handed to sub-makes so callers never think about eccrs/.
+RULES        = default-rules/rules.txt
+INSTANCE     = default-rules/inst.txt
+ABS_RULES    = $(abspath $(RULES))
+ABS_INSTANCE = $(abspath $(INSTANCE))
 
 ifeq ($(OS), Windows_NT)
     EXE_EXT = .exe
     RM      = cmd /C del /Q
-    NULL    = 2>nul
 else
     EXE_EXT =
     RM      = rm -f
-    NULL    =
 endif
 
-GEN = ./gen$(EXE_EXT)
+TRANSLATE = translator/translate$(EXE_EXT)
+KLMBIN    = klm/klm$(EXE_EXT)
+KLMSRC    = klm/klm.c klm/lex.c klm/orderedTuple.c klm/setRules.c rules.c kb.c
 
-# Final executable
-eccrs$(EXE_EXT): main.o eccrsMSW.o rules.o
-	$(CC) $(CFLAGS) main.o eccrsMSW.o rules.o -o eccrs$(EXE_EXT)
+.NOTPARALLEL:
+.PHONY: all eccrs translate klm clean
 
-# Object files
-main.o: main.c rules.h
-	$(CC) $(CFLAGS) -c main.c
+all: klm
 
-eccrsMSW.o: eccrsMSW.c rules.h
-	$(CC) $(CFLAGS) -c eccrsMSW.c
+# stage 1: generate rules.c/rules.h and build the ECCRS solver
+eccrs:
+	$(MAKE) -C eccrs RULES="$(ABS_RULES)" INSTANCE="$(ABS_INSTANCE)"
 
-rules.o: rules.c rules.h
-	$(CC) $(CFLAGS) -c rules.c
+# stage 2: ECCRS ruleset -> KLM knowledge base
+translate: eccrs
+	$(CC) $(CFLAGS) translator/translator1.c rules.c -o $(TRANSLATE)
+	cd translator && ./translate$(EXE_EXT)
 
-# Code generation
-rules.c rules.h: $(RULES) $(INSTANCE) gen$(EXE_EXT)
-	$(GEN) -r $(RULES) -i $(INSTANCE)
-
-# Generator
-gen$(EXE_EXT): parseEccrs.c
-	$(CC) $(CFLAGS) parseEccrs.c -o gen$(EXE_EXT)
+# stage 3: lex / entailment
+klm: translate
+	$(CC) $(CFLAGS) -g $(KLMSRC) -lpicosat -o $(KLMBIN)
+	cd klm && ./klm$(EXE_EXT)
 
 clean:
-	-$(RM) *.o eccrs$(EXE_EXT) gen$(EXE_EXT) rules.c rules.h $(NULL)
+	$(MAKE) -C eccrs clean
+	-$(RM) $(TRANSLATE) $(KLMBIN)

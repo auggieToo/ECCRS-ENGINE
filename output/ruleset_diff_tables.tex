@@ -1,0 +1,29 @@
+\begin{table}[t]
+\centering
+\caption{Effect of rule-set violations on MSW labels. Both trace files cover the same instances; one is produced by the correct rule set, the other by a rule set containing violations. Each instance falls into exactly one outcome, so the outcome columns sum to $N$. \emph{Agree}: both decisive with the same label. \emph{Disagree}: both decisive with different labels. The remaining columns record which of the two abstained. Label kept $=$ (Agree $+$ Both abstain)$/N$.}
+\label{tab:violation-labels}
+\begin{tabular}{lrrrrrrr}
+\toprule
+Dataset & $N$ & Agree & Disagree & Both abstain & Correct abstains & Violating abstains & Label kept (\%) \\
+\midrule
+Mushroom & 175 & 98 & 77 & 0 & 0 & 0 & 56.00 \\
+\midrule
+Overall & 175 & 98 & 77 & 0 & 0 & 0 & 56.00 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Effect of rule-set violations on MSW support. Restricted to the instances whose label the violation did not change: \emph{support identical} keeps both the applicable-rule set and the set of maximally specific winners, while the remaining columns count instances that reach the same label through different rules. Unchanged (\%) is taken over all $N$; Jaccard is the mean overlap of applicable-rule sets, also over all $N$.}
+\label{tab:violation-support}
+\begin{tabular}{lrrrrrr}
+\toprule
+Dataset & Label kept & Support identical & Applicable differs & Incl-max differs & Unchanged (\%) & Mean Jaccard \\
+\midrule
+Mushroom & 98 & 98 & 0 & 0 & 56.00 & 0.5600 \\
+\midrule
+Overall & 98 & 98 & 0 & 0 & 56.00 & 0.5600 \\
+\bottomrule
+\end{tabular}
+\end{table}

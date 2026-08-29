@@ -15,7 +15,7 @@ typedef int64_t i64;
 typedef u32 atomId;
 typedef u32 ruleId;
 
-#define MAX_CLAUSE 16
+#define MAX_CLAUSE 120
 
 #define POS(a) ((lit){(a), POSITIVE})
 #define NEG(a) ((lit){(a), NEGATIVE})
@@ -34,7 +34,7 @@ typedef u32 ruleId;
 #define QUERY(kb, id, body, head) \
     implicFromLits((kb), DEFEASIBLE,id, body, head)
 
-typedef enum { CLASSICAL, DEFEASIBLE } ruleType;
+typedef enum { DEFEASIBLE, CLASSICAL } ruleType;
 
 typedef enum { NEGATIVE, POSITIVE } literalType;
 
