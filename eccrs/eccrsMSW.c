@@ -8,6 +8,12 @@
 
 
 
+typedef struct 
+{
+	u32 out[3];
+	
+}toCtx;
+
 //helper fuctions
 static inline i8 isComparable(Rule a , Rule b);
 static i8 isSubset(Condition *a, u32 sizeA,Condition *b, u32  sizeB);
@@ -19,9 +25,9 @@ static void computeOverides(Rule *appRules, Overides *outset, u32 size);
 static u32  findByRuleId(Overides *outset, u32 size, u32 ruleId);
 static void printAllChains(Overides *outset, u32 size);
 static void printAllChainsToCSV(Overides *outset, u32 size, FILE *out);
-static u8  sanityCheck(Rule *ruleset);
-static u8  strictGlobalExceptionClosure(Rule *ruleset);
-static u8  totalOverride(Rule *ruleset);
+static u8  sanityCheck(Rule *ruleset, u32 *out);
+static u8  strictGlobalExceptionClosure(Rule *ruleset, u32 *out);
+static u8  totalOverride(Rule *ruleset, toCtx *out);
 static u8 ruleContainsFeature(Rule a, featureIndex fi);
 static u8 ruleHasConflictingFeature(Rule a, featureIndex fi, u32  val);
 static u8 areCompatible(Rule a, Rule b);
@@ -39,27 +45,51 @@ static inline u8 featureKeysEquals(featureIndex a, featureIndex b);
 //check if the assumptions made by the Alignment theorem 
 //hold for the given ECCRS rules. 
 //return 1 if all the all the asusmptions hold 
-u8 verifyAssumptions(Rule *rules)
+u8 verifyAssumptions(Rule *rules, FILE *out)
 {
     u8 violations = 1;
-    if(sanityCheck(rules))
-        printf("Passed Sanity check\n");
+
+	if(!out)
+	{
+		out = stdout;
+
+	}
+	fprintf(out, "Assumption Verification\n");
+	fprintf(out, "	1. Sanity check: ");
+	u32 rOut[2];
+    if(sanityCheck(rules,rOut))
+        fprintf(out, "Passed\n");
     else 
     {   
-        printf("Failed Sanity check\n");
+        fprintf(out,"Failed\n");																																																		
+		fprintf(out,"		Reason: Rule %u and Rule %u have identical rule bodies but opposite labels\n\n", rOut[0], rOut[1]);
         violations = 1;
     }
-
-    if(strictGlobalExceptionClosure(rules))
-        printf("Strict Global Exception  Closure not violated\n");
+	rOut[0]=rOut[1]=0;
+	fprintf(out, "    2. Strict Global Exception Closure check: ");
+    if(strictGlobalExceptionClosure(rules,rOut))
+        fprintf(out,"Passed\n");
     else
     {
-        printf("Strict Global Closure Violated\n");
+        fprintf(out,"Failed\n");
+
+        fprintf(out, "		Reason: Rule %d and Rule %d have opposite labels," 
+							"and are Compatible but neithet is a subset of the other\n", 
+							rOut[0],rOut[1]);
         violations = 1;
 
     }
 
-	//totalOverride(rules);
+
+	
+	fprintf(out, "	3. No Total Override: ");
+	toCtx toOut = {0};
+	if(totalOverride(rules, &toOut))
+	{
+
+
+	}
+	
 
     return violations;
 
@@ -165,7 +195,6 @@ writeExplanationTracesCSV(FILE *fp,
 
 	fprintf(fp, "\n");
 	
-	printf("here");
 }
 
 //given applicable rules ,overides chain set and inclusion-maximal set, and 
@@ -220,13 +249,13 @@ printExplanationTraces(Rule *applicableRules,
 //check if there exists two rules with identical bodies but different labels 
 //return 0 if such pair of rules exists else 1;
 static u8  
-sanityCheck(Rule *ruleset)
+sanityCheck(Rule *ruleset,u32 *out)
 {
-    for(int i = 0 ; i < SIZE_OF_RULESET ; i++)
+    for(u32 i = 0 ; i < SIZE_OF_RULESET ; i++)
     {
         Condition *a = ruleset[i].conditions;
         u32 sizeA = ruleset[i].numConditions;
-        for(int j = i + 1 ;  j < SIZE_OF_RULESET ; j++)
+        for(u32 j = i + 1 ;  j < SIZE_OF_RULESET ; j++)
         {
 
             Condition *b = ruleset[j].conditions;
@@ -234,9 +263,11 @@ sanityCheck(Rule *ruleset)
 
             if(RULES_EQUAL(a, sizeA,b,sizeB))
             {
-                if (ruleset[i].label != ruleset[j].label) 
+                if (ruleset[i].label != ruleset[j].label)
+				{
+					out[0]=i; out[1]=j;
                     return 0;
-
+				}
             }
 
         }
@@ -253,7 +284,7 @@ sanityCheck(Rule *ruleset)
 //where either rule body is a subset of the other. 
 //return 1 if no violation else 0
 static u8  
-strictGlobalExceptionClosure(Rule *ruleset)
+strictGlobalExceptionClosure(Rule *ruleset, u32 *out)
 {
     Rule *rk, *rj;
     u32 k, j;
@@ -267,21 +298,24 @@ strictGlobalExceptionClosure(Rule *ruleset)
             if (!rulesOppositeLabels(*rk, *rj)) continue;
             if (!areCompatible2(*rk, *rj)) continue;
 
-            /* equal size → cannot be strict subset */
+            // equal size → cannot be strict subset 
             if (rk->numConditions == rj->numConditions)
                 {
 
-                printf("RULE %d and %d are opp labels, Compatible and %d is not strict subset of %d as they are equal\n", k,j,k,j);
+				out[0]=k; out[1]=j;
+                //printf("RULE %d and %d are opp labels, Compatible and %d is not strict subset of %d as they are equal\n", k,j,k,j);
                 return 0;
                 }
 
-            /* check only the smaller against larger */
+            // check only the smaller against larger 
             if (rk->numConditions < rj->numConditions)
             {
                 if (!isSubsetRule(*rk, *rj))
                 {
-                    printf("RULE %d and %d are opp labels, Compatible and %d is not strict subset of %d\n", k,j,k,j);
-                    return 0;
+                    //printf("RULE %d and %d are opp labels, Compatible and %d is not strict subset of %d\n", k,j,k,j);
+                    
+					out[0]=k; out[1]=j;
+					return 0;
                 }
             }
             else
@@ -305,13 +339,12 @@ strictGlobalExceptionClosure(Rule *ruleset)
 // by a stricter rule with the opposite label."
 
 static u8  
-totalOverride(Rule *ruleset)
+totalOverride(Rule *ruleset, toCtx *out)
 {
     Rule r; 
 	int k = 0 ;
     RULESET_FOREACH_RULE_SAFE(ruleset, r)
     {
-		printf("rule %d\n", k++);		
 		existsUncoveredAssignment(r, ruleset);
 
      }

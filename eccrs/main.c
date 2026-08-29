@@ -46,7 +46,7 @@ i32 main(i32 argc , char * argv[])
 
     if(flags.checkAssumptions)
     {
-        verifyAssumptions(ruleset);
+		verifyAssumptions(ruleset,NULL);
     }
 
 	FILE *csv = fopen("../explanation_traces.csv", "w");

@@ -56,7 +56,6 @@ static void wLiteral(FILE *f, u32 atom, u8 sign) {
     wU8(f, sign);
 }
 
-// sign convention: match KLM's enum. assuming POSITIVE=0, NEGATIVE=1.
 #define BLOB_NEG 0    // NEGATIVE
 #define BLOB_POS 1    // POSITIVE
 #define BLOB_DEFEASIBLE 0

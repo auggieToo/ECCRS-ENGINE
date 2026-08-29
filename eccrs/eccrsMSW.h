@@ -7,10 +7,11 @@
         prediction = mswPrediction(maxIncl, maxInclSize);\
 
 
+
 //check if the assumptions made by the Alignment theorem 
 //hold for the given ECCRS rules. 
 //return 1 if all the all the asusmptions hold 
-u8 verifyAssumptions(Rule *rules);
+u8 verifyAssumptions(Rule *rules, FILE *out);
 
 
 //compute the applicable rule given an instance 
