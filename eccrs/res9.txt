@@ -1,0 +1,3147 @@
+Assumption Verification
+	1. Sanity check: Failed
+		Reason: Rule 11 and Rule 12 have identical rule bodies but opposite labels
+
+    2. Strict Global Exception Closure check: Failed
+		Reason: Rule 11 and Rule 12 have opposite labels,and are Compatible but neithet is a subset of the other
+	3. No Total Override: Reason: 
+Rule 11 is totally overridden by:
+  Rule 12 (covers 32/32 completions)
+
+------Instance ID: 463----------
+Applicable Rules
+----------------------------
+rule 1
+
+Overiddes
+----------------------------
+Rule 1 applies
+inclusion-maximal applicable set
+----------------------------
+rule 1
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 648----------
+Applicable Rules
+----------------------------
+rule 1
+
+Overiddes
+----------------------------
+Rule 1 applies
+inclusion-maximal applicable set
+----------------------------
+rule 1
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 3----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 178----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 601----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 334----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 655----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 564----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 413----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 578----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 458----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 529----------
+Applicable Rules
+----------------------------
+rule 1
+
+Overiddes
+----------------------------
+Rule 1 applies
+inclusion-maximal applicable set
+----------------------------
+rule 1
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 256----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 59----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 86----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 163----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 416----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 195----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 224----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 405----------
+Applicable Rules
+----------------------------
+rule 4
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 4 applies but is more specific than Rule 9, so Rule 9 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 4
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 407----------
+Applicable Rules
+----------------------------
+rule 2
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 2 applies but is more specific than Rule 9, so Rule 9 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 2
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 235----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 31----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 489----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 143----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 166----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 571----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 425----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 51----------
+Applicable Rules
+----------------------------
+rule 3
+rule 7
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 7 applies but is more specific than Rule 9, so Rule 9 is overridden
+Rule 3 applies but is more specific than Rule 7, so Rule 7 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 3
+
+Prediction
+----------------------------
+Prediction: 0
+
+------Instance ID: 669----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 616----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 679----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 372----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 472----------
+Applicable Rules
+----------------------------
+rule 1
+
+Overiddes
+----------------------------
+Rule 1 applies
+inclusion-maximal applicable set
+----------------------------
+rule 1
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 473----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 507----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 251----------
+Applicable Rules
+----------------------------
+rule 2
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 2 applies but is more specific than Rule 9, so Rule 9 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 2
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 633----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 450----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 423----------
+Applicable Rules
+----------------------------
+rule 2
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 2 applies but is more specific than Rule 9, so Rule 9 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 2
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 228----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 34----------
+Applicable Rules
+----------------------------
+rule 0
+
+Overiddes
+----------------------------
+Rule 0 applies
+inclusion-maximal applicable set
+----------------------------
+rule 0
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 442----------
+Applicable Rules
+----------------------------
+rule 5
+rule 7
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 7 applies but is more specific than Rule 9, so Rule 9 is overridden
+Rule 5 applies but is more specific than Rule 7, so Rule 7 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 5
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 535----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 528----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 426----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 340----------
+Applicable Rules
+----------------------------
+rule 3
+rule 7
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 7 applies but is more specific than Rule 9, so Rule 9 is overridden
+Rule 3 applies but is more specific than Rule 7, so Rule 7 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 3
+
+Prediction
+----------------------------
+Prediction: 0
+
+------Instance ID: 353----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 295----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 561----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 410----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 585----------
+Applicable Rules
+----------------------------
+rule 1
+
+Overiddes
+----------------------------
+Rule 1 applies
+inclusion-maximal applicable set
+----------------------------
+rule 1
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 497----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 186----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 39----------
+Applicable Rules
+----------------------------
+rule 3
+rule 7
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 7 applies but is more specific than Rule 9, so Rule 9 is overridden
+Rule 3 applies but is more specific than Rule 7, so Rule 7 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 3
+
+Prediction
+----------------------------
+Prediction: 0
+
+------Instance ID: 603----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 62----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 14----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 419----------
+Applicable Rules
+----------------------------
+rule 3
+rule 7
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 7 applies but is more specific than Rule 9, so Rule 9 is overridden
+Rule 3 applies but is more specific than Rule 7, so Rule 7 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 3
+
+Prediction
+----------------------------
+Prediction: 0
+
+------Instance ID: 139----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 78----------
+Applicable Rules
+----------------------------
+rule 3
+rule 7
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 7 applies but is more specific than Rule 9, so Rule 9 is overridden
+Rule 3 applies but is more specific than Rule 7, so Rule 7 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 3
+
+Prediction
+----------------------------
+Prediction: 0
+
+------Instance ID: 260----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 573----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 344----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 690----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 605----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 404----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 488----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 297----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 358----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 482----------
+Applicable Rules
+----------------------------
+rule 5
+rule 7
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 7 applies but is more specific than Rule 9, so Rule 9 is overridden
+Rule 5 applies but is more specific than Rule 7, so Rule 7 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 5
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 409----------
+Applicable Rules
+----------------------------
+rule 4
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 4 applies but is more specific than Rule 9, so Rule 9 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 4
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 77----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 97----------
+Applicable Rules
+----------------------------
+rule 1
+
+Overiddes
+----------------------------
+Rule 1 applies
+inclusion-maximal applicable set
+----------------------------
+rule 1
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 434----------
+Applicable Rules
+----------------------------
+rule 4
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 4 applies but is more specific than Rule 9, so Rule 9 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 4
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 197----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 184----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 574----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 553----------
+Applicable Rules
+----------------------------
+rule 4
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 4 applies but is more specific than Rule 9, so Rule 9 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 4
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 111----------
+Applicable Rules
+----------------------------
+rule 4
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 4 applies but is more specific than Rule 9, so Rule 9 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 4
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 160----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 678----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 589----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 103----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 203----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 127----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 47----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 287----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 286----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 699----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 651----------
+Applicable Rules
+----------------------------
+rule 1
+
+Overiddes
+----------------------------
+Rule 1 applies
+inclusion-maximal applicable set
+----------------------------
+rule 1
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 501----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 118----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 382----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 663----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 374----------
+Applicable Rules
+----------------------------
+rule 0
+
+Overiddes
+----------------------------
+Rule 0 applies
+inclusion-maximal applicable set
+----------------------------
+rule 0
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 170----------
+Applicable Rules
+----------------------------
+rule 1
+
+Overiddes
+----------------------------
+Rule 1 applies
+inclusion-maximal applicable set
+----------------------------
+rule 1
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 155----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 35----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 607----------
+Applicable Rules
+----------------------------
+rule 1
+
+Overiddes
+----------------------------
+Rule 1 applies
+inclusion-maximal applicable set
+----------------------------
+rule 1
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 455----------
+Applicable Rules
+----------------------------
+rule 8
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 8 applies but is more specific than Rule 11, so Rule 11 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 8
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 2----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 159----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 261----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 387----------
+Applicable Rules
+----------------------------
+rule 3
+rule 7
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 7 applies but is more specific than Rule 9, so Rule 9 is overridden
+Rule 3 applies but is more specific than Rule 7, so Rule 7 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 3
+
+Prediction
+----------------------------
+Prediction: 0
+
+------Instance ID: 187----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 636----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 29----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 209----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 131----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 240----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 525----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 275----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 276----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 146----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 600----------
+Applicable Rules
+----------------------------
+rule 5
+rule 7
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 7 applies but is more specific than Rule 9, so Rule 9 is overridden
+Rule 5 applies but is more specific than Rule 7, so Rule 7 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 5
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 558----------
+Applicable Rules
+----------------------------
+rule 1
+
+Overiddes
+----------------------------
+Rule 1 applies
+inclusion-maximal applicable set
+----------------------------
+rule 1
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 370----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 357----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 381----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 530----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 128----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 52----------
+Applicable Rules
+----------------------------
+rule 3
+rule 7
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 7 applies but is more specific than Rule 9, so Rule 9 is overridden
+Rule 3 applies but is more specific than Rule 7, so Rule 7 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 3
+
+Prediction
+----------------------------
+Prediction: 0
+
+------Instance ID: 304----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 495----------
+Applicable Rules
+----------------------------
+rule 0
+
+Overiddes
+----------------------------
+Rule 0 applies
+inclusion-maximal applicable set
+----------------------------
+rule 0
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 306----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 194----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 383----------
+Applicable Rules
+----------------------------
+rule 4
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 4 applies but is more specific than Rule 9, so Rule 9 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 4
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 13----------
+Applicable Rules
+----------------------------
+rule 3
+rule 7
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 7 applies but is more specific than Rule 9, so Rule 9 is overridden
+Rule 3 applies but is more specific than Rule 7, so Rule 7 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 3
+
+Prediction
+----------------------------
+Prediction: 0
+
+------Instance ID: 523----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 647----------
+Applicable Rules
+----------------------------
+rule 2
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 2 applies but is more specific than Rule 9, so Rule 9 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 2
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 527----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 177----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 40----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 328----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 485----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 171----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 698----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 513----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 692----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 430----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 273----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 223----------
+Applicable Rules
+----------------------------
+rule 0
+
+Overiddes
+----------------------------
+Rule 0 applies
+inclusion-maximal applicable set
+----------------------------
+rule 0
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 136----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 105----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 593----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 467----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 609----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 142----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 229----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 126----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 21----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 25----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 339----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 650----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 140----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 270----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 509----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 53----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 520----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 54----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 17----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 72----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 447----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 694----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 572----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 175----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 510----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 441----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 641----------
+Applicable Rules
+----------------------------
+rule 1
+
+Overiddes
+----------------------------
+Rule 1 applies
+inclusion-maximal applicable set
+----------------------------
+rule 1
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 95----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 436----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 217----------
+Applicable Rules
+----------------------------
+rule 6
+
+Overiddes
+----------------------------
+Rule 6 applies
+inclusion-maximal applicable set
+----------------------------
+rule 6
+
+Prediction
+----------------------------
+Prediction: 1
+
+------Instance ID: 88----------
+Applicable Rules
+----------------------------
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 applies
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 11
+rule 12
+
+Prediction
+----------------------------
+Abstain
+
+------Instance ID: 506----------
+Applicable Rules
+----------------------------
+rule 2
+rule 9
+rule 11
+rule 12
+
+Overiddes
+----------------------------
+Rule 11 appliesRule 9 applies but is more specific than Rule 11, so Rule 11 is overridden
+Rule 2 applies but is more specific than Rule 9, so Rule 9 is overridden
+
+Rule 12 applies
+inclusion-maximal applicable set
+----------------------------
+rule 2
+
+Prediction
+----------------------------
+Prediction: 1

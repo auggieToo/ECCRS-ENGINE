@@ -210,6 +210,7 @@ HeaderPatchPoints writeHeader(FILE *out)
     fprintf(out, "typedef uint8_t u8;\n");
     fprintf(out, "typedef uint16_t u16;\n");
     fprintf(out, "typedef uint32_t u32;\n\n");
+    fprintf(out, "typedef uint64_t u64;\n\n");
 
 
     fprintf(out, "#define MAX_RULES ");

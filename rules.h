@@ -1,7 +1,7 @@
 //---------------------------------------------
 //Warning: This file was auto generated
 //Changing this file may lead to unexpected behavior
-//Generated using: /home/august/edrs/tests-rules/bcancer-rules-san.txt , /home/august/edrs/tests-rules/bcancer-inst-csv.csv 
+//Generated using: /home/august/edrs/tests-rules/bcancer-rules-tot-ovr.txt , /home/august/edrs/tests-rules/bcancer-inst-csv.csv 
 //---------------------------------------------
 
 
@@ -16,7 +16,9 @@ typedef uint8_t u8;
 typedef uint16_t u16;
 typedef uint32_t u32;
 
-#define MAX_RULES         13
+typedef uint64_t u64;
+
+#define MAX_RULES         14
 #define MAX_CONDITIONS          4
 #define MAX_FEATURES          0
 

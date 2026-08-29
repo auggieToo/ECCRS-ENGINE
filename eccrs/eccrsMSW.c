@@ -7,12 +7,20 @@
                                        isSubset(b, sizeb,a, sizea)
 
 
-
+#define MAX_OVERRIDERS 10
 typedef struct 
 {
 	u32 out[3];
 	
 }toCtx;
+
+typedef struct {
+    u32 ruleId[MAX_OVERRIDERS];
+    u64 mask[MAX_OVERRIDERS];
+    u32 n;
+    u32 assignments;
+    u64 covered;
+} CoverStats;
 
 //helper fuctions
 static inline i8 isComparable(Rule a , Rule b);
@@ -27,19 +35,25 @@ static void printAllChains(Overides *outset, u32 size);
 static void printAllChainsToCSV(Overides *outset, u32 size, FILE *out);
 static u8  sanityCheck(Rule *ruleset, u32 *out);
 static u8  strictGlobalExceptionClosure(Rule *ruleset, u32 *out);
-static u8  totalOverride(Rule *ruleset, toCtx *out);
+static Rule  totalOverride(Rule *ruleset, CoverStats *out);
 static u8 ruleContainsFeature(Rule a, featureIndex fi);
 static u8 ruleHasConflictingFeature(Rule a, featureIndex fi, u32  val);
 static u8 areCompatible(Rule a, Rule b);
 static u8 areCompatible2(Rule a, Rule b);
 static inline u8 rulesOppositeLabels(Rule a,Rule b);
-static u8 existsUncoveredAssignment(Rule r ,Rule *rules);
+static u8 existsUncoveredAssignment(Rule r ,Rule *rules, CoverStats *s);
 static u8 searchForAssignment(Instance partialAssignment,featureIndex *freeFeatures, 
 			      u32 numFreeFeatures,
 			      u32 depth, 
 			      Rule r, 
 			      Rule *ruleset);
+static void enumerateAssignments(Instance pa,
+                     featureIndex *freeFeatures, u32 numFree,
+                     u32 depth, Rule r, Rule *ruleset,
+                     CoverStats *s);
 
+
+static void reportCover(CoverStats *s, Rule r);
 static inline u8 featureKeysEquals(featureIndex a, featureIndex b);
 
 //check if the assumptions made by the Alignment theorem 
@@ -74,7 +88,7 @@ u8 verifyAssumptions(Rule *rules, FILE *out)
         fprintf(out,"Failed\n");
 
         fprintf(out, "		Reason: Rule %d and Rule %d have opposite labels," 
-							"and are Compatible but neithet is a subset of the other\n", 
+							"and are Compatible but neither is a strict subset of the other\n", 
 							rOut[0],rOut[1]);
         violations = 1;
 
@@ -83,10 +97,16 @@ u8 verifyAssumptions(Rule *rules, FILE *out)
 
 	
 	fprintf(out, "	3. No Total Override: ");
-	toCtx toOut = {0};
-	if(totalOverride(rules, &toOut))
+	CoverStats toOut = {0};
+	Rule r;
+	if( (r = totalOverride(rules, &toOut)).numConditions ==0)
 	{
-
+		fprintf(out, "Passed\n");
+	} 
+	else
+	{
+		fprintf(out, "Reason: \n");
+		reportCover(&toOut,r);
 
 	}
 	
@@ -338,17 +358,16 @@ strictGlobalExceptionClosure(Rule *ruleset, u32 *out)
 // exists an assignment that satisfies a given rule without being covered 
 // by a stricter rule with the opposite label."
 
-static u8  
-totalOverride(Rule *ruleset, toCtx *out)
+static Rule  
+totalOverride(Rule *ruleset, CoverStats *out)
 {
-    Rule r; 
-	int k = 0 ;
+    u8 allOverridden = 1;
+    Rule r;
     RULESET_FOREACH_RULE_SAFE(ruleset, r)
     {
-		existsUncoveredAssignment(r, ruleset);
-
-     }
-    return 1;
+        if (!existsUncoveredAssignment(r, ruleset, out)) return r;
+    }
+    return (Rule){0};
 
 }
 
@@ -374,44 +393,47 @@ inAllFeatureArray(featureIndex *arr, u32 len, featureIndex val)
     return 0;
 }
 
-static u8 
-existsUncoveredAssignment(Rule r ,Rule *rules)
+
+static u8
+existsUncoveredAssignment(Rule r, Rule *rules, CoverStats *s)
 {
+
 	//build a partial assignment 
 	//need to figure out which feature is in what index...
-	Instance partialAssignment=  (Instance){0};
-	for(u8 k = 0; k <  INSTANCE_SIZE;k++)
-	{
-		if(ruleContainsFeature(r,ALL_FEATURES[k])) 
-			partialAssignment.conditions[partialAssignment.size++] = (Condition){ALL_FEATURES[k],featureVal(r,ALL_FEATURES[k]) };
-	}
+    Instance pa = (Instance){0};
+    for (u8 k = 0; k < INSTANCE_SIZE; k++)
+        if (ruleContainsFeature(r, ALL_FEATURES[k]))
+            pa.conditions[pa.size++] =
+                (Condition){ ALL_FEATURES[k], featureVal(r, ALL_FEATURES[k]) };
+
 
 	//collect all the free features -> these are features that are not in the rule conditions
-	featureIndex freeFeatures[INSTANCE_SIZE];
-	u32 freeFeaturesSize = 0 ; 
-	Rule other; 
-	RULESET_FOREACH_RULE_SAFE(ruleset, other)
-	{
-
+    featureIndex freeFeatures[INSTANCE_SIZE];
+    u32 freeSize = 0;
+    Rule other;
+    RULESET_FOREACH_RULE_SAFE(rules, other)      
+    {
+		
 		//because we want to check if the rule can be overriden by 
 		//rule of opposite label for a given instance/partial assignment , we only need 
 		//to select features that appear in the rules of opposite labels 
-		if(other.label == r.label) continue;
+        if (other.label == r.label) continue;
+        featureIndex fvar; u32 vvar;
 
-		featureIndex fvar;
-		u32 vvar; 
-		RULE_FOREACH_FEAT_VAL_SAFE(other, fvar, vvar)
-		{
-			if( !ruleContainsFeature(r, fvar) &&					//feature not in the rule
-			    !inAllFeatureArray(freeFeatures, freeFeaturesSize, fvar)		//featue already seen
-			  ) freeFeatures[freeFeaturesSize++] = fvar;	
-				
-		}
+        RULE_FOREACH_FEAT_VAL_SAFE(other, fvar, vvar)
+            if (!ruleContainsFeature(r, fvar) &&
+                !inAllFeatureArray(freeFeatures, freeSize, fvar))
+                freeFeatures[freeSize++] = fvar;
+    }
 
+    if (freeSize > 63) { printf("Rule %u: %u free features, too many\n",
+                                r.ruleId, freeSize); return 1; }
 
-	}
-	return searchForAssignment(partialAssignment, freeFeatures, freeFeaturesSize , 0 , r, rules);
+    *s = (CoverStats){0};
+    enumerateAssignments(pa, freeFeatures, freeSize, 0, r, rules, s);
 
+    u64 full = (1ull << s->assignments) - 1;
+    return s->covered != full;
 }
 
 // static u8
@@ -467,69 +489,53 @@ printInstance(Instance ins)
 		printf("\n");
 }
 
-
-
-static u8 searchForAssignment(Instance partialAssignment,featureIndex *freeFeatures, 
-			      u32 numFreeFeatures,
-			      u32 depth, 
-			      Rule r, 
-			      Rule *ruleset)
+static void 
+coverBump(CoverStats *s, u32 id, u32 idx)
 {
-	//TODO: can check if a rule fires in all possible extension of the partial assignment- alreadyDominated()... 
-
-
-	if(depth == numFreeFeatures)
-	{
-		Rule other;
-		//this part forms part of the greedy algorithm 
-		RULESET_FOREACH_RULE_SAFE(ruleset, other)
-		{
-			if(other.label == r.label) continue; 
-			
-			if(	isApplicable(other, partialAssignment)		//other fires on this assignment
-				&& isSubsetRule(r, other)						//and rule is a subset of other
-			) return 0; 								//rule r is overriden for this assignment 
-
-
-		}
-		printInstance(partialAssignment);
-		return 1 ;
-		
-
-	}
-
-	featureIndex f = freeFeatures[depth];
-	Instance pa = partialAssignment; 
-		
-	//add the new feature in the partial assignment 
-	partialAssignment.conditions[partialAssignment.size++] = (Condition){f, 0};   //set the new feature to 0 first
-
-	if(searchForAssignment(partialAssignment,
-						   freeFeatures, 
-						   numFreeFeatures, 
-						   depth + 1, 
-						   r, 
-						   ruleset))
-		return 1; 
-
-	//change the feature value to 1
-	partialAssignment.conditions[partialAssignment.size - 1] = (Condition){f, 1};   //set the new feature to 0 first
-	
-	if(searchForAssignment(partialAssignment,
-						   freeFeatures, 
-						   numFreeFeatures, 
-						   depth + 1, 
-						   r, 
-						   ruleset))
-		return 1; 
-
-	
-	//backtrack
-	partialAssignment = pa ;
-	
-	return 0;
-
+    for (u32 i = 0; i < s->n; i++)
+        if (s->ruleId[i] == id) { s->mask[i] |= 1ull << idx; return; }
+    if (s->n < MAX_OVERRIDERS) {
+        s->ruleId[s->n] = id;
+        s->mask[s->n]   = 1ull << idx;
+        s->n++;
+    }
 }
+
+static void
+enumerateAssignments(Instance pa,
+                     featureIndex *freeFeatures, u32 numFree,
+                     u32 depth, Rule r, Rule *ruleset,
+                     CoverStats *s)
+{
+    if (depth == numFree)
+    {
+        u32 idx = s->assignments++;     
+        u32 hits = 0;
+        Rule other;
+        RULESET_FOREACH_RULE_SAFE(ruleset, other)
+        {
+            if (other.ruleId == r.ruleId) continue;
+            if (other.label  == r.label)  continue;
+            if (isApplicable(other, pa) && isSubsetRule(r, other))
+            {
+                coverBump(s, other.ruleId, idx);
+                hits++;
+            }
+        }
+        if (hits) s->covered |= 1ull << idx;
+        //else      printInstance(pa);
+        return;
+    }
+
+    u32 base = pa.size;
+    pa.conditions[base] = (Condition){ freeFeatures[depth], 0 };
+    pa.size = base + 1;
+    enumerateAssignments(pa, freeFeatures, numFree, depth + 1, r, ruleset, s);
+
+    pa.conditions[base] = (Condition){ freeFeatures[depth], 1 };
+    enumerateAssignments(pa, freeFeatures, numFree, depth + 1, r, ruleset, s);
+}
+
 static inline u8 
 rulesOppositeLabels(Rule a,Rule b)
 {
@@ -577,12 +583,15 @@ isSubset(Condition *a, u32 sizeA,
 //check if rule a is a subset of rule b 
 //that is : each conditions in rule a must be in rule b 
 //return 1 if subset else 0
+//Strict
 static i8 
 isSubsetRule(Rule ar, Rule br)
 {
 	featureIndex aFidx, bFidx;
     u32 bRval, aRval;
     u32 i, j;
+
+	if (ar.numConditions >= br.numConditions) return 0;
 
     RULE_FOREACH_FEAT_VAL_IDX(ar, aFidx, aRval, i)
     {
@@ -768,7 +777,32 @@ computeOverides(Rule *appRules, Overides *outset, u32 size)
 }
 
 
+static void
+reportCover(CoverStats *s, Rule r)
+{
+    u64 full = (s->assignments >= 64) ? ~0ull : (1ull << s->assignments) - 1;
 
+    if (s->covered != full) {
+        printf("Rule %u: NOT totally overridden (%u of %u completions uncovered)\n",
+               r.ruleId, s->assignments - __builtin_popcountll(s->covered),
+               s->assignments);
+        return;
+    }
+
+    u64 need = full;
+    printf("Rule %u is totally overridden by:\n", r.ruleId);
+    while (need) {
+        u32 best = 0; u32 bestGain = 0;
+        for (u32 i = 0; i < s->n; i++) {
+            u32 gain = __builtin_popcountll(s->mask[i] & need);
+            if (gain > bestGain) { bestGain = gain; best = i; }
+        }
+        if (!bestGain) break;
+        printf("  Rule %u (covers %u/%u completions)\n",
+               s->ruleId[best], bestGain, s->assignments);
+        need &= ~s->mask[best];
+    }
+}
 
 
 //find a rule in an array using its rule id ..

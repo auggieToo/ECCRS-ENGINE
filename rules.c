@@ -1,7 +1,7 @@
 //---------------------------------------------
 //Warning: This file was auto generated
 //Changing this file may lead to unexpected behavior
-//Generated using: /home/august/edrs/tests-rules/bcancer-rules-san.txt , /home/august/edrs/tests-rules/bcancer-inst-csv.csv 
+//Generated using: /home/august/edrs/tests-rules/bcancer-rules-tot-ovr.txt , /home/august/edrs/tests-rules/bcancer-inst-csv.csv 
 //---------------------------------------------
 
 
@@ -21,7 +21,8 @@ Rule ruleset[] = {
     {9, {{{2,0, 0 },1 },{{5,0, 0 },0 }}, 2, 1},
     {10, {{{2,0, 0 },0 },{{8,0, 0 },1 }}, 2, 0},
     {11, {{{2,0, 0 },1 }}, 1, 0},
-    {12, {{{2,0, 0 },1 }}, 1, 1},
+    {12, {{{2,0, 0 },0 },{{4,0, 0 },0 },{{8,0, 0 },0 },{{7,0, 0 },1 }}, 4, 0},
+    {13, {{{2,0, 0 },0 },{{4,0, 0 },0 },{{8,0, 0 },0 },{{7,0, 0 },0 }}, 4, 0},
 };
 
 #define _1_IDXS    {1,0, 0 }
@@ -212,5 +213,5 @@ InstanceList instanceSet[] = {
     {88, { {{_1_IDXS, 0},{_2_IDXS, 1},{_3_IDXS, 1},{_4_IDXS, 1},{_5_IDXS, 1},{_6_IDXS, 1},{_7_IDXS, 1}}, 7}},
     {506, { {{_1_IDXS, 0},{_2_IDXS, 1},{_3_IDXS, 0},{_4_IDXS, 0},{_5_IDXS, 0},{_6_IDXS, 0},{_7_IDXS, 0}}, 7}},
 };
- const unsigned int SIZE_OF_RULESET = 13;
+ const unsigned int SIZE_OF_RULESET = 14;
  const unsigned int SIZE_OF_INSTANCE_SET = 175;
