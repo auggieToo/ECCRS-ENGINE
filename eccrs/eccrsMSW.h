@@ -30,7 +30,8 @@ Prediction mswPrediction(Rule *appRule, i8 size);
 //given applicable rules ,overides chain set and inclusion-maximal set, and 
 //print the explanation traces.
 void 
-printExplanationTraces(Rule *applicableRules, 
+printExplanationTraces(FILE *out,
+						Rule *applicableRules, 
                        Overides  *overSets, 
                        i8 size,
                        Rule *inclusionSet,

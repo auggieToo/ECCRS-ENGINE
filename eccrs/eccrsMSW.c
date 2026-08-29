@@ -53,7 +53,7 @@ static void enumerateAssignments(Instance pa,
                      CoverStats *s);
 
 
-static void reportCover(CoverStats *s, Rule r);
+static void reportCover(FILE *out,CoverStats *s, Rule r);
 static inline u8 featureKeysEquals(featureIndex a, featureIndex b);
 
 //check if the assumptions made by the Alignment theorem 
@@ -105,8 +105,9 @@ u8 verifyAssumptions(Rule *rules, FILE *out)
 	} 
 	else
 	{
-		fprintf(out, "Reason: \n");
-		reportCover(&toOut,r);
+		fprintf(out,"Failed\n");
+		fprintf(out, "		Reason: \n");
+		reportCover(out,&toOut,r);
 
 	}
 	
@@ -220,7 +221,8 @@ writeExplanationTracesCSV(FILE *fp,
 //given applicable rules ,overides chain set and inclusion-maximal set, and 
 //print the explanation traces.
 void 
-printExplanationTraces(Rule *applicableRules, 
+printExplanationTraces(FILE *out,
+					   Rule *applicableRules, 
                        Overides  *overSets, 
                        i8 size,
                        Rule *inclusionSet,
@@ -228,41 +230,43 @@ printExplanationTraces(Rule *applicableRules,
                        Prediction prediction,
                        u8 po)
 {
+
+	if(!out) out = stdout ; 
     if(!po)
     { 
-        printf("Applicable Rules\n");
-        printf("----------------------------\n");
+        fprintf(out,"Applicable Rules\n");
+        fprintf(out,"----------------------------\n");
         if(size)
         {
             for(int k = 0 ; k < size ;k++)
-                printf("rule %d\n", applicableRules[k].ruleId);
+                fprintf(out,"rule %d\n", applicableRules[k].ruleId);
         }
-        else printf("\n No Applicable Rules for the given Instance");
+        else fprintf(out,"\n No Applicable Rules for the given Instance");
 
 
-        printf("\n");
-        printf("Overiddes\n");
-        printf("----------------------------\n");
+        fprintf(out,"\n");
+        fprintf(out,"Overiddes\n");
+        fprintf(out,"----------------------------\n");
         if(size)
             printAllChains(overSets, size);
-        else printf("\n No Overiddes\n");
+        else fprintf(out,"\n No Overiddes\n");
 
-        printf("inclusion-maximal applicable set\n");
-        printf("----------------------------\n");
+        fprintf(out,"inclusion-maximal applicable set\n");
+        fprintf(out,"----------------------------\n");
         for(int k = 0 ; k < includeSize ;k++)
         {
-            printf("rule %d\n", inclusionSet[k].ruleId);
+            fprintf(out,"rule %d\n", inclusionSet[k].ruleId);
 
         }
 
     }
 
-    printf("\n");
-    printf("Prediction\n");
-    printf("----------------------------\n");
-    if(prediction == PRED_1) printf("Prediction: 1\n"); 
-    else if(prediction == PRED_0) printf("Prediction: 0\n"); 
-    else printf("Abstain\n"); 
+    fprintf(out,"\n");
+    fprintf(out,"Prediction\n");
+    fprintf(out,"----------------------------\n");
+    if(prediction == PRED_1) fprintf(out,"Prediction: 1\n"); 
+    else if(prediction == PRED_0) fprintf(out,"Prediction: 0\n"); 
+    else fprintf(out,"Abstain\n"); 
 }
 
 
@@ -778,19 +782,19 @@ computeOverides(Rule *appRules, Overides *outset, u32 size)
 
 
 static void
-reportCover(CoverStats *s, Rule r)
+reportCover(FILE *out,CoverStats *s, Rule r)
 {
     u64 full = (s->assignments >= 64) ? ~0ull : (1ull << s->assignments) - 1;
 
     if (s->covered != full) {
-        printf("Rule %u: NOT totally overridden (%u of %u completions uncovered)\n",
+        fprintf(out, "		Rule %u: NOT totally overridden (%u of %u completions uncovered)\n",
                r.ruleId, s->assignments - __builtin_popcountll(s->covered),
                s->assignments);
         return;
     }
 
     u64 need = full;
-    printf("Rule %u is totally overridden by:\n", r.ruleId);
+    fprintf(out,"		Rule %u is totally overridden by:\n", r.ruleId);
     while (need) {
         u32 best = 0; u32 bestGain = 0;
         for (u32 i = 0; i < s->n; i++) {
@@ -798,7 +802,7 @@ reportCover(CoverStats *s, Rule r)
             if (gain > bestGain) { bestGain = gain; best = i; }
         }
         if (!bestGain) break;
-        printf("  Rule %u (covers %u/%u completions)\n",
+        printf("			Rule %u (covers %u/%u completions)\n",
                s->ruleId[best], bestGain, s->assignments);
         need &= ~s->mask[best];
     }
