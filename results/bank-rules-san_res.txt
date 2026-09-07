@@ -1,0 +1,10 @@
+Assumption Verification
+	1. Sanity check: Failed
+		Reason: Rule 18 and Rule 21 have identical rule bodies but opposite labels
+
+    2. Strict Global Exception Closure check: Failed
+		Reason: Rule 18 and Rule 21 have opposite labels,and are Compatible but neither is a strict subset of the other
+	3. No Total Override: Failed
+		Reason: 
+		Rule 6: NOT totally overridden (256 of 256 completions uncovered)
+rule 6: assignments=256 covered=0000000000000000 popcount=0

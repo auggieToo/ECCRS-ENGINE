@@ -1,12 +1,16 @@
 CC     = gcc
 CFLAGS = -O2 -Wall
 
-# Given relative to THIS directory, or absolute. Normalised before
-# being handed to sub-makes so callers never think about eccrs/.
+# Inputs: relative to THIS directory, or absolute.
 RULES        = default-rules/rules.txt
 INSTANCE     = default-rules/inst.txt
 ABS_RULES    = $(abspath $(RULES))
 ABS_INSTANCE = $(abspath $(INSTANCE))
+
+# Per-program runtime arguments.
+ECCRS_ARGS     =
+TRANSLATE_ARGS =
+KLM_ARGS       =
 
 ifeq ($(OS), Windows_NT)
     EXE_EXT = .exe
@@ -21,23 +25,34 @@ KLMBIN    = klm/klm$(EXE_EXT)
 KLMSRC    = klm/klm.c klm/lex.c klm/orderedTuple.c klm/setRules.c rules.c kb.c
 
 .NOTPARALLEL:
-.PHONY: all eccrs translate klm clean
+.PHONY: all eccrs translate klm run run-eccrs run-translate run-klm clean
 
-all: klm
+# ---- build only ----
 
-# stage 1: generate rules.c/rules.h and build the ECCRS solver
+all: eccrs translate klm
+
 eccrs:
 	$(MAKE) -C eccrs RULES="$(ABS_RULES)" INSTANCE="$(ABS_INSTANCE)"
 
-# stage 2: ECCRS ruleset -> KLM knowledge base
 translate: eccrs
 	$(CC) $(CFLAGS) translator/translator1.c rules.c -o $(TRANSLATE)
-	cd translator && ./translate$(EXE_EXT)
 
-# stage 3: lex / entailment
-klm: translate
+klm: eccrs
 	$(CC) $(CFLAGS) -g $(KLMSRC) -lpicosat -o $(KLMBIN)
-	cd klm && ./klm$(EXE_EXT)
+
+# ---- build and run ----
+
+run: run-klm
+
+run-eccrs: eccrs
+	cd eccrs && ./eccrs$(EXE_EXT) $(ECCRS_ARGS)
+
+run-translate: translate
+	cd translator && ./translate$(EXE_EXT) $(TRANSLATE_ARGS)
+
+# translate must have RUN, not just built, before klm executes
+run-klm: run-translate klm
+	cd klm && ./klm$(EXE_EXT) $(KLM_ARGS)
 
 clean:
 	$(MAKE) -C eccrs clean

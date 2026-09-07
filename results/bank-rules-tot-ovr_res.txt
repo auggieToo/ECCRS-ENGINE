@@ -1,0 +1,7 @@
+Assumption Verification
+	1. Sanity check: Passed
+    2. Strict Global Exception Closure check: Passed
+	3. No Total Override: Failed
+		Reason: 
+		Rule 8: NOT totally overridden (256 of 256 completions uncovered)
+rule 8: assignments=256 covered=0000000000000000 popcount=0

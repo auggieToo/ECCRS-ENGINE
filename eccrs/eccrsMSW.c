@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "../rules.h"
 #include "rulesIterators.h"
+#include "report.h"
 
 #define RULES_EQUAL(a, sizea, b,sizeb) isSubset(a, sizea, b ,sizeb) &&\
                                        isSubset(b, sizeb,a, sizea)
@@ -232,7 +233,7 @@ printExplanationTraces(FILE *out,
 {
 
 	if(!out) out = stdout ; 
-    if(!po)
+    if(po== REPORT_BOTH)
     { 
         fprintf(out,"Applicable Rules\n");
         fprintf(out,"----------------------------\n");
@@ -518,6 +519,17 @@ enumerateAssignments(Instance pa,
         Rule other;
         RULESET_FOREACH_RULE_SAFE(ruleset, other)
         {
+			if (r.ruleId == 6 && idx == 0 &&
+                (other.ruleId == 21 || other.ruleId == 22))
+            {
+                fprintf(stderr,
+                    "r%u(nc=%u,lbl=%d) vs r%u(nc=%u,lbl=%d): appl=%d subset=%d\n",
+                    r.ruleId, r.numConditions, (int)r.label,
+                    other.ruleId, other.numConditions, (int)other.label,
+                    (int)isApplicable(other, pa),
+                    (int)isSubsetRule(r, other));
+            }
+
             if (other.ruleId == r.ruleId) continue;
             if (other.label  == r.label)  continue;
             if (isApplicable(other, pa) && isSubsetRule(r, other))
@@ -790,7 +802,10 @@ reportCover(FILE *out,CoverStats *s, Rule r)
         fprintf(out, "		Rule %u: NOT totally overridden (%u of %u completions uncovered)\n",
                r.ruleId, s->assignments - __builtin_popcountll(s->covered),
                s->assignments);
-        return;
+        fprintf(out, "rule %u: assignments=%u covered=%016llx popcount=%d\n",
+        r.ruleId, s->assignments, (unsigned long long)s->covered,
+        __builtin_popcountll(s->covered));
+		return;
     }
 
     u64 need = full;

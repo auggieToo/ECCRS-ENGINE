@@ -1,0 +1,6 @@
+Assumption Verification
+	1. Sanity check: Passed
+    2. Strict Global Exception Closure check: Failed
+		Reason: Rule 3 and Rule 21 have opposite labels,and are Compatible but neither is a strict subset of the other
+	3. No Total Override: Passed
+

@@ -9,29 +9,105 @@
 #include <string.h>
 #include "eccrsMSW.h"
 #include "../rules.h"
+#include <getopt.h>
+#include "report.h"
 
-typedef struct 
+
+static void
+usage(const char *prog)
 {
-    u8 checkAssumptions;        //-ca   --disable the Assumptions checks  
-    u8 predictionOnly;          //-po   --print the prediction Only
-    u8 assumptionsCheckTrace;    //-ct  --print traces for Assumptions checking
+    fprintf(stderr,
+        "usage: %s [what] [where] [options]\n"
+        "\n"
+        "what to report (default: both)\n"
+        "  --po           predictions only\n"
+        "  --aco          assumption checks only\n"
+        "\n"
+        "where to send it (default: stdout; repeatable)\n"
+        "  --stdout       write to stdout\n"
+        "  --out FILE     write text report to FILE\n"
+        "  --csv FILE     write CSV traces to FILE\n"
+        "\n"
+        "options\n"
+        "  --rules FILE   read the ruleset from FILE\n"
+        "  --ca           disable assumption checking\n"
+        "  --ct           trace assumption checking\n",
+        prog);
+}
 
-}clFlags;
+static clFlags
+parseClArguments(i32 argc, char *argv[])
+{
+    DEFAULT_FLAG(f);
 
-#define DEFUALT_FLAG(flagsName)  \
-                 clFlags flagsName = (clFlags){ .predictionOnly   = 0,\
-                                       .checkAssumptions = 1,\
-                                       .assumptionsCheckTrace = 0\
-                                    };\
+    static struct option longOpts[] = {
+        { "ca",     no_argument,       0, OPT_CA     },
+        { "ct",     no_argument,       0, OPT_CT     },
+        { "po",     no_argument,       0, OPT_PO     },
+        { "aco",    no_argument,       0, OPT_ACO    },
+        { "stdout", no_argument,       0, OPT_STDOUT },
+        { "out",    required_argument, 0, OPT_OUT    },
+        { "csv",    required_argument, 0, OPT_CSV    },
+        { "rules",  required_argument, 0, OPT_RULES  },
+        { "help",   no_argument,       0, OPT_HELP   },
+        { 0, 0, 0, 0 }
+    };
 
-static clFlags parseClArguments(i32 argc,char* argv[]);
+    i32 c;
+    while ((c = getopt_long(argc, argv, "", longOpts, NULL)) != -1)
+    {
+        switch (c)
+        {
+            case OPT_CA:  f.checkAssumptions      = 0; break;
+            case OPT_CT:  f.assumptionsCheckTrace = 1; break;
 
+            case OPT_PO:  f.report = REPORT_PREDICTION; break;
+            case OPT_ACO: f.report = REPORT_ASSUMPTION; break;
 
+            case OPT_STDOUT: f.sinks |= SINK_STDOUT; break;
+            case OPT_OUT: f.sinks |= SINK_FILE; f.outPath = optarg; break;
+            case OPT_CSV: f.sinks |= SINK_CSV;  f.csvPath = optarg; break;
 
+            case OPT_RULES: f.rulesPath = optarg; break;
+
+            case OPT_HELP: usage(argv[0]); exit(EXIT_SUCCESS);
+            default:       usage(argv[0]); exit(EXIT_FAILURE);
+        }
+    }
+
+    if (!f.sinks) f.sinks = SINK_STDOUT;
+
+    if (f.report == REPORT_ASSUMPTION && !f.checkAssumptions)
+    {
+        fprintf(stderr, "%s: --aco and --ca contradict\n", argv[0]);
+        exit(EXIT_FAILURE);
+    }
+
+    if (optind < argc)
+    {
+        fprintf(stderr, "%s: unexpected argument '%s'\n", argv[0], argv[optind]);
+        exit(EXIT_FAILURE);
+    }
+
+    return f;
+}
 
 i32 main(i32 argc , char * argv[])
 {
-    clFlags flags =  parseClArguments(argc,argv);
+    clFlags flags = parseClArguments(argc, argv);
+
+	FILE *txt = NULL, *csv = NULL;
+	if (flags.sinks & SINK_FILE)
+	{
+		txt = fopen(flags.outPath, "w");
+		if (!txt) { perror(flags.outPath); return EXIT_FAILURE; }
+	}
+	if (flags.sinks & SINK_CSV)
+	{
+		csv = fopen(flags.csvPath, "w");
+		if (!csv) { perror(flags.csvPath); return EXIT_FAILURE; }
+		fprintf(csv, "instance_id,applicable_rules,overrides,incl_max,prediction\n");
+	}
 
 
 
@@ -44,64 +120,45 @@ i32 main(i32 argc , char * argv[])
     Rule maxInc[MAX_RULES];
     Overides outRides[MAX_RULES];
 
-    if(flags.checkAssumptions)
+    if(flags.report != REPORT_PREDICTION && flags.checkAssumptions)
     {
-		verifyAssumptions(ruleset,NULL);
+		verifyAssumptions(ruleset,txt);
     }
 
-	FILE *csv = fopen("../explanation_traces.csv", "w");
-	if (!csv) { perror("fopen"); return 1; }
-
-	// Write CSV header
-	fprintf(csv, "instance_id,applicable_rules,overrides,incl_max,prediction\n");
-
-
-
-    for(int k = 0 ; k < SIZE_OF_INSTANCE_SET ; k++)
-    {
-        RUN_ECCRS_MSW(ruleset,instanceSet[k].inst, outSet, 
-                              appliSize, 
-                              maxInclSize,
-                              outRides,
-                              maxInc,
-                              prediction);
+	if(flags.report != REPORT_ASSUMPTION)
+	{
+		for(int k = 0 ; k < SIZE_OF_INSTANCE_SET ; k++)
+		{
+			RUN_ECCRS_MSW(ruleset,instanceSet[k].inst, outSet, 
+								  appliSize, 
+								  maxInclSize,
+								  outRides,
+								  maxInc,
+								  prediction);
 
 
-    printf("\n------Instance ID: %d----------\n", instanceSet[k].instanceId);
-	printExplanationTraces(outSet, outRides, 
-                                        appliSize,
-                                       maxInc, 
-                                        maxInclSize,
-                                        prediction,
-                                        flags.predictionOnly);
-		
-		  writeExplanationTracesCSV(csv,
-                              instanceSet[k].instanceId,
-                              outSet, outRides, appliSize,
-                              maxInc, maxInclSize,
-                              prediction);
-		
+		printf("\n------Instance ID: %d----------\n", instanceSet[k].instanceId);
+		printExplanationTraces(NULL,outSet, outRides, 
+											appliSize,
+										   maxInc, 
+											maxInclSize,
+											prediction,
+											flags.report);
+			
+			  writeExplanationTracesCSV(csv,
+								  instanceSet[k].instanceId,
+								  outSet, outRides, appliSize,
+								  maxInc, maxInclSize,
+								  prediction);
+			
 
-    }
-	fclose(csv);
+		}
+	}
+	if(csv)	fclose(csv);
+	if(txt) fclose(txt);
     return EXIT_SUCCESS;
 }
 
-static clFlags 
-parseClArguments(i32 argc,char* argv[])
-{
-    //create a defualt flag
-    DEFUALT_FLAG(f);
-
-    for(i32 k = 1 ; k < argc; k++)
-    {
-        if((strcmp("-ca",argv[k])==0)) f.checkAssumptions = 0;
-        else if((strcmp("-po",argv[k])==0)) f.predictionOnly = 1;
-        else if((strcmp("-ct",argv[k])==0)) f.assumptionsCheckTrace = 1;
-    }
-
-    return f;
-}
 
 
 
