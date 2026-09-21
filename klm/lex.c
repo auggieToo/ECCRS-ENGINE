@@ -4,7 +4,7 @@
 
 #include <ctype.h>
 #include <stdlib.h>
-#include <picosat.h>
+#include "vendor/picosat.h"
 #include <stdbool.h>
 #include <string.h>
 
@@ -156,7 +156,10 @@ SubsetRankAlg(knowledgeBase K, orderedSrTuple *out)
 
 	orderedTuple B = BaseRank(K);
 
-	tuplePrintSet(NULL,&B, &K);
+	FILE *outf = fopen("../out/baseRank.txt", "w");
+	if(!outf){perror("baseRank"); return 0;}
+
+	tuplePrintSet(outf,&B, &K);
 	
 	u32 i = 0, k = 0; 
 	
@@ -185,8 +188,8 @@ SubsetRankAlg(knowledgeBase K, orderedSrTuple *out)
 	}
 
 	out->infRank = B.infRank;
+	 fclose(outf);
 
-		printf("\n\n\n\n");		
 		//orderedSrTuplePrint(NULL, out, &K);
 	
 }
@@ -433,57 +436,6 @@ emitRuleCb(u32 idx, void *ctx)
 	addRuleClauseSel(e->s, &e->K->rules[idx].impl, e->sel);
 }
 
-/* does  R_start ∧ ... ∧ R_(rankNo-1) ∧ R_inf  entail ¬a ?          */
-/* i.e.  that conjunction ∪ {a}  is UNSAT                            */
-u8
-NegEntailSr(const knowledgeBase *K,
-            const orderedSrTuple *ot,
-            u32 startRank,
-            formula a)
-{
-	PicoSAT *s = picosat_init();
-	i32 nextVar = (i32)K->atoms.count + 1;    /* fresh vars live above atoms */
-
-	for (u32 i = startRank; i < ot->rankNo; i++)
-	{
-		const subsetRank *sr = &ot->R[i];
-
-		if (sr->count == 1)                   /* plain conjunction */
-		{
-			emitCtx e = { .s = s, .K = K, .sel = 0 };
-			rsForEach(&sr->rs[0], emitRuleCb, &e);
-		}
-		else                                  /* disjunction of conjunctions */
-		{
-			i32 firstSel = nextVar;
-
-			for (u32 g = 0; g < sr->count; g++)
-			{
-				emitCtx e = { .s = s, .K = K, .sel = nextVar++ };
-				rsForEach(&sr->rs[g], emitRuleCb, &e);
-			}
-
-			for (i32 v = firstSel; v < nextVar; v++)   /* sel_1 ∨ ... ∨ sel_p */
-				picosat_add(s, v);
-			picosat_add(s, 0);
-		}
-	}
-
-	/* R_inf, unguarded */
-	emitCtx e = { .s = s, .K = K, .sel = 0 };
-	rsForEach(&ot->infRank.rs, emitRuleCb, &e);
-
-	/* assert a's literals */
-	for (u32 j = 0; j < a.count; j++)
-	{
-		picosat_add(s, litToInt(a.clause[j]));
-		picosat_add(s, 0);
-	}
-
-	int res = picosat_sat(s, -1);
-	picosat_reset(s);
-	return res == PICOSAT_UNSATISFIABLE;
-}
 static i32
 emitRanks(PicoSAT *s, const knowledgeBase *K,
           const orderedSrTuple *ot, u32 startRank)
@@ -516,8 +468,28 @@ emitRanks(PicoSAT *s, const knowledgeBase *K,
 	emitCtx e = { .s = s, .K = K, .sel = 0 };
 	rsForEach(&ot->infRank.rs, emitRuleCb, &e);
 
-	return nextVar;                 /* in case callers need more fresh vars */
+	return nextVar;                 
 }
+
+// does  R_start ∧ ... ∧ R_(rankNo-1) ∧ R_inf  entail ¬a ?          
+// i.e.  that conjunction ∪ {a}  is UNSAT                           
+u8
+NegEntailSr(const knowledgeBase *K, const orderedSrTuple *ot,
+            u32 startRank, formula a)
+{
+	PicoSAT *s = picosat_init();
+	emitRanks(s, K, ot, startRank);
+
+	for (u32 j = 0; j < a.count; j++) {
+		picosat_add(s, litToInt(a.clause[j]));
+		picosat_add(s, 0);
+	}
+
+	int res = picosat_sat(s, -1);
+	picosat_reset(s);
+	return res == PICOSAT_UNSATISFIABLE;
+}
+
 
 u8
 EntailSr(const knowledgeBase *K, const orderedSrTuple *ot,
@@ -526,8 +498,7 @@ EntailSr(const knowledgeBase *K, const orderedSrTuple *ot,
 	PicoSAT *s = picosat_init();
 	emitRanks(s, K, ot, startRank);
 
-	addNegRuleClause(s, &q);                   /* assert ¬(body -> head) */
-
+	addNegRuleClause(s, &q);                   
 	int res = picosat_sat(s, -1);
 	picosat_reset(s);
 	return res == PICOSAT_UNSATISFIABLE;
@@ -545,8 +516,46 @@ LexicographicClosure(const knowledgeBase *K, const orderedSrTuple *ot, implic q)
 
 void loadBlob(const char *path, knowledgeBase *A,
 				qimplic **queries, u32 *nQueries);
-int main()
+i32 
+main(i32 argc, char *argv[])
 {
+	u8 blobKB = 1; 
+	u8 printBaseRank = 0;
+	u8 printSubsetRank  = 0;
+
+	//parse command line arguments 
+	for(u32 i = 1 ; i < argc ; i++)
+	{
+		if(strcmp(argv[i], "--blob") ==0) blobKB = 1;
+		if(strcmp(argv[i], "--kbr") ==0) blobKB = 0;
+		if(strcmp(argv[i], "--pBRank") ==0) printBaseRank = 1;
+		if(strcmp(argv[i], "--pSRank") ==0) printSubsetRank = 1;
+		if(strcmp(argv[i], "--out")==0)
+		{
+			//TODO:  
+				
+				//everything goes to : outfolder
+
+			i++; 
+		}
+
+	}
+
+	knowledgeBase A;
+	orderedSrTuple ost;
+	srTupleInit(&ost);
+	u32 s;
+	qimplic *q;
+
+	if(blobKB)
+	{
+			loadBlob("../data.blob", &A, &q, &s);
+	}
+	else 
+	{
+		(void)0;
+	}
+
 /*
 	knowledgeBase A; 
 	kbInit(&A, 10);
@@ -564,29 +573,23 @@ int main()
 	srTupleInit(&ost);
 	SubsetRankAlg(A, &ost);
 
-	static qimplic q[11303];
 	getQueries(&A, q);
 */
 
-	knowledgeBase A;
-	orderedSrTuple ost;
-	srTupleInit(&ost);
-	u32 s;
-	qimplic *q;
-	loadBlob("../mushroom-data.blob", &A, &q, &s);
 
 
 
+	FILE *kbf = fopen("../out/knowledgeBase.txt", "w");
+	if(!kbf) {perror("knowledge base"); return 0;}
+	kbPrint(kbf,&A);
 
-	kbPrint(NULL,&A);
 	kbSize = A.count;
 	
 
-	printf("\n\n\n");
 
-		SubsetRankAlg(A, &ost);
+	SubsetRankAlg(A, &ost);
 
-	FILE *csv = fopen("../results.csv", "w");
+	FILE *csv = fopen("../out/lexicogrResults.csv", "w");
 	if (!csv) { perror("fopen results.csv"); return 1; }
 
 	fprintf(csv, "instanceid,entail_m,entail_not_m,abstain\n");
@@ -607,8 +610,8 @@ int main()
 		fprintf(csv, "%u,%d,%d,%d\n",
 				q[i].queryId, entailM ? 1 : 0, entailNotM ? 1 : 0, abstain);
 	}
-
 fclose(csv);
+fclose(kbf);
 
 
 
@@ -623,14 +626,14 @@ static u32 rU32(FILE *f) {
 }
 static u8 rU8(FILE *f) { u8 v; fread(&v, 1, 1, f); return v; }
 
-// ---- atom table: register a name at the exact id the blob assigned ----
+
 // ids arrive in order 0,1,2,... so this is really append, but we store the
 // id explicitly to stay robust if that ever changes.
-
 static void
 atomTableAddNamed(atomTable *t, const char *name, atomId id)
 {
-    if (t->count >= t->capacity) {
+    if (t->count >= t->capacity) 
+	{
         t->capacity = t->capacity ? t->capacity * 2 : 64;
         t->names = realloc(t->names, sizeof(u8*)    * t->capacity);
         t->ids   = realloc(t->ids,   sizeof(atomId) * t->capacity);
@@ -642,9 +645,10 @@ atomTableAddNamed(atomTable *t, const char *name, atomId id)
     t->count++;
 }
 
-// ---- formula readers ----
-// count, then count × (u32 atom, u8 sign)
 
+
+
+// count, then count × (u32 atom, u8 sign)
 static void
 readFormula(FILE *f, formula *out)   // heap-backed (KB rules)
 {
@@ -691,8 +695,9 @@ loadBlob(const char *path, knowledgeBase *A,
         atomTableAddNamed(&A->atoms, name, i+1);
     }
 
-	for (u32 i = 0; i < A->atoms.count; i++)
-    printf("atom %u = %s (id %u)\n", i, A->atoms.names[i], A->atoms.ids[i]);
+	// for (u32 i = 0; i < A->atoms.count; i++)
+	//    printf("atom %u = %s (id %u)\n", i, A->atoms.names[i], A->atoms.ids[i]);
+
 
     // SECTION 2: rules
     u32 nRules = rU32(f);

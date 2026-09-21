@@ -96,19 +96,16 @@ i32 main(i32 argc , char * argv[])
 {
     clFlags flags = parseClArguments(argc, argv);
 
-	FILE *txt = NULL, *csv = NULL;
-	if (flags.sinks & SINK_FILE)
-	{
-		txt = fopen(flags.outPath, "w");
-		if (!txt) { perror(flags.outPath); return EXIT_FAILURE; }
-	}
-	if (flags.sinks & SINK_CSV)
-	{
-		csv = fopen(flags.csvPath, "w");
-		if (!csv) { perror(flags.csvPath); return EXIT_FAILURE; }
-		fprintf(csv, "instance_id,applicable_rules,overrides,incl_max,prediction\n");
-	}
+	FILE *txt = NULL, *csv = NULL, *traces = NULL;
+	txt = fopen("../out/assumptionCheck.txt", "w");
+	if (!txt) { perror("../out/assumptionCheck.txt"); return EXIT_FAILURE; }
+		
+	csv = fopen("../out/eccrsResults.csv", "w");
+	if (!csv) { perror("../out/eccrsResults.csv"); return EXIT_FAILURE; }
+	fprintf(csv, "instance_id,applicable_rules,overrides,incl_max,prediction\n");
 
+	traces = fopen("../out/eccrsTraces.txt", "w");
+	if (!txt) { perror("../out/eccrsTraces.txt"); return EXIT_FAILURE; }
 
 
     u8 appliSize;
@@ -120,12 +117,9 @@ i32 main(i32 argc , char * argv[])
     Rule maxInc[MAX_RULES];
     Overides outRides[MAX_RULES];
 
-    if(flags.report != REPORT_PREDICTION && flags.checkAssumptions)
-    {
-		verifyAssumptions(ruleset,txt);
-    }
+	verifyAssumptions(ruleset,txt);
 
-	if(flags.report != REPORT_ASSUMPTION)
+	if(1)
 	{
 		for(int k = 0 ; k < SIZE_OF_INSTANCE_SET ; k++)
 		{
@@ -137,8 +131,8 @@ i32 main(i32 argc , char * argv[])
 								  prediction);
 
 
-		printf("\n------Instance ID: %d----------\n", instanceSet[k].instanceId);
-		printExplanationTraces(NULL,outSet, outRides, 
+		fprintf(traces,"\n------Instance ID: %d----------\n", instanceSet[k].instanceId);
+		printExplanationTraces(traces,outSet, outRides, 
 											appliSize,
 										   maxInc, 
 											maxInclSize,
@@ -156,6 +150,7 @@ i32 main(i32 argc , char * argv[])
 	}
 	if(csv)	fclose(csv);
 	if(txt) fclose(txt);
+	if(traces) fclose(traces);
     return EXIT_SUCCESS;
 }
 

@@ -542,11 +542,8 @@ rulePrint(FILE *out, const atomTable *t, const rule *r)
 	formulaPrint(out, t, &r->impl.body);
 	fputs(r->impl.type == DEFEASIBLE ? "  |~  " : "  ->  ", out);
 	formulaPrint(out, t, &r->impl.head);
+	fprintf(out,"\n");
 
-	if (r->rank == RANK_UNASSIGNED)
-		fputs("      (rank: inf)\n", out);
-	else
-		fprintf(out, "      (rank: %u)\n", r->rank);
 }
 
 void
@@ -577,7 +574,7 @@ kbPrint(FILE *out, const knowledgeBase *kb)
 		return;
 	}
 
-	/* classical block first, then defeasible: reads the way a DKB is written */
+	// classical block first  then defeasible: reads the way a DKB is written 
 	fputs(" classical:\n", out);
 	u32 shown = 0;
 	for (u32 i = 0; i < kb->count; i++)

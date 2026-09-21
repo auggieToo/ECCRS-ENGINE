@@ -1,0 +1,176 @@
+instance_id,applicable_rules,overrides,incl_max,prediction
+463,"r1","r1 applies|","r1",1
+648,"r1","r1 applies|","r1",1
+3,"r6","r6 applies|","r6",1
+178,"r11","r11 applies|","r11",0
+601,"r6","r6 applies|","r6",1
+334,"r11","r11 applies|","r11",0
+655,"r6","r6 applies|","r6",1
+564,"r6","r6 applies|","r6",1
+413,"r11","r11 applies|","r11",0
+578,"r6","r6 applies|","r6",1
+458,"r11","r11 applies|","r11",0
+529,"r1","r1 applies|","r1",1
+256,"r11","r11 applies|","r11",0
+59,"r11","r11 applies|","r11",0
+86,"r11","r11 applies|","r11",0
+163,"r6","r6 applies|","r6",1
+416,"r11","r11 applies|","r11",0
+195,"r6","r6 applies|","r6",1
+224,"r11","r11 applies|","r11",0
+405,"r4 r9 r11","r11 applies->r9 applies & overides r11->r4 applies & overides r9|","r4",1
+407,"r2 r9 r11","r11 applies->r9 applies & overides r11->r2 applies & overides r9|","r2",1
+235,"r11","r11 applies|","r11",0
+31,"r6","r6 applies|","r6",1
+489,"r11","r11 applies|","r11",0
+143,"r11","r11 applies|","r11",0
+166,"r6","r6 applies|","r6",1
+571,"r11","r11 applies|","r11",0
+425,"r6","r6 applies|","r6",1
+51,"r3 r7 r9 r11","r11 applies->r9 applies & overides r11->r7 applies & overides r9->r3 applies & overides r7|","r3",0
+669,"r11","r11 applies|","r11",0
+616,"r6","r6 applies|","r6",1
+679,"r6","r6 applies|","r6",1
+372,"r6","r6 applies|","r6",1
+472,"r1","r1 applies|","r1",1
+473,"r6","r6 applies|","r6",1
+507,"r11","r11 applies|","r11",0
+251,"r2 r9 r11","r11 applies->r9 applies & overides r11->r2 applies & overides r9|","r2",1
+633,"r6","r6 applies|","r6",1
+450,"r11","r11 applies|","r11",0
+423,"r2 r9 r11","r11 applies->r9 applies & overides r11->r2 applies & overides r9|","r2",1
+228,"r11","r11 applies|","r11",0
+34,"r0","r0 applies|","r0",1
+442,"r5 r7 r9 r11","r11 applies->r9 applies & overides r11->r7 applies & overides r9->r5 applies & overides r7|","r5",1
+535,"r6","r6 applies|","r6",1
+528,"r6","r6 applies|","r6",1
+426,"r11","r11 applies|","r11",0
+340,"r3 r7 r9 r11","r11 applies->r9 applies & overides r11->r7 applies & overides r9->r3 applies & overides r7|","r3",0
+353,"r11","r11 applies|","r11",0
+295,"r6","r6 applies|","r6",1
+561,"r6","r6 applies|","r6",1
+410,"r6","r6 applies|","r6",1
+585,"r1","r1 applies|","r1",1
+497,"r6","r6 applies|","r6",1
+186,"r6","r6 applies|","r6",1
+39,"r3 r7 r9 r11","r11 applies->r9 applies & overides r11->r7 applies & overides r9->r3 applies & overides r7|","r3",0
+603,"r6","r6 applies|","r6",1
+62,"r6","r6 applies|","r6",1
+14,"r6","r6 applies|","r6",1
+419,"r3 r7 r9 r11","r11 applies->r9 applies & overides r11->r7 applies & overides r9->r3 applies & overides r7|","r3",0
+139,"r6","r6 applies|","r6",1
+78,"r3 r7 r9 r11","r11 applies->r9 applies & overides r11->r7 applies & overides r9->r3 applies & overides r7|","r3",0
+260,"r11","r11 applies|","r11",0
+573,"r6","r6 applies|","r6",1
+344,"r6","r6 applies|","r6",1
+690,"r6","r6 applies|","r6",1
+605,"r11","r11 applies|","r11",0
+404,"r6","r6 applies|","r6",1
+488,"r11","r11 applies|","r11",0
+297,"r11","r11 applies|","r11",0
+358,"r11","r11 applies|","r11",0
+482,"r5 r7 r9 r11","r11 applies->r9 applies & overides r11->r7 applies & overides r9->r5 applies & overides r7|","r5",1
+409,"r4 r9 r11","r11 applies->r9 applies & overides r11->r4 applies & overides r9|","r4",1
+77,"r6","r6 applies|","r6",1
+97,"r1","r1 applies|","r1",1
+434,"r4 r9 r11","r11 applies->r9 applies & overides r11->r4 applies & overides r9|","r4",1
+197,"r11","r11 applies|","r11",0
+184,"r11","r11 applies|","r11",0
+574,"r6","r6 applies|","r6",1
+553,"r4 r9 r11","r11 applies->r9 applies & overides r11->r4 applies & overides r9|","r4",1
+111,"r4 r9 r11","r11 applies->r9 applies & overides r11->r4 applies & overides r9|","r4",1
+160,"r11","r11 applies|","r11",0
+678,"r6","r6 applies|","r6",1
+589,"r11","r11 applies|","r11",0
+103,"r6","r6 applies|","r6",1
+203,"r6","r6 applies|","r6",1
+127,"r11","r11 applies|","r11",0
+47,"r11","r11 applies|","r11",0
+287,"r11","r11 applies|","r11",0
+286,"r11","r11 applies|","r11",0
+699,"r11","r11 applies|","r11",0
+651,"r1","r1 applies|","r1",1
+501,"r6","r6 applies|","r6",1
+118,"r11","r11 applies|","r11",0
+382,"r11","r11 applies|","r11",0
+663,"r6","r6 applies|","r6",1
+374,"r0","r0 applies|","r0",1
+170,"r1","r1 applies|","r1",1
+155,"r6","r6 applies|","r6",1
+35,"r6","r6 applies|","r6",1
+607,"r1","r1 applies|","r1",1
+455,"r8 r11","r11 applies->r8 applies & overides r11|","r8",1
+2,"r11","r11 applies|","r11",0
+159,"r6","r6 applies|","r6",1
+261,"r11","r11 applies|","r11",0
+387,"r3 r7 r9 r11","r11 applies->r9 applies & overides r11->r7 applies & overides r9->r3 applies & overides r7|","r3",0
+187,"r11","r11 applies|","r11",0
+636,"r6","r6 applies|","r6",1
+29,"r6","r6 applies|","r6",1
+209,"r6","r6 applies|","r6",1
+131,"r6","r6 applies|","r6",1
+240,"r11","r11 applies|","r11",0
+525,"r6","r6 applies|","r6",1
+275,"r6","r6 applies|","r6",1
+276,"r6","r6 applies|","r6",1
+146,"r6","r6 applies|","r6",1
+600,"r5 r7 r9 r11","r11 applies->r9 applies & overides r11->r7 applies & overides r9->r5 applies & overides r7|","r5",1
+558,"r1","r1 applies|","r1",1
+370,"r6","r6 applies|","r6",1
+357,"r11","r11 applies|","r11",0
+381,"r6","r6 applies|","r6",1
+530,"r6","r6 applies|","r6",1
+128,"r6","r6 applies|","r6",1
+52,"r3 r7 r9 r11","r11 applies->r9 applies & overides r11->r7 applies & overides r9->r3 applies & overides r7|","r3",0
+304,"r6","r6 applies|","r6",1
+495,"r0","r0 applies|","r0",1
+306,"r11","r11 applies|","r11",0
+194,"r6","r6 applies|","r6",1
+383,"r4 r9 r11","r11 applies->r9 applies & overides r11->r4 applies & overides r9|","r4",1
+13,"r3 r7 r9 r11","r11 applies->r9 applies & overides r11->r7 applies & overides r9->r3 applies & overides r7|","r3",0
+523,"r11","r11 applies|","r11",0
+647,"r2 r9 r11","r11 applies->r9 applies & overides r11->r2 applies & overides r9|","r2",1
+527,"r6","r6 applies|","r6",1
+177,"r6","r6 applies|","r6",1
+40,"r11","r11 applies|","r11",0
+328,"r6","r6 applies|","r6",1
+485,"r6","r6 applies|","r6",1
+171,"r6","r6 applies|","r6",1
+698,"r11","r11 applies|","r11",0
+513,"r6","r6 applies|","r6",1
+692,"r11","r11 applies|","r11",0
+430,"r6","r6 applies|","r6",1
+273,"r11","r11 applies|","r11",0
+223,"r0","r0 applies|","r0",1
+136,"r6","r6 applies|","r6",1
+105,"r11","r11 applies|","r11",0
+593,"r11","r11 applies|","r11",0
+467,"r11","r11 applies|","r11",0
+609,"r11","r11 applies|","r11",0
+142,"r6","r6 applies|","r6",1
+229,"r6","r6 applies|","r6",1
+126,"r6","r6 applies|","r6",1
+21,"r11","r11 applies|","r11",0
+25,"r6","r6 applies|","r6",1
+339,"r6","r6 applies|","r6",1
+650,"r6","r6 applies|","r6",1
+140,"r6","r6 applies|","r6",1
+270,"r6","r6 applies|","r6",1
+509,"r6","r6 applies|","r6",1
+53,"r11","r11 applies|","r11",0
+520,"r11","r11 applies|","r11",0
+54,"r11","r11 applies|","r11",0
+17,"r6","r6 applies|","r6",1
+72,"r11","r11 applies|","r11",0
+447,"r6","r6 applies|","r6",1
+694,"r6","r6 applies|","r6",1
+572,"r11","r11 applies|","r11",0
+175,"r11","r11 applies|","r11",0
+510,"r6","r6 applies|","r6",1
+441,"r11","r11 applies|","r11",0
+641,"r1","r1 applies|","r1",1
+95,"r6","r6 applies|","r6",1
+436,"r11","r11 applies|","r11",0
+217,"r6","r6 applies|","r6",1
+88,"r11","r11 applies|","r11",0
+506,"r2 r9 r11","r11 applies->r9 applies & overides r11->r2 applies & overides r9|","r2",1

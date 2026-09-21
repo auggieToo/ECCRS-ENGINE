@@ -1,0 +1,16 @@
+knowledgeBase: 12 rules, 8 atoms
+ classical:
+  (none)
+ defeasible:
+  [0] ~a2 & a4 & a7 & ~a8  |~  m
+  [1] ~a2 & a4 & ~a7 & ~a8  |~  m
+  [2] ~a1 & a2 & ~a4 & ~a5  |~  m
+  [3] a1 & a2 & ~a5 & a7  |~  ~m
+  [4] ~a1 & a2 & a4 & ~a5  |~  m
+  [5] a1 & a2 & ~a5 & ~a7  |~  m
+  [6] ~a2 & ~a4 & ~a8  |~  m
+  [7] a1 & a2 & ~a5  |~  ~m
+  [8] a2 & a5 & ~a7  |~  m
+  [9] a2 & ~a5  |~  m
+  [10] ~a2 & a8  |~  ~m
+  [11] a2  |~  ~m

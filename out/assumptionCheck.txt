@@ -1,0 +1,4 @@
+Assumption Verification
+	1. Sanity check: Passed
+    2. Strict Global Exception Closure check: Passed
+	3. No Total Override: Passed

@@ -20,7 +20,7 @@ typedef struct {
     u64 mask[MAX_OVERRIDERS];
     u32 n;
     u32 assignments;
-    u64 covered;
+    u32 covered;
 } CoverStats;
 
 //helper fuctions
@@ -32,7 +32,7 @@ static inline i8 isApplicable(Rule a, Instance F);
 static i32 compareRuleBySize(const void *a, const void *b);
 static void computeOverides(Rule *appRules, Overides *outset, u32 size);
 static u32  findByRuleId(Overides *outset, u32 size, u32 ruleId);
-static void printAllChains(Overides *outset, u32 size);
+static void printAllChains(Overides *outset, u32 size, FILE *out);
 static void printAllChainsToCSV(Overides *outset, u32 size, FILE *out);
 static u8  sanityCheck(Rule *ruleset, u32 *out);
 static u8  strictGlobalExceptionClosure(Rule *ruleset, u32 *out);
@@ -249,7 +249,7 @@ printExplanationTraces(FILE *out,
         fprintf(out,"Overiddes\n");
         fprintf(out,"----------------------------\n");
         if(size)
-            printAllChains(overSets, size);
+            printAllChains(overSets, size,out);
         else fprintf(out,"\n No Overiddes\n");
 
         fprintf(out,"inclusion-maximal applicable set\n");
@@ -363,17 +363,16 @@ strictGlobalExceptionClosure(Rule *ruleset, u32 *out)
 // exists an assignment that satisfies a given rule without being covered 
 // by a stricter rule with the opposite label."
 
-static Rule  
+static Rule
 totalOverride(Rule *ruleset, CoverStats *out)
 {
-    u8 allOverridden = 1;
     Rule r;
     RULESET_FOREACH_RULE_SAFE(ruleset, r)
     {
-        if (!existsUncoveredAssignment(r, ruleset, out)) return r;
+        if (!existsUncoveredAssignment(r, ruleset, out))
+            return r;              // no uncovered completion -> totally overridden -> VIOLATION
     }
-    return (Rule){0};
-
+    return (Rule){0};           
 }
 
 //returns the required value of a feature in a rule
@@ -411,34 +410,29 @@ existsUncoveredAssignment(Rule r, Rule *rules, CoverStats *s)
             pa.conditions[pa.size++] =
                 (Condition){ ALL_FEATURES[k], featureVal(r, ALL_FEATURES[k]) };
 
-
 	//collect all the free features -> these are features that are not in the rule conditions
     featureIndex freeFeatures[INSTANCE_SIZE];
     u32 freeSize = 0;
     Rule other;
-    RULESET_FOREACH_RULE_SAFE(rules, other)      
+    RULESET_FOREACH_RULE_SAFE(rules, other)
     {
-		
+
 		//because we want to check if the rule can be overriden by 
 		//rule of opposite label for a given instance/partial assignment , we only need 
 		//to select features that appear in the rules of opposite labels 
         if (other.label == r.label) continue;
         featureIndex fvar; u32 vvar;
-
         RULE_FOREACH_FEAT_VAL_SAFE(other, fvar, vvar)
             if (!ruleContainsFeature(r, fvar) &&
                 !inAllFeatureArray(freeFeatures, freeSize, fvar))
                 freeFeatures[freeSize++] = fvar;
     }
 
-    if (freeSize > 63) { printf("Rule %u: %u free features, too many\n",
-                                r.ruleId, freeSize); return 1; }
-
     *s = (CoverStats){0};
     enumerateAssignments(pa, freeFeatures, freeSize, 0, r, rules, s);
 
-    u64 full = (1ull << s->assignments) - 1;
-    return s->covered != full;
+    // uncovered assignment exists  <=>  not every completion was covered
+    return s->assignments != s->covered;   // covered now COUNTS, see below
 }
 
 // static u8
@@ -514,32 +508,25 @@ enumerateAssignments(Instance pa,
 {
     if (depth == numFree)
     {
-        u32 idx = s->assignments++;     
-        u32 hits = 0;
+        s->assignments++;
+        u8 covered = 0;
         Rule other;
         RULESET_FOREACH_RULE_SAFE(ruleset, other)
         {
-			if (r.ruleId == 6 && idx == 0 &&
-                (other.ruleId == 21 || other.ruleId == 22))
-            {
-                fprintf(stderr,
-                    "r%u(nc=%u,lbl=%d) vs r%u(nc=%u,lbl=%d): appl=%d subset=%d\n",
-                    r.ruleId, r.numConditions, (int)r.label,
-                    other.ruleId, other.numConditions, (int)other.label,
-                    (int)isApplicable(other, pa),
-                    (int)isSubsetRule(r, other));
-            }
-
             if (other.ruleId == r.ruleId) continue;
             if (other.label  == r.label)  continue;
             if (isApplicable(other, pa) && isSubsetRule(r, other))
             {
-                coverBump(s, other.ruleId, idx);
-                hits++;
+                covered = 1;
+                // record override
+                u8 seen = 0;
+                for (u32 i = 0; i < s->n; i++)
+                    if (s->ruleId[i] == other.ruleId) { seen = 1; break; }
+                if (!seen && s->n < MAX_OVERRIDERS)
+                    s->ruleId[s->n++] = other.ruleId;
             }
         }
-        if (hits) s->covered |= 1ull << idx;
-        //else      printInstance(pa);
+        if (covered) s->covered++;  
         return;
     }
 
@@ -794,33 +781,15 @@ computeOverides(Rule *appRules, Overides *outset, u32 size)
 
 
 static void
-reportCover(FILE *out,CoverStats *s, Rule r)
+reportCover(FILE *out, CoverStats *s, Rule r)
 {
-    u64 full = (s->assignments >= 64) ? ~0ull : (1ull << s->assignments) - 1;
-
-    if (s->covered != full) {
-        fprintf(out, "		Rule %u: NOT totally overridden (%u of %u completions uncovered)\n",
-               r.ruleId, s->assignments - __builtin_popcountll(s->covered),
-               s->assignments);
-        fprintf(out, "rule %u: assignments=%u covered=%016llx popcount=%d\n",
-        r.ruleId, s->assignments, (unsigned long long)s->covered,
-        __builtin_popcountll(s->covered));
-		return;
+    fprintf(out, "		Rule %u is totally overridden by: ", r.ruleId);
+    for (u32 i = 0; i < s->n; i++)
+    {
+        fprintf(out, "Rule %u", s->ruleId[i]);
+        if (i < s->n - 1) fprintf(out, ", ");
     }
-
-    u64 need = full;
-    fprintf(out,"		Rule %u is totally overridden by:\n", r.ruleId);
-    while (need) {
-        u32 best = 0; u32 bestGain = 0;
-        for (u32 i = 0; i < s->n; i++) {
-            u32 gain = __builtin_popcountll(s->mask[i] & need);
-            if (gain > bestGain) { bestGain = gain; best = i; }
-        }
-        if (!bestGain) break;
-        printf("			Rule %u (covers %u/%u completions)\n",
-               s->ruleId[best], bestGain, s->assignments);
-        need &= ~s->mask[best];
-    }
+    fprintf(out, "\n");
 }
 
 
@@ -836,7 +805,7 @@ findByRuleId(Overides *outset, u32 size, u32 ruleId)
 
 //explanation traces: Rules point to the Rule that overrides it
 static void 
-printAllChains(Overides *outset, u32 size)
+printAllChains(Overides *outset, u32 size,	FILE *out)
 {
     for (u32 i = 0; i < size; i++)
     {
@@ -860,13 +829,13 @@ printAllChains(Overides *outset, u32 size)
 
 
         //explnation traces
-        printf("Rule %u applies", outset[chain[0]].r.ruleId);
+        fprintf(out,"Rule %u applies", outset[chain[0]].r.ruleId);
         for (u32 k = 1; k < len; k++)
-            printf("Rule %u applies but is more specific than Rule %u, so Rule %u is overridden\n",
+            fprintf(out,"Rule %u applies but is more specific than Rule %u, so Rule %u is overridden\n",
                     outset[chain[k]].r.ruleId,
                     outset[chain[k-1]].r.ruleId,
                     outset[chain[k-1]].r.ruleId);
-        printf("\n");
+        fprintf(out,"\n");
     }
 }
 

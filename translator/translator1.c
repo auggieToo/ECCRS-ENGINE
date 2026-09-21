@@ -65,8 +65,8 @@ wLiteral(FILE *f, u32 atom, u8 sign)
 static void
 emitBlob(void)
 {
-    FILE *f = fopen("../mushroom-data.blob", "wb");
-    if (!f) { perror("fopen ../mushroom.blob"); return; }
+    FILE *f = fopen("../data.blob", "wb");
+    if (!f) { perror("fopen ../data.blob"); return; }
 
     transAtoms atoms = { .count = 0 };
 
@@ -256,7 +256,7 @@ void emitQimplicList(FILE *out,
 int
 main(int argc, char **argv)
 {
-    int useBlob = 0;
+    int useBlob = 1;
     for (int i = 1; i < argc; i++) 
 	{
          if (strcmp(argv[i], "--blob")  == 0) useBlob = 1;

@@ -66,7 +66,7 @@ void
 tupleAddRule(orderedTuple *ot, u32 idx)
 {
 	rsAdd(&ot->R[ot->n - 1].rs , idx);
-	printf("rank %d: added rule %d , new size, %d\n", ot->n , idx ,ot->R[ot->n - 1].rs.count);
+	//printf("rank %d: added rule %d , new size, %d\n", ot->n , idx ,ot->R[ot->n - 1].rs.count);
 }
 
 
@@ -81,7 +81,7 @@ tuplePrint(FILE *out, const atomTable *atoms, const orderedTuple *ot)
 		kbPrintWithAtoms(out, &ot->R[i].r, atoms);
 	}
  
-	fputs("rank inf:\n", out);
+	fprintf(out,"rank inf:\n");
 	kbPrintWithAtoms(out, &ot->infinite, atoms);
 }
 
