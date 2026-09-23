@@ -1,11 +1,11 @@
 # ~/edrs/Makefile  -- top-level pipeline: eccrs -> translate -> klm
 
 CC     = gcc
-CFLAGS = -O2 -Wall
+CFLAGS = -O2 -fopenmp
 
 # Generated sources (rules.c, kb.c) are huge; -O2 on them makes cc1 run
 # out of memory. They get their own flags and are compiled separately.
-GEN_CFLAGS = -O0 -g0 -Wall -fno-var-tracking -fno-var-tracking-assignments
+GEN_CFLAGS = -O0 -g0  -fno-var-tracking -fno-var-tracking-assignments
 
 # Inputs: relative to THIS directory, or absolute.
 RULES        = default-rules/rules.txt
@@ -33,7 +33,7 @@ TRANSLATE = translator/translate$(EXE_EXT)
 KLMBIN    = klm/klm$(EXE_EXT)
 
 KLM_OBJ = $(OBJ)/klm.o $(OBJ)/lex.o $(OBJ)/orderedTuple.o $(OBJ)/setRules.o \
-          $(OBJ)/rules.o $(OBJ)/kb.o $(OBJ)/picosat.o
+          $(OBJ)/rules.o $(OBJ)/picosat.o
 
 .NOTPARALLEL:
 .PHONY: all eccrs translate klm run run-eccrs run-translate run-klm clean help
@@ -69,7 +69,7 @@ translate: eccrs $(OBJ)/rules.o
 
 # stage 3: lex / entailment
 klm: eccrs $(KLM_OBJ)
-	$(CC) $(KLM_OBJ) -o $(KLMBIN)
+	$(CC) $(KLM_OBJ) -fopenmp -o $(KLMBIN)
 
 # ---------------- build and run ----------------
 

@@ -589,11 +589,12 @@ main(i32 argc, char *argv[])
 
 	SubsetRankAlg(A, &ost);
 
-	FILE *csv = fopen("../out/lexicogrResults.csv", "w");
-	if (!csv) { perror("fopen results.csv"); return 1; }
+	u32 n = SIZE_OF_INSTANCE_SET;
+	int  *em  = malloc(sizeof(int) * n);
+	int  *enm = malloc(sizeof(int) * n);
 
-	fprintf(csv, "instanceid,entail_m,entail_not_m,abstain\n");
 
+	#pragma omp parallel for schedule(dynamic)
 	for (u32 i = 0; i < SIZE_OF_INSTANCE_SET; i++) {
 		implic qi = asImplic(&q[i]);
 
@@ -606,13 +607,24 @@ main(i32 argc, char *argv[])
 
 		// abstain = neither
 		int abstain = (!entailM && !entailNotM) ? 1 : 0;
-
-		fprintf(csv, "%u,%d,%d,%d\n",
-				q[i].queryId, entailM ? 1 : 0, entailNotM ? 1 : 0, abstain);
+		
+		em[i]  = entailM    ? 1 : 0;
+		enm[i] = entailNotM ? 1 : 0;
+		// fprintf(csv, "%u,%d,%d,%d\n",
+		// 		q[i].queryId, entailM ? 1 : 0, entailNotM ? 1 : 0, abstain);
 	}
-fclose(csv);
-fclose(kbf);
 
+
+	FILE *csv = fopen("../out/lexicogrResults.csv", "w");
+	if (!csv) { perror("fopen results.csv"); return 1; }
+
+	fprintf(csv, "instanceid,entail_m,entail_not_m,abstain\n");
+	for (u32 i = 0; i < n; i++)
+		fprintf(csv, "%u,%d,%d,%d\n",
+            q[i].queryId, em[i], enm[i], (!em[i] && !enm[i]) ? 1 : 0);
+	free(em); free(enm);
+	fclose(csv);
+	fclose(kbf);
 
 
 	
